@@ -67,7 +67,36 @@ body > header > .logo-row > .logo-container {
 body > header > .logo-row > .logo-container > img{
     padding:  28px 0;
 }
-.button{
+
+body > header > .logo-row > .logo-container >.tab{
+
+    position: relative;
+    right: 7rem;
+    top:3rem;
+    margin: 0;
+    padding: 0;
+
+
+
+}
+body > header > .logo-row > .logo-container >.tab >ul{
+    list-style-type: none;
+    align-items: center;
+    display: flex;
+    flex-direction: column ;
+    justify-content: center;
+    border: rgb(0,0,0) solid 0.0625rem;
+    padding: 0.25rem;
+
+}
+
+
+body > header > .logo-row > .logo-container >.tab:hover{
+
+}
+
+
+body > header > .logo-row > .logo-container>.search  > form >.button{
 
     /*background-color: rgba(108,122,108,0.22);*/
 
@@ -306,6 +335,5 @@ body >footer> .foot-row  >ul >li {
     font-size: 0.9rem;
 
 }
-
 
 
