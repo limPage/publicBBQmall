@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang = "ko" xmlns:th = "http://www.thymeleaf.org">
+<header class="--header" th:fragment="header"> <!-- fragment : 헤더 전체의 지칭 -->
+    <div class="--content">
+        <a class="--logo-container" th:href="@{/}">
+            <img alt="Study" class="--logo" th:src="@{/resources/images/logo.png}">
+        </a>
+        <ul class="--menu --main">
+
+            <!--/*@thymesVar id="boards" type="com.khj.studymemberbbs.entities.bbs.BoardEntity[]"*/-->
+            <li class="--item" th:each="board : ${boards}">
+                <a class="--link" th:text="${board.getText()}" th:href = "@{/bbs/list (bid=${board.getId()})}">공지사항</a>
+            </li>
+        </ul>
+        <ul class="--menu">
+            <li class="--item" th:if="${session.user == null}">
+                <a class="--link" th:href = "@{/member/login}">로그인</a>
+            </li>
+            <li class="--item" th:if="${session.user == null}">
+                <a class="--link" th:href = "@{/member/register}">회원가입</a>
+            </li>
+            <li class="--item" th:if="${session.user != null}">
+                <a class="--link" th:href = "@{/member/logout}">로그아웃</a>
+            </li>
+            <li class="--item" th:if="${session.user != null}">
+                <a class="--link" th:href = "@{/member/my}">마이페이지</a>
+            </li>
+        </ul>
+    </div>
+</header>
+
+<div class="--cover" id = "cover" th:fragment="cover">
+    <img alt = "" class = "--icon" th:src = "@{/resources/images/loading.png}">
+    <span class = "--text" rel = "text">무언가를 불러오고 있습니다. 잠시만 기다려 주세요.</span>
+</div>
+
+<footer class="--footer" th:fragment="footer">
+    <div class="--content">
+        발
+    </div>
+</footer>
+</html>

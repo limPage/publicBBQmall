@@ -19,4 +19,13 @@ public class HomeController {
         return modelAndView;
     }
 
+    @GetMapping(value = "register", produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getRegister() {
+        ModelAndView modelAndView = new ModelAndView("member/register");
+
+        return modelAndView;
+    }
+
+
+
 }
