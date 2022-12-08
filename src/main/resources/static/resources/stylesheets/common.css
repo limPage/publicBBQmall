@@ -73,7 +73,7 @@ body > header > .logo-row > .logo-container > img{
 
 
     font-size: 1.3rem;
-
+    color: rgba(117,131,117,0.9);
 
     align-items: center;
     display: flex;
@@ -98,7 +98,18 @@ body > header > .logo-row > .logo-container >.search{
 
     padding: 0 0.75rem;
 }
+body > header > .logo-row > .logo-container >.search >form{
+    align-items: stretch;
+    display: flex;
+    flex-direction: row ;
+    justify-content: stretch;
+}
 
+
+body > header > .logo-row > .logo-container >.search >form,
+body > header > .logo-row > .logo-container >.search >form>label{
+    width: 100%;
+}
 
 body > header > .logo-row > .logo-container >.search input{
 
@@ -108,7 +119,7 @@ body > header > .logo-row > .logo-container >.search input{
     /*background-color: red;*/
     padding: 0 9px;
 
-    color: white;
+
 
     font-size: 1rem;
     font-weight: 550;
@@ -117,7 +128,7 @@ body > header > .logo-row > .logo-container >.search input{
     /*word-spacing:-3px;*/
     border: none;
 }
-body > header > .logo-row > .logo-container >.search>input::placeholder{
+body > header > .logo-row > .logo-container >.search input::placeholder{
     color: rgba(117,131,117,0.9);
 
     font-size: 1rem;
