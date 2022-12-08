@@ -21,6 +21,8 @@
                 <h2 class = "title">회원가입</h2>
                 <div class="step-container">
                     <span class="text" rel = "stepText">이용약관 및 개인정보 처리방침</span>
+                    <span class="step step0">0</span>
+                    <span class="line"></span>
                     <span class="step step1">1</span>
                     <span class="line"></span>
                     <span class="step step2">2</span>
@@ -28,6 +30,61 @@
                     <span class="step step3">3</span>
                 </div>
             </div>
+            <div class = "step step0">
+                <table>
+                <div id="layout_body" class="layout_body">
+                    <style>
+                        @media (max-width: 1023px) {
+                            .title_container {
+                                display: block;
+                            }
+                        }
+                    </style>
+
+                    <div class="title_container bold">
+                        <h2><span designelement="text" textindex="1" texttemplatepath="cmVzcG9uc2l2ZV92ZXIxX2RlZmF1bHRfZ2wvbWVtYmVyL2pvaW5fZ2F0ZS5odG1s">회원가입</span></h2>
+                    </div>
+                    <p class="mypage_greeting" designelement="text" textindex="2" texttemplatepath="cmVzcG9uc2l2ZV92ZXIxX2RlZmF1bHRfZ2wvbWVtYmVyL2pvaW5fZ2F0ZS5odG1s">비비큐몰 회원이 되면 다양한 혜택을 받을 수 있습니다.</p>
+
+                    <div class="resp_login_wrap" style="min-height:300px;">
+
+                        <div class="sub_page_tab_contents" style="display: block;">
+                            <p class="join_btns">
+                                <button type="button" class="register-button" id="registerButton" onclick="document.location.href='agreement?join_type=member'"><span designelement="text" textindex="5">회원가입</span></button>
+                            </p>
+
+                            <h3 class="title_sub3 v3"><span designelement="text" textindex="6" texttemplatepath="cmVzcG9uc2l2ZV92ZXIxX2RlZmF1bHRfZ2wvbWVtYmVyL2pvaW5fZ2F0ZS5odG1s">간편하게 시작하기</span></h3>
+                            <ul class="sns_login_ul">
+                                <li snstype="kakaosync" class="sns-login-button"><div class="img"><img src="/data/images/common/sns_icon_kakaosync.png" onclick="document.location.href='agreement?join_type=kksyncmember'" alt=" kakaosync 회원가입" title="카카오 회원가입"></div></li>
+
+                            </ul>
+                        </div>
+
+                        <div class="sub_page_tab_contents" style="display: none;">
+                            <p class="join_btns">
+                                <button type="button" class="btn_resp size_c color2 Wmax" onclick="document.location.href='agreement?join_type=business'"><span designelement="text" textindex="7" texttemplatepath="cmVzcG9uc2l2ZV92ZXIxX2RlZmF1bHRfZ2wvbWVtYmVyL2pvaW5fZ2F0ZS5odG1s">회원가입</span></button>
+                            </p>
+
+                            <h3 class="title_sub3 v3"><span designelement="text" textindex="8" texttemplatepath="cmVzcG9uc2l2ZV92ZXIxX2RlZmF1bHRfZ2wvbWVtYmVyL2pvaW5fZ2F0ZS5odG1s">또는 SNS 회원가입</span></h3>
+                            <ul class="sns_login_ul">
+                                <li><div class="img"><img src="/data/skin/responsive_ver1_default_gl/images/design/sns_icon_kakaosync.png" onclick="document.location.href='agreement?join_type=kksyncbusiness'" alt=" kakaosync 회원가입" title="카카오 회원가입"></div></li>
+                            </ul>
+                        </div>
+
+                        <h3 class="title_sub2 Mt50"><b class="Fw400"><span designelement="text" textindex="9" texttemplatepath="cmVzcG9uc2l2ZV92ZXIxX2RlZmF1bHRfZ2wvbWVtYmVyL2pvaW5fZ2F0ZS5odG1s">신규회원을 위한 혜택을 놓치지 마세요!</span></b></h3>
+                        <div class="join_member_benefit_detail">
+                            <ul>
+                                <li class="tt">적립금</li>
+                                <li class="dd">
+                                    <span class="num">3,000</span>원
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                </table>
+            </div>
+            <!-- -----------------------------------step 0------------------------------------------  -->
             <div class = "step step1">
                 <label class="label">
                     <h2 class="title">서비스 이용약관</h2>

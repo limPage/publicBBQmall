@@ -54,6 +54,7 @@ body > .main > .content > .form > .title-container > .step-container > .step {
     justify-content : center;
 }
 
+body > .main > .content > .form.step1 > .title-container > .step-container > .step.step0,
 body > .main > .content > .form.step1 > .title-container > .step-container > .step.step1,
 body > .main > .content > .form.step2 > .title-container > .step-container > .step.step2,
 body > .main > .content > .form.step3 > .title-container > .step-container > .step.step3 { /* 다음 버튼 누를때마다 색칠된 원 이동 */
@@ -61,7 +62,7 @@ body > .main > .content > .form.step3 > .title-container > .step-container > .st
     border : 0.125rem solid rgb(26, 188, 156);
     color : rgb(255, 255, 255);
 }
-
+body > .main > .content > .form.step2 > .title-container > .step-container > .step.step0,
 body > .main > .content > .form.step2 > .title-container > .step-container > .step.step1,
 body > .main > .content > .form.step3 > .title-container > .step-container > .step.step1,
 body > .main > .content > .form.step3 > .title-container > .step-container > .step.step2 {
@@ -70,6 +71,7 @@ body > .main > .content > .form.step3 > .title-container > .step-container > .st
     color : rgb(171, 178, 185);
 }
 
+body > .main > .content > .form.step2 > .title-container > .step-container > .step.step0 + .line
 body > .main > .content > .form.step2 > .title-container > .step-container > .step.step1 + .line,
 body > .main > .content > .form.step3 > .title-container > .step-container > .step.step1 + .line,
 body > .main > .content > .form.step3 > .title-container > .step-container > .step.step2 + .line{ /* 숫자 사이의 선 색도 변경을 원할 경우 */
@@ -94,7 +96,7 @@ body > .main > .content > .form > .step {
     flex-direction : column;
     justify-content : flex-start;
 }
-
+body > .main > .content > .form.step1 > .step.step0,
 body > .main > .content > .form.step1 > .step.step1,
 body > .main > .content > .form.step2 > .step.step2,
 body > .main > .content > .form.step3 > .step.step3{

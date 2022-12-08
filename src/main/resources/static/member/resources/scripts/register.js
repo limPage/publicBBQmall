@@ -21,6 +21,15 @@ const EmailWarning = {
 
 form.querySelector('[rel = "nextButton"]').addEventListener('click', () => { // nextButton을 클릭했을 때
     form.querySelector('[rel = "warning"]').classList.remove('visible'); // 타입 rel이 warning인 html 클래스에 존재하는 visible을 제거한다.
+
+    if(form.classList.contains('step0')) {
+        form['registerButton'].addEventListener('click', () => {
+            form.querySelector('[rel="warning"]').classList.add('visible');
+            form.classList.remove('step0');
+            form.classList.add('step1');
+        });
+    }
+
     if(form.classList.contains('step1')) { // 클래스가 step1을 포함하고 있을 때
         console.log('스텝1 처리');
         if (!form['termAgree'].checked) { // termAgree가 체크되지 않았을 때
