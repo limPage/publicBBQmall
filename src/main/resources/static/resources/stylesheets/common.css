@@ -18,6 +18,12 @@ body {
     margin: unset;
     position: absolute;
 
+    align-items: stretch;
+    display: flex;
+    flex-direction:  column;
+    justify-content: center;
+
+
 }
 
 body > header {
@@ -49,7 +55,7 @@ body > header > .logo-row {
 
 body > header > .logo-row > .logo-container {
 
-    width: 84rem;
+    width: 80rem;
     padding: 0 2.5rem;
     /*background-color: yellow;*/
     align-items: center;
@@ -63,10 +69,11 @@ body > header > .logo-row > .logo-container > img{
 }
 .button{
 
-    background-color: rgba(108,122,108,0.22);
+    /*background-color: rgba(108,122,108,0.22);*/
 
-    color: gray;
-    font-size: 1.5rem;
+
+    font-size: 1.3rem;
+
 
     align-items: center;
     display: flex;
@@ -86,35 +93,35 @@ body > header > .logo-row > .logo-container >.search{
     height: 2.5rem;
     top: 0.86rem;
     position: relative;
+    border-radius: 999rem;
+    background-color: rgba(108,122,108,0.15);
+
+    padding: 0 0.75rem;
 }
 
 
-body > header > .logo-row > .logo-container >.search>input{
+body > header > .logo-row > .logo-container >.search input{
 
     width: 100%;
     height: 2.5rem;
-    background-color: rgba(108,122,108,0.22);
+    background-color: transparent;
+    /*background-color: red;*/
     padding: 0 9px;
 
+    color: white;
 
+    font-size: 1rem;
+    font-weight: 550;
+
+    letter-spacing: -2px;
+    /*word-spacing:-3px;*/
     border: none;
 }
-body > header > .logo-row > .logo-container >.search >div:first-of-type{
-    border-top-left-radius: 1rem;
-    border-bottom-left-radius: 1rem;
-    width: 2rem;
-    background-color: rgba(108,122,108,0.22);
+body > header > .logo-row > .logo-container >.search>input::placeholder{
+    color: rgba(117,131,117,0.9);
 
-
-}
-body > header > .logo-row > .logo-container >.search >div:last-of-type{
-    border-top-right-radius: 1rem;
-    border-bottom-right-radius: 1rem;
-    width: 2rem;
-
-
-    background-color: rgba(108,122,108,0.22);
-
+    font-size: 1rem;
+    font-weight: 500;
 }
 
 
@@ -202,3 +209,92 @@ body > header > .menu-row > .menu-container > ul > .my-menu{
     width: 3rem;
 
 }
+body >main{
+    flex: 1;
+}
+
+body >footer{
+    align-items: center;
+    display: flex;
+    flex-direction: row ;
+    justify-content: center;
+
+    background-color: rgba(219,218,226,0.24)
+}
+
+body >footer> .foot-row{
+    width: 80rem;
+    /*background-color: red;*/
+    padding: 68px 0 40px 80px;
+
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column ;
+}
+body >footer> .foot-row > .foot-container{
+    align-items: flex-start ;
+    display: flex;
+    flex-direction: row ;
+    justify-content: flex-start;
+    
+}
+body >footer> .foot-row > .foot-container >.question{
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column ;
+    justify-content: flex-start;
+    padding-left: 1rem;
+
+}
+body >footer> .foot-row > .foot-container >.question >a{
+    background-color: yellow;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    border: black solid 0.0625rem;
+    margin: 0.25rem;
+    width: 10rem;
+
+}
+body >footer> .foot-row > .foot-container >.info>ul>li{
+    list-style-type: none;
+    font-size: 1.1rem;
+
+    margin:  0.25rem 0 ;
+}
+body >footer> .foot-row > .foot-container >.info>ul{
+    margin: 0;
+}
+
+body >footer> .foot-row > .foot-container >.info >ul:first-of-type{
+    align-items: center;
+    display: flex;
+    flex-direction: row ;
+    justify-content: flex-start;
+
+}
+body >footer> .foot-row > .foot-container >.info >ul:first-of-type > li{
+
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+body >footer> .foot-row > .foot-container >.info >ul:first-of-type > li:first-of-type{
+    padding-left: 0;
+}
+
+
+body >footer> .foot-row > .foot-container >.info >ul:first-of-type > li:nth-of-type(2){
+    border-left: black solid 0.0625rem;
+    border-right: black solid 0.0625rem;
+    color: rgb(255,0,0);
+}
+
+
+body >footer> .foot-row  >ul >li {
+   list-style-type: none;
+    font-size: 0.9rem;
+
+}
+
+
+
