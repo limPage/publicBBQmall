@@ -1,0 +1,155 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css");
+
+html {
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    font-weight: 400;
+
+    /*height: 100%;*/
+}
+
+body {
+
+    /*background-color: black;*/
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    min-height: 100%;
+    margin: unset;
+   position: absolute;
+
+}
+
+body > header {
+
+   /*background-color: cornsilk;*/
+
+    align-items: stretch;
+    display: flex;
+    flex-direction: column ;
+    justify-content: stretch;
+    /*width: 100%;*/
+    /*border-bottom: */
+    box-shadow: 0 0 0.3rem  rgba(0,0,0,15%);
+}
+
+body > header > .logo-row {
+
+
+
+    /*width: 100%;*/
+    align-items: stretch;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    /*height: 108px;*/
+
+}
+
+
+body > header > .logo-row > .logo-container {
+
+    width: 84rem;
+    padding: 0 2.5rem;
+    /*background-color: yellow;*/
+    align-items: center;
+    display: flex;
+    flex-direction: row ;
+    justify-content: flex-start;
+    font-size: 1.2rem;
+}
+body > header > .logo-row > .logo-container > img{
+    padding:  28px 0;
+}
+
+body > header > .logo-row > .logo-container >.search{
+    width: 22rem;
+    height: 2.5rem;
+    background-color: rgba(108,122,108,0.22);
+    padding: 0 9px;
+    margin-left: 2rem;
+    border-radius: 1rem;
+}
+
+body > header > .logo-row > .logo-container >.spring{
+    flex: 1;
+}
+
+body > header > .logo-row > .logo-container > a~a{
+
+    border-right: 0.05rem solid black;
+    padding:  0 16px;
+}
+body > header > .logo-row > .logo-container > a:last-of-type{
+    padding-left: 16px;
+}
+
+
+
+body > header > .menu-row {
+
+
+    width: 100%;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+
+}
+
+body > header > .menu-row > .menu-container {
+    /*background-color: blueviolet;*/
+
+    padding: 0 2.5rem;
+    width: 84rem;
+    position: relative;
+
+}
+
+body > header > .menu-row > .menu-container > ul {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+
+    list-style-type: none;
+
+}
+
+body > header > .menu-row > .menu-container > ul > li{
+
+
+
+    font-size: 1.5rem;
+    font-weight: 500;
+    height: 4.5rem;
+    /*background-color: rosybrown;*/
+
+    align-items: center;
+    display: flex;
+    flex-direction: row ;
+    justify-content: center;
+    white-space: nowrap;
+}
+body > header > .menu-row > .menu-container > ul > .spring{
+    flex: 1;
+}
+
+a{ text-decoration: none;
+color: black;}
+
+body > header > .menu-row > .menu-container > ul >.menu-button{
+    padding-right: 3rem;
+}
+body > header > .menu-row > .menu-container > ul >.menu{
+
+    padding:0 3rem ;
+}
+body > header > .menu-row > .menu-container > ul > .my-menu{
+    width: 3rem;
+
+}

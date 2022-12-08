@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+</head>
+<body>
+
+<header class="--header" th:fragment="header">
+
+  <div class="--content">
+    <a class="--logo-container" th:href="@{/member/login}">
+      <img class="--logo" alt="image" th:src="@{/resources/images/logo.png}">
+    </a>
+
+    <ul class="--menu --main">
+<!--     밑줄로 오류된곳을 알트 앤터 타입에 앤티티주소-->
+      <!--/*@thymesVar id="boards" type="com.lch.studymemberbbs.entities.bbs.BoardEntity[]"*/-->
+      <li class="--item" th:each="board : ${boards}">
+        <a class="--link" th:text="${board.getText()}" th:href="@{/bbs/list (bid=${board.getId()})}">공지사항</a>
+      </li>
+
+    </ul>
+
+    <ul class="--menu">
+      <li class="--item" th:if="${session.user == null}">
+        <a class="--link" th:href="@{/member/login}">로그인</a>
+      </li>
+      <li class="--item" th:if="${session.user == null}">
+        <a class="--link" th:href="@{/member/register}">회원가입</a>
+      </li>
+      <li class="--item" th:if="${session.user != null}">
+        <a class="--link" th:href="@{/member/logout}">로그아웃</a>
+      </li>
+      <li class="--item" th:if="${session.user != null}">
+        <a class="--link" th:href="@{/member/register}">마이페이지</a>
+      </li>
+    </ul>
+  </div>
+
+</header>
+
+<div class="--cover" id="cover" th:fragment="cover">
+  <img alt="" class="--icon" th:src="@{/resources/images/l2.png}">
+  <img alt="" class="--icon2" th:src="@{/resources/images/l2.png}">
+  <img alt="" class="--icon3" th:src="@{/resources/images/l2.png}">
+  <sapn class="--text" rel="text">무언가를 불러오고 있습니다. 잠시만 기다려 주세요.</sapn>
+
+</div>
+
+
+
+<footer class="--footer" th:fragment="footer">
+  <div class="--content">
+    발
+  </div>
+</footer>
+
+</body>
+</html>
