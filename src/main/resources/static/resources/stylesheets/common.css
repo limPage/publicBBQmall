@@ -4,7 +4,10 @@ html {
     font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
     font-weight: 400;
 
-    /*height: 100%;*/
+    height: 100%;
+    max-width: 1903px;
+    margin: unset;
+    padding: unset;
 }
 
 body {
@@ -12,16 +15,16 @@ body {
     /*background-color: black;*/
     top: 0;
     left: 0;
-    width: 100%;
-
+    /*width: 100%;*/
+    /*height: 100%;*/
     min-height: 100%;
     margin: unset;
-    position: absolute;
+
 
     align-items: stretch;
     display: flex;
     flex-direction:  column;
-    justify-content: center;
+    justify-content: stretch;
 
 
 }
@@ -58,41 +61,206 @@ body > header > .logo-row > .logo-container {
     width: 80rem;
     padding: 0 2.5rem;
     /*background-color: yellow;*/
-    align-items: center;
+    align-items: flex-start;
     display: flex;
     flex-direction: row ;
     justify-content: flex-start;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    height: 6.75rem;
 }
 body > header > .logo-row > .logo-container > img{
-    padding:  28px 0;
+    padding:  1.75rem 0;
+}
+body > header > .logo-row > .logo-container > .user-menu{
+    /*height: 100%;*/
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: row;
 }
 
-body > header > .logo-row > .logo-container >.tab{
 
+body > header > .logo-row > .logo-container > .user-menu> ul {
+    /*height: 100%;*/
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: row;
+    /*top: 10px;*/
+    /*position: relative;*/
+    list-style-type: none;
+    margin: unset;
+    /*height: 41px;*/
+    padding: unset;
+    /*margin-left: 1rem;*/
+    /*background-color: lightblue;*/
+
+}
+/*body > header > .logo-row > .logo-container > .user-menu> ul >span{*/
+/*    height: 1rem;*/
+/*    width: 1rem;*/
+
+/*    border-right: 0.05rem solid black ;*/
+
+/*}*/
+
+body > header > .logo-row > .logo-container >.user-menu> ul > li {
+
+    /*color: red;*/
+
+
+    font-family: inherit;
+    font-weight: 450;
+    /*border-right: 0.05rem solid black ;*/
+
+
+    display: flex;
+    align-items: center;
+}
+
+body > header > .logo-row > .logo-container >.user-menu> ul > li:first-of-type{
+    padding-left:16px;
+
+}
+
+
+
+body > header > .logo-row > .logo-container >.user-menu > ul > li:last-of-type{
+    padding-right: unset;
+    border-right: none ;
+
+}
+body > header > .logo-row > .logo-container >.user-menu> ul > li > .bar{
+    margin-top: 40px;
+    border-right: solid 2px rgba(117,131,117,0.9);
+    height: 1rem;
+    padding-left: 16px;
+}
+
+
+
+body > header > .logo-row > .logo-container >.user-menu> ul > li >a{
+
+    font-size: 19px;
+    font-family: inherit;
+    font-weight: 450;
+    color: rgba(0,0,0,0.8);
+
+    height: 41px;
+    margin-top: 39px;
+
+    padding-left: 16px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    letter-spacing: -1px;
+
+
+}
+body > header > .logo-row > .logo-container >.user-menu> ul > .cs>a{
+
+    padding-left: 17px;
+    /*width: 98px;*/
+
+}
+
+body > header > .logo-row > .logo-container >.user-menu> ul > .cs>a> .drop-down{
+
+
+    font-size: 0.5rem ;
+    margin-left: 10px;
+    width: 8px;
+    height: 7px;
     position: relative;
-    right: 7rem;
-    top:3rem;
+    bottom: 0.2rem;
+    /*background-repeat: no-repeat;*/
+    /*width: 0.5rem;*/
+    /*height: 0.5rem;*/
+    /*color: red;*/
+    /*margin-left: 10px;*/
+
+    /*display: inline-block;*/
+
+    /*position: relative;*/
+    /*right: -4px;*/
+}
+
+
+
+/*      고객센터   - 탭     */
+body > header > .logo-row > .logo-container >.user-menu> div{
+
+    position: absolute;
+    right: -0.5rem;
+    top:0.8rem;
     margin: 0;
     padding: 0;
 
 
 
 }
-body > header > .logo-row > .logo-container >.tab >ul{
+body > header > .logo-row > .logo-container >.user-menu > div >ul{
     list-style-type: none;
-    align-items: center;
+    align-items: flex-start;
     display: flex;
     flex-direction: column ;
     justify-content: center;
+    background-color: red;
     border: rgb(0,0,0) solid 0.0625rem;
     padding: 0.25rem;
+    font-size: 1.1rem;
+    width: 6rem;
+/*font-family: inherit;*/
+/*    font-weight: 550;*/
 
 }
+body > header > .logo-row > .logo-container >.user-menu > div >ul >li{
+    padding: 0.5rem;
+    height: 100%;
+
+}
+body > header > .logo-row > .logo-container >.user-menu > div >ul >li>a{
+    /*font-family: inherit;*/
+    /*font-weight: 550;*/
+}
+
+
 
 
 body > header > .logo-row > .logo-container >.tab:hover{
 
+    background-color: grey;
+}
+
+
+
+body > header > .logo-row > .logo-container >.search{
+    /*width: 25em;*/
+    /*height: 2.5625rem;*/
+    align-items: stretch;
+    display: flex;
+    flex-direction: row ;
+    justify-content: stretch;
+
+    margin-left: 2.3rem;
+
+    top: 2.45rem;
+    position: relative;
+    border-radius: 2rem;
+    background-color: rgba(108,122,108,0.15);
+
+
+}
+body > header > .logo-row > .logo-container >.search >form{
+    align-items: stretch;
+    display: flex;
+    flex-direction: row ;
+    justify-content: stretch;
+    padding: 0 12px;
 }
 
 
@@ -100,68 +268,49 @@ body > header > .logo-row > .logo-container>.search  > form >.button{
 
     /*background-color: rgba(108,122,108,0.22);*/
 
-
-    font-size: 1.3rem;
+    width: 34px;
+    font-size: 1.5rem;
     color: rgba(117,131,117,0.9);
 
     align-items: center;
     display: flex;
     flex-direction: row ;
-    justify-content: center;
+    justify-content: flex-end;
 
 }
 
-body > header > .logo-row > .logo-container >.search{
-    width: 24rem;
-    align-items: stretch;
-    display: flex;
-    flex-direction: row ;
-    justify-content: stretch;
 
-    margin-left: 2.5rem;
-    height: 2.5rem;
-    top: 0.86rem;
-    position: relative;
-    border-radius: 999rem;
-    background-color: rgba(108,122,108,0.15);
+body > header > .logo-row > .logo-container >.search > form> label> input{
 
-    padding: 0 0.75rem;
-}
-body > header > .logo-row > .logo-container >.search >form{
-    align-items: stretch;
-    display: flex;
-    flex-direction: row ;
-    justify-content: stretch;
-}
-
-
-body > header > .logo-row > .logo-container >.search >form,
-body > header > .logo-row > .logo-container >.search >form>label{
-    width: 100%;
-}
-
-body > header > .logo-row > .logo-container >.search input{
-
-    width: 100%;
-    height: 2.5rem;
+    width: 21.75rem;
+    height: 2.5625rem;
     background-color: transparent;
     /*background-color: red;*/
-    padding: 0 9px;
+    padding: 0 0.5625rem;
 
 
+    font-family: inherit;
+    font-size: 1.05rem;
+    font-weight: inherit;
+    color: rgba(11,10,0,0.8);
+    letter-spacing: -1px;
 
-    font-size: 1rem;
-    font-weight: 550;
 
-    letter-spacing: -2px;
     /*word-spacing:-3px;*/
+
     border: none;
 }
-body > header > .logo-row > .logo-container >.search input::placeholder{
-    color: rgba(117,131,117,0.9);
+body > header > .logo-row > .logo-container >.search input:focus{
+    outline: none;
+}
 
-    font-size: 1rem;
+body > header > .logo-row > .logo-container >.search input::placeholder{
+    color: rgba(117,131,117,0.7);
+    letter-spacing: -1px;
+    font-size: 1.05rem;
     font-weight: 500;
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+
 }
 
 
@@ -169,16 +318,6 @@ body > header > .logo-row > .logo-container >.spring{
     flex: 1;
 }
 
-body > header > .logo-row > .logo-container > a{
-
-    border-right: 0.05rem solid black;
-    padding:  0 16px;
-}
-body > header > .logo-row > .logo-container > a:last-of-type{
-    padding-left: 16px;
-    border-right: none ;
-
-}
 
 
 
@@ -251,24 +390,30 @@ body > header > .menu-row > .menu-container > ul > .my-menu{
 }
 body >main{
     flex: 1;
+
 }
 
 body >footer{
-    align-items: center;
+    align-items: flex-start;
     display: flex;
     flex-direction: row ;
     justify-content: center;
 
-    background-color: rgba(219,218,226,0.24)
+
+
+    height: 393px;
+    background-color: grey;
+
 }
 
 body >footer> .foot-row{
-    width: 80rem;
+    background-color: rgba(219,218,226,0.24);
+    width: 1200px;
     /*background-color: red;*/
     padding: 68px 0 40px 80px;
 
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     display: flex;
     flex-direction: column ;
 }
@@ -276,10 +421,18 @@ body >footer> .foot-row > .foot-container{
     align-items: flex-start ;
     display: flex;
     flex-direction: row ;
+    justify-content: space-between;
+}
+
+body >footer> .foot-row > .foot-container>.question-row{
+    align-items: flex-start ;
+    display: flex;
+    flex-direction: row ;
     justify-content: flex-start;
+    width: 490px;
     
 }
-body >footer> .foot-row > .foot-container >.question{
+body >footer> .foot-row > .foot-container >.question-row>.question-button{
     align-items: flex-start;
     display: flex;
     flex-direction: column ;
@@ -287,43 +440,56 @@ body >footer> .foot-row > .foot-container >.question{
     padding-left: 1rem;
 
 }
-body >footer> .foot-row > .foot-container >.question >a{
+body >footer> .foot-row > .foot-container >.question-row>.question-button >a{
     background-color: yellow;
     padding: 0.75rem;
     border-radius: 0.5rem;
     border: black solid 0.0625rem;
     margin: 0.25rem;
-    width: 10rem;
+    width: 11.2rem;
 
 }
 body >footer> .foot-row > .foot-container >.info>ul>li{
     list-style-type: none;
-    font-size: 1.1rem;
+    font-size: 1rem;
 
-    margin:  0.25rem 0 ;
+    margin:  0.4rem 0 ;
+    background-color: lightblue;
+    display: inline-block;
 }
+body >footer> .foot-row > .foot-container >.info{
+    display: flex;
+    flex-direction: column;
+    background-color: red;
+}
+
+
 body >footer> .foot-row > .foot-container >.info>ul{
     margin: 0;
+    padding: 0;
+
+
 }
 
-body >footer> .foot-row > .foot-container >.info >ul:first-of-type{
+body >footer> .foot-row > .foot-container >.info >.use{
     align-items: center;
     display: flex;
     flex-direction: row ;
     justify-content: flex-start;
 
 }
-body >footer> .foot-row > .foot-container >.info >ul:first-of-type > li{
+body >footer> .foot-row > .foot-container >.info > .use > li{
+    background-color: lightblue;
 
-    padding-left: 1rem;
-    padding-right: 1rem;
+    /*padding-left: 1rem;*/
+    /*padding-right: 1rem;*/
 }
-body >footer> .foot-row > .foot-container >.info >ul:first-of-type > li:first-of-type{
+body >footer> .foot-row > .foot-container >.info > .use > li:first-of-type{
     padding-left: 0;
 }
 
 
-body >footer> .foot-row > .foot-container >.info >ul:first-of-type > li:nth-of-type(2){
+body >footer> .foot-row > .foot-container >.info > .use > li:nth-of-type(2){
     border-left: black solid 0.0625rem;
     border-right: black solid 0.0625rem;
     color: rgb(255,0,0);
@@ -336,4 +502,19 @@ body >footer> .foot-row  >ul >li {
 
 }
 
+body >footer> .foot-row > .foot-container >.info> .info-text{
+
+    /*padding-left: 3rem;*/
+    width: 714px;
+    height: 135px;
+    letter-spacing: -1px;
+
+}
+body >footer> .foot-row > .foot-container >.info> .info-text >li >span{
+    font-size: 1rem;
+
+
+
+
+}
 
