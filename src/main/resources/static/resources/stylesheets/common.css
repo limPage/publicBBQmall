@@ -402,26 +402,28 @@ body >footer{
 
 
     height: 393px;
-    background-color: grey;
+    background-color: #F7f7f7;
 
 }
 
 body >footer> .foot-row{
-    background-color: rgba(219,218,226,0.24);
+    /*background-color: rgba(219,218,226,0.24);*/
+
     width: 1200px;
     /*background-color: red;*/
     padding: 68px 0 40px 80px;
 
     justify-content: center;
-    align-items: flex-start;
+    align-items: stretch;
     display: flex;
     flex-direction: column ;
 }
 body >footer> .foot-row > .foot-container{
-    align-items: flex-start ;
+    /*align-items: flex-start ;*/
     display: flex;
     flex-direction: row ;
-    justify-content: space-between;
+    /*justify-content: space-between;*/
+    /*justify-content: flex-start;*/
 }
 
 body >footer> .foot-row > .foot-container>.question-row{
@@ -437,70 +439,103 @@ body >footer> .foot-row > .foot-container >.question-row>.question-button{
     display: flex;
     flex-direction: column ;
     justify-content: flex-start;
-    padding-left: 1rem;
+    padding-left: 20px;
 
 }
 body >footer> .foot-row > .foot-container >.question-row>.question-button >a{
-    background-color: yellow;
-    padding: 0.75rem;
-    border-radius: 0.5rem;
-    border: black solid 0.0625rem;
-    margin: 0.25rem;
-    width: 11.2rem;
-
+    background-color: white;
+    /*padding: 0.75rem;*/
+    border-radius: 0.4rem;
+    border: rgba(0,0,0,0.2) solid 0.0625rem;
+    /*margin: 0.25rem;*/
+    box-shadow: black;
+    padding: 10px  0 8px 19px;
+    width: 184px;
+    font-size: 19px;
+    font-weight: 530;
+    letter-spacing: -1px;
+    color: rgba(0 ,0,0,0.9);
+    position: relative;
 }
-body >footer> .foot-row > .foot-container >.info>ul>li{
-    list-style-type: none;
-    font-size: 1rem;
+body >footer> .foot-row > .foot-container >.question-row>.question-button >a:nth-of-type(2){
+    background-color: #FFCC00;
+    border: #FFCC00 solid 0.0625rem;
 
-    margin:  0.4rem 0 ;
-    background-color: lightblue;
-    display: inline-block;
+    margin: 8px 0 0 0;
+}
+body >footer> .foot-row > .foot-container >.question-row>.question-button >a>.icon{
+    position: absolute;
+    font-size: 16px;
+    right: 20px;
+    top: 13px;
+    color: rgba(0,0,0,0.7);
+}
+
+
+
+
+body >footer> .foot-row > .foot-container >.info>ul>li{
+    /*list-style-type: none;*/
+    /*font-size: 1rem;*/
+
+    /*margin:  0.4rem 0 ;*/
+    /*background-color: lightblue;*/
+    /*display: inline-block;*/
 }
 body >footer> .foot-row > .foot-container >.info{
     display: flex;
     flex-direction: column;
-    background-color: red;
+    /*background-color: red;*/
+    align-items: stretch;
 }
 
 
 body >footer> .foot-row > .foot-container >.info>ul{
     margin: 0;
     padding: 0;
-
+    list-style-type: none;
 
 }
 
-body >footer> .foot-row > .foot-container >.info >.use{
+body >footer> .foot-row > .foot-container >.info >.info-use{
     align-items: center;
     display: flex;
     flex-direction: row ;
     justify-content: flex-start;
 
+    width: 725px;
+    height: 22px;
+    margin: 0 0 0 -15px;
 }
-body >footer> .foot-row > .foot-container >.info > .use > li{
-    background-color: lightblue;
+body >footer> .foot-row > .foot-container >.info >.info-use>.bar{
+    border-right: #989898 solid 1px;
+    height: 13px;
+    padding:unset;
 
-    /*padding-left: 1rem;*/
-    /*padding-right: 1rem;*/
-}
-body >footer> .foot-row > .foot-container >.info > .use > li:first-of-type{
-    padding-left: 0;
-}
-
-
-body >footer> .foot-row > .foot-container >.info > .use > li:nth-of-type(2){
-    border-left: black solid 0.0625rem;
-    border-right: black solid 0.0625rem;
-    color: rgb(255,0,0);
 }
 
 
-body >footer> .foot-row  >ul >li {
-   list-style-type: none;
-    font-size: 0.9rem;
+body >footer> .foot-row > .foot-container >.info > .info-use > li{
+    /*background-color: darksalmon;*/
+    /*display: inline-block;*/
+   padding: 0 0.9375rem;
+    letter-spacing: -1px;
 
 }
+body >footer> .foot-row > .foot-container >.info > .info-use > li > b{
+    color: rgba(0,0,0,0.8);
+
+}
+
+body >footer> .foot-row > .foot-container >.info > .info-use > li:nth-of-type(3)>b{
+    /*height: 5.133125rem;*/
+    /*width: 24px;*/
+
+    color: red;
+}
+
+
+
 
 body >footer> .foot-row > .foot-container >.info> .info-text{
 
@@ -508,12 +543,51 @@ body >footer> .foot-row > .foot-container >.info> .info-text{
     width: 714px;
     height: 135px;
     letter-spacing: -1px;
+    /*background-color: lightblue;*/
+
+    padding-top: 23px;
+    margin: 0 0 0 -4px;
+
+
 
 }
+body >footer> .foot-row > .foot-container >.info> .info-text>li {
+/*display: inline-block;*/
+    /*margin: 2px;*/
+    padding:6px 0 1px 4px;
+}
+body >footer> .foot-row > .foot-container >.info> .info-text>li:first-of-type {
+
+    padding:5px 0 1px 4px;
+}
+
+
 body >footer> .foot-row > .foot-container >.info> .info-text >li >span{
-    font-size: 1rem;
+    font-size: 17px;
+    color: rgba(0,0,0,0.8);
+
+}
+
+body >footer> .foot-row  >.last  {
+    margin: 54px 0 0 0 ;
+    text-align: center;
+    font-size: 14px;
+    letter-spacing: -1px;
+    color: rgba(0,0,0,0.8);
+    font-weight: 450;
+}
+body >footer> .foot-row  >.last >p:first-of-type{
+    margin: 0 0 8px 0;
+    /*margin: unset;*/
+    padding: 5px 0 0 0;
+    height: 20px;
+}
 
 
+body >footer> .foot-row  >.last >p:last-of-type{
+    margin: unset;
+    /*height: 20px;*/
+    color: rgba(0,0,0,0.5);
 
 
 }
