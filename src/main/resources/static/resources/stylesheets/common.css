@@ -74,8 +74,13 @@ body > header > .logo-row > .logo-container {
     height: 6.75rem;
 }
 
-body > header > .logo-row > .logo-container > img {
-    padding: 1.75rem 0;
+body > header > .logo-row > .logo-container > a {
+    height: 100%;
+    /*width: 100%;*/
+display: flex;
+    align-items: center;
+
+    /*padding: 1.75rem 0;*/
 }
 
 body > header > .logo-row > .logo-container > .user-menu {
@@ -625,12 +630,12 @@ body > footer > .foot-row > .foot-container > .info > .info-use > li {
 
 }
 
-body > footer > .foot-row > .foot-container > .info > .info-use > li > b {
+body > footer > .foot-row > .foot-container > .info > .info-use > li > a {
     color: rgba(0, 0, 0, 0.8);
 
 }
 
-body > footer > .foot-row > .foot-container > .info > .info-use > li:nth-of-type(3) > b {
+body > footer > .foot-row > .foot-container > .info > .info-use > li:nth-of-type(3) > a {
     /*height: 5.133125rem;*/
     /*width: 24px;*/
 
@@ -669,6 +674,10 @@ body > footer > .foot-row > .foot-container > .info > .info-text > li > span {
     color: rgba(0, 0, 0, 0.8);
 
 }
+body > footer > .foot-row > .foot-container > .info > .info-text > li > span>a{
+    color: inherit;
+}
+
 
 body > footer > .foot-row > .last {
     margin: 54px 0 0 0;

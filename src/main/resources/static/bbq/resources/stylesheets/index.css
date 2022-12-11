@@ -1,0 +1,21 @@
+
+body> main> .swiper>div{
+
+    /*color: white;*/
+    /*background: black;*/
+    display: inline-block;
+    /*font-size: 5rem;*/
+}
+
+body> main> .swiper{
+    width: 1900px;
+    height: 545px;
+    /*background-color: #CF152D;*/
+
+    background-image: url("https://mall.bbq.co.kr/data/skin/responsive_ver1_default_gl/images/banner/10/images_1.png?ver=3000");
+
+    background-size: 100%;
+    background-repeat: no-repeat;
+
+}
+
