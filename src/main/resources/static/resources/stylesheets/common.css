@@ -42,9 +42,10 @@ body > header {
     display: flex;
     flex-direction: column;
     justify-content: stretch;
-    /*width: 100%;*/
+    width: 100%;
     /*border-bottom: */
     box-shadow: 0 0 0.3rem rgba(0, 0, 0, 15%);
+    z-index: 1;
 }
 
 body > header > .logo-row {
