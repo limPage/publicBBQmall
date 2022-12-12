@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>BBQ몰</title>
     <link rel="stylesheet" th:href="@{/bbq/resources/stylesheets/index.css}">
+    <link rel="stylesheet" th:href="@{/category/resources/stylesheets/category.css}">
     <th:block th:replace="~{fragments/head :: common}"></th:block>
 </head>
 <body>
@@ -12,7 +13,7 @@
     <div class="swiper">
         <div>
             <div class="catalog-page">
-                <form name = "goods-search-form" id="goodsSearchForm" method="get">
+                <form name = "goods-search-form" id="goodsSearchForm" class = "goods-search-form" method="get">
                     <div class="search-filter">
                         <ul class="search-list">
                             <li>
@@ -49,19 +50,250 @@
                     </div>
 
                     <div class="search-item-display" id="searchItemDisplay">
-                        <ul>
-                            <li class = "goods_list">
+                        <ul class = "ul">
+                            <li class = "goods-list">
                                 <div class="item-area">
-                                    <a href = "/goods/view?no=582">
-                                        <img src = "/resources/images/images/new1.png" alt>
+                                    <a href = "https://www.mall.bbq.co.kr/goods/view?no=582" class="goods">
+                                        <img src = "/resources/images/images/new1.png" width = "300px" alt>
+                                        <div class = "goods-content">
+                                            BBQ닭가슴살 맛보기세트 12종 2팩씩 (신제품)
+                                        </div>
+                                        <div class = "goods-price">
+                                            41% 44,900원
+                                        </div>
+                                    </a>
+                                    <div class="zzim">
+                                        <i class="fa-light fa-cart-shopping-fast"></i>
+                                    </div>
+
+                                </div>
+                                <div class="item-area">
+                                    <a href = "https://www.mall.bbq.co.kr/goods/view?no=582">
+                                        <img src = "/resources/images/images/new1.png" width = "300px" alt>
+                                        <div class = "goods-content">
+                                            BBQ간편식 골라담기 (신제품)
+                                        </div>
+                                        <div class = "goods-price">
+                                            41% 44,900원
+                                        </div>
+                                    </a>
+                                    <div class="zzim">
+                                        <i class="fa-light fa-cart-shopping-fast"></i>
+                                    </div>
+                                </div>
+                                <div class="item-area">
+                                    <a href = "https://www.mall.bbq.co.kr/goods/view?no=582">
+                                        <img src = "/resources/images/images/new1.png" width = "300px" alt>
+                                        <div class = "goods-content">
+                                            BBQ간편식 맛보기세트 15종 (신제품)
+                                        </div>
+                                        <div class = "goods-price">
+                                            27% 44,900원
+                                        </div>
+                                    </a>
+                                    <div class="zzim">
+                                        <i class="fa-light fa-cart-shopping-fast"></i>
+                                    </div>
+                                </div>
+                                <div class="item-area">
+                                    <a href = "https://www.mall.bbq.co.kr/goods/view?no=582">
+                                        <img src = "/resources/images/images/new1.png" width = "300px" alt>
+                                        <div class = "goods-content">
+                                            [냉동] BBQ 구운 왕갈비맛 삼각밥 100g 10팩
+                                        </div>
+                                        <div class = "goods-price">
+                                            13% 17,300원
+                                        </div>
                                     </a>
                                     <div class="zzim">
                                         <i class="fa-light fa-cart-shopping-fast"></i>
                                     </div>
                                 </div>
                             </li>
+
+                            <li class = "goods-list">
+                                <div class="item-area">
+                                    <a href = "https://www.mall.bbq.co.kr/goods/view?no=582" class="goods">
+                                        <img src = "/resources/images/images/new1.png" width = "300px" alt>
+                                        <div class = "goods-content">
+                                            BBQ닭가슴살 맛보기세트 12종 2팩씩 (신제품)
+                                        </div>
+                                        <div class = "goods-price">
+                                            41% 44,900원
+                                        </div>
+                                    </a>
+                                    <div class="zzim">
+                                        <i class="fa-light fa-cart-shopping-fast"></i>
+                                    </div>
+
+                                </div>
+                                <div class="item-area">
+                                    <a href = "https://www.mall.bbq.co.kr/goods/view?no=582">
+                                        <img src = "/resources/images/images/new1.png" width = "300px" alt>
+                                        <div class = "goods-content">
+                                            BBQ간편식 골라담기 (신제품)
+                                        </div>
+                                        <div class = "goods-price">
+                                            41% 44,900원
+                                        </div>
+                                    </a>
+                                    <div class="zzim">
+                                        <i class="fa-light fa-cart-shopping-fast"></i>
+                                    </div>
+                                </div>
+                                <div class="item-area">
+                                    <a href = "https://www.mall.bbq.co.kr/goods/view?no=582">
+                                        <img src = "/resources/images/images/new1.png" width = "300px" alt>
+                                        <div class = "goods-content">
+                                            BBQ간편식 맛보기세트 15종 (신제품)
+                                        </div>
+                                        <div class = "goods-price">
+                                            27% 44,900원
+                                        </div>
+                                    </a>
+                                    <div class="zzim">
+                                        <i class="fa-light fa-cart-shopping-fast"></i>
+                                    </div>
+                                </div>
+                                <div class="item-area">
+                                    <a href = "https://www.mall.bbq.co.kr/goods/view?no=582">
+                                        <img src = "/resources/images/images/new1.png" width = "300px" alt>
+                                        <div class = "goods-content">
+                                            [냉동] BBQ 구운 왕갈비맛 삼각밥 100g 10팩
+                                        </div>
+                                        <div class = "goods-price">
+                                            13% 17,300원
+                                        </div>
+                                    </a>
+                                    <div class="zzim">
+                                        <i class="fa-light fa-cart-shopping-fast"></i>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class = "goods-list">
+                                <div class="item-area">
+                                    <a href = "https://www.mall.bbq.co.kr/goods/view?no=582" class="goods">
+                                        <img src = "/resources/images/images/new1.png" width = "300px" alt>
+                                        <div class = "goods-content">
+                                            BBQ닭가슴살 맛보기세트 12종 2팩씩 (신제품)
+                                        </div>
+                                        <div class = "goods-price">
+                                            41% 44,900원
+                                        </div>
+                                    </a>
+                                    <div class="zzim">
+                                        <i class="fa-light fa-cart-shopping-fast"></i>
+                                    </div>
+
+                                </div>
+                                <div class="item-area">
+                                    <a href = "https://www.mall.bbq.co.kr/goods/view?no=582">
+                                        <img src = "/resources/images/images/new1.png" width = "300px" alt>
+                                        <div class = "goods-content">
+                                            BBQ간편식 골라담기 (신제품)
+                                        </div>
+                                        <div class = "goods-price">
+                                            41% 44,900원
+                                        </div>
+                                    </a>
+                                    <div class="zzim">
+                                        <i class="fa-light fa-cart-shopping-fast"></i>
+                                    </div>
+                                </div>
+                                <div class="item-area">
+                                    <a href = "https://www.mall.bbq.co.kr/goods/view?no=582">
+                                        <img src = "/resources/images/images/new1.png" width = "300px" alt>
+                                        <div class = "goods-content">
+                                            BBQ간편식 맛보기세트 15종 (신제품)
+                                        </div>
+                                        <div class = "goods-price">
+                                            27% 44,900원
+                                        </div>
+                                    </a>
+                                    <div class="zzim">
+                                        <i class="fa-light fa-cart-shopping-fast"></i>
+                                    </div>
+                                </div>
+                                <div class="item-area">
+                                    <a href = "https://www.mall.bbq.co.kr/goods/view?no=582">
+                                        <img src = "/resources/images/images/new1.png" width = "300px" alt>
+                                        <div class = "goods-content">
+                                            [냉동] BBQ 구운 왕갈비맛 삼각밥 100g 10팩
+                                        </div>
+                                        <div class = "goods-price">
+                                            13% 17,300원
+                                        </div>
+                                    </a>
+                                    <div class="zzim">
+                                        <i class="fa-light fa-cart-shopping-fast"></i>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class = "goods-list">
+                                <div class="item-area">
+                                    <a href = "https://www.mall.bbq.co.kr/goods/view?no=582" class="goods">
+                                        <img src = "/resources/images/images/new1.png" width = "300px" alt>
+                                        <div class = "goods-content">
+                                            BBQ닭가슴살 맛보기세트 12종 2팩씩 (신제품)
+                                        </div>
+                                        <div class = "goods-price">
+                                            41% 44,900원
+                                        </div>
+                                    </a>
+                                    <div class="zzim">
+                                        <i class="fa-light fa-cart-shopping-fast"></i>
+                                    </div>
+
+                                </div>
+                                <div class="item-area">
+                                    <a href = "https://www.mall.bbq.co.kr/goods/view?no=582">
+                                        <img src = "/resources/images/images/new1.png" width = "300px" alt>
+                                        <div class = "goods-content">
+                                            BBQ간편식 골라담기 (신제품)
+                                        </div>
+                                        <div class = "goods-price">
+                                            41% 44,900원
+                                        </div>
+                                    </a>
+                                    <div class="zzim">
+                                        <i class="fa-light fa-cart-shopping-fast"></i>
+                                    </div>
+                                </div>
+                                <div class="item-area">
+                                    <a href = "https://www.mall.bbq.co.kr/goods/view?no=582">
+                                        <img src = "/resources/images/images/new1.png" width = "300px" alt>
+                                        <div class = "goods-content">
+                                            BBQ간편식 맛보기세트 15종 (신제품)
+                                        </div>
+                                        <div class = "goods-price">
+                                            27% 44,900원
+                                        </div>
+                                    </a>
+                                    <div class="zzim">
+                                        <i class="fa-light fa-cart-shopping-fast"></i>
+                                    </div>
+                                </div>
+                                <div class="item-area">
+                                    <a href = "https://www.mall.bbq.co.kr/goods/view?no=582">
+                                        <img src = "/resources/images/images/new1.png" width = "300px" alt>
+                                        <div class = "goods-content">
+                                            [냉동] BBQ 구운 왕갈비맛 삼각밥 100g 10팩
+                                        </div>
+                                        <div class = "goods-price">
+                                            13% 17,300원
+                                        </div>
+                                    </a>
+                                    <div class="zzim">
+                                        <i class="fa-light fa-cart-shopping-fast"></i>
+                                    </div>
+                                </div>
+                            </li>
+
                         </ul>
                     </div>
+
 
                 </form>
             </div>
