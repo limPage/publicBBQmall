@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>BBQ몰</title>
+    <link rel="stylesheet" th:href="@{/bbq/resources/stylesheets/index.css}">
+    <th:block th:replace="~{fragments/head :: common}"></th:block>
+</head>
+<body>
+<th:block th:replace="~{fragments/body :: header}"></th:block>
+<main>
+    <div class="swiper">
+        <div>
+            <div class="catalog-page">
+                <form name = "goods-search-form" id="goodsSearchForm" method="get">
+                    <div class="search-filter">
+                        <ul class="search-list">
+                            <li>
+                                <label class="active">
+                                    <input type="radio" name ="sorting" value="ranking" checked>랭킹순
+                                </label>
+                            </li>
+                            <li>
+                                <label class="active">
+                                    <input type="radio" name ="sorting" value="register" checked>신규등록순
+                                </label>
+                            </li>
+                            <li>
+                                <label class="active">
+                                    <input type="radio" name ="sorting" value="low-price" checked>낮은가격순
+                                </label>
+                            </li>
+                            <li>
+                                <label class="active">
+                                    <input type="radio" name ="sorting" value="high-price" checked>높은가격순
+                                </label>
+                            </li>
+                            <li>
+                                <label class="active">
+                                    <input type="radio" name ="sorting" value="review" checked>상품평많은순
+                                </label>
+                            </li>
+                            <li>
+                                <label class="active">
+                                    <input type="radio" name ="sorting" value="sale" checked>판매량순
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="search-item-display" id="searchItemDisplay">
+                        <ul>
+                            <li class = "goods_list">
+                                <div class="item-area">
+                                    <a href = "/goods/view?no=582">
+                                        <img src = "/resources/images/images/new1.png" alt>
+                                    </a>
+                                    <div class="zzim">
+                                        <i class="fa-light fa-cart-shopping-fast"></i>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+<th:block th:replace="~{fragments/body :: footer}"></th:block>
+</body>
+</html>

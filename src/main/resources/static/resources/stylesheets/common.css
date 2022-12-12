@@ -4,7 +4,15 @@ html {
     font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
     font-weight: 400;
 
-    /*height: 100%;*/
+    height: 100%;
+    max-width: 1903px;
+    margin: unset;
+    padding: unset;
+}
+
+* {
+    text-decoration: none;
+    list-style-type: none;
 }
 
 body {
@@ -12,11 +20,17 @@ body {
     /*background-color: black;*/
     top: 0;
     left: 0;
-    width: 100%;
-
+    /*width: 100%;*/
+    /*height: 100%;*/
     min-height: 100%;
     margin: unset;
-    position: absolute;
+
+
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+
 
 }
 
@@ -26,15 +40,14 @@ body > header {
 
     align-items: stretch;
     display: flex;
-    flex-direction: column ;
+    flex-direction: column;
     justify-content: stretch;
     /*width: 100%;*/
     /*border-bottom: */
-    box-shadow: 0 0 0.3rem  rgba(0,0,0,15%);
+    box-shadow: 0 0 0.3rem rgba(0, 0, 0, 15%);
 }
 
 body > header > .logo-row {
-
 
 
     /*width: 100%;*/
@@ -49,156 +62,644 @@ body > header > .logo-row {
 
 body > header > .logo-row > .logo-container {
 
-    width: 84rem;
+    width: 80rem;
     padding: 0 2.5rem;
     /*background-color: yellow;*/
-    align-items: center;
+    align-items: flex-start;
     display: flex;
-    flex-direction: row ;
+    flex-direction: row;
     justify-content: flex-start;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    height: 6.75rem;
 }
-body > header > .logo-row > .logo-container > img{
-    padding:  28px 0;
-}
-.button{
 
-    background-color: rgba(108,122,108,0.22);
-
-    color: gray;
-    font-size: 1.5rem;
-
-    align-items: center;
+body > header > .logo-row > .logo-container > a {
+    height: 100%;
+    /*width: 100%;*/
     display: flex;
-    flex-direction: row ;
+    align-items: center;
+
+    /*padding: 1.75rem 0;*/
+}
+
+body > header > .logo-row > .logo-container > .user-menu {
+    /*height: 100%;*/
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: row;
+}
+
+
+body > header > .logo-row > .logo-container > .user-menu > ul {
+    /*height: 100%;*/
+    display: flex;
+    align-items: flex-start;
     justify-content: center;
+    flex-direction: row;
+    /*top: 10px;*/
+    /*position: relative;*/
+
+    margin: unset;
+    /*height: 41px;*/
+    padding: unset;
+    /*margin-left: 1rem;*/
+    /*background-color: lightblue;*/
 
 }
 
-body > header > .logo-row > .logo-container >.search{
-    width: 24rem;
+/*body > header > .logo-row > .logo-container > .user-menu> ul >span{*/
+/*    height: 1rem;*/
+/*    width: 1rem;*/
+
+/*    border-right: 0.05rem solid black ;*/
+
+/*}*/
+
+body > header > .logo-row > .logo-container > .user-menu > ul > li {
+
+    /*color: red;*/
+
+
+    font-family: inherit;
+    font-weight: 450;
+    /*border-right: 0.05rem solid black ;*/
+
+
+    display: flex;
+    align-items: center;
+}
+
+body > header > .logo-row > .logo-container > .user-menu > ul > li:first-of-type {
+    padding-left: 16px;
+
+}
+
+
+body > header > .logo-row > .logo-container > .user-menu > ul > li:last-of-type {
+    /*padding-right: unset;*/
+    /*border-right: none;*/
+
+}
+
+body > header > .logo-row > .logo-container > .user-menu > ul > li > .bar {
+    margin-top: 40px;
+    border-right: solid 2px rgba(0, 0, 0, 0.3);
+    height: 1rem;
+    /*padding-left: 16px;*/
+}
+
+
+body > header > .logo-row > .logo-container > .user-menu > ul > li > a {
+
+    font-size: 19px;
+    font-family: inherit;
+    font-weight: 450;
+    color: rgba(0, 0, 0, 0.8);
+
+    height: 41px;
+    margin-top: 39px;
+
+    padding:0 16px 0 16px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    letter-spacing: -1px;
+
+}
+
+body > header > .logo-row > .logo-container > .user-menu > ul > .cs > a {
+
+    padding: 0 0 0 17px;
+    /*width: 98px;*/
+
+}
+
+body > header > .logo-row > .logo-container > .user-menu > ul > .cs > a > .drop-down {
+
+
+    font-size: 0.5rem;
+    margin-left: 10px;
+    width: 8px;
+    height: 7px;
+    position: relative;
+    bottom: 0.2rem;
+    /*background-repeat: no-repeat;*/
+    /*width: 0.5rem;*/
+    /*height: 0.5rem;*/
+    /*color: red;*/
+    /*margin-left: 10px;*/
+
+    /*display: inline-block;*/
+
+    /*position: relative;*/
+    /*right: -4px;*/
+}
+
+
+/*      고객센터   - 탭     */
+body > header > .logo-row > .logo-container > .user-menu > div {
+
+    position: absolute;
+    right: -0.5rem;
+    top: 0.8rem;
+    margin: 0;
+    padding: 0;
+
+
+}
+
+body > header > .logo-row > .logo-container > .user-menu > div > ul {
+    list-style-type: none;
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: red;
+    border: rgb(0, 0, 0) solid 0.0625rem;
+    padding: 0.25rem;
+    font-size: 1.1rem;
+    width: 6rem;
+    /*font-family: inherit;*/
+    /*    font-weight: 550;*/
+
+}
+
+body > header > .logo-row > .logo-container > .user-menu > div > ul > li {
+    padding: 0.5rem;
+    height: 100%;
+
+}
+
+body > header > .logo-row > .logo-container > .user-menu > div > ul > li > a {
+    /*font-family: inherit;*/
+    /*font-weight: 550;*/
+}
+
+
+body > header > .logo-row > .logo-container > .tab:hover {
+
+    background-color: grey;
+}
+
+
+body > header > .logo-row > .logo-container > .search {
+    /*width: 25em;*/
+    /*height: 2.5625rem;*/
     align-items: stretch;
     display: flex;
-    flex-direction: row ;
+    flex-direction: row;
     justify-content: stretch;
 
-    margin-left: 2.5rem;
-    height: 2.5rem;
-    top: 0.86rem;
+    margin-left: 2.3rem;
+
+    top: 2.45rem;
     position: relative;
+    border-radius: 2rem;
+    background-color: rgba(108, 122, 108, 0.15);
+
+
+}
+
+body > header > .logo-row > .logo-container > .search > form {
+    align-items: stretch;
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+    padding: 0 12px;
 }
 
 
-body > header > .logo-row > .logo-container >.search>input{
+body > header > .logo-row > .logo-container > .search > form > .button {
 
-    width: 100%;
-    height: 2.5rem;
-    background-color: rgba(108,122,108,0.22);
-    padding: 0 9px;
+    /*background-color: rgba(108,122,108,0.22);*/
 
+    width: 34px;
+    font-size: 1.5rem;
+    color: rgba(117, 131, 117, 0.9);
+
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+}
+
+
+body > header > .logo-row > .logo-container > .search > form > label > input {
+
+    width: 21.75rem;
+    height: 2.5625rem;
+    background-color: transparent;
+    /*background-color: red;*/
+    padding: 0 0.5625rem;
+
+
+    font-family: inherit;
+    font-size: 1.05rem;
+    font-weight: inherit;
+    color: rgba(11, 10, 0, 0.8);
+    letter-spacing: -1px;
+
+
+    /*word-spacing:-3px;*/
 
     border: none;
 }
-body > header > .logo-row > .logo-container >.search >div:first-of-type{
-    border-top-left-radius: 1rem;
-    border-bottom-left-radius: 1rem;
-    width: 2rem;
-    background-color: rgba(108,122,108,0.22);
 
-
+body > header > .logo-row > .logo-container > .search input:focus {
+    outline: none;
 }
-body > header > .logo-row > .logo-container >.search >div:last-of-type{
-    border-top-right-radius: 1rem;
-    border-bottom-right-radius: 1rem;
-    width: 2rem;
 
-
-    background-color: rgba(108,122,108,0.22);
+body > header > .logo-row > .logo-container > .search input::placeholder {
+    color: rgba(117, 131, 117, 0.7);
+    letter-spacing: -1px;
+    font-size: 1.05rem;
+    font-weight: 500;
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 
 }
 
 
-body > header > .logo-row > .logo-container >.spring{
+body > header > .logo-row > .logo-container > .spring {
     flex: 1;
 }
-
-body > header > .logo-row > .logo-container > a{
-
-    border-right: 0.05rem solid black;
-    padding:  0 16px;
-}
-body > header > .logo-row > .logo-container > a:last-of-type{
-    padding-left: 16px;
-    border-right: none ;
-
-}
-
 
 
 body > header > .menu-row {
 
 
-    width: 100%;
+    /*width: 100%;*/
     align-items: center;
-    display: flex;
+    /*display: block;*/
     flex-direction: row;
     justify-content: center;
-
+    /*position: relative;*/
 
 }
 
 body > header > .menu-row > .menu-container {
     /*background-color: blueviolet;*/
 
-    padding: 0 2.5rem;
-    width: 84rem;
-    position: relative;
+    /*padding: 0 2.5rem;*/
+    /*width: 84rem;*/
+    /*position: relative;*/
+    display: flex;
+    justify-content: center;
 
 }
+body > header > .menu-row > .menu-container > ul > .menu-button >a{
+    display: flex;
+    align-items: center;
+    /*width: 100%;*/
+    height: 100%;
+    padding: 0 37px 0 0;
+}
+
+body > header > .menu-row > .menu-container > ul > .menu-button >a> .menu-trigger {
+    width: 34px;
+    height: 34px;
+    border: rgba(0,0,0,0.3) solid 1px;
+    border-radius: 999rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 10px 0 0;
+}
+body > header > .menu-row > .menu-container > ul > .menu-button >a> .menu-trigger>span {
+    width: 20px;
+    height: 2px;
+    background-color: #CF152D;
+    display: inline-block;
+    /*margin: 2px;*/
+    padding: 0;
+}
+body > header > .menu-row > .menu-container > ul > .menu-button >a> .menu-trigger> .hover-trigger {
+
+    margin: 3px;
+}
+
+
 
 body > header > .menu-row > .menu-container > ul {
+
     align-items: center;
     display: flex;
     flex-direction: row;
+    justify-content: center;
+
+    height: 52px;
+    width: 1280px;
+    list-style-type: none;
+    padding: 0 40px ;
+    margin: 0 0 11px;
+    font-size: 22px;
+    /*height: 72px;*/
+    letter-spacing: -1.6px;
+    /*margin-bottom: 1rem;*/
+
+}
+
+body > header > .menu-row > .menu-container > ul > .menu-button {
+
+    height: 100%;
+
+    /*display: flex;*/
+    /*align-items: center;*/
+}
+
+
+
+body > header > .menu-row > .menu-container > ul > .menu{
+    height: 100%;
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*align-content: center;*/
+}
+
+body > header > .menu-row > .menu-container > ul > .menu>a {
+
+    font-size: 22px;
+
+
+    padding: 0 36px ;
+    /*width: 5rem;*/
+    height: 100%;
+    display: flex;
+    align-items: center;
+    /*position: relative;*/
+}
+body > header > .menu-row > .menu-container > ul > .menu>a >span{
+    /*position: absolute;*/
+    /*display: inline;*/
+
+}
+
+
+body > header > .menu-row > .menu-container > ul > li >a>strong{
+    color: black;
+    font-weight: 500;
+
+}
+body > header > .menu-row > .menu-container > ul > li >a:hover>strong{
+    font-weight: 700;
+}
+body > header > .menu-row > .menu-container > ul > li >a:hover>.en{
+
+    letter-spacing: -1.75px;
+}
+body > header > .menu-row > .menu-container > ul > li >a:hover>.new{
+    letter-spacing: -2px;
+}
+
+
+
+
+body > header > .menu-row > .menu-container > ul > .spring{
+    flex: 1;
+
+}
+
+
+
+/*body > header > .menu-row > .menu-container > ul >.menu-button{*/
+/*    padding-right: 36px;*/
+/*}*/
+/*body > header > .menu-row > .menu-container > ul >.menu{*/
+
+
+/*}*/
+body > header > .menu-row > .menu-container > ul > .my-menu{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 5px;
+    width: 3rem;
+
+}
+body > header > .menu-row > .menu-container > ul > .my-menu>a>img{
+
+}
+
+
+body > header > .menu-row > .menu-container > ul > .my-menu:last-of-type{
+    width: 50px;
+
+}
+
+
+body > main {
+    flex: 1;
+
+}
+
+body > footer {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+
+    height: 393px;
+    background-color: #F7f7f7;
+
+}
+
+body > footer > .foot-row {
+    /*background-color: rgba(219,218,226,0.24);*/
+
+    width: 1200px;
+    /*background-color: red;*/
+    padding: 68px 0 40px 80px;
+
+    justify-content: center;
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+}
+
+body > footer > .foot-row > .foot-container {
+    /*align-items: flex-start ;*/
+    display: flex;
+    flex-direction: row;
+    /*justify-content: space-between;*/
+    /*justify-content: flex-start;*/
+}
+
+body > footer > .foot-row > .foot-container > .question-row {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: row;
     justify-content: flex-start;
+    width: 490px;
+
+}
+
+body > footer > .foot-row > .foot-container > .question-row > .question-button {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-left: 20px;
+
+}
+
+body > footer > .foot-row > .foot-container > .question-row > .question-button > a {
+    background-color: white;
+    /*padding: 0.75rem;*/
+    border-radius: 0.4rem;
+    border: rgba(0, 0, 0, 0.2) solid 0.0625rem;
+    /*margin: 0.25rem;*/
+    box-shadow: black;
+    padding: 10px 0 8px 19px;
+    width: 184px;
+    font-size: 19px;
+    font-weight: 530;
+    letter-spacing: -1px;
+    color: rgba(0, 0, 0, 0.9);
+    position: relative;
+}
+
+body > footer > .foot-row > .foot-container > .question-row > .question-button > a:nth-of-type(2) {
+    background-color: #FFCC00;
+    border: #FFCC00 solid 0.0625rem;
+
+    margin: 8px 0 0 0;
+}
+
+body > footer > .foot-row > .foot-container > .question-row > .question-button > a > .icon {
+    position: absolute;
+    font-size: 16px;
+    right: 20px;
+    top: 13px;
+    color: rgba(0, 0, 0, 0.7);
+}
+
+
+body > footer > .foot-row > .foot-container > .info > ul > li {
+    /*list-style-type: none;*/
+    /*font-size: 1rem;*/
+
+    /*margin:  0.4rem 0 ;*/
+    /*background-color: lightblue;*/
+    /*display: inline-block;*/
+}
+
+body > footer > .foot-row > .foot-container > .info {
+    display: flex;
+    flex-direction: column;
+    /*background-color: red;*/
+    align-items: stretch;
+}
+
+
+body > footer > .foot-row > .foot-container > .info > ul {
     margin: 0;
     padding: 0;
-    width: 100%;
-
     list-style-type: none;
 
 }
 
-body > header > .menu-row > .menu-container > ul > li{
-
-
-
-    font-size: 1.5rem;
-    font-weight: 500;
-    height: 4.5rem;
-    /*background-color: rosybrown;*/
-
+body > footer > .foot-row > .foot-container > .info > .info-use {
     align-items: center;
     display: flex;
-    flex-direction: row ;
-    justify-content: center;
-    white-space: nowrap;
-}
-body > header > .menu-row > .menu-container > ul > .spring{
-    flex: 1;
+    flex-direction: row;
+    justify-content: flex-start;
+
+    width: 725px;
+    height: 22px;
+    margin: 0 0 0 -15px;
 }
 
-a{ text-decoration: none;
-    color: black;}
+body > footer > .foot-row > .foot-container > .info > .info-use > .bar {
+    border-right: #989898 solid 1px;
+    height: 13px;
+    padding: unset;
 
-body > header > .menu-row > .menu-container > ul >.menu-button{
-    padding-right: 3rem;
 }
-body > header > .menu-row > .menu-container > ul >.menu{
 
-    padding:0 3rem ;
+
+body > footer > .foot-row > .foot-container > .info > .info-use > li {
+    /*background-color: darksalmon;*/
+    /*display: inline-block;*/
+    padding: 0 0.9375rem;
+    letter-spacing: -1px;
+
 }
-body > header > .menu-row > .menu-container > ul > .my-menu{
-    width: 3rem;
+
+body > footer > .foot-row > .foot-container > .info > .info-use > li > a {
+    color: rgba(0, 0, 0, 0.8);
+
+}
+
+body > footer > .foot-row > .foot-container > .info > .info-use > li:nth-of-type(3) > a {
+    /*height: 5.133125rem;*/
+    /*width: 24px;*/
+
+    color: red;
+}
+
+
+body > footer > .foot-row > .foot-container > .info > .info-text {
+
+    /*padding-left: 3rem;*/
+    width: 714px;
+    height: 135px;
+    letter-spacing: -1px;
+    /*background-color: lightblue;*/
+
+    padding-top: 23px;
+    margin: 0 0 0 -4px;
+
+
+}
+
+body > footer > .foot-row > .foot-container > .info > .info-text > li {
+    /*display: inline-block;*/
+    /*margin: 2px;*/
+    padding: 6px 0 1px 4px;
+}
+
+body > footer > .foot-row > .foot-container > .info > .info-text > li:first-of-type {
+
+    padding: 5px 0 1px 4px;
+}
+
+
+body > footer > .foot-row > .foot-container > .info > .info-text > li > span {
+    font-size: 17px;
+    color: rgba(0, 0, 0, 0.8);
+
+}
+body > footer > .foot-row > .foot-container > .info > .info-text > li > span>a{
+    color: inherit;
+}
+
+
+body > footer > .foot-row > .last {
+    margin: 54px 0 0 0;
+    text-align: center;
+    font-size: 14px;
+    letter-spacing: -1px;
+    color: rgba(0, 0, 0, 0.8);
+    font-weight: 450;
+}
+
+body > footer > .foot-row > .last > p:first-of-type {
+    margin: 0 0 8px 0;
+    /*margin: unset;*/
+    padding: 5px 0 0 0;
+    height: 20px;
+}
+
+
+body > footer > .foot-row > .last > p:last-of-type {
+    margin: unset;
+    /*height: 20px;*/
+    color: rgba(0, 0, 0, 0.5);
+
 
 }
