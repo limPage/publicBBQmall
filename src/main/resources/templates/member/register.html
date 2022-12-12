@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>BBQ몰 - 회원가입</title>
-    <th:block th:replace = "~{fragments/head :: common}"></th:block>
+    <th:block th:replace="~{fragments/head :: common}"></th:block>
     <link rel="stylesheet" th:href="@{/member/resources/stylesheets/register.css}">
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script defer th:src="@{/member/resources/scripts/register.js}"></script>
@@ -15,197 +15,280 @@
 <th:block th:replace="~{fragments/body :: header}"></th:block> <!-- block 자리에 body.html 파일의 replace 태그와 치환한다. -->
 <th:block th:replace="~{fragments/body :: cover}"></th:block>
 <main class="--main main">
-    <div class="--content content">
-        <form class = "form step1" id = "form">
-            <div class="title-container">
-                <h2 class = "title">회원가입</h2>
-                <div class="step-container">
-                    <span class="text" rel = "stepText">이용약관 및 개인정보 처리방침</span>
-                    <span class="step step0">0</span>
-                    <span class="line"></span>
-                    <span class="step step1">1</span>
-                    <span class="line"></span>
-                    <span class="step step2">2</span>
-                    <span class="line"></span>
-                    <span class="step step3">3</span>
-                </div>
-            </div>
-            <div class = "step step0">
+    <div class="content">
+        <form class="form step" id="form">
+
+            <div class="email-check-page">
+
+                <h1 class="title">본인인증</h1>
                 <table>
-                <div id="layout_body" class="layout_body">
-                    <style>
-                        @media (max-width: 1023px) {
-                            .title_container {
-                                display: block;
-                            }
-                        }
-                    </style>
-
-                    <div class="title_container bold">
-                        <h2><span designelement="text" textindex="1" texttemplatepath="cmVzcG9uc2l2ZV92ZXIxX2RlZmF1bHRfZ2wvbWVtYmVyL2pvaW5fZ2F0ZS5odG1s">회원가입</span></h2>
-                    </div>
-                    <p class="mypage_greeting" designelement="text" textindex="2" texttemplatepath="cmVzcG9uc2l2ZV92ZXIxX2RlZmF1bHRfZ2wvbWVtYmVyL2pvaW5fZ2F0ZS5odG1s">비비큐몰 회원이 되면 다양한 혜택을 받을 수 있습니다.</p>
-
-                    <div class="resp_login_wrap" style="min-height:300px;">
-
-                        <div class="sub_page_tab_contents" style="display: block;">
-                            <p class="join_btns">
-                                <button type="button" class="register-button" id="registerButton" onclick="document.location.href='agreement?join_type=member'"><span designelement="text" textindex="5">회원가입</span></button>
-                            </p>
-
-                            <h3 class="title_sub3 v3"><span designelement="text" textindex="6" texttemplatepath="cmVzcG9uc2l2ZV92ZXIxX2RlZmF1bHRfZ2wvbWVtYmVyL2pvaW5fZ2F0ZS5odG1s">간편하게 시작하기</span></h3>
-                            <ul class="sns_login_ul">
-                                <li snstype="kakaosync" class="sns-login-button"><div class="img"><img src="/data/images/common/sns_icon_kakaosync.png" onclick="document.location.href='agreement?join_type=kksyncmember'" alt=" kakaosync 회원가입" title="카카오 회원가입"></div></li>
-
-                            </ul>
-                        </div>
-
-                        <div class="sub_page_tab_contents" style="display: none;">
-                            <p class="join_btns">
-                                <button type="button" class="btn_resp size_c color2 Wmax" onclick="document.location.href='agreement?join_type=business'"><span designelement="text" textindex="7" texttemplatepath="cmVzcG9uc2l2ZV92ZXIxX2RlZmF1bHRfZ2wvbWVtYmVyL2pvaW5fZ2F0ZS5odG1s">회원가입</span></button>
-                            </p>
-
-                            <h3 class="title_sub3 v3"><span designelement="text" textindex="8" texttemplatepath="cmVzcG9uc2l2ZV92ZXIxX2RlZmF1bHRfZ2wvbWVtYmVyL2pvaW5fZ2F0ZS5odG1s">또는 SNS 회원가입</span></h3>
-                            <ul class="sns_login_ul">
-                                <li><div class="img"><img src="/data/skin/responsive_ver1_default_gl/images/design/sns_icon_kakaosync.png" onclick="document.location.href='agreement?join_type=kksyncbusiness'" alt=" kakaosync 회원가입" title="카카오 회원가입"></div></li>
-                            </ul>
-                        </div>
-
-                        <h3 class="title_sub2 Mt50"><b class="Fw400"><span designelement="text" textindex="9" texttemplatepath="cmVzcG9uc2l2ZV92ZXIxX2RlZmF1bHRfZ2wvbWVtYmVyL2pvaW5fZ2F0ZS5odG1s">신규회원을 위한 혜택을 놓치지 마세요!</span></b></h3>
-                        <div class="join_member_benefit_detail">
-                            <ul>
-                                <li class="tt">적립금</li>
-                                <li class="dd">
-                                    <span class="num">3,000</span>원
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                </table>
-            </div>
-            <!-- -----------------------------------step 0------------------------------------------  -->
-            <div class = "step step1">
-                <label class="label">
-                    <h2 class="title">서비스 이용약관</h2>
-                    <textarea class="--object-input term" readonly>서비스 이용약관</textarea>
-                </label>
-                <label class="label">
-                    <h2 class="title">개인정보 처리방침</h2>
-                    <textarea class="--object-input term" readonly>개인정보 처리방침</textarea>
-                </label>
-                <label class = "--object-check">
-                    <input name = "termAgree" type = "checkbox">
-                    <span class = "--checkbox"><i class="fa-solid fa-check --icon"></i></span>
-                    <span class = "--text">위 서비스 이용약관 및 개인정보 처리방침을 읽어보았고 이해하였으며 동의합니다.</span>
-                </label>
-            </div>
-            <div class = "step step2">
-                <table class = "table">
                     <tbody>
+
+                    <tr class="head">
+
+                        <td><a>이메일</a></td>
+
+                    </tr>
+
                     <tr>
-                        <th>이메일</th>
-                        <td>
-                            <label class="label email">
-                                <span hidden>이메일</span>
-                                <input type = "email" class = "--object-input input" maxlength = "50" name = "email" placeholder = "이메일 주소를 입력해주세요">
-                                <input type = "button" class = "--object-button" name = "emailSend" value = "인증번호 전송">
-                            </label>
-                            <label class="label email">
-                                <span hidden>인증번호</span>
-                                <input type = "text" class = "--object-input input" disabled maxlength = "6" name = "emailAuthCode" placeholder = "이메일 인증번호를 입력해주세요">
-                                <input name = "emailAuthSalt" type = "hidden">
-                                <input type = "button" class = "--object-button" disabled name = "emailVerify" value = "인증번호 확인">
-                            </label>
-                            <span class = "warning" rel = "emailWarning">이메일 주소를 입력해 주세요.</span>
+                        <td class="icon-container">
+
+                            <i class="fa-solid fa-envelope icon"></i>
+
+                            <span>이메일을 사용하여 본인확인을 합니다.</span>
                         </td>
                     </tr>
-                    <tr>
-                        <th>비밀번호</th>
-                        <td>
-                            <label class="label password">
-                                <span hidden>비밀번호</span>
-                                <input type = "password" class = "--object-input input" maxlength = "50" name = "password" placeholder = "비밀번호를 입력해주세요">
 
-                            </label>
-                            <label class="label password">
-                                <span hidden>비밀번호</span>
-                                <input type = "password" class = "--object-input input" maxlength = "50" name = "passwordCheck" placeholder = "비밀번호를 한번 더 입력해주세요">
+                    <tr class="check-start">
+                        <td>
+                            <label>
+                                <input class="email-button" id="emailButton" type="button" value="이메일 본인 인증">
+
 
                             </label>
 
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>닉네임</th>
-                        <td>
-                            <label class="label">
-                                <span hidden>닉네임</span>
-                                <input type = "text" class = "--object-input input" maxlength = "10" name = "nickname" placeholder = "닉네임을 입력해주세요.">
-                            </label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>이름</th>
-                        <td>
-                            <label class="label">
-                                <span hidden>이름</span>
-                                <input type = "text" class = "--object-input input" maxlength = "5" name = "name" placeholder = "이름을 입력해주세요.">
-                            </label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>연락처</th>
-                        <td>
-                            <label class="label">
-                                <span hidden>연락처</span>
-                                <input type = "text" class = "--object-input input" maxlength = "12" name = "contact" placeholder = "연락처를 '-' 없이 입력해주세요.">
-                            </label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>주소</th>
-                        <td>
-                            <label class="label address">
-                                <span hidden>우편번호</span>
-                                <input type = "text" class = "--object-input input" maxlength = "6" name = "addressPostal" placeholder = "우편번호" readonly>
-                                <input type = "button" class = "--object-button" name = "addressFind" value = "주소 찾기">
-                            </label>
-                            <label class="label address">
-                                <span hidden>기본 주소</span>
-                                <input type = "text" class = "--object-input input" maxlength = "100" name = "addressPrimary" placeholder = "주소찾기를 통해 주소를 입력해 주세요.">
-                            </label>
-                            <label class="label address">
-                                <span hidden>상세 주소</span>
-                                <input type = "text" class = "--object-input input" maxlength = "100" name = "addressSecondary" placeholder = "상세 주소를 입력해 주세요.">
-                            </label>
-                            <div class="panel address" rel = "addressFindPanel">
-                                <div class="dialog" rel = "addressFindPanelDialog">
 
-                                </div>
-                            </div>
+                        </td>
+                    </tr >
+                    <tr class="code-send-row">
+                        <td>
+                            <label>
+                                <input class="email-text" type="email" name="emailText" placeholder="이메일을 입력해주세요" maxlength="20">
+                                <input class="code-send-button" name="codeSend" type="button" value="인증번호 전송">
+
+                            </label>
+
+
                         </td>
                     </tr>
+                    <tr class="code-check-row">
+                        <td>
+                            <label>
+                                <input class="email-Auth-Code" name="emailAuthCode" type="text" placeholder="인증번호를 입력해주세요" maxlength="20">
+                                <input class="code-check-button" type="button" value="인증">
+                                <input name="emailAuthSalt" type="hidden">
+
+                            </label>
+
+
+                        </td>
+                    </tr>
+
+
+
+
+
+
                     </tbody>
                 </table>
-            </div>
-            <div class = "step step3">
-                <span class = "title">회원가입 완료</span>
-                <span class = "message"><b>스터디</b>에 회원가입해 주셔서 감사드립니다. <br>아래 <i>로그인하러 가기</i>버튼을 클릭하여 로그인해주세요.</span>
-            </div>
-            <div class="warning" rel = "warning">
-                <i class="icon fa-solid fa-triangle-exclamation"></i>
-                <div class="text" rel = "warningText"></div>
-            </div>
-            <div class="button-container">
-                <div class="button green" rel = "nextButton">
-                    <span class = "text">
-                        다음
-                    </span>
-                    <i class="fa-solid fa-chevron-right --icon"></i>
-                </div>
-            </div>
-        </form>
+
+                <input class="next" type="button" value="확인">
+
+                <ul class="text">
+                    <li>
+                        실명확인이 되지 않는 경우 아래의 실명인증기관에 실명등록을 요청할 수 있습니다.
+                        <br>
+                        한국신용정보㈜ 1588-2486
+                    </li>
+                    <li>
+                        타인의 정보 및 주민등록번호를 부정하게 사용하는 경우 3년 이하의 징역 또는 1천만원 이하의 벌금에 처해질 수 있습니다
+                        <br>
+                        (주민등록법 제 37조)
+                    </li>
+                </ul>
+
+
+
+    </div>
+    </form>
+
+    <!--                <h2 class = "title">회원가입</h2>-->
+    <!--                <div class="step-container">-->
+    <!--                    <span class="text" rel = "stepText">이용약관 및 개인정보 처리방침</span>-->
+    <!--                    <span class="step step0">0</span>-->
+    <!--                    <span class="line"></span>-->
+    <!--                    <span class="step step1">1</span>-->
+    <!--                    <span class="line"></span>-->
+    <!--                    <span class="step step2">2</span>-->
+    <!--                    <span class="line"></span>-->
+    <!--                    <span class="step step3">3</span>-->
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--            <div class = "step step0">-->
+    <!--                <table>-->
+    <!--                <div id="layout_body" class="layout_body">-->
+    <!--                    <style>-->
+    <!--                        @media (max-width: 1023px) {-->
+    <!--                            .title_container {-->
+    <!--                                display: block;-->
+    <!--                            }-->
+    <!--                        }-->
+    <!--                    </style>-->
+
+    <!--                    <div class="title_container bold">-->
+    <!--                        <h2><span designelement="text" textindex="1" texttemplatepath="cmVzcG9uc2l2ZV92ZXIxX2RlZmF1bHRfZ2wvbWVtYmVyL2pvaW5fZ2F0ZS5odG1s">회원가입</span></h2>-->
+    <!--                    </div>-->
+    <!--                    <p class="mypage_greeting" designelement="text" textindex="2" texttemplatepath="cmVzcG9uc2l2ZV92ZXIxX2RlZmF1bHRfZ2wvbWVtYmVyL2pvaW5fZ2F0ZS5odG1s">비비큐몰 회원이 되면 다양한 혜택을 받을 수 있습니다.</p>-->
+
+    <!--                    <div class="resp_login_wrap" style="min-height:300px;">-->
+
+    <!--                        <div class="sub_page_tab_contents" style="display: block;">-->
+    <!--                            <p class="join_btns">-->
+    <!--                                <button type="button" class="register-button" id="registerButton" onclick="document.location.href='agreement?join_type=member'"><span designelement="text" textindex="5">회원가입</span></button>-->
+    <!--                            </p>-->
+
+    <!--                            <h3 class="title_sub3 v3"><span designelement="text" textindex="6" texttemplatepath="cmVzcG9uc2l2ZV92ZXIxX2RlZmF1bHRfZ2wvbWVtYmVyL2pvaW5fZ2F0ZS5odG1s">간편하게 시작하기</span></h3>-->
+    <!--                            <ul class="sns_login_ul">-->
+    <!--                                <li snstype="kakaosync" class="sns-login-button"><div class="img"><img src="/data/images/common/sns_icon_kakaosync.png" onclick="document.location.href='agreement?join_type=kksyncmember'" alt=" kakaosync 회원가입" title="카카오 회원가입"></div></li>-->
+
+    <!--                            </ul>-->
+    <!--                        </div>-->
+
+    <!--                        <div class="sub_page_tab_contents" style="display: none;">-->
+    <!--                            <p class="join_btns">-->
+    <!--                                <button type="button" class="btn_resp size_c color2 Wmax" onclick="document.location.href='agreement?join_type=business'"><span designelement="text" textindex="7" texttemplatepath="cmVzcG9uc2l2ZV92ZXIxX2RlZmF1bHRfZ2wvbWVtYmVyL2pvaW5fZ2F0ZS5odG1s">회원가입</span></button>-->
+    <!--                            </p>-->
+
+    <!--                            <h3 class="title_sub3 v3"><span designelement="text" textindex="8" texttemplatepath="cmVzcG9uc2l2ZV92ZXIxX2RlZmF1bHRfZ2wvbWVtYmVyL2pvaW5fZ2F0ZS5odG1s">또는 SNS 회원가입</span></h3>-->
+    <!--                            <ul class="sns_login_ul">-->
+    <!--                                <li><div class="img"><img src="/data/skin/responsive_ver1_default_gl/images/design/sns_icon_kakaosync.png" onclick="document.location.href='agreement?join_type=kksyncbusiness'" alt=" kakaosync 회원가입" title="카카오 회원가입"></div></li>-->
+    <!--                            </ul>-->
+    <!--                        </div>-->
+
+    <!--                        <h3 class="title_sub2 Mt50"><b class="Fw400"><span designelement="text" textindex="9" texttemplatepath="cmVzcG9uc2l2ZV92ZXIxX2RlZmF1bHRfZ2wvbWVtYmVyL2pvaW5fZ2F0ZS5odG1s">신규회원을 위한 혜택을 놓치지 마세요!</span></b></h3>-->
+    <!--                        <div class="join_member_benefit_detail">-->
+    <!--                            <ul>-->
+    <!--                                <li class="tt">적립금</li>-->
+    <!--                                <li class="dd">-->
+    <!--                                    <span class="num">3,000</span>원-->
+    <!--                                </li>-->
+    <!--                            </ul>-->
+    <!--                        </div>-->
+    <!--                    </div>-->
+    <!--                </div>-->
+    <!--                </table>-->
+    <!--            </div>-->
+    <!--            &lt;!&ndash; -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;step 0&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;  &ndash;&gt;-->
+    <!--            <div class = "step step1">-->
+    <!--                <label class="label">-->
+    <!--                    <h2 class="title">서비스 이용약관</h2>-->
+    <!--                    <textarea class="&#45;&#45;object-input term" readonly>서비스 이용약관</textarea>-->
+    <!--                </label>-->
+    <!--                <label class="label">-->
+    <!--                    <h2 class="title">개인정보 처리방침</h2>-->
+    <!--                    <textarea class="&#45;&#45;object-input term" readonly>개인정보 처리방침</textarea>-->
+    <!--                </label>-->
+    <!--                <label class = "&#45;&#45;object-check">-->
+    <!--                    <input name = "termAgree" type = "checkbox">-->
+    <!--                    <span class = "&#45;&#45;checkbox"><i class="fa-solid fa-check &#45;&#45;icon"></i></span>-->
+    <!--                    <span class = "&#45;&#45;text">위 서비스 이용약관 및 개인정보 처리방침을 읽어보았고 이해하였으며 동의합니다.</span>-->
+    <!--                </label>-->
+    <!--            </div>-->
+    <!--            <div class = "step step2">-->
+    <!--                <table class = "table">-->
+    <!--                    <tbody>-->
+    <!--                    <tr>-->
+    <!--                        <th>이메일</th>-->
+    <!--                        <td>-->
+    <!--                            <label class="label email">-->
+    <!--                                <span hidden>이메일</span>-->
+    <!--                                <input type = "email" class = "&#45;&#45;object-input input" maxlength = "50" name = "email" placeholder = "이메일 주소를 입력해주세요">-->
+    <!--                                <input type = "button" class = "&#45;&#45;object-button" name = "emailSend" value = "인증번호 전송">-->
+    <!--                            </label>-->
+    <!--                            <label class="label email">-->
+    <!--                                <span hidden>인증번호</span>-->
+    <!--                                <input type = "text" class = "&#45;&#45;object-input input" disabled maxlength = "6" name = "emailAuthCode" placeholder = "이메일 인증번호를 입력해주세요">-->
+    <!--                                <input name = "emailAuthSalt" type = "hidden">-->
+    <!--                                <input type = "button" class = "&#45;&#45;object-button" disabled name = "emailVerify" value = "인증번호 확인">-->
+    <!--                            </label>-->
+    <!--                            <span class = "warning" rel = "emailWarning">이메일 주소를 입력해 주세요.</span>-->
+    <!--                        </td>-->
+    <!--                    </tr>-->
+    <!--                    <tr>-->
+    <!--                        <th>비밀번호</th>-->
+    <!--                        <td>-->
+    <!--                            <label class="label password">-->
+    <!--                                <span hidden>비밀번호</span>-->
+    <!--                                <input type = "password" class = "&#45;&#45;object-input input" maxlength = "50" name = "password" placeholder = "비밀번호를 입력해주세요">-->
+
+    <!--                            </label>-->
+    <!--                            <label class="label password">-->
+    <!--                                <span hidden>비밀번호</span>-->
+    <!--                                <input type = "password" class = "&#45;&#45;object-input input" maxlength = "50" name = "passwordCheck" placeholder = "비밀번호를 한번 더 입력해주세요">-->
+
+    <!--                            </label>-->
+
+    <!--                        </td>-->
+    <!--                    </tr>-->
+    <!--                    <tr>-->
+    <!--                        <th>닉네임</th>-->
+    <!--                        <td>-->
+    <!--                            <label class="label">-->
+    <!--                                <span hidden>닉네임</span>-->
+    <!--                                <input type = "text" class = "&#45;&#45;object-input input" maxlength = "10" name = "nickname" placeholder = "닉네임을 입력해주세요.">-->
+    <!--                            </label>-->
+    <!--                        </td>-->
+    <!--                    </tr>-->
+    <!--                    <tr>-->
+    <!--                        <th>이름</th>-->
+    <!--                        <td>-->
+    <!--                            <label class="label">-->
+    <!--                                <span hidden>이름</span>-->
+    <!--                                <input type = "text" class = "&#45;&#45;object-input input" maxlength = "5" name = "name" placeholder = "이름을 입력해주세요.">-->
+    <!--                            </label>-->
+    <!--                        </td>-->
+    <!--                    </tr>-->
+    <!--                    <tr>-->
+    <!--                        <th>연락처</th>-->
+    <!--                        <td>-->
+    <!--                            <label class="label">-->
+    <!--                                <span hidden>연락처</span>-->
+    <!--                                <input type = "text" class = "&#45;&#45;object-input input" maxlength = "12" name = "contact" placeholder = "연락처를 '-' 없이 입력해주세요.">-->
+    <!--                            </label>-->
+    <!--                        </td>-->
+    <!--                    </tr>-->
+    <!--                    <tr>-->
+    <!--                        <th>주소</th>-->
+    <!--                        <td>-->
+    <!--                            <label class="label address">-->
+    <!--                                <span hidden>우편번호</span>-->
+    <!--                                <input type = "text" class = "&#45;&#45;object-input input" maxlength = "6" name = "addressPostal" placeholder = "우편번호" readonly>-->
+    <!--                                <input type = "button" class = "&#45;&#45;object-button" name = "addressFind" value = "주소 찾기">-->
+    <!--                            </label>-->
+    <!--                            <label class="label address">-->
+    <!--                                <span hidden>기본 주소</span>-->
+    <!--                                <input type = "text" class = "&#45;&#45;object-input input" maxlength = "100" name = "addressPrimary" placeholder = "주소찾기를 통해 주소를 입력해 주세요.">-->
+    <!--                            </label>-->
+    <!--                            <label class="label address">-->
+    <!--                                <span hidden>상세 주소</span>-->
+    <!--                                <input type = "text" class = "&#45;&#45;object-input input" maxlength = "100" name = "addressSecondary" placeholder = "상세 주소를 입력해 주세요.">-->
+    <!--                            </label>-->
+    <!--                            <div class="panel address" rel = "addressFindPanel">-->
+    <!--                                <div class="dialog" rel = "addressFindPanelDialog">-->
+
+    <!--                                </div>-->
+    <!--                            </div>-->
+    <!--                        </td>-->
+    <!--                    </tr>-->
+    <!--                    </tbody>-->
+    <!--                </table>-->
+    <!--            </div>-->
+    <!--            <div class = "step step3">-->
+    <!--                <span class = "title">회원가입 완료</span>-->
+    <!--                <span class = "message"><b>스터디</b>에 회원가입해 주셔서 감사드립니다. <br>아래 <i>로그인하러 가기</i>버튼을 클릭하여 로그인해주세요.</span>-->
+    <!--            </div>-->
+    <!--            <div class="warning" rel = "warning">-->
+    <!--                <i class="icon fa-solid fa-triangle-exclamation"></i>-->
+    <!--                <div class="text" rel = "warningText"></div>-->
+    <!--            </div>-->
+    <!--            <div class="button-container">-->
+    <!--                <div class="button green" rel = "nextButton">-->
+    <!--                    <span class = "text">-->
+    <!--                        다음-->
+    <!--                    </span>-->
+    <!--                    <i class="fa-solid fa-chevron-right &#45;&#45;icon"></i>-->
+    <!--                </div>-->
+
     </div>
 </main>
 <th:block th:replace="~{fragments/body :: footer}"></th:block>

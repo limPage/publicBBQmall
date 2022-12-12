@@ -1,14 +1,5 @@
 
-body>main{
-    width: 1280px;
-    padding: 0 40px;
-    align-items: center;
-    display: flex;
-    flex-direction: column ;
-    justify-content: center;
 
-
-}
 body>.swiper-row> .swiper>div{
     width: 100%;
     height: 545px;
