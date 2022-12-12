@@ -57,7 +57,7 @@ main > .swiper > div > .catalog-page > .goods-search-form > .search-filter-wrap 
 }
 
 main > .swiper > div > .catalog-page > .goods-search-form > .border-line {
-    border-bottom : 0.125rem solid rgb(213, 216, 220);
+    border-bottom : 0.0125rem solid rgb(213, 216, 220);
 }
 
 .goods-search-form > .search-item-display > .ul > .goods-list {
