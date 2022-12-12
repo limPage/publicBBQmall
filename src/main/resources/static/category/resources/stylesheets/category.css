@@ -41,15 +41,23 @@ main > .swiper > div > .catalog-page > .goods-search-form > .search-filter-wrap 
     flex-direction : row;
     justify-content : flex-end;
 
-    list-style-type : none;
     line-height : normal;
-    margin-right : 15rem;
+    margin-right : 20rem;
+    position : relative;
 }
 
-main > .swiper > div > .catalog-page > .goods-search-form > .search-filter > .search-list > li {
+main > .swiper > div > .catalog-page > .goods-search-form > .search-filter-wrap > .search-filter > .search-list > .li + .li{
+    border-left : 0.125rem solid rgb(213, 216, 220);
+}
 
-    float : right;
-    position : relative;
+main > .swiper > div > .catalog-page > .goods-search-form > .search-filter-wrap > .search-filter > .search-list > .li > .active > .button {
+    background-color: rgb(255, 255, 255);
+    border : none;
+    font-weight : 100;
+}
+
+main > .swiper > div > .catalog-page > .goods-search-form > .border-line {
+    border-bottom : 0.125rem solid rgb(213, 216, 220);
 }
 
 .goods-search-form > .search-item-display > .ul > .goods-list {
@@ -65,6 +73,31 @@ main > .swiper > div > .catalog-page > .goods-search-form > .search-filter > .se
     display : flex;
     flex-direction : row;
     justify-content : center;
-    padding : 2rem;
+    padding : 0.625rem;
+    margin-top : 1rem;
     flex-wrap: wrap;
+}
+
+main > .swiper > div > .catalog-page > .goods-search-form > .paging-navigation {
+    align-items : stretch;
+    display : flex;
+    flex-direction : row;
+    justify-content : center;
+
+    box-sizing : border-box;
+    text-decoration: none;
+    font-size : 1rem;
+    margin-bottom : 5rem;
+}
+
+main > .swiper > div > .catalog-page > .goods-search-form > .paging-navigation > .page {
+    border-top : 0.0125rem solid rgb(213, 216, 220);
+    border-bottom : 0.0125rem solid rgb(213, 216, 220);
+    border-left : 0.0125rem solid rgb(213, 216, 220);
+    font-weight : 500;
+    padding : 0.5rem 0.75rem;
+}
+
+main > .swiper > div > .catalog-page > .goods-search-form > .paging-navigation > .page:last-of-type {
+    border-right : 0.0125rem solid rgb(213, 216, 220);
 }

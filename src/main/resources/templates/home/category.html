@@ -2,7 +2,10 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>BBQ몰</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>BBQ몰 - 카테고리</title>
     <link rel="stylesheet" th:href="@{/bbq/resources/stylesheets/index.css}">
     <link rel="stylesheet" th:href="@{/category/resources/stylesheets/category.css}">
     <th:block th:replace="~{fragments/head :: common}"></th:block>
@@ -17,38 +20,42 @@
                     <div class="search-filter-wrap">
                         <div class="search-filter">
                             <ul class="search-list">
-                                <li>
+                                <li class = "li">
                                     <label class="active">
-                                        <input type="radio" name="sorting" value="ranking" checked>랭킹순
+                                        <input type="button" name="sorting" value="랭킹순" class = "button">&nbsp
                                     </label>
                                 </li>
-                                <li>
+                                <li class = "li">
                                     <label class="active">
-                                        <input type="radio" name="sorting" value="register" checked>신규등록순
+                                        <input type="button" name="sorting" value="신규등록순" class = "button">&nbsp
                                     </label>
                                 </li>
-                                <li>
+                                <li class = "li">
                                     <label class="active">
-                                        <input type="radio" name="sorting" value="low-price" checked>낮은가격순
+                                        <input type="button" name="sorting" value="낮은가격순" class = "button">&nbsp
                                     </label>
                                 </li>
-                                <li>
+                                <li class = "li">
                                     <label class="active">
-                                        <input type="radio" name="sorting" value="high-price" checked>높은가격순
+                                        <input type="button" name="sorting" value="높은가격순" class = "button">&nbsp
                                     </label>
                                 </li>
-                                <li>
+                                <li class = "li">
                                     <label class="active">
-                                        <input type="radio" name="sorting" value="review" checked>상품평많은순
+                                        <input type="button" name="sorting" value="상품평많은순" class = "button">&nbsp
                                     </label>
                                 </li>
-                                <li>
+                                <li class = "li">
                                     <label class="active">
-                                        <input type="radio" name="sorting" value="sale" checked>판매량순
+                                        <input type="button" name="sorting" value="판매량순" class = "button">
                                     </label>
                                 </li>
                             </ul>
                         </div>
+                    </div>
+
+                    <div class = "border-line">
+
                     </div>
 
                     <div class="search-item-display" id="searchItemDisplay">
@@ -294,6 +301,15 @@
                             </li>
 
                         </ul>
+                    </div>
+                    <div class="paging-navigation">
+                        <a href = "#" class = "page">1</a>
+                        <a href = "#" class = "page">2</a>
+                        <a href = "#" class = "page">3</a>
+                        <a href = "#" class = "page">4</a>
+                        <a href = "#" class = "page">5</a>
+                        <a href = "#" class = "page"><i class="fa-solid fa-angle-right"></i></a>
+                        <a href = "#" class = "page"><i class="fa-solid fa-angles-right"></i></a>
                     </div>
 
 
