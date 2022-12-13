@@ -35,7 +35,7 @@
 
                             <i class="fa-solid fa-envelope icon"></i>
 
-                            <span>이메일을 사용하여 본인확인을 합니다.</span>
+                            <span id="guideText">이메일을 사용하여 본인확인을 합니다.</span>
                         </td>
                     </tr>
 
@@ -53,8 +53,8 @@
                     <tr class="code-send-row">
                         <td>
                             <label>
-                                <input class="email-text" type="email" name="emailText" placeholder="이메일을 입력해주세요" maxlength="20">
-                                <input class="code-send-button" name="codeSend" type="button" value="인증번호 전송">
+                                <input class="email-text" type="email" name="emailText" placeholder="이메일을 입력해주세요" maxlength="20" autofocus>
+                                <input class="code-send-button" name="codeSendButton" type="button" value="인증번호 전송">
 
                             </label>
 
@@ -64,8 +64,8 @@
                     <tr class="code-check-row">
                         <td>
                             <label>
-                                <input class="email-Auth-Code" name="emailAuthCode" type="text" placeholder="인증번호를 입력해주세요" maxlength="20">
-                                <input class="code-check-button" type="button" value="인증">
+                                <input class="email-Auth-Code " name="emailAuthCode" type="text" placeholder="인증번호를 입력해주세요" maxlength="20" >
+                                <input class="code-check-button " name="codeCheckButton" type="button" value="인증" >
                                 <input name="emailAuthSalt" type="hidden">
 
                             </label>
@@ -82,25 +82,141 @@
                     </tbody>
                 </table>
 
-                <input class="next" type="button" value="확인">
-
-                <ul class="text">
-                    <li>
-                        실명확인이 되지 않는 경우 아래의 실명인증기관에 실명등록을 요청할 수 있습니다.
-                        <br>
-                        한국신용정보㈜ 1588-2486
-                    </li>
-                    <li>
-                        타인의 정보 및 주민등록번호를 부정하게 사용하는 경우 3년 이하의 징역 또는 1천만원 이하의 벌금에 처해질 수 있습니다
-                        <br>
-                        (주민등록법 제 37조)
-                    </li>
-                </ul>
 
 
 
     </div>
-    </form>
+
+            <div class="insert-userinfo-page">
+                <h1 class="title">회원정보 입력</h1>
+                <h5 class="title2">
+                    <span><i class="fa-solid fa-circle-exclamation icon"></i></span>
+                    모든 항목을 기입해 주세요.</h5>
+                <table>
+                    <tbody>
+                    <tr class="id-row">
+                        <th>아이디</th>
+                        <td>
+                            <label>
+                                <input type="text" maxlength="20" autofocus placeholder="공백 없는 영문/숫자 포함 6~20자">
+                            </label>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>비밀번호</th>
+                        <td>
+                            <label>
+                                <input type="password" maxlength="30" >
+                            </label>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>비밀번호 확인</th>
+                        <td>
+                            <label>
+                                <input type="password" maxlength="30" >
+                            </label>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>이름</th>
+                        <td>
+                            <label>
+                                <input type="text" maxlength="10" >
+                            </label>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>이메일</th>
+                        <td>
+                            <label>
+                                <input type="email" maxlength="20" disabled>
+                            </label>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>전화번호</th>
+                        <td>
+                            <label>
+                                <input type="text" maxlength="12" placeholder='" - " 없이 입력해주세요'>
+                            </label>
+                        </td>
+                    </tr>
+
+                    <tr class="address-row">
+                        <th>주소</th>
+                        <td>
+                            <label class="label address-first">
+                                <span hidden>우편번호</span>
+
+                                <input autofocus class="--object-input input" maxlength="6" name="addressPostal"
+                                       placeholder="우편번호"  type="text" disabled>
+                                <input class="--object-button" name="addressFind" value="주소 찾기" type="button">
+
+                            </label>
+
+                            <label class="label address">
+                                <span hidden>기본주소</span>
+                                <input autofocus class="--object-input input" maxlength="100" name="addressPrimary"
+                                       placeholder="주소찾기를 통해 주소를 입력해 주세요." disabled type="text">
+
+                            </label>
+
+
+
+                            <label class="label address">
+                                <span hidden>상세주소</span>
+                                <input autofocus class="--object-input input" maxlength="100" name="addressSecondary"
+                                       placeholder="상세주소를 입력해주세요." type="text">
+
+                            </label>
+                            <div class="panel address" rel="addressFindPanel">
+                                <div class="dialog" rel="addressFindPanelDialog"></div>
+                            </div>
+
+
+                        </td>
+                    </tr>
+
+                    <tr class="birth-row">
+                        <th>생년월일</th>
+                        <td>
+                            <label>
+                                <input type="date" maxlength="20">
+                            </label>
+                        </td>
+                    </tr>
+
+
+
+                    </tbody>
+                </table>
+
+            </div>
+
+            <label>
+                <input class="next" name="next" type="button" value="다음">
+            </label>
+            <ul class="text">
+                <li>
+                    실명확인이 되지 않는 경우 아래의 실명인증기관에 실명등록을 요청할 수 있습니다.
+                    <br>
+                    한국신용정보㈜ 1588-2486
+                </li>
+                <li>
+                    타인의 정보 및 주민등록번호를 부정하게 사용하는 경우 3년 이하의 징역 또는 1천만원 이하의 벌금에 처해질 수 있습니다
+                    <br>
+                    (주민등록법 제 37조)
+                </li>
+            </ul>
+
+
+        </form>
 
     <!--                <h2 class = "title">회원가입</h2>-->
     <!--                <div class="step-container">-->

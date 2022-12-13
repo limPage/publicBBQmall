@@ -46,6 +46,19 @@ public class MemberController {
     }
 
 
+    @RequestMapping(value = "email", method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String patchEmail(EmailAuthEntity emailAuth) {
+        Enum<?> result = this.memberService.verifyEmailAuth(emailAuth);
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("result", result.name().toLowerCase());
+
+
+        return responseObject.toString();
+    }
+
+
+
 
 
 }

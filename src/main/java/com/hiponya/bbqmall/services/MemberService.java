@@ -4,6 +4,7 @@ import com.hiponya.bbqmall.entities.member.EmailAuthEntity;
 import com.hiponya.bbqmall.entities.member.UserEntity;
 import com.hiponya.bbqmall.enums.CommonResult;
 import com.hiponya.bbqmall.enums.member.SendEmailAuthResult;
+import com.hiponya.bbqmall.enums.member.VerifyEmailAuthResult;
 import com.hiponya.bbqmall.interfaces.IResult;
 import com.hiponya.bbqmall.mappers.IMemberMapper;
 import com.hiponya.bbqmall.utils.CryptoUtils;
@@ -86,6 +87,28 @@ public class MemberService {
         helper.setSubject("[스터디] 회원가입 인증번호");
         helper.setText(text, true);
         this.mailSender.send(mail);
+
+        return CommonResult.SUCCESS;
+    }
+
+    @Transactional
+    public Enum<? extends IResult> verifyEmailAuth(EmailAuthEntity emailAuth) {
+
+        EmailAuthEntity existingEmailAuth = this.memberMapper.selectEmailAuthByEmailCodeSalt(
+                emailAuth.getEmail(), emailAuth.getCode(), emailAuth.getSalt());
+
+        if (existingEmailAuth == null) {
+            return CommonResult.FAILURE;
+        }
+
+        if (existingEmailAuth.getExpiresOn().compareTo(new Date()) < 0) {
+            return VerifyEmailAuthResult.EXPIRED;
+        }
+
+        existingEmailAuth.setExpired(true);
+        if (this.memberMapper.updateEmailAuth(existingEmailAuth) == 0) {
+            return CommonResult.FAILURE;
+        }
 
         return CommonResult.SUCCESS;
     }

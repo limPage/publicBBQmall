@@ -18,4 +18,8 @@ public interface IMemberMapper {
     int insertEmailAuth(EmailAuthEntity emailAuthEntity);
 
 
+
+    int updateEmailAuth(EmailAuthEntity emailAuth);
+
+
 }

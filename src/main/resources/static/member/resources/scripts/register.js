@@ -1,17 +1,24 @@
  const form = window.document.getElementById('form');
+const  codeSendRow = form.querySelector('.code-send-row');
+const  codeCheckRow = form.querySelector('.code-check-row');
+
 
 form['emailButton'].addEventListener('click', ()=>{
 
-    alert('ddd');
+
+    form['emailButton'].classList.add('visible');
+    window.document.getElementById('guideText').innerText='이메일을 입력하여 인증을 진행합니다.'
+
+    codeSendRow.classList.add('visible');
 })
 
- form['codeSend'].addEventListener('click', ()=> {
+ form['codeSendButton'].addEventListener('click', ()=> {
 
 
      if(form['emailText'].value === '') {
        alert('이메일 주소를 입력해주세요.');
          form['emailText'].focus();
-         return false;
+         return;
      }
      let regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
 
@@ -29,7 +36,7 @@ form['emailButton'].addEventListener('click', ()=>{
      const formData = new FormData(); // FormData 객체를 사용하는 formData 변수 선언
      formData.append('email', form['emailText'].value); // @RequestParam의 value, form의 input의 name
 
-     xhr.open('POST', './email'); // 1이 찍힘
+     xhr.open('POST', 'member/email'); // 1이 찍힘
      xhr.onreadystatechange = () => {
          if(xhr.readyState === XMLHttpRequest.DONE) { // 연결 상태가 연결완료(성공, 실패 관계없이)일 때, 4가 찍힘
              Cover.hide(); // visible 클래스 삭제
@@ -41,12 +48,45 @@ form['emailButton'].addEventListener('click', ()=>{
 
                          alert('인증 번호를 전송하였습니다. 전송된 인증번호는 5분간만 유효합니다.');
 
-                         // form['email'].setAttribute('disabled', 'disabled'); //  email을 사용불가로
-                         // form['emailSend'].setAttribute('disabled', 'disabled'); // emailSend 버튼을 사용불가로
+                         let date= new  Date();
+
+                         date.setMinutes(5);
+                         date.setSeconds(0);
+                     function timer (){
+
+                         date.setSeconds(date.getSeconds()-1);
+                         window.document.getElementById('guideText').innerText='수신된 인증 코드를 확인합니다.['+date.getMinutes()+ ":"+date.getSeconds()+']';
+                         if(date.getMinutes()===0&& date.getSeconds()===0){
+                             clearInterval(interval);
+                             window.document.getElementById('guideText').innerText='페이지를 새로고침하여 다시 진행해주세요.'
+
+                         }
+
+                     }
+
+                     let  interval= setInterval( timer,1000);
+
+
+
+                         // date.setMinutes(date.getMinutes() +5);
+                         // date= date.toLocaleTimeString();
+                         form['emailText'].setAttribute('disabled', 'disabled'); //  email을 사용불가로
+                         // form['emailText'].classList.add('disabled');
+                         form['codeSendButton'].setAttribute('disabled', 'disabled'); // emailSend 버튼을 사용불가로
+                         // form['codeSendButton'].classList.add('disabled');
+                         codeSendRow.classList.add('disabled');
+                         form['codeSendButton'].setAttribute('value','전송완료');
                          // form['emailAuthCode'].removeAttribute('disabled'); // 인증번호 의 disalbed 삭제하여 사용가능하게
-                         // form['emailAuthCode'].focus(); // 인증번호 칸에 포커스
-                         form['emailAuthSalt'].value = responseObject['salt'];
-                         // form['emailVerify'].removeAttribute('disabled');
+                         form['emailAuthSalt'].value = responseObject['salt'];//히든에 값을 준다.
+                         // form['codeCheckButton'].removeAttribute('disabled');
+
+
+                         codeCheckRow.classList.add('visible');
+
+                         // window.document.getElementById('guideText').innerText='수신된 인증 코드를 확인합니다.[코드만료]:'+date;
+
+                         form['emailAuthCode'].focus(); // 인증번호 칸에 포커스
+
                          break;
 
                      case 'email_duplicated':
@@ -75,6 +115,90 @@ form['emailButton'].addEventListener('click', ()=>{
  });
 
 
+
+ form['codeCheckButton'].addEventListener('click', () => {
+     if (form['emailAuthCode'].value === ''){
+         alert('인증번호를 입력해 주세요');
+         form['emailAuthCode'].focus();
+         return;
+     }
+     if (!new RegExp('^(\\d{6}$)').test(form['emailAuthCode'].value)) {
+         alert('올바른 인증번호를 입력해 주세요');
+         form['emailAuthCode'].focus();
+         form['emailAuthCode'].select();
+         return;
+     }
+     Cover.show('인증 번호를 확인하고 있습니다. \n\n 잠시만 기다려주세요.');
+     const xhr = new XMLHttpRequest();
+     const formData = new FormData();
+     formData.append('email', form['emailText'].value);
+     formData.append('code', form['emailAuthCode'].value);//맴버변수, html 넹미
+     formData.append('salt', form['emailAuthSalt'].value);
+     xhr.open('PATCH', '/member/email');
+     xhr.onreadystatechange = () => {
+         if (xhr.readyState === XMLHttpRequest.DONE) {//4 성공인게 아니고 작업의끝
+             Cover.hide();
+             if (xhr.status >= 200 && xhr.status < 300) {
+                 const responseObject = JSON.parse(xhr.responseText);
+                 switch (responseObject['result']){
+                     case 'expired':
+                         alert('인증 정보가 만료되었습니다. 다시 시도해 주세요');
+                         form['emailText'].removeAttribute('disabled');
+                         form['emailText'].focus();
+                         form['emailText'].select();
+                         // form['emailSend'].removeAttribute('disabled');
+                         // form['emailAuthCode'].value = '';
+                         // form['emailAuthCode'].setAttribute('disabled','disabled');
+                         // form['emailAuthSalt'].value= '';
+                         // form['emailVerify'].setAttribute('disabled','disabled');
+                         break;
+
+                     case 'success':
+                         alert('이메일이 정상적으로 인증되었습니다.')
+                         // form['emailAuthCode'].setAttribute('disabled','disabled');
+                         // form['emailVerify'].setAttribute('disabled','disabled');
+                         // form['password'].focus();
+
+                         form['next'].classList.add('visible');
+
+                         codeCheckRow.classList.add('disabled');
+                         form['emailAuthCode'].setAttribute('disabled', 'disabled'); // emailSend 버튼을 사용불가로
+                         form['codeCheckButton'].setAttribute('disabled', 'disabled'); // emailSend 버튼을 사용불가로
+                         // form['codeSendButton'].classList.add('disabled');
+                         codeSendRow.classList.add('disabled');
+                         form['codeCheckButton'].setAttribute('value','인증완료');
+
+                         window.document.getElementById('guideText').innerText='다음 페이지에서 회원가입을 진행합니다.'
+
+
+                         break;
+                     default:
+                         alert('인증번호가 올바르지 않습니다.');
+                         // form['emailAuthCode'].focus();
+                         // form['emailAuthCode'].select();
+                         // break;
+                 }
+
+                 console.log(xhr.responseText);
+
+
+             } else {
+                 alert('서버와 통신하지 못하였습니다.')
+             }
+         }
+     };
+     xhr.send(formData);
+ });
+
+ form['next'].addEventListener('click',()=>{
+
+     form.classList.add('step');
+     if(form.classList.contains('step'))form.classList.add('step2');
+
+
+        alert("dd");
+
+ })
 
  // const Warning = {
 //     show : (text) => {

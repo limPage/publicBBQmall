@@ -51,7 +51,20 @@
 # binary: 대소문자 구분. 하는게 좋겠죠?
     </select>
 
+    <update id="updateEmailAuth"
+            parameterType="com.hiponya.bbqmall.entities.member.EmailAuthEntity">
 
+        UPDATE `bbqmall`.`email_auths`
+        SET `email`        = #{email},
+            `code`         = #{code},
+            `salt`         = #{salt},
+            `created_on`   = #{createdOn},
+            `expires_on`   = #{expiresOn},
+            `expired_flag` = #{isExpired}
+        WHERE BINARY `index` = #{index}
+        LIMIT 1
+
+    </update>
 
 
 
