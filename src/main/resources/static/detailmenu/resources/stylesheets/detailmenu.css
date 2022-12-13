@@ -35,9 +35,16 @@ body > header {
     box-shadow: 0 0 0.3rem rgba(0, 0, 0, 15%);
 }
 
-main > .products-view > .products > .title-container {
+.image-container {
+    margin-left : 17.5rem;
+    padding : 3rem;
+}
+
+main > .products-view > .products > .image-container > .products-spec {
     align-items : stretch;
     display : flex;
-    flex-direction : column;
-    justify-content : flex-start;
+    flex-direction : row;
+    justify-content : flex-end;
+
+    position: relative;
 }

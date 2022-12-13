@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hiponya.bbqmall.mappers.IMemberMapper">
+
+    <select id="selectUserByEmail"
+            resultType="com.hiponya.bbqmall.entities.member.UserEntity">
+        SELECT `email`             AS `email`,
+               `id` AS `id`,
+               `password`          AS `password`,
+
+               `name`              AS `name`,
+               `contact`           AS `contact`,
+               `birth` AS`birth`,
+               `address_postal`    AS `addressPostal`,
+               `address_primary`   AS `addressPrimary`,
+               `address_primary`   AS `addressPrimary`,
+               `address_secondary` AS `addressSecondary`,
+               `registered_on`     AS `registeredOn`
+
+        FROM `bbqmall`.`users`
+        WHERE BINARY `email` = #{email}
+        LIMIT 1;
+    </select>
+
+    <insert id="insertEmailAuth" useGeneratedKeys="true" keyProperty="index"
+            keyColumn="index" parameterType="com.hiponya.bbqmall.entities.member.EmailAuthEntity">
+
+        INSERT INTO `bbqmall`.`email_auths` (`email`, `code`, `salt`, `created_on`, `expires_on`, `expired_flag`)
+        VALUES (#{email}, #{code}, #{salt}, #{createdOn}, #{expiresOn}, #{isExpired})
+
+
+    </insert>
+
+    <select id="selectEmailAuthByEmailCodeSalt" resultType="com.hiponya.bbqmall.entities.member.EmailAuthEntity">
+
+        SELECT `index`        AS `index`,
+               `email`        AS `email`,
+               `code`         AS `code`,
+               `salt`         AS `salt`,
+               `created_on`   AS `createdOn`,
+               `expires_on`   AS `expiresOn`,
+               `expired_flag` AS `isExpired`
+
+        FROM `bbqmall`.`email_auths`
+        WHERE BINARY `email` = #{email}
+          AND BINARY `code` = #{code}
+          AND BINARY `salt` = #{salt}
+        LIMIT 1;
+# binary: 대소문자 구분. 하는게 좋겠죠?
+    </select>
+
+</mapper>

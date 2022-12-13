@@ -9,6 +9,8 @@
     <link rel="stylesheet" th:href="@{/bbq/resources/stylesheets/index.css}">
     <link rel="stylesheet" th:href="@{/category/resources/stylesheets/category.css}">
     <th:block th:replace="~{fragments/head :: common}"></th:block>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script defer th:src="@{/category/resources/scripts/category.js}"></script>
 </head>
 <body>
 <th:block th:replace="~{fragments/body :: header}"></th:block>
@@ -16,38 +18,38 @@
     <div class="swiper">
         <div>
             <div class="catalog-page">
-                <form name="goods-search-form" id="goodsSearchForm" class="goods-search-form" method="get">
+                <form id="form" name="goods-search-form" class="goods-search-form" method="get">
                     <div class="search-filter-wrap">
                         <div class="search-filter">
                             <ul class="search-list">
                                 <li class = "li">
                                     <label class="active">
-                                        <input type="button" name="sorting" value="랭킹순" class = "button">&nbsp
+                                        <input type="button" name="ranking" value="랭킹순" class = "button" id="sorting">&nbsp
                                     </label>
                                 </li>
                                 <li class = "li">
                                     <label class="active">
-                                        <input type="button" name="sorting" value="신규등록순" class = "button">&nbsp
+                                        <input type="button" name="new" value="신규등록순" class = "button">&nbsp
                                     </label>
                                 </li>
                                 <li class = "li">
                                     <label class="active">
-                                        <input type="button" name="sorting" value="낮은가격순" class = "button">&nbsp
+                                        <input type="button" name="low" value="낮은가격순" class = "button">&nbsp
                                     </label>
                                 </li>
                                 <li class = "li">
                                     <label class="active">
-                                        <input type="button" name="sorting" value="높은가격순" class = "button">&nbsp
+                                        <input type="button" name="high" value="높은가격순" class = "button">&nbsp
                                     </label>
                                 </li>
                                 <li class = "li">
                                     <label class="active">
-                                        <input type="button" name="sorting" value="상품평많은순" class = "button">&nbsp
+                                        <input type="button" name="many" value="상품평많은순" class = "button">&nbsp
                                     </label>
                                 </li>
                                 <li class = "li">
                                     <label class="active">
-                                        <input type="button" name="sorting" value="판매량순" class = "button">
+                                        <input type="button" name="quantity" value="판매량순" class = "button">
                                     </label>
                                 </li>
                             </ul>
@@ -62,7 +64,7 @@
                         <ul class="ul">
                             <li class="goods-list">
                                 <div class="item-area">
-                                    <a href="https://www.mall.bbq.co.kr/goods/view?no=582" class="goods">
+                                    <a href="/detailMenu" class="goods">
                                         <img src="/resources/images/images/new1.png" width="300px" alt>
                                         <div class="goods-content">
                                             BBQ닭가슴살 맛보기세트 12종 2팩씩 (신제품)
@@ -77,7 +79,7 @@
 
                                 </div>
                                 <div class="item-area">
-                                    <a href="https://www.mall.bbq.co.kr/goods/view?no=582">
+                                    <a href="/detailMenu" class="goods">
                                         <img src="/resources/images/images/new1.png" width="300px" alt>
                                         <div class="goods-content">
                                             BBQ간편식 골라담기 (신제품)
@@ -91,7 +93,7 @@
                                     </div>
                                 </div>
                                 <div class="item-area">
-                                    <a href="https://www.mall.bbq.co.kr/goods/view?no=582">
+                                    <a href="/detailMenu" class="goods">
                                         <img src="/resources/images/images/new1.png" width="300px" alt>
                                         <div class="goods-content">
                                             BBQ간편식 맛보기세트 15종 (신제품)
@@ -105,7 +107,7 @@
                                     </div>
                                 </div>
                                 <div class="item-area">
-                                    <a href="https://www.mall.bbq.co.kr/goods/view?no=582">
+                                    <a href="/detailMenu" class="goods">
                                         <img src="/resources/images/images/new1.png" width="300px" alt>
                                         <div class="goods-content">
                                             [냉동] BBQ 구운 왕갈비맛 삼각밥 100g 10팩
@@ -122,7 +124,7 @@
 
                             <li class="goods-list">
                                 <div class="item-area">
-                                    <a href="https://www.mall.bbq.co.kr/goods/view?no=582" class="goods">
+                                    <a href="/detailMenu" class="goods">
                                         <img src="/resources/images/images/new1.png" width="300px" alt>
                                         <div class="goods-content">
                                             BBQ닭가슴살 맛보기세트 12종 2팩씩 (신제품)
@@ -137,7 +139,7 @@
 
                                 </div>
                                 <div class="item-area">
-                                    <a href="https://www.mall.bbq.co.kr/goods/view?no=582">
+                                    <a href="/detailMenu" class="goods">
                                         <img src="/resources/images/images/new1.png" width="300px" alt>
                                         <div class="goods-content">
                                             BBQ간편식 골라담기 (신제품)
@@ -151,7 +153,7 @@
                                     </div>
                                 </div>
                                 <div class="item-area">
-                                    <a href="https://www.mall.bbq.co.kr/goods/view?no=582">
+                                    <a href="/detailMenu" class="goods">
                                         <img src="/resources/images/images/new1.png" width="300px" alt>
                                         <div class="goods-content">
                                             BBQ간편식 맛보기세트 15종 (신제품)
@@ -165,7 +167,7 @@
                                     </div>
                                 </div>
                                 <div class="item-area">
-                                    <a href="https://www.mall.bbq.co.kr/goods/view?no=582">
+                                    <a href="/detailMenu" class="goods">
                                         <img src="/resources/images/images/new1.png" width="300px" alt>
                                         <div class="goods-content">
                                             [냉동] BBQ 구운 왕갈비맛 삼각밥 100g 10팩
@@ -182,7 +184,7 @@
 
                             <li class="goods-list">
                                 <div class="item-area">
-                                    <a href="https://www.mall.bbq.co.kr/goods/view?no=582" class="goods">
+                                    <a href="/detailMenu" class="goods">
                                         <img src="/resources/images/images/new1.png" width="300px" alt>
                                         <div class="goods-content">
                                             BBQ닭가슴살 맛보기세트 12종 2팩씩 (신제품)
@@ -197,7 +199,7 @@
 
                                 </div>
                                 <div class="item-area">
-                                    <a href="https://www.mall.bbq.co.kr/goods/view?no=582">
+                                    <a href="/detailMenu" class="goods">
                                         <img src="/resources/images/images/new1.png" width="300px" alt>
                                         <div class="goods-content">
                                             BBQ간편식 골라담기 (신제품)
@@ -211,7 +213,7 @@
                                     </div>
                                 </div>
                                 <div class="item-area">
-                                    <a href="https://www.mall.bbq.co.kr/goods/view?no=582">
+                                    <a href="/detailMenu" class="goods">
                                         <img src="/resources/images/images/new1.png" width="300px" alt>
                                         <div class="goods-content">
                                             BBQ간편식 맛보기세트 15종 (신제품)
@@ -225,7 +227,7 @@
                                     </div>
                                 </div>
                                 <div class="item-area">
-                                    <a href="https://www.mall.bbq.co.kr/goods/view?no=582">
+                                    <a href="/detailMenu" class="goods">
                                         <img src="/resources/images/images/new1.png" width="300px" alt>
                                         <div class="goods-content">
                                             [냉동] BBQ 구운 왕갈비맛 삼각밥 100g 10팩
@@ -242,7 +244,7 @@
 
                             <li class="goods-list">
                                 <div class="item-area">
-                                    <a href="https://www.mall.bbq.co.kr/goods/view?no=582" class="goods">
+                                    <a href="/detailMenu" class="goods">
                                         <img src="/resources/images/images/new1.png" width="300px" alt>
                                         <div class="goods-content">
                                             BBQ닭가슴살 맛보기세트 12종 2팩씩 (신제품)
@@ -257,7 +259,7 @@
 
                                 </div>
                                 <div class="item-area">
-                                    <a href="https://www.mall.bbq.co.kr/goods/view?no=582">
+                                    <a href="/detailMenu" class="goods">
                                         <img src="/resources/images/images/new1.png" width="300px" alt>
                                         <div class="goods-content">
                                             BBQ간편식 골라담기 (신제품)
@@ -271,7 +273,7 @@
                                     </div>
                                 </div>
                                 <div class="item-area">
-                                    <a href="https://www.mall.bbq.co.kr/goods/view?no=582">
+                                    <a href="/detailMenu" class="goods">
                                         <img src="/resources/images/images/new1.png" width="300px" alt>
                                         <div class="goods-content">
                                             BBQ간편식 맛보기세트 15종 (신제품)
@@ -285,7 +287,7 @@
                                     </div>
                                 </div>
                                 <div class="item-area">
-                                    <a href="https://www.mall.bbq.co.kr/goods/view?no=582">
+                                    <a href="/detailMenu" class="goods">
                                         <img src="/resources/images/images/new1.png" width="300px" alt>
                                         <div class="goods-content">
                                             [냉동] BBQ 구운 왕갈비맛 삼각밥 100g 10팩
