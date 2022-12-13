@@ -68,7 +68,7 @@ public class EmailAuthEntity {
         return this;
     }
 
-    public Boolean getExpired() {
+    public Boolean isExpired() {
         return isExpired;
     }
 

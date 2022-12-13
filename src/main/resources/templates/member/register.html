@@ -10,13 +10,14 @@
     <link rel="stylesheet" th:href="@{/member/resources/stylesheets/register.css}">
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script defer th:src="@{/member/resources/scripts/register.js}"></script>
+
 </head>
 <body>
 <th:block th:replace="~{fragments/body :: header}"></th:block> <!-- block 자리에 body.html 파일의 replace 태그와 치환한다. -->
 <th:block th:replace="~{fragments/body :: cover}"></th:block>
 <main class="--main main">
     <div class="content">
-        <form class="form step" id="form">
+        <form class="form" id="form">
 
             <div class="email-check-page">
 
@@ -53,7 +54,7 @@
                     <tr class="code-send-row">
                         <td>
                             <label>
-                                <input class="email-text" type="email" name="emailText" placeholder="이메일을 입력해주세요" maxlength="20" autofocus>
+                                <input class="email-text" type="email" name="emailText" placeholder="이메일을 입력해주세요" maxlength="30" autofocus>
                                 <input class="code-send-button" name="codeSendButton" type="button" value="인증번호 전송">
 
                             </label>
@@ -98,16 +99,16 @@
                         <th>아이디</th>
                         <td>
                             <label>
-                                <input type="text" maxlength="20" autofocus placeholder="공백 없는 영문/숫자 포함 6~20자">
+                                <input type="text" name="id" maxlength="20" autofocus placeholder="공백 없는 영문/숫자 포함 6~20자">
                             </label>
                         </td>
                     </tr>
 
-                    <tr>
+                    <tr class="password-row">
                         <th>비밀번호</th>
                         <td>
                             <label>
-                                <input type="password" maxlength="30" >
+                                <input type="password" name="password" maxlength="16" placeholder="8~16자의 영문, 숫자, 특수문자를 최소 한가지씩 포함">
                             </label>
                         </td>
                     </tr>
@@ -116,7 +117,7 @@
                         <th>비밀번호 확인</th>
                         <td>
                             <label>
-                                <input type="password" maxlength="30" >
+                                <input type="password" name="passwordCheck" maxlength="16" >
                             </label>
                         </td>
                     </tr>
@@ -125,7 +126,7 @@
                         <th>이름</th>
                         <td>
                             <label>
-                                <input type="text" maxlength="10" >
+                                <input type="text" name="name" maxlength="10" >
                             </label>
                         </td>
                     </tr>
@@ -134,7 +135,7 @@
                         <th>이메일</th>
                         <td>
                             <label>
-                                <input type="email" maxlength="20" disabled>
+                                <input type="email" name="email" maxlength="20" disabled>
                             </label>
                         </td>
                     </tr>
@@ -143,7 +144,7 @@
                         <th>전화번호</th>
                         <td>
                             <label>
-                                <input type="text" maxlength="12" placeholder='" - " 없이 입력해주세요'>
+                                <input type="text" name="contact" maxlength="20" placeholder='" - " 없이 입력해주세요'>
                             </label>
                         </td>
                     </tr>
@@ -172,7 +173,7 @@
                             <label class="label address">
                                 <span hidden>상세주소</span>
                                 <input autofocus class="--object-input input" maxlength="100" name="addressSecondary"
-                                       placeholder="상세주소를 입력해주세요." type="text">
+                                       placeholder="상세주소를 입력해주세요." disabled type="text">
 
                             </label>
                             <div class="panel address" rel="addressFindPanel">
@@ -187,7 +188,7 @@
                         <th>생년월일</th>
                         <td>
                             <label>
-                                <input type="date" maxlength="20">
+                                <input type="date" maxlength="20" name="birth">
                             </label>
                         </td>
                     </tr>
@@ -199,6 +200,15 @@
 
             </div>
 
+            <div class="complete-page ">
+                <h1 class="title">가입완료</h1>
+                <h5 class="title2">
+                    <span><i class="fa-regular fa-face-smile icon"></i></span>
+                    고객님을 진심으로 환영합니다.</h5>
+
+
+
+            </div>
             <label>
                 <input class="next" name="next" type="button" value="다음">
             </label>

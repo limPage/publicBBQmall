@@ -67,7 +67,16 @@
     </update>
 
 
+    <insert id="insertUser" parameterType="com.hiponya.bbqmall.entities.member.UserEntity">
 
+        INSERT INTO `bbqmall`.`users` (`email`,`id`,  `name`, `contact`,`password`,`birth`, `address_postal`,
+                                            `address_primary`,
+                                            `address_secondary`,`registered_on`)
+        VALUES (#{email},#{id}, #{name}, #{contact}, #{password}, #{birth},  #{addressPostal}, #{addressPrimary},
+                #{addressSecondary} , IFNULL(#{registeredOn}, DEFAULT(`registered_on`)))
+
+
+    </insert>
 
 
 

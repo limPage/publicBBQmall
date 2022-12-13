@@ -58,7 +58,25 @@ public class MemberController {
     }
 
 
+    @RequestMapping(value = "register", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String postRegister(UserEntity user, EmailAuthEntity emailAuth) throws NoSuchAlgorithmException {
+        Enum<?> result =this.memberService.register(user, emailAuth);
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("result",result.name().toLowerCase() );
 
+//        if (result == CommonResult.SUCCESS) {
+//            responseObject.put("salt", emailAuth.getSalt());
+//        }
+        return responseObject.toString();
+
+        //1.memberservice가 가진 register메서드에 user및 emailauth전달하여 호출하기
+        //2.1이 반환하는 결과 eunm<?>를 받아와 jsonobject 타입의 응답결과 만들기
+        //3.2에서만든 jsonobject객체를 문자열화 하여 반환하기 tostring
+
+
+
+    }
 
 
 }

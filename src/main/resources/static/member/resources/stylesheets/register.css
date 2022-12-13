@@ -213,8 +213,9 @@ body>main>.content>.form.step > .text{
     display: none;
 }
 
-body>main>.content>.form >.insert-userinfo-page{
-
+body>main>.content>.form >.insert-userinfo-page,
+body>main>.content>.form.step2>.insert-userinfo-page
+{
     display: none;
 }
 body>main>.content>.form.step >.insert-userinfo-page{
@@ -308,13 +309,53 @@ body>main>.content>form>.insert-userinfo-page>table>tbody>.id-row>td>label>input
     font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
 
-
-/*body>main>.content>form>.insert-userinfo-page>table>tbody>.address-row >td>label:not(:first-of-type)>input{*/
-/*    !*padding-top: 5px;*!*/
-/*    !*height: 40px;*!*/
-/*    !*width: 252px;*!*/
-/*    margin-top: 5px;*/
-
-/*}*/
+body>main>.content>form>.insert-userinfo-page>table>tbody>.password-row>td>label>input::placeholder {
+    /*font-weight: 40;*/
+    font-size: 11px;
+    color: rgb(0,0,0,0.7);
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
 
 
+
+
+
+/*주소 입력창*/
+body > main > .content > .form.step>.insert-userinfo-page> table > tbody>tr>td>.panel.address{
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,70%);
+    position: fixed;
+    display: none;
+    z-index: 10;
+}
+body > main > .content > .form.step>.insert-userinfo-page> table > tbody>tr>td>.panel.address.visible{
+
+    display: block;
+}
+
+
+body > main > .content > .form.step>.insert-userinfo-page> table > tbody>tr>td>.panel.address>.dialog{
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    max-width: 27.5rem;
+    max-height: 30rem;
+    background-color: rgb(255,255,255);
+    position: absolute;
+    transform: translate(-50% ,-50%);
+}
+
+
+/*회원가입 완료*/
+
+body> main> .content>.form>.complete-page{
+    display: none;
+}
+
+body> main> .content>.form.step2>.complete-page{
+    display: block;
+}
