@@ -13,11 +13,14 @@ public interface IMemberMapper {
     EmailAuthEntity selectEmailAuthByEmailCodeSalt(@Param(value = "email") String email,
                                                    @Param(value = "code") String code,
                                                    @Param(value = "salt") String salt); //@파람 타입이 있기때문에 xml파일에서 파라매터 타입을 적지 않는다.
-
     UserEntity selectUserByEmail(@Param(value = "email") String email);
-
     //  UserEntity selectUserByEmail(UserEntity user);
     int insertEmailAuth(EmailAuthEntity emailAuthEntity);
+
+
+    int insertUser(UserEntity user);
+
+    int updateEmailAuth(EmailAuthEntity emailAuth);
 
 
 }

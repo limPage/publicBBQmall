@@ -9,29 +9,35 @@
     <link rel="stylesheet" th:href="@{/bbq/resources/stylesheets/index.css}">
     <link rel="stylesheet" th:href="@{/detailmenu/resources/stylesheets/detailmenu.css}">
     <th:block th:replace="~{fragments/head :: common}"></th:block>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script defer th:src="@{/detailmenu/resources/scripts/detailmenu.js}"></script>
 </head>
 <body>
 <th:block th:replace="~{fragments/body :: header}"></th:block>
 <main>
     <div class="products-view">
         <div class="products">
+
             <div class="image-container">
-                <img src="/resources/images/images/kimbob-title.png" alt>
-                <span class="pagination">
-                    <div class="count">
-                        <input type="button" class="left" id="left" value="<">
-                        <input type="button" class="right" id="right" value=">">
-                    </div>
-                </span>
-                <span class="products-spec">
-                    <form class="products-form" id="productsForm">
+                <img src="/resources/images/images/kimbob-title.png" class="image" alt>
+                <div class="pagination">
+                    <span class="count">
+                        <input type="button" class="left" id="left" name="left" value="<">
+                        <input type="button" class="right" id="right" name="right" value=">">
+                    </span>
+                </div>
+            </div>
+
+            <div class = "products-container">
+                <form class="products-form" id="productsForm">
+                    <div class="products-spec">
                         <div class="title">[냉동] BBQ 구운 왕갈비맛 삼각밥 100g 10팩</div>
                         <div class="star-container">
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star star"></i>
+                            <i class="fa-regular fa-star star"></i>
+                            <i class="fa-regular fa-star star"></i>
+                            <i class="fa-regular fa-star star"></i>
+                            <i class="fa-regular fa-star star"></i>
                             <span class="review-count">(0)</span>
                         </div>
                         <div class="price-container">
@@ -40,48 +46,46 @@
                             <span class="won">원</span>
                             <span class="basic-price">20,000원</span>
                         </div>
-                        <div class="grade-container">
-                            <span class="grade">회원등급</span>
-                            <span class="save">5%추가적립</span>
-                            <span class="more">자세히></span>
-                        </div>
-                        <div class="benefit-container">
-                            <span class="benefit">적립혜택</span>
-                            <span class="benefit-price">구매 0원</span>
-                            <span class="latter">후기</span>
-                            <span class="reference">우측'자세히'참조</span>
-                            <span class="more">자세히></span>
-                        </div>
-                        <div class="delivery-container">
-                            <span class="delivery">배송</span>
-                            <span class="delivery-service">택배(<span class="delivery-price">주문시결제</span>)</span>
-                            <span class="more">자세히></span>
-                        </div>
-                        <div class="brand-container">
-                            <span class="brand">브랜드</span>
-                            <span class="brand-title">BBQ몰</span>
-                        </div>
-                        <div class="quantity-container">
-                            <span class="quantity">구매수량</span>
-                            <input type="button" id="add" class="add">
-                            <input type="number" class="quantity-number" id="quantityNumber" name="quantityNumber">
-                            <input type="button" id="min" class="min">
-                        </div>
-                        <div class="total-container">
-                        <span class="total">총 상품금액
+                    </div>
+
+                    <div class="grade-container">
+                        <span class="grade">회원등급</span>
+                        <span class="save">5%추가적립</span>
+                        <span class="more">자세히></span>
+                    </div>
+                    <div class="benefit-container">
+                        <span class="benefit">적립혜택</span>
+                        <span class="benefit-price">구매 0원</span>
+                        <span class="latter">후기</span>
+                        <span class="reference">우측'자세히'참조</span>
+                        <span class="more">자세히></span>
+                    </div>
+                    <div class="delivery-container">
+                        <span class="delivery">배송</span>
+                        <span class="delivery-service">택배(<span class="delivery-price">주문시결제</span>)</span>
+                        <span class="more">자세히></span>
+                    </div>
+                    <div class="brand-container">
+                        <span class="brand">브랜드</span>
+                        <span class="brand-title">BBQ몰</span>
+                    </div>
+                    <div class="quantity-container">
+                        <span class="quantity">구매수량</span>
+                        <input type="button" id="add" class="add" value="+">
+                        <input type="number" class="quantity-number" id="quantityNumber" name="quantityNumber">
+                        <input type="button" id="min" class="min" value="-">
+                    </div>
+                    <div class="total-container"><span class="total">총 상품금액
                             <span class="total-price">17,300</span>
                             원</span>
-                        </div>
-                        <div class="button-container">
-                            <input type = "button" name = "cart" id="cart" class="cart" value="장바구니">
-                            <input type = "button" name = "buy" id="buy" class="buy" value="바로구매">
-                            <input type = "button" name = "jjim" id="jjim" class="jjim" value="♡">
-                        </div>
-                    </form>
-                </span>
+                    </div>
+                    <div class="button-container">
+                        <input type="button" name="cart" id="cart" class="cart" value="장바구니">
+                        <input type="button" name="buy" id="buy" class="buy" value="바로구매">
+                        <input type="button" name="jjim" id="jjim" class="jjim" value="♡">
+                    </div>
+                </form>
             </div>
-
-
         </div>
     </div>
 </main>

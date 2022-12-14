@@ -1,9 +1,11 @@
 package com.hiponya.bbqmall.services;
 
 import com.hiponya.bbqmall.entities.member.EmailAuthEntity;
+import com.hiponya.bbqmall.enums.member.RegisterResult;
 import com.hiponya.bbqmall.entities.member.UserEntity;
 import com.hiponya.bbqmall.enums.CommonResult;
 import com.hiponya.bbqmall.enums.member.SendEmailAuthResult;
+import com.hiponya.bbqmall.enums.member.VerifyEmailAuthResult;
 import com.hiponya.bbqmall.interfaces.IResult;
 import com.hiponya.bbqmall.mappers.IMemberMapper;
 import com.hiponya.bbqmall.utils.CryptoUtils;
@@ -90,5 +92,49 @@ public class MemberService {
         return CommonResult.SUCCESS;
     }
 
+    @Transactional
+    public Enum<? extends IResult> verifyEmailAuth(EmailAuthEntity emailAuth) {
 
+        EmailAuthEntity existingEmailAuth = this.memberMapper.selectEmailAuthByEmailCodeSalt(
+                emailAuth.getEmail(), emailAuth.getCode(), emailAuth.getSalt());
+
+        if (existingEmailAuth == null) {
+            return CommonResult.FAILURE;
+        }
+
+        if (existingEmailAuth.getExpiresOn().compareTo(new Date()) < 0) {
+            return VerifyEmailAuthResult.EXPIRED;
+        }
+
+        existingEmailAuth.setExpired(true);
+        if (this.memberMapper.updateEmailAuth(existingEmailAuth) == 0) {
+            return CommonResult.FAILURE;
+        }
+
+        return CommonResult.SUCCESS;
+    }
+
+
+    public Enum<? extends IResult> register(UserEntity user, EmailAuthEntity emailAuth) {
+
+        //이메일어스가 가진 이메일, 코드 ,솔트값 기준으로 새로운 이메일어스앤티티, 셀렉트해서 가져오기
+        //2. 1에서 가녀종ㄴ 새로운 객체가 null이거나 이가 가진 isExpired()호출결과가 false이녁ㅇ우 registerResult.email_not_verified'를 결과로 반환하기. 없음으로 만들어야함
+        //3,. user객체를 imembermapper객체의 insertuser메서드 호출시 전달인자로 하여 insert하기
+        //4. 3의 결과가 0이면 comonresult.failure반환하기
+        //5 위 과정 전체를 거친후 commonresult.success반환하기
+
+        EmailAuthEntity existingEmailAuthEntity = this.memberMapper.selectEmailAuthByEmailCodeSalt(emailAuth.getEmail(), emailAuth.getCode(), emailAuth.getSalt());
+        if (existingEmailAuthEntity == null || !existingEmailAuthEntity.isExpired()) {
+            return RegisterResult.EMAIL_NOT_VERIFIED;
+        }
+
+        //유틸즈에 비밀번호 보냄
+        user.setPassword(CryptoUtils.hashSha512(user.getPassword()));
+
+        if (this.memberMapper.insertUser(user) == 0) {
+            return CommonResult.FAILURE;
+        }
+
+        return CommonResult.SUCCESS;
+    }
 }
