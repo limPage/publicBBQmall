@@ -1,4 +1,4 @@
-package com.hiponya.bbqmall.entities.member;
+package com.hiponya.bbqmall.enums.member;
 
 import com.hiponya.bbqmall.interfaces.IResult;
 

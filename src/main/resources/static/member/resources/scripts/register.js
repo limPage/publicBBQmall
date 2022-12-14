@@ -1,6 +1,26 @@
  const form = window.document.getElementById('form');
 const  codeSendRow = form.querySelector('.code-send-row');
 const  codeCheckRow = form.querySelector('.code-check-row');
+ let date= new  Date();
+
+ date.setMinutes(5);
+ date.setSeconds(0);
+
+
+ function timer (){
+
+
+     date.setSeconds(date.getSeconds()-1);
+     window.document.getElementById('guideText').innerText='수신된 인증 코드를 확인합니다.['+date.getMinutes()+ ":"+date.getSeconds()+']';
+     if(date.getMinutes()===0&& date.getSeconds()===0){
+         clearInterval(interval);
+         window.document.getElementById('guideText').innerText='페이지를 새로고침하여 다시 진행해주세요.'
+
+     }
+
+ }
+let interval;
+
 
 
 form['emailButton'].addEventListener('click', ()=>{
@@ -48,24 +68,9 @@ form['emailButton'].addEventListener('click', ()=>{
 
                          alert('인증 번호를 전송하였습니다. 전송된 인증번호는 5분간만 유효합니다.');
 
-                         let date= new  Date();
 
-                         date.setMinutes(5);
-                         date.setSeconds(0);
-                     function timer (){
 
-                         date.setSeconds(date.getSeconds()-1);
-                         window.document.getElementById('guideText').innerText='수신된 인증 코드를 확인합니다.['+date.getMinutes()+ ":"+date.getSeconds()+']';
-                         if(date.getMinutes()===0&& date.getSeconds()===0){
-                             clearInterval(interval);
-                             window.document.getElementById('guideText').innerText='페이지를 새로고침하여 다시 진행해주세요.'
-
-                         }
-
-                     }
-
-                     let  interval= setInterval( timer,1000);
-
+                         interval= setInterval( timer,1000);
 
 
                          // date.setMinutes(date.getMinutes() +5);
@@ -158,6 +163,7 @@ form['emailButton'].addEventListener('click', ()=>{
                          // form['emailAuthCode'].setAttribute('disabled','disabled');
                          // form['emailVerify'].setAttribute('disabled','disabled');
                          // form['password'].focus();
+                         clearInterval(interval);
 
                          form['next'].classList.add('visible');
 
@@ -192,14 +198,16 @@ form['emailButton'].addEventListener('click', ()=>{
 
  form['next'].addEventListener('click',()=>{
 
-     if(!form.classList.contains('step')) {
-         form.classList.add('step');
+     //이메일 인증페이지에서 다음버튼을 눌렀을때 정보페이지로 간다.
+     if(!form.classList.contains('step3') && !form.classList.contains('step2')) {
+
+         form.classList.add('step2');
+         form.classList.remove('step1')
          form['email'].value=form['emailText'].value;
 
-
      }
-
-     else if(form.classList.contains('step')) {
+  //정보 입력페이지에서 눌렀을때 완료페이지로 가진다.
+     else if(form.classList.contains('step2')) {
 
          form['email'].value=form['emailText'].value;
          let regId = /^[a-z]+[a-z0-9]{5,19}$/g;
@@ -280,8 +288,8 @@ form['emailButton'].addEventListener('click', ()=>{
                               alert("가입성공!");
 
                               form['next'].value='로그인하러 가기'
-                              form.classList.remove('step');
-                              form.classList.add('step2');
+                              form.classList.remove('step2');
+                              form.classList.add('step3');
 
                               // form.querySelector('[rel="stepText"]').innerText = '회원가입 완료';
                               // form.querySelector('[rel="nextButton"]').innerText = '로그인하러 가기';
@@ -301,6 +309,13 @@ form['emailButton'].addEventListener('click', ()=>{
           };
           xhr.send(formData);
      }
+
+    else if(form.classList.contains('step3')){
+
+        window.location.href='http://localhost:8080/';
+
+     }
+
 
 
 

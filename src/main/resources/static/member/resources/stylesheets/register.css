@@ -205,22 +205,21 @@ body> main > .content>.form>label>.next{
 body> main > .content>.form>label>.next.visible{
     display: block;
 }
-body>main>.content>.form.step >.email-check-page{
-    display: none;
-}
 
-body>main>.content>.form.step > .text{
-    display: none;
-}
-
-body>main>.content>.form >.insert-userinfo-page,
-body>main>.content>.form.step2>.insert-userinfo-page
+body>main>.content>.form.step1 >.insert-userinfo-page,
+body>main>.content>.form.step1 >.complete-page,
+body>main>.content>.form.step2>.email-check-page,
+body>main>.content>.form.step2>.complete-page,
+body>main>.content>.form.step2 > .text,
+body>main>.content>.form.step3>.email-check-page,
+body>main>.content>.form.step3>.insert-userinfo-page,
+body>main>.content>.form.step3 > .text
 {
     display: none;
 }
-body>main>.content>.form.step >.insert-userinfo-page{
-    display: block;
-}
+
+
+
 
 
 /*회원가입 페이지*/
@@ -229,6 +228,7 @@ body > main > .content> .form.step > label>.next{
 }
 
 body>main>.content>form>.insert-userinfo-page{
+
 
     align-items: center;
     display: flex;
@@ -321,7 +321,7 @@ body>main>.content>form>.insert-userinfo-page>table>tbody>.password-row>td>label
 
 
 /*주소 입력창*/
-body > main > .content > .form.step>.insert-userinfo-page> table > tbody>tr>td>.panel.address{
+body > main > .content > .form.step2>.insert-userinfo-page> table > tbody>tr>td>.panel.address{
     top:0;
     left:0;
     width: 100%;
@@ -331,13 +331,13 @@ body > main > .content > .form.step>.insert-userinfo-page> table > tbody>tr>td>.
     display: none;
     z-index: 10;
 }
-body > main > .content > .form.step>.insert-userinfo-page> table > tbody>tr>td>.panel.address.visible{
+body > main > .content > .form.step2>.insert-userinfo-page> table > tbody>tr>td>.panel.address.visible{
 
     display: block;
 }
 
 
-body > main > .content > .form.step>.insert-userinfo-page> table > tbody>tr>td>.panel.address>.dialog{
+body > main > .content > .form.step2>.insert-userinfo-page> table > tbody>tr>td>.panel.address>.dialog{
     top: 50%;
     left: 50%;
     width: 100%;
@@ -352,10 +352,3 @@ body > main > .content > .form.step>.insert-userinfo-page> table > tbody>tr>td>.
 
 /*회원가입 완료*/
 
-body> main> .content>.form>.complete-page{
-    display: none;
-}
-
-body> main> .content>.form.step2>.complete-page{
-    display: block;
-}

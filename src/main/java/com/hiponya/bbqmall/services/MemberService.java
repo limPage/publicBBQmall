@@ -1,7 +1,7 @@
 package com.hiponya.bbqmall.services;
 
 import com.hiponya.bbqmall.entities.member.EmailAuthEntity;
-import com.hiponya.bbqmall.entities.member.RegisterResult;
+import com.hiponya.bbqmall.enums.member.RegisterResult;
 import com.hiponya.bbqmall.entities.member.UserEntity;
 import com.hiponya.bbqmall.enums.CommonResult;
 import com.hiponya.bbqmall.enums.member.SendEmailAuthResult;
