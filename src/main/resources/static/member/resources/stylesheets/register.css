@@ -37,7 +37,7 @@ body > main > .content> .form >div> .title2{
     text-align: center;
     margin-bottom: 20px;
 }
-body > main > .content> .form >div> .title2>span>.icon{
+body > main > .content> .form >div> .title2>.icon{
     color: #ee3400;
     border: #FFCC00 3px solid;
     border-radius: 999rem;

@@ -28,6 +28,15 @@ public class HomeController {
         return modelAndView;
     }
 
+    @GetMapping(value = "/login", produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getLogin() {
+        ModelAndView modelAndView = new ModelAndView("member/login");
+
+        return modelAndView;
+    }
+
+
+
     @GetMapping(value = "catalog", produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getCatalog() {
         ModelAndView modelAndView = new ModelAndView("member/catalog");

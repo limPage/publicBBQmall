@@ -137,4 +137,17 @@ public class MemberService {
 
         return CommonResult.SUCCESS;
     }
+
+    @Transactional
+    public Enum<? extends IResult> login(UserEntity user){
+        user.setPassword(CryptoUtils.hashSha512(user.getPassword()));
+        UserEntity exising = this.memberMapper.selectUserLogin(user.getId(), user.getPassword());
+
+        if (exising== null ){
+            return CommonResult.FAILURE;
+        }
+
+        return CommonResult.SUCCESS;
+    }
+
 }

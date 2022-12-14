@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpSession;
 import java.security.NoSuchAlgorithmException;
 
 @Controller
@@ -78,6 +79,26 @@ public class MemberController {
 
     }
 
+
+
+    @RequestMapping(value = "login" ,method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String postLogin(HttpSession session, UserEntity user){
+//        MediaType mediaType = new MediaType("member/login");
+
+
+        Enum<? extends IResult> result = this.memberService.login(user);
+
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("result", result.name().toLowerCase());
+
+        if(result == CommonResult.SUCCESS){
+            session.setAttribute("user",user);
+            System.out.println("로그인 성공");
+        }else System.out.println("로그인실패");
+
+        return responseObject.toString();
+    }
 
 }
 

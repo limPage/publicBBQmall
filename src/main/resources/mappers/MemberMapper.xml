@@ -7,12 +7,12 @@
     <select id="selectUserByEmail"
             resultType="com.hiponya.bbqmall.entities.member.UserEntity">
         SELECT `email`             AS `email`,
-               `id` AS `id`,
+               `id`                AS `id`,
                `password`          AS `password`,
 
                `name`              AS `name`,
                `contact`           AS `contact`,
-               `birth` AS`birth`,
+               `birth`             AS `birth`,
                `address_postal`    AS `addressPostal`,
                `address_primary`   AS `addressPrimary`,
                `address_primary`   AS `addressPrimary`,
@@ -69,16 +69,33 @@
 
     <insert id="insertUser" parameterType="com.hiponya.bbqmall.entities.member.UserEntity">
 
-        INSERT INTO `bbqmall`.`users` (`email`,`id`,  `name`, `contact`,`password`,`birth`, `address_postal`,
-                                            `address_primary`,
-                                            `address_secondary`,`registered_on`)
-        VALUES (#{email},#{id}, #{name}, #{contact}, #{password}, #{birth},  #{addressPostal}, #{addressPrimary},
-                #{addressSecondary} , IFNULL(#{registeredOn}, DEFAULT(`registered_on`)))
+        INSERT INTO `bbqmall`.`users` (`email`, `id`, `name`, `contact`, `password`, `birth`, `address_postal`,
+                                       `address_primary`,
+                                       `address_secondary`, `registered_on`)
+        VALUES (#{email}, #{id}, #{name}, #{contact}, #{password}, #{birth}, #{addressPostal}, #{addressPrimary},
+                #{addressSecondary}, IFNULL(#{registeredOn}, DEFAULT(`registered_on`)))
 
 
     </insert>
 
+    <select id="selectUserLogin" resultType="com.hiponya.bbqmall.entities.member.UserEntity">
+        SELECT `email`             AS `email`,
+               `id`                AS `id`,
+               `password`          AS `password`,
+               `name`              AS `name`,
+               `contact`           AS `contact`,
+               `birth`             AS `birth`,
+               `address_postal`    AS `addressPostal`,
+               `address_primary`   AS `addressPrimary`,
+               `address_primary`   AS `addressPrimary`,
+               `address_secondary` AS `addressSecondary`,
+               `registered_on`     AS `registeredOn`
+        FROM `bbqmall`.`users`
+        WHERE BINARY `id` = #{id}
+          AND BINARY `password` = #{password}
 
+
+    </select>
 
 
 </mapper>

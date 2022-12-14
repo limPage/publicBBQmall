@@ -7,7 +7,7 @@
 <header th:fragment="header">
     <div class="logo-row">
         <div class="logo-container">
-            <a href="#">
+            <a th:href="@{/}">
             <img alt="" src="https://mall.bbq.co.kr/data/skin/responsive_ver1_default_gl/images/bbq/bbq_logo.svg"
                  width="118px"></a>
             <div class="search">
@@ -34,7 +34,7 @@
 
                     <li>
                         <span class="bar"></span>
-                        <a href="#">로그인</a>
+                        <a th:href="@{/login}">로그인</a>
                         <span class="bar"></span>
 
                     </li>
