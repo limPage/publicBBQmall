@@ -1,14 +1,14 @@
 package com.hiponya.bbqmall.controllers;
 
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping(value = "/")
@@ -51,6 +51,25 @@ public class HomeController {
         return modelAndView;
     }
 
+
+    @RequestMapping(value = "logout" , method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getLogout(HttpSession session){
+
+//        session.removeAttribute("user");
+        session.setAttribute("user", null);
+        ModelAndView modelAndView = new ModelAndView( "redirect:./"); //리다이렉션
+
+        System.out.println("로그아웃");
+        return modelAndView;
+    }
+
+
+    @GetMapping(value = "recover", produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getRecover() {
+        ModelAndView modelAndView = new ModelAndView("member/recover");
+
+        return modelAndView;
+    }
 
 
 }

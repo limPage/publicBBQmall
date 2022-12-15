@@ -36,6 +36,7 @@ const content = window.document.getElementById('content');
      content.classList.add('login-mode-null');
 
      form['id'].setAttribute('placeholder','주문번호');
+     form['id'].value='';
      form['password'].setAttribute('placeholder','주문자 이메일');
 
  })
