@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-
+<head>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script defer th:src = "@{/resources/libraries/ckeditor/ckeditor.js}"></script>
+    <script defer th:src="@{/resources/scripts/common.js}"></script>
+</head>
 
 <body>
 
@@ -74,8 +78,8 @@
                         </div>
                         <strong>전체상품</strong></a>
                 </li>
-                <li class="menu">
-                    <a href="/category"><strong class="new">NEW</strong></a>
+                <li class="menu" th:each="category : ${category}">
+                    <a th:href = "@{/bbs/list (bid=${board.getId()})}"><strong class="new">NEW</strong></a>
                 </li>
                 <li class="menu">
                     <a href="/category"><strong class="en">669 세트</strong></a>
