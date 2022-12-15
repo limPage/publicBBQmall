@@ -291,6 +291,18 @@ body> main> .content> .login-service-row{
     position: relative;
 
 }
+body> main> .content> .login-service-row>li>a{
+    color: inherit;
+
+}
+
+
+body> main> .content> .login-service-row>li>a:hover{
+    text-decoration: underline;
+
+}
+
+
 body> main> .content> .login-service-row>.bar{
 
     height: 0.8rem;

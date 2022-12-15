@@ -46,6 +46,11 @@ const content = window.document.getElementById('content');
 
      e.preventDefault();
 
+     if(content.classList.contains('login-mode-null')){
+         alert("비회원 주문은 추후 추가될 예정입니다.")
+         return;
+     }
+
      if(form['id'].value === ''){
 
          alert("아이디를 입력해주세요.");

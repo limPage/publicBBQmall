@@ -1,7 +1,8 @@
  const form = window.document.getElementById('form');
 const  codeSendRow = form.querySelector('.code-send-row');
 const  codeCheckRow = form.querySelector('.code-check-row');
- let date= new  Date();
+const terms=  window.document.querySelector('.terms-content')
+let date= new  Date();
 
  date.setMinutes(5);
  date.setSeconds(0);
@@ -30,6 +31,9 @@ form['emailButton'].addEventListener('click', ()=>{
     window.document.getElementById('guideText').innerText='이메일을 입력하여 인증을 진행합니다.'
 
     codeSendRow.classList.add('visible');
+
+    form['next'].classList.add('visible');
+
 })
 
  form['codeSendButton'].addEventListener('click', ()=> {
@@ -165,7 +169,7 @@ form['emailButton'].addEventListener('click', ()=>{
                          // form['password'].focus();
                          clearInterval(interval);
 
-                         form['next'].classList.add('visible');
+                         // form['next'].classList.add('visible');
 
                          codeCheckRow.classList.add('disabled');
                          form['emailAuthCode'].setAttribute('disabled', 'disabled'); // emailSend 버튼을 사용불가로
@@ -199,13 +203,37 @@ form['emailButton'].addEventListener('click', ()=>{
  form['next'].addEventListener('click',()=>{
 
      //이메일 인증페이지에서 다음버튼을 눌렀을때 정보페이지로 간다.
-     if(!form.classList.contains('step3') && !form.classList.contains('step2')) {
+     if(!form.classList.contains('step3') && !form.classList.contains('step2') && !form.classList.contains('step1')) {
 
-         form.classList.add('step2');
-         form.classList.remove('step1')
-         form['email'].value=form['emailText'].value;
+         if(codeSendRow.classList.contains('disabled')&&
+         codeCheckRow.classList.contains('disabled') &&
+             (form['emailAuthSalt'].value != null)){
+
+             form.classList.add('step1');
+             form.classList.remove('step0');
+             form['email'].value=form['emailText'].value;
+
+
+         }else {
+
+         alert("이메일 인증을 완료해주세요.");
+         }
+
+
+
+     }else if (form.classList.contains('step1')){
+
+        if(!form['checkboxShop'].checked || !form['checkboxUser'].checked){
+            alert('필수사항을 체크해주세요.');
+            return;
+        }
+
+        form.classList.add('step2');
+        form.classList.remove('step1');
+
 
      }
+
   //정보 입력페이지에서 눌렀을때 완료페이지로 가진다.
      else if(form.classList.contains('step2')) {
 
@@ -347,3 +375,98 @@ form['emailButton'].addEventListener('click', ()=>{
  form.querySelector('[rel="addressFindPanel"]').addEventListener('click', () => {
      form.querySelector('[rel="addressFindPanel"]').classList.remove('visible');
  });
+
+
+ //약관 동의
+
+ form['checkAll'].addEventListener('click',()=>{
+
+     if (form['checkAll'].checked){
+         form['checkboxShop'].checked=true;
+         form['checkboxUser'].checked=true;
+         form['checkboxMarketing'].checked=true;
+         form['checkboxEmail'].checked=true;
+         form['checkboxSMS'].checked=true;
+
+     }else     {
+         form['checkboxShop'].checked=false;
+         form['checkboxUser'].checked=false;
+         form['checkboxMarketing'].checked=false;
+         form['checkboxEmail'].checked=false;
+         form['checkboxSMS'].checked=false;
+     }
+
+ });
+
+ form['checkboxMarketing'].addEventListener('click',()=>{
+     if (form['checkboxMarketing'].checked){
+         form['checkboxEmail'].checked=true;
+         form['checkboxSMS'].checked=true;
+
+     }else     {
+
+         form['checkboxEmail'].checked=false;
+         form['checkboxSMS'].checked=false;
+     }
+
+    form['checkAll'].checked=false;
+ });
+ form['checkboxEmail'].addEventListener('click',()=>{
+
+     if(!form['checkboxEmail'].checked && !form['checkboxSMS'].checked){
+
+         form['checkboxMarketing'].checked=false;
+
+     }else   form['checkboxMarketing'].checked=true;
+
+     form['checkAll'].checked=false;
+
+
+ });
+ form['checkboxSMS'].addEventListener('click',()=>{
+
+     if(!form['checkboxEmail'].checked && !form['checkboxSMS'].checked){
+
+         form['checkboxMarketing'].checked=false;
+
+     } else      form['checkboxMarketing'].checked=true;
+
+     form['checkAll'].checked=false;
+
+ });
+
+
+
+
+
+
+
+
+ window.document.querySelector('.terms-text-button-shop').addEventListener('click',()=>{
+
+     terms.classList.add('visible');
+     window.document.getElementById('termsTitle').innerText='쇼핑몰 이용약관';
+    window.document.querySelector('.shop-terms-text').classList.add('visible');
+
+ } )
+ window.document.querySelector('.terms-text-button-user').addEventListener('click',()=>{
+
+     terms.classList.add('visible');
+     window.document.getElementById('termsTitle').innerText='개인정보 수집 및 이용';
+     window.document.querySelector('.user-terms-text').classList.add('visible');
+
+
+ } )
+
+
+ const exitingButtons= window.document.querySelectorAll('.exiting-button');
+
+ for (const exitingButton of exitingButtons) {
+     exitingButton.addEventListener('click', ()=>{
+         terms.classList.remove('visible');
+         window.document.querySelector('.shop-terms-text').classList.remove('visible');
+         window.document.querySelector('.user-terms-text').classList.remove('visible');
+
+     });}
+
+
