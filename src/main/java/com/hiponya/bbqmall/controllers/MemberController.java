@@ -6,6 +6,7 @@ import com.hiponya.bbqmall.entities.member.UserEntity;
 import com.hiponya.bbqmall.enums.CommonResult;
 import com.hiponya.bbqmall.interfaces.IResult;
 import com.hiponya.bbqmall.services.MemberService;
+import com.hiponya.bbqmall.vos.member.EmailAuthVo;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -141,7 +142,7 @@ public class MemberController {
 
 
     @ResponseBody
-    @RequestMapping(value = "recoverId", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "recover", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public String postRecoverEmail(UserEntity user) {
         Enum<? extends IResult> result =this.memberService.recoverId(user);
 
@@ -157,6 +158,24 @@ public class MemberController {
         return responseObject.toString();// "{result: success}" 스크립트
 
     }
+
+
+    @ResponseBody
+    @RequestMapping(value = "recoverPassword", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public String postRecoverPassword(EmailAuthVo emailAuthVo) throws MessagingException {
+        Enum<?> result =this.memberService.recoverPasswordSend(emailAuthVo);
+
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("result",result.name().toLowerCase() );
+
+        if (result == CommonResult.SUCCESS) {
+            responseObject.put("index", emailAuthVo.getIndex());
+        }
+        return responseObject.toString();// "{result: success}" 스크립트
+
+    }
+
+
 
 
 }

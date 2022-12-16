@@ -93,6 +93,7 @@
         FROM `bbqmall`.`users`
         WHERE BINARY `id` = #{id}
           AND BINARY `password` = #{password}
+        LIMIT 1;
 
 
     </select>
@@ -114,9 +115,29 @@
         WHERE BINARY `name` = #{name}
           AND `email` = #{email}
 
+        LIMIT 1;
 
     </select>
 
+    <select id="selectUserByNameIdEmail" resultType="com.hiponya.bbqmall.entities.member.UserEntity">
+        SELECT `email`             AS `email`,
+               `id`                AS `id`,
+               `password`          AS `password`,
+               `name`              AS `name`,
+               `contact`           AS `contact`,
+               `birth`             AS `birth`,
+               `address_postal`    AS `addressPostal`,
+               `address_primary`   AS `addressPrimary`,
+               `address_primary`   AS `addressPrimary`,
+               `address_secondary` AS `addressSecondary`,
+               `registered_on`     AS `registeredOn`
+        FROM `bbqmall`.`users`
+        WHERE BINARY `name` = #{name}
+          AND `id` = #{id}
+          AND `email` = #{email}
 
+        LIMIT 1;
+
+    </select>
 
 </mapper>
