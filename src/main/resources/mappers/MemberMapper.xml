@@ -98,4 +98,25 @@
     </select>
 
 
+    <select id="selectUserByNameContact" resultType="com.hiponya.bbqmall.entities.member.UserEntity">
+        SELECT `email`             AS `email`,
+               `id`                AS `id`,
+               `password`          AS `password`,
+               `name`              AS `name`,
+               `contact`           AS `contact`,
+               `birth`             AS `birth`,
+               `address_postal`    AS `addressPostal`,
+               `address_primary`   AS `addressPrimary`,
+               `address_primary`   AS `addressPrimary`,
+               `address_secondary` AS `addressSecondary`,
+               `registered_on`     AS `registeredOn`
+        FROM `bbqmall`.`users`
+        WHERE BINARY `name` = #{name}
+          AND `email` = #{email}
+
+
+    </select>
+
+
+
 </mapper>

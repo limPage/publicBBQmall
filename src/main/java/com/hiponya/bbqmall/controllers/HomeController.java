@@ -21,19 +21,6 @@ public class HomeController {
         return modelAndView;
     }
 
-    @GetMapping(value = "/register", produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getRegister() {
-        ModelAndView modelAndView = new ModelAndView("member/register");
-
-        return modelAndView;
-    }
-
-    @GetMapping(value = "/login", produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getLogin() {
-        ModelAndView modelAndView = new ModelAndView("member/login");
-
-        return modelAndView;
-    }
 
 
 
@@ -52,24 +39,7 @@ public class HomeController {
     }
 
 
-    @RequestMapping(value = "logout" , method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getLogout(HttpSession session){
 
-//        session.removeAttribute("user");
-        session.setAttribute("user", null);
-        ModelAndView modelAndView = new ModelAndView( "redirect:./"); //리다이렉션
-
-        System.out.println("로그아웃");
-        return modelAndView;
-    }
-
-
-    @GetMapping(value = "recover", produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getRecover() {
-        ModelAndView modelAndView = new ModelAndView("member/recover");
-
-        return modelAndView;
-    }
 
 
 }

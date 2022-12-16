@@ -14,52 +14,72 @@
 <th:block th:replace="~{fragments/body :: header}"></th:block> <!-- block 자리에 body.html 파일의 replace 태그와 치환한다. -->
 <th:block th:replace="~{fragments/body :: cover}"></th:block>
 <main class="--main main">
-    <div class="content login-mode-user" id="content">
-        <form class="form " id="form">
+    <div class="content " id="content">
+        <form class="form recover-mode-id" id="form">
             <h1 class="title">아이디/비밀번호 찾기</h1>
 
             <table>
                 <tbody>
-                <tr class="login-mode-row">
+                <tr class="recover-mode-row">
                     <td>
 
                         <label>
-                            <input class="login-user" name="loginUser" value="아이디찾기" type="button">
+                            <input class="recover-id" name="recoverId" value="아이디 찾기" type="button">
                         </label>
 
                         <label>
-                            <input class="login-null" name="loginNull" value="비밀번호찾기" type="button">
+                            <input class="recover-password" name="recoverPassword" value="비밀번호찾기" type="button">
                         </label>
                     </td>
 
                 </tr>
 
-                <tr class="icon-row">
+                <tr class="icon-row visible">
                     <td>
-                        <span>등록된 정보로 아이디 찾기</span>
-                        <span> 회원가입시 등록한 정보로 찾을 수 있습니다.</span>
+                        <div class="bar-container">
+                            <div class="bar-icon">
+                                <span>/////////////////////</span>
+                            </div>
+                            <span class="row-title">등록된 정보로 아이디 찾기</span>
+                            <div class="bar-icon">
+                                <span>/////////////////////</span>
+                            </div>
+                        </div>
+                        <span class="row-title2"> 회원가입시 등록한 정보로 찾을 수 있습니다.</span>
                         <div class="icon-container"><i class="fa-solid fa-envelope icon"></i>
                         </div>
                     </td>
                 </tr>
 
 
-                    <tr class="name-row">
-                        <th>
-                            <span>이름</span></th>
+                <tr class="name-row data-row">
+                    <th>
+                        <span>이름</span></th>
 
-                        <td>
-                        <label> <input type="text"></label>
+                    <td>
+                        <label> <input type="text" name="name" autofocus maxlength="10"></label>
 
-                        </td>
+                    </td>
 
 
-                    </tr>
-                <tr class="email-row">
+                </tr>
+
+                <tr class="id-row data-row">
+                    <th><span>아이디</span></th>
+
+                    <td>
+                        <label> <input type="text" name="id" maxlength="20"></label>
+
+                    </td>
+
+
+                </tr>
+
+                <tr class="email-row data-row">
                     <th><span>이메일</span></th>
 
                     <td>
-                        <label> <input type="text"></label>
+                        <label> <input type="email" name="email" maxlength="30"></label>
 
                     </td>
 
@@ -67,19 +87,44 @@
                 </tr>
 
 
+                <tr class="result-row data-row">
+
+                    <td>
+
+                        <span class="no-select">고객님의 아이디는&nbsp;&nbsp;</span>
+                            <span rel="result-id">null</span>
+                        <span class="no-select">&nbsp;&nbsp;입니다.</span>
+                    </td>
 
 
+                </tr>
 
                 </tbody>
 
                 <tfoot>
-                <tr>
+                <tr class="next-button-row visible">
                     <td>
                         <label>
-                            <input type="button" value="이메일 인증" name="recoverButton">
+                            <input type="button" value="이메일 전송" name="next">
                         </label>
                     </td>
                 </tr>
+
+                <tr class="result-button-row">
+                    <td>
+                        <label>
+                            <input class="login" type="button" value="로그인" name="">
+                        </label>
+
+
+                        <label>
+                            <input  class= " gray-button" type="button" value="회원가입" name="">
+                        </label>
+                    </td>
+                </tr>
+
+
+
                 </tfoot>
 
             </table>

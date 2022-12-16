@@ -150,4 +150,15 @@ public class MemberService {
         return CommonResult.SUCCESS;
     }
 
+
+    @Transactional
+    public Enum<? extends IResult> recoverId(UserEntity user){
+        UserEntity exisingUser = this.memberMapper.selectUserByNameContact(user.getName(), user.getEmail());
+        if (exisingUser== null ){
+            return CommonResult.FAILURE;
+        }
+        user.setId(exisingUser.getId());
+
+        return CommonResult.SUCCESS;
+    }
 }

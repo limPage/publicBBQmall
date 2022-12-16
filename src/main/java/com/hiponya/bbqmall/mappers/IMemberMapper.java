@@ -26,5 +26,6 @@ public interface IMemberMapper {
 
     int updateEmailAuth(EmailAuthEntity emailAuth);
 
-
+    UserEntity selectUserByNameContact(@Param(value = "name") String name,
+                                       @Param(value = "email") String email);
 }
