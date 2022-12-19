@@ -9,6 +9,7 @@ import com.hiponya.bbqmall.enums.member.VerifyEmailAuthResult;
 import com.hiponya.bbqmall.interfaces.IResult;
 import com.hiponya.bbqmall.mappers.IMemberMapper;
 import com.hiponya.bbqmall.utils.CryptoUtils;
+import com.hiponya.bbqmall.vos.member.EmailAuthVo;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -137,4 +138,112 @@ public class MemberService {
 
         return CommonResult.SUCCESS;
     }
+
+    @Transactional
+    public Enum<? extends IResult> login(UserEntity user){
+        user.setPassword(CryptoUtils.hashSha512(user.getPassword()));
+        UserEntity exising = this.memberMapper.selectUserLogin(user.getId(), user.getPassword());
+
+        if (exising== null ){
+            return CommonResult.FAILURE;
+        }
+
+        return CommonResult.SUCCESS;
+    }
+
+
+    @Transactional
+    public Enum<? extends IResult> recoverId(UserEntity user){
+        UserEntity exisingUser = this.memberMapper.selectUserByNameContact(user.getName(), user.getEmail());
+        if (exisingUser== null ){
+            return CommonResult.FAILURE;
+        }
+        user.setId(exisingUser.getId());
+
+        return CommonResult.SUCCESS;
+    }
+
+
+    @Transactional//실패시 안보내겠다.
+    public Enum<? extends IResult> recoverPasswordSend(EmailAuthVo emailAuthVo) throws MessagingException {
+
+        UserEntity existingUser = this.memberMapper.selectUserByNameIdEmail(
+                emailAuthVo.getName(),emailAuthVo.getId(),emailAuthVo.getEmail()
+        );
+        if (existingUser == null) {
+            return CommonResult.FAILURE;
+        }
+
+        String authCode = RandomStringUtils.randomNumeric(6); //아파치 커먼 유틸즈 있어야 사용가능
+        String authSalt = String.format("%s%s%f%f",
+                authCode,
+                emailAuthVo.getEmail(),
+                Math.random(),
+                Math.random());
+        authSalt = CryptoUtils.hashSha512(authSalt);
+        Date createdOn = new Date(); //현재 일시
+        Date expiresOn = DateUtils.addMinutes(createdOn, 5); //5분미래
+        emailAuthVo.setCode(authCode);
+        emailAuthVo.setSalt(authSalt);
+        emailAuthVo.setCreatedOn(createdOn);
+        emailAuthVo.setExpiresOn(expiresOn);
+        emailAuthVo.setExpired(false);
+
+        if (this.memberMapper.insertEmailAuth(emailAuthVo) == 0) {
+            return CommonResult.FAILURE;
+        }
+
+        Context context = new Context(); //서비스에서 html 파일갑이용하기 위해
+        context.setVariable("code", emailAuthVo.getCode());
+        context.setVariable("email", emailAuthVo.getEmail());
+        context.setVariable("salt", emailAuthVo.getSalt());
+
+        //메일보내기
+        String text = this.templateEngine.process("member/recoverPasswordEmailAuth", context);
+        MimeMessage mail = this.mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(mail, "UTF-8");
+        helper.setTo(emailAuthVo.getEmail());
+        helper.setSubject("[스터디] 비밀번호 재설정 인증 링크");
+        helper.setText(text, true);
+        this.mailSender.send(mail);
+
+        return CommonResult.SUCCESS;
+    }
+
+
+
+    public Enum<? extends IResult> recoverPasswordCheck(EmailAuthEntity emailAuth){
+        EmailAuthEntity existingEmailAuth = this.memberMapper.selectEmailAuthByIndex(emailAuth.getIndex());
+        if(existingEmailAuth==null || !existingEmailAuth.isExpired()){
+
+            return CommonResult.FAILURE;
+        }
+
+        emailAuth.setCode(existingEmailAuth.getCode());
+        emailAuth.setSalt(existingEmailAuth.getSalt());
+        return CommonResult.SUCCESS;
+    }
+
+
+    @Transactional
+    public Enum<? extends IResult> recoverPasswordAuth(EmailAuthEntity emailAuth){
+//        int existingEmailAuth =  this.memberMapper.updateRecoverPasswordAuth(emailAuth.getEmail(),emailAuth.getCode(),emailAuth.getSalt());
+        EmailAuthEntity existingEmailAuth = this.memberMapper.selectEmailAuthByEmailCodeSalt(emailAuth.getEmail(),emailAuth.getCode(),emailAuth.getSalt());
+
+
+        if(existingEmailAuth ==null ||existingEmailAuth.getExpiresOn().compareTo(new Date()) < 0){
+            //new Date().compareTo(~~~.get~)와 같음 순서가 다름
+            return CommonResult.FAILURE;
+        }
+        if (this.memberMapper.updateEmailAuth(existingEmailAuth)==0){
+            return  CommonResult.FAILURE;
+        }
+//        emailAuth.setExpired(true);
+        this.memberMapper.updateRecoverPasswordAuth(emailAuth.getEmail(),emailAuth.getCode(),emailAuth.getSalt());
+        return CommonResult.SUCCESS;
+
+
+    }
+
+
 }

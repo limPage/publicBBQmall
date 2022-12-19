@@ -54,4 +54,8 @@ public class CategoryService {
         return this.categoryMapper.selectCategories();
     }
 
+    public ProductEntity[] getProducts() {
+        return this.categoryMapper.selectProducts();
+    }
+
 }

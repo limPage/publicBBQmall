@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>BBQ몰 - 카테고리</title>
+    <title th:text = "${'BBQ몰 - ' + (category.getTitle() == null ? '' : category.getTitle())}"></title>
     <link rel="stylesheet" th:href="@{/bbq/resources/stylesheets/index.css}">
     <link rel="stylesheet" th:href="@{/category/resources/stylesheets/category.css}">
     <th:block th:replace="~{fragments/head :: common}"></th:block>
@@ -25,6 +25,7 @@
                                 <li class = "li">
                                     <label class="active">
                                         <input type="button" name="ranking" value="랭킹순" class = "button" id="sorting">&nbsp
+                                        <input type="hidden" name = "index" th:value="${category.getIndex()}">
                                     </label>
                                 </li>
                                 <li class = "li">
@@ -62,9 +63,9 @@
 
                     <div class="search-item-display" id="searchItemDisplay">
                         <ul class="ul">
-                            <li class="goods-list">
+                            <li class="goods-list" th:each = "product : ${products}">
                                 <div class="item-area">
-                                    <a href="/view" class="goods">
+                                    <a href="/view" class="goods" name="1">
                                         <img src="/resources/images/images/new1.png" width="300px" alt>
                                         <div class="goods-title">
                                             BBQ닭가슴살 맛보기세트 12종 2팩씩 (신제품)
@@ -79,7 +80,7 @@
 
                                 </div>
                                 <div class="item-area">
-                                    <a href="/view" class="goods">
+                                    <a th:href= "@{/view?cid=${category.getIndex()}}" class="goods">
                                         <img src="/resources/images/images/new1.png" width="300px" alt>
                                         <div class="goods-title">
                                             BBQ간편식 골라담기 (신제품)

@@ -20,7 +20,23 @@ public interface IMemberMapper {
 
     int insertUser(UserEntity user);
 
+    UserEntity selectUserLogin(@Param(value = "id") String id,
+                               @Param(value = "password") String password);
+
+
     int updateEmailAuth(EmailAuthEntity emailAuth);
 
+    UserEntity selectUserByNameContact(@Param(value = "name") String name,
+                                       @Param(value = "email") String email);
+
+    UserEntity selectUserByNameIdEmail(@Param(value = "name") String name,
+                                       @Param(value = "id") String id,
+                                       @Param(value = "email") String email);
+
+    int updateRecoverPasswordAuth(@Param(value = "email") String email,
+                                  @Param(value = "code") String code,
+                                  @Param(value = "salt") String salt);
+
+    EmailAuthEntity selectEmailAuthByIndex(@Param(value = "index") int index);
 
 }

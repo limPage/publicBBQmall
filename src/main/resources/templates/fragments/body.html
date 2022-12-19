@@ -78,25 +78,27 @@
                         </div>
                         <strong>전체상품</strong></a>
                 </li>
-                <li class="menu" th:each="category : ${category}">
-                    <a th:href = "@{/bbs/list (bid=${board.getId()})}"><strong class="new">NEW</strong></a>
+                <!--/*@thymesVar id="boards" type="com.khj.studymemberbbs.entities.bbs.BoardEntity[]"*/-->
+                <li class="menu" th:each="category : ${categories}">
+                    <!--<a href="/category"><strong class="new"></strong></a>-->
+                    <a th:text="${category.getTitle()}" th:href = "@{/category (cid=${category.getIndex()})}"></a>
                 </li>
-                <li class="menu">
-                    <a href="/category"><strong class="en">669 세트</strong></a>
-                </li>
+<!--                <li class="menu">-->
+<!--                    <a href="/category"><strong class="en">669 세트</strong></a>-->
+<!--                </li>-->
 
-                <li class="menu">
-                    <a href="/category"><strong class="en">BBQ베스트</strong></a>
-                </li>
-                <li class="menu">
-                    <a href="/category"><strong>현명한특가</strong></a>
-                </li>
-                <li class="menu">
-                    <a href="/category"><strong>브랜드관</strong></a>
-                </li>
-                <li class="menu">
-                    <a href="/category"><strong>이벤트/혜택</strong></a>
-                </li>
+<!--                <li class="menu">-->
+<!--                    <a href="/category"><strong class="en">BBQ베스트</strong></a>-->
+<!--                </li>-->
+<!--                <li class="menu">-->
+<!--                    <a href="/category"><strong>현명한특가</strong></a>-->
+<!--                </li>-->
+<!--                <li class="menu">-->
+<!--                    <a href="/category"><strong>브랜드관</strong></a>-->
+<!--                </li>-->
+<!--                <li class="menu">-->
+<!--                    <a href="/category"><strong>이벤트/혜택</strong></a>-->
+<!--                </li>-->
                 <span class="spring"></span>
                 <li class="my-menu">
                     <a href="#"><img alt=""

@@ -1,6 +1,7 @@
 package com.hiponya.bbqmall.mappers;
 
 import com.hiponya.bbqmall.entities.product.CategoryEntity;
+import com.hiponya.bbqmall.entities.product.ProductEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -12,6 +13,7 @@ public interface ICategoryMapper {
 
     CategoryEntity[] selectCategories();
 
+    ProductEntity[] selectProducts();
 
 
 }

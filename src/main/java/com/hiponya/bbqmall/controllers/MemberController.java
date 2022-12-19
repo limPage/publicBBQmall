@@ -6,16 +6,19 @@ import com.hiponya.bbqmall.entities.member.UserEntity;
 import com.hiponya.bbqmall.enums.CommonResult;
 import com.hiponya.bbqmall.interfaces.IResult;
 import com.hiponya.bbqmall.services.MemberService;
+import com.hiponya.bbqmall.vos.member.EmailAuthVo;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpSession;
 import java.security.NoSuchAlgorithmException;
 
 @Controller
@@ -28,6 +31,24 @@ public class MemberController {
     public MemberController(MemberService memberService) {
         this.memberService = memberService;
     }
+
+
+    @GetMapping(value = "/register", produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getRegister() {
+        ModelAndView modelAndView = new ModelAndView("member/register");
+
+        return modelAndView;
+    }
+
+    @GetMapping(value = "/login", produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getLogin() {
+        ModelAndView modelAndView = new ModelAndView("member/login");
+
+        return modelAndView;
+    }
+
+
+
 
     @RequestMapping(value = "email", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
@@ -77,6 +98,110 @@ public class MemberController {
 
 
     }
+
+
+
+    @RequestMapping(value = "login" ,method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String postLogin(HttpSession session, UserEntity user){
+//        MediaType mediaType = new MediaType("member/login");
+
+
+        Enum<? extends IResult> result = this.memberService.login(user);
+
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("result", result.name().toLowerCase());
+
+        if(result == CommonResult.SUCCESS){
+            session.setAttribute("user",user);
+            System.out.println("로그인 성공");
+        }else System.out.println("로그인실패");
+
+        return responseObject.toString();
+    }
+
+
+    @RequestMapping(value = "logout" , method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getLogout(HttpSession session){
+
+//        session.removeAttribute("user");
+        session.setAttribute("user", null);
+        ModelAndView modelAndView = new ModelAndView( "redirect:./"); //리다이렉션
+
+        System.out.println("로그아웃");
+        return modelAndView;
+    }
+
+
+    @GetMapping(value = "recover", produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getRecover() {
+        ModelAndView modelAndView = new ModelAndView("member/recover");
+
+        return modelAndView;
+    }
+
+
+    @ResponseBody
+    @RequestMapping(value = "recover", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public String postRecoverEmail(UserEntity user) {
+        Enum<? extends IResult> result =this.memberService.recoverId(user);
+
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("result",result.name().toLowerCase() );
+
+
+        if (result == CommonResult.SUCCESS) {
+
+            responseObject.put("id", user.getId());
+        }
+
+        return responseObject.toString();// "{result: success}" 스크립트
+
+    }
+
+
+    @ResponseBody
+    @RequestMapping(value = "recoverPassword", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public String postRecoverPassword(EmailAuthVo emailAuthVo) throws MessagingException {
+        Enum<?> result =this.memberService.recoverPasswordSend(emailAuthVo);
+
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("result",result.name().toLowerCase() );
+
+        if (result == CommonResult.SUCCESS) {
+            responseObject.put("index", emailAuthVo.getIndex());
+        }
+        return responseObject.toString();// "{result: success}" 스크립트
+
+    }
+
+
+    @RequestMapping(value = "recoverPasswordEmail", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String postRecoverPasswordEmail(EmailAuthEntity emailAuth){
+        Enum<?> result = this.memberService.recoverPasswordCheck(emailAuth);
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("result", result.name().toLowerCase());
+
+        if(result == CommonResult.SUCCESS){
+            responseObject.put("code",emailAuth.getCode());
+            responseObject.put("salt", emailAuth.getSalt());
+        }
+
+        System.out.println(emailAuth.getIndex());
+        return responseObject.toString();
+
+    }
+
+    @RequestMapping(value = "recoverPasswordEmail", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getRecoverPasswordEmail(EmailAuthEntity emailAuth){
+        //  this.memberService.updateRecoverPasswordAuth(emailAuth);
+        Enum<?> result= this.memberService.recoverPasswordAuth(emailAuth);
+        ModelAndView modelAndView = new ModelAndView("member/recoverPasswordEmail");
+        modelAndView.addObject("result",result.name());
+        return modelAndView;
+    }
+
 
 
 }

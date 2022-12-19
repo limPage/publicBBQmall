@@ -7,12 +7,12 @@
     <select id="selectUserByEmail"
             resultType="com.hiponya.bbqmall.entities.member.UserEntity">
         SELECT `email`             AS `email`,
-               `id` AS `id`,
+               `id`                AS `id`,
                `password`          AS `password`,
 
                `name`              AS `name`,
                `contact`           AS `contact`,
-               `birth` AS`birth`,
+               `birth`             AS `birth`,
                `address_postal`    AS `addressPostal`,
                `address_primary`   AS `addressPrimary`,
                `address_primary`   AS `addressPrimary`,
@@ -49,6 +49,126 @@
           AND BINARY `salt` = #{salt}
         LIMIT 1;
 # binary: 대소문자 구분. 하는게 좋겠죠?
+    </select>
+
+    <update id="updateEmailAuth"
+            parameterType="com.hiponya.bbqmall.entities.member.EmailAuthEntity">
+
+        UPDATE `bbqmall`.`email_auths`
+        SET `email`        = #{email},
+            `code`         = #{code},
+            `salt`         = #{salt},
+            `created_on`   = #{createdOn},
+            `expires_on`   = #{expiresOn},
+            `expired_flag` = #{isExpired}
+        WHERE BINARY `index` = #{index}
+        LIMIT 1
+
+    </update>
+
+
+    <insert id="insertUser" parameterType="com.hiponya.bbqmall.entities.member.UserEntity">
+
+        INSERT INTO `bbqmall`.`users` (`email`, `id`, `name`, `contact`, `password`, `birth`, `address_postal`,
+                                       `address_primary`,
+                                       `address_secondary`, `registered_on`)
+        VALUES (#{email}, #{id}, #{name}, #{contact}, #{password}, #{birth}, #{addressPostal}, #{addressPrimary},
+                #{addressSecondary}, IFNULL(#{registeredOn}, DEFAULT(`registered_on`)))
+
+
+    </insert>
+
+    <select id="selectUserLogin" resultType="com.hiponya.bbqmall.entities.member.UserEntity">
+        SELECT `email`             AS `email`,
+               `id`                AS `id`,
+               `password`          AS `password`,
+               `name`              AS `name`,
+               `contact`           AS `contact`,
+               `birth`             AS `birth`,
+               `address_postal`    AS `addressPostal`,
+               `address_primary`   AS `addressPrimary`,
+               `address_primary`   AS `addressPrimary`,
+               `address_secondary` AS `addressSecondary`,
+               `registered_on`     AS `registeredOn`
+        FROM `bbqmall`.`users`
+        WHERE BINARY `id` = #{id}
+          AND BINARY `password` = #{password}
+        LIMIT 1;
+
+
+    </select>
+
+
+    <select id="selectUserByNameContact" resultType="com.hiponya.bbqmall.entities.member.UserEntity">
+        SELECT `email`             AS `email`,
+               `id`                AS `id`,
+               `password`          AS `password`,
+               `name`              AS `name`,
+               `contact`           AS `contact`,
+               `birth`             AS `birth`,
+               `address_postal`    AS `addressPostal`,
+               `address_primary`   AS `addressPrimary`,
+               `address_primary`   AS `addressPrimary`,
+               `address_secondary` AS `addressSecondary`,
+               `registered_on`     AS `registeredOn`
+        FROM `bbqmall`.`users`
+        WHERE BINARY `name` = #{name}
+          AND `email` = #{email}
+
+        LIMIT 1;
+
+    </select>
+
+    <select id="selectUserByNameIdEmail" resultType="com.hiponya.bbqmall.entities.member.UserEntity">
+        SELECT `email`             AS `email`,
+               `id`                AS `id`,
+               `password`          AS `password`,
+               `name`              AS `name`,
+               `contact`           AS `contact`,
+               `birth`             AS `birth`,
+               `address_postal`    AS `addressPostal`,
+               `address_primary`   AS `addressPrimary`,
+               `address_primary`   AS `addressPrimary`,
+               `address_secondary` AS `addressSecondary`,
+               `registered_on`     AS `registeredOn`
+        FROM `bbqmall`.`users`
+        WHERE BINARY `name` = #{name}
+          AND `id` = #{id}
+          AND `email` = #{email}
+
+        LIMIT 1;
+
+    </select>
+
+    <update id="updateRecoverPasswordAuth">
+
+        UPDATE `bbqmall`.`email_auths`
+        SET `expired_flag` = true
+
+        WHERE BINARY `email` = #{email}
+          AND BINARY `code` = #{code}
+          AND BINARY `salt` = #{salt}
+        LIMIT 1
+
+
+    </update>
+
+
+    <select id="selectEmailAuthByIndex" resultType="com.hiponya.bbqmall.entities.member.EmailAuthEntity">
+        SELECT `index`        AS `index`,
+               `email`        AS `email`,
+               `code`         AS `code`,
+               `salt`         AS `salt`,
+               `created_on`   AS `createdOn`,
+               `expires_on`   AS `expiresOn`,
+               `expired_flag` AS `isExpired`
+
+        FROM `bbqmall`.`email_auths`
+        WHERE `index` = #{index}
+
+        LIMIT 1;
+
+
     </select>
 
 </mapper>
