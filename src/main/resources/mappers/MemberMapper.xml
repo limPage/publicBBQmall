@@ -140,4 +140,35 @@
 
     </select>
 
+    <update id="updateRecoverPasswordAuth">
+
+        UPDATE `bbqmall`.`email_auths`
+        SET `expired_flag` = true
+
+        WHERE BINARY `email` = #{email}
+          AND BINARY `code` = #{code}
+          AND BINARY `salt` = #{salt}
+        LIMIT 1
+
+
+    </update>
+
+
+    <select id="selectEmailAuthByIndex" resultType="com.hiponya.bbqmall.entities.member.EmailAuthEntity">
+        SELECT `index`        AS `index`,
+               `email`        AS `email`,
+               `code`         AS `code`,
+               `salt`         AS `salt`,
+               `created_on`   AS `createdOn`,
+               `expires_on`   AS `expiresOn`,
+               `expired_flag` AS `isExpired`
+
+        FROM `bbqmall`.`email_auths`
+        WHERE `index` = #{index}
+
+        LIMIT 1;
+
+
+    </select>
+
 </mapper>

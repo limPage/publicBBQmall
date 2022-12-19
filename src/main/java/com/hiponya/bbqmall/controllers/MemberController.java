@@ -176,6 +176,32 @@ public class MemberController {
     }
 
 
+    @RequestMapping(value = "recoverPasswordEmail", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String postRecoverPasswordEmail(EmailAuthEntity emailAuth){
+        Enum<?> result = this.memberService.recoverPasswordCheck(emailAuth);
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("result", result.name().toLowerCase());
+
+        if(result == CommonResult.SUCCESS){
+            responseObject.put("code",emailAuth.getCode());
+            responseObject.put("salt", emailAuth.getSalt());
+        }
+
+        System.out.println(emailAuth.getIndex());
+        return responseObject.toString();
+
+    }
+
+    @RequestMapping(value = "recoverPasswordEmail", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getRecoverPasswordEmail(EmailAuthEntity emailAuth){
+        //  this.memberService.updateRecoverPasswordAuth(emailAuth);
+        Enum<?> result= this.memberService.recoverPasswordAuth(emailAuth);
+        ModelAndView modelAndView = new ModelAndView("member/recoverPasswordEmail");
+        modelAndView.addObject("result",result.name());
+        return modelAndView;
+    }
+
 
 
 }

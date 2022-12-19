@@ -354,6 +354,22 @@ main> .content >.form>table>tbody>.result-row>td>.no-select{
     user-select: none;
 }
 
+main> .content >.form>table>tbody>.user-id,
+main> .content >.form>table>tbody>.password-check-row
+{
+    border-top: 1px solid rgba(0,0,0,0.2);
+
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    display: none;
+
+}
+main> .content >.form>table>tbody>.password-row{
+    display: none;
+}
+
+
+
+
 
 body>main>.content>.form> table>tfoot{
     /*padding-top: 20px;*/
@@ -383,18 +399,28 @@ body>main>.content>.form> table>tfoot>.result-button-row.visible,
 body>main>.content>.form> table>tfoot>.next-button-row.visible,
 body>main>.content>.form> table>tbody>.icon-row.visible
 
+
 {
     display:  table-row;
 }
 body>main>.content>.form> table>tbody>.icon-row,
 body>main>.content>.form> table>tfoot>.result-button-row,
-body>main>.content>.form> table>tfoot>.next-button-row
+body>main>.content>.form> table>tfoot>.next-button-row,
+main> .content >.form>table>tbody>.password-row,
+body>main>.content>.form> table>tbody>.name-row.disabled,
+body>main>.content>.form> table>tbody>.id-row.disabled,
+body>main>.content>.form> table>tbody>.email-row.disabled
+
 {
     display: none;
 }
 
 
-
+main> .content >.form>table>tbody>.user-id.visible,
+main> .content >.form>table>tbody>.password-check-row.visible,
+main> .content >.form>table>tbody>.password-row.visible{
+    display: flex;
+}
 
 
 

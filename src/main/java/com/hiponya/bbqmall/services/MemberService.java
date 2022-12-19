@@ -211,4 +211,39 @@ public class MemberService {
     }
 
 
+
+    public Enum<? extends IResult> recoverPasswordCheck(EmailAuthEntity emailAuth){
+        EmailAuthEntity existingEmailAuth = this.memberMapper.selectEmailAuthByIndex(emailAuth.getIndex());
+        if(existingEmailAuth==null || !existingEmailAuth.isExpired()){
+
+            return CommonResult.FAILURE;
+        }
+
+        emailAuth.setCode(existingEmailAuth.getCode());
+        emailAuth.setSalt(existingEmailAuth.getSalt());
+        return CommonResult.SUCCESS;
+    }
+
+
+    @Transactional
+    public Enum<? extends IResult> recoverPasswordAuth(EmailAuthEntity emailAuth){
+//        int existingEmailAuth =  this.memberMapper.updateRecoverPasswordAuth(emailAuth.getEmail(),emailAuth.getCode(),emailAuth.getSalt());
+        EmailAuthEntity existingEmailAuth = this.memberMapper.selectEmailAuthByEmailCodeSalt(emailAuth.getEmail(),emailAuth.getCode(),emailAuth.getSalt());
+
+
+        if(existingEmailAuth ==null ||existingEmailAuth.getExpiresOn().compareTo(new Date()) < 0){
+            //new Date().compareTo(~~~.get~)와 같음 순서가 다름
+            return CommonResult.FAILURE;
+        }
+        if (this.memberMapper.updateEmailAuth(existingEmailAuth)==0){
+            return  CommonResult.FAILURE;
+        }
+//        emailAuth.setExpired(true);
+        this.memberMapper.updateRecoverPasswordAuth(emailAuth.getEmail(),emailAuth.getCode(),emailAuth.getSalt());
+        return CommonResult.SUCCESS;
+
+
+    }
+
+
 }

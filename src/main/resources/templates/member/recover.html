@@ -99,6 +99,43 @@
 
                 </tr>
 
+
+
+                <tr class="user-id data-row">
+                    <th><span>아이디</span></th>
+
+                    <td>
+                        <label> <input type="text" name="userId" maxlength="20" disabled></label>
+
+                    </td>
+
+
+                </tr>
+
+                <tr class="password-row data-row">
+                    <th><span>비밀번호</span></th>
+
+                    <td>
+                        <label> <input type="password" name="password" maxlength="20"></label>
+
+                    </td>
+
+
+                </tr>
+
+                <tr class="password-check-row data-row">
+                    <th><span>비밀번호 확인</span></th>
+
+                    <td>
+                        <label> <input type="password" name="passwordCheck" maxlength="20"></label>
+
+                    </td>
+
+
+                </tr>
+
+
+
                 </tbody>
 
                 <tfoot>
@@ -129,6 +166,10 @@
 
             </table>
 
+            <label>
+                <input hidden name="code">
+                <input hidden name="salt">
+            </label>
 
         </form>
 

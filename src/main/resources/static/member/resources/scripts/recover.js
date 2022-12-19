@@ -174,3 +174,121 @@ form['recoverId'].addEventListener('click',()=>{
      }
  })
 
+
+ setInterval(()=>{
+     if (emailAuthIndex===null){
+         return;
+     }
+
+     const xhr = new XMLHttpRequest();
+     const formData = new FormData();
+     formData.append('index', emailAuthIndex);
+     xhr.open('POST', './recoverPasswordEmail');
+     xhr.onreadystatechange = () => {
+         if (xhr.readyState === XMLHttpRequest.DONE) {//4 성공인게 아니고 작업의끝;
+             if (xhr.status >= 200 && xhr.status < 300) {
+                 const responseObject = JSON.parse(xhr.responseText);//{resutl:suceess로 가져온것을 { \n result \t 식으로 만듬}
+
+                 switch (responseObject['result']) {
+                     case 'success':
+                         form['code'].value = responseObject['code'];
+                         form['salt'].value = responseObject['salt'];
+                         // form.querySelector('[rel="messageRow"]').classList.remove('visible');
+                         emailAuthIndex= null;
+
+                         form.querySelector('.user-id').classList.add('visible');
+                         form.querySelector('.password-row').classList.add('visible');
+                         form.querySelector('.password-check-row').classList.add('visible');
+
+                         form['password'].focus();
+                         form['password'].select();
+
+                         form['userId'].value=form['id'].value;
+                         form.querySelector('.email-row').classList.add('disabled');
+                         form.querySelector('.id-row').classList.add('disabled');
+                         form.querySelector('.name-row').classList.add('disabled');
+
+
+                         form.querySelector('.result-button-row').classList.remove('visible');
+
+                         // let resultId= (responseObject['id']);
+                         // form.querySelector('[rel="result-id"]').innerHTML='<b style="color: yellow; background-color: black" >'  +  resultId +'</b>' ;
+                         form.querySelector('.result-row').classList.remove('visible');
+                         form.querySelector('.next-button-row').classList.remove('visible');
+                         form.querySelector('.icon-row').classList.remove('visible');
+                         form.querySelector('.next-button-row').classList.add('visible');
+
+                        form['next'].value="비밀번호 변경";
+                        form.querySelector('.result-button-row').classList.add('password-patch');
+
+                         break;
+                     default:
+
+                 }
+             }
+         }
+     };
+     xhr.send(formData);
+ },1000);
+
+
+if (form.querySelector('.result-button-row').classList.contains('password-patch')) {
+
+
+    form['next'].addEventListener('click', () => {
+       Cover.show();
+        if (form['password'].value === '') {
+
+            alert('비밀번호를 입력해주세요.');
+            form['password'].focus();
+            form['password'].select();
+            return;
+        }
+        if (form['passwordCheck'].value === '') {
+
+            alert('비밀번호를 입력해주세요.');
+            form['passwordCheck'].focus();
+            form['passwordCheck'].select();
+
+            return;
+        }
+
+        if (form ['password'].value !== form['passwordCheck'].value) {
+
+            alert('비밀번호가 서로 일치하지 않습니다.');
+            form['password'].focus();
+            form['password'].select();
+
+            return;
+        }
+        Cover.show('비밀번호를 재설정하고 있습니다.')
+        const xhr = new XMLHttpRequest();
+        const formData = new FormData();
+        formData.append('email', form['email'].value);
+        formData.append('code', form['code'].value);
+        formData.append('salt', form['salt'].value);
+        formData.append('password', form['password'].value);
+        xhr.open('PATCH', './recoverPassword');
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === XMLHttpRequest.DONE) {//4 성공인게 아니고 작업의끝
+                Cover.hide();
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    const responseObject = JSON.parse(xhr.responseText);//{resutl:suceess로 가져온것을 { \n result \t 식으로 만듬}
+
+                    switch (responseObject['result']) {
+                        case 'success':
+                            alert('비밀번호를 성공적으로 재설정하였습니다.\n\n확인버튼을 누르면 로그인 페이지로 이동합니다.');
+                            window.location.href = 'login';
+                            break;
+
+                        default:
+                            alert('비밀번호를 재설정하지 못하였습니다. ');
+                    }
+                } else {
+                    alert('서버와 통신하지 못하였습니다.');
+                }
+            }
+        }
+        xhr.send(formData);
+    });
+}
