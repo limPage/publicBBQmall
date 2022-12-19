@@ -209,7 +209,16 @@ public class MemberController {
         return responseObject.toString();
     }
 
+
+    @GetMapping(value = "csCenter",produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getCsCenter(){
+        ModelAndView modelAndView = new ModelAndView("member/csCenter");
+        return modelAndView;
+    }
+
+
 }
+
 
 
 
