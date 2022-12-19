@@ -76,10 +76,19 @@ body>main>.content>ul{
 body>main>.content>ul>li{
     width: 100%;
     border-collapse:collapse;
-    display: inline-block;
-    border: rgba(0,0,0,0.1) solid 0.06rem;
+
+    border: rgba(0,0,0,0.05) solid 0.06rem;
+    border-right: none;
+    display: table-cell;
 
 }
+body>main>.content>ul>li:last-of-type{
+
+    border-right: rgba(0,0,0,0.05) solid 0.06rem;
+
+}
+
+
 body>main>.content>ul>li>a{
 width: 100%;
 height: calc(10rem - 0.125rem);
