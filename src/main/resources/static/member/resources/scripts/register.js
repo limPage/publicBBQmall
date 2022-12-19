@@ -60,7 +60,7 @@ form['emailButton'].addEventListener('click', ()=>{
      const formData = new FormData(); // FormData 객체를 사용하는 formData 변수 선언
      formData.append('email', form['emailText'].value); // @RequestParam의 value, form의 input의 name
 
-     xhr.open('POST', 'member/email'); // 1이 찍힘
+     xhr.open('POST', './email'); // 1이 찍힘
      xhr.onreadystatechange = () => {
          if(xhr.readyState === XMLHttpRequest.DONE) { // 연결 상태가 연결완료(성공, 실패 관계없이)일 때, 4가 찍힘
              Cover.hide(); // visible 클래스 삭제
@@ -143,7 +143,7 @@ form['emailButton'].addEventListener('click', ()=>{
      formData.append('email', form['emailText'].value);
      formData.append('code', form['emailAuthCode'].value);//맴버변수, html 넹미
      formData.append('salt', form['emailAuthSalt'].value);
-     xhr.open('PATCH', '/member/email');
+     xhr.open('PATCH', './email');
      xhr.onreadystatechange = () => {
          if (xhr.readyState === XMLHttpRequest.DONE) {//4 성공인게 아니고 작업의끝
              Cover.hide();
@@ -304,7 +304,7 @@ form['emailButton'].addEventListener('click', ()=>{
           formData.append('addressPrimary',form['addressPrimary'].value);
           formData.append('addressSecondary',form['addressSecondary'].value);
 
-          xhr.open('POST', 'member/register');
+          xhr.open('POST', './register');
           xhr.onreadystatechange = () => {
               if (xhr.readyState === XMLHttpRequest.DONE) {//4 성공인게 아니고 작업의끝
                   Cover.hide();
@@ -340,7 +340,7 @@ form['emailButton'].addEventListener('click', ()=>{
 
     else if(form.classList.contains('step3')){
 
-        window.location.href='http://localhost:8080/';
+        window.location.href='http://localhost:8080/member/login';
 
      }
 

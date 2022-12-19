@@ -245,5 +245,31 @@ public class MemberService {
 
     }
 
+    @Transactional
+    public Enum<? extends IResult> recoverPassword (EmailAuthEntity emailAuth, UserEntity user){
+
+        EmailAuthEntity existingEmailAuth = this.memberMapper.selectEmailAuthByEmailCodeSalt(emailAuth.getEmail(),emailAuth.getCode(),emailAuth.getSalt());
+
+        if(existingEmailAuth == null || !existingEmailAuth.isExpired() ){
+            return CommonResult.FAILURE;
+        }
+//
+        UserEntity existingUser = this.memberMapper.selectUserByEmail(existingEmailAuth.getEmail());
+
+
+
+
+
+
+        existingUser.setPassword( CryptoUtils.hashSha512(user.getPassword()));
+
+        if(this.memberMapper.updateUser(existingUser)==0){//user는 페스워드와 이메일만갖고잇음
+            return CommonResult.FAILURE;
+        }
+
+        return CommonResult.SUCCESS;
+    }
+
+
 
 }

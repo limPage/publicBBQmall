@@ -112,7 +112,6 @@ body > main > .content> .form >.email-check-page> table >tbody>tr>.icon-containe
 
 body > main > .content> .form >.email-check-page> table> tbody> .check-start> td>label>.email-button,
 body > main > .content> .form > label>.next
-
 {
 
     height: 48px;
@@ -125,6 +124,13 @@ body > main > .content> .form > label>.next
         font-size: 14px;
         font-weight: 450;
 }
+body > main > .content> .form >.email-check-page> table> tbody> .check-start> td>label>.email-button:hover,
+body > main > .content> .form > label>.next:hover{
+    transition-duration: 500ms;
+    background-color: #FFCC00;
+}
+
+
 body > main > .content> .form >.email-check-page> table> tbody> .code-send-row>td>label,
 body > main > .content> .form >.email-check-page> table> tbody> .code-check-row>td>label{
 

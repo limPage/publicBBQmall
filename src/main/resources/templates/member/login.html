@@ -97,9 +97,9 @@
 
         </form>
         <ul class="login-service-row">
-            <li><a th:href="@{/member/recover}">아이디 찾기</a></li>
+            <li><a th:href="@{/member/recover?find=id}">아이디 찾기</a></li>
             <li class="bar"></li>
-            <li><a href="#">비밀번호 찾기</a></li>
+            <li><a th:href="@{/member/recover?find=pw}">비밀번호 찾기</a></li>
             <li class="bar"></li>
             <li><a th:href="@{/member/register}" >회원가입</a></li>
         </ul>

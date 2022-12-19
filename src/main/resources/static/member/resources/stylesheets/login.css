@@ -272,6 +272,13 @@ body >main>.content>.form> table>tbody>tr>td>label>input[type='submit']
     font-size: 14px;
     font-weight: 450;
 }
+body >main>.content>.form> table>tbody>tr>td>label>input[type='submit']:hover{
+    background-color: #FFCC00;
+    transition-duration: 500ms;
+}
+
+
+
 body >main>.content>.form> table>tbody>.button-row-null-mode{
     padding-bottom: 10rem;
     display: block;

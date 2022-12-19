@@ -69,9 +69,16 @@
 
     <insert id="insertUser" parameterType="com.hiponya.bbqmall.entities.member.UserEntity">
 
-        INSERT INTO `bbqmall`.`users` (`email`, `id`, `name`, `contact`, `password`, `birth`, `address_postal`,
+        INSERT INTO `bbqmall`.`users` (`email`,
+                                       `id`,
+                                       `name`,
+                                       `contact`,
+                                       `password`,
+                                       `birth`,
+                                       `address_postal`,
                                        `address_primary`,
-                                       `address_secondary`, `registered_on`)
+                                       `address_secondary`,
+                                       `registered_on`)
         VALUES (#{email}, #{id}, #{name}, #{contact}, #{password}, #{birth}, #{addressPostal}, #{addressPrimary},
                 #{addressSecondary}, IFNULL(#{registeredOn}, DEFAULT(`registered_on`)))
 
@@ -170,5 +177,24 @@
 
 
     </select>
+
+    <update id="updateUser" parameterType="com.hiponya.bbqmall.entities.member.UserEntity">
+        UPDATE `bbqmall`.`users`
+        SET `id`        = #{id},
+            `name`            = #{name},
+            `contact`         = #{contact},
+            `password`        = #{password},
+            `birth` =        #{birth},
+            `address_postal`  = #{addressPostal},
+            `address_primary` = #{addressPrimary},
+            address_secondary = #{addressSecondary},
+            `registered_on`   = #{ registeredOn}
+        WHERE BINARY `email` = #{email}
+        LIMIT 1
+#프라이머리키를 제외하고 업데이트
+
+
+
+    </update>
 
 </mapper>

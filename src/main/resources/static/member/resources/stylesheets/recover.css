@@ -395,6 +395,12 @@ body>main>.content>.form> table>tfoot>tr>td>label> input
 
     margin-top: 20px;
 }
+body>main>.content>.form> table>tfoot>tr>td>label> input:hover{
+    background-color: #FFCC00;
+    transition-duration: 500ms;
+}
+
+
 body>main>.content>.form> table>tfoot>.result-button-row.visible,
 body>main>.content>.form> table>tfoot>.next-button-row.visible,
 body>main>.content>.form> table>tbody>.icon-row.visible
@@ -426,7 +432,7 @@ main> .content >.form>table>tbody>.password-row.visible{
 
 body>main>.content>.form> table>tfoot>.result-button-row>td{
 
-    margin-top: 10px;
+    margin-top: 0px;
     align-items: center;
     display: flex;
     flex-direction: row;
@@ -439,4 +445,7 @@ body>main>.content>.form> table>tfoot>.result-button-row>td>label{
 body>main>.content>.form> table>tfoot>.result-button-row>td>label>.gray-button{
     background-color: rgba(0,0,0,0.4);
 
+}
+body>main>.content>.form> table>tfoot>.result-button-row>td>label>.gray-button:hover{
+    background-color: black;
 }

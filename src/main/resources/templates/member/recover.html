@@ -15,7 +15,7 @@
 <th:block th:replace="~{fragments/body :: cover}"></th:block>
 <main class="--main main">
     <div class="content " id="content">
-        <form class="form recover-mode-id" id="form">
+        <form class="form recover-mode-id " id="form">
             <h1 class="title">아이디/비밀번호 찾기</h1>
 
             <table>
@@ -150,12 +150,12 @@
                 <tr class="result-button-row">
                     <td>
                         <label>
-                            <input class="login" type="button" value="로그인" name="">
+                            <input class="login" type="button" value="로그인" name="login">
                         </label>
 
 
                         <label>
-                            <input  class= " gray-button" type="button" value="회원가입" name="">
+                            <input  class= " gray-button" type="button" value="회원가입" name="register">
                         </label>
                     </td>
                 </tr>
@@ -169,6 +169,7 @@
             <label>
                 <input hidden name="code">
                 <input hidden name="salt">
+                <input hidden name="recoverMode" th:value="${find}">
             </label>
 
         </form>

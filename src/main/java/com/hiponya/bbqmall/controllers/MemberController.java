@@ -11,10 +11,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.mail.MessagingException;
@@ -126,7 +123,7 @@ public class MemberController {
 
 //        session.removeAttribute("user");
         session.setAttribute("user", null);
-        ModelAndView modelAndView = new ModelAndView( "redirect:./"); //리다이렉션
+        ModelAndView modelAndView = new ModelAndView( "redirect:/"); //리다이렉션
 
         System.out.println("로그아웃");
         return modelAndView;
@@ -134,9 +131,9 @@ public class MemberController {
 
 
     @GetMapping(value = "recover", produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getRecover() {
+    public ModelAndView getRecover(@RequestParam (value = "find") String find) {
         ModelAndView modelAndView = new ModelAndView("member/recover");
-
+        modelAndView.addObject("find", find);
         return modelAndView;
     }
 
@@ -202,7 +199,15 @@ public class MemberController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "recoverPassword", method = RequestMethod.PATCH, produces = MediaType.TEXT_HTML_VALUE)
+    @ResponseBody
+    public String patchRecoverPassword(EmailAuthEntity emailAuth, UserEntity user){
+        Enum<?> result = this.memberService.recoverPassword(emailAuth ,user);
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("result", result.name().toLowerCase());
 
+        return responseObject.toString();
+    }
 
 }
 

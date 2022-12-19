@@ -39,4 +39,7 @@ public interface IMemberMapper {
 
     EmailAuthEntity selectEmailAuthByIndex(@Param(value = "index") int index);
 
+
+    int updateUser(UserEntity user);
+
 }

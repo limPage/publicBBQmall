@@ -76,7 +76,7 @@ const content = window.document.getElementById('content');
      const formData = new FormData();
      formData.append('id', form['id'].value);
      formData.append('password', form['password'].value);
-     xhr.open('POST', 'member/login');
+     xhr.open('POST', './login');
      xhr.onreadystatechange = () => {
          if (xhr.readyState === XMLHttpRequest.DONE) {//4 성공인게 아니고 작업의끝
              Cover.hide();
