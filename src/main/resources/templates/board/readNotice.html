@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>글읽기</title>
+
+    <th:block th:replace="~{fragments/head :: common}"></th:block>
+
+    <link rel="stylesheet" th:href="@{/bbs/resources/stylesheets/readArticle.css}">
+    <script defer th:src="@{/bbs/resources/scripts/readArticle.js}"></script>
+
+</head>
+<body>
+<th:block th:replace="~{fragments/body :: header}"></th:block> <!-- block 자리에 body.html 파일의 replace 태그와 치환한다. -->
+<th:block th:replace="~{fragments/body :: cover}"></th:block>
+
+
+<main class="cs-center">
+    <th:block th:replace="~{fragments/body ::sideBar}"></th:block>
+    <div class="content">
+
+    </div>
+
+
+
+
+</main>
+
+
+<th:block th:replace="~{fragments/body :: footer}"></th:block>
+
+</body>
+</html>

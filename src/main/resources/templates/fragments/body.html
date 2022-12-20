@@ -123,12 +123,26 @@
 </header>
 
 <div class="--cover" id="cover" th:fragment="cover">
-    <img alt="" class="--icon" th:src="@{/resources/images/images/l2.png}">
-    <img alt="" class="--icon2" th:src="@{/resources/images/images/l2.png}">
-    <img alt="" class="--icon3" th:src="@{/resources/images/images/l2.png}">
+    <img alt="" class="--icon" th:src="@{/resources/images/l2.png}">
+    <img alt="" class="--icon2" th:src="@{/resources/images/l2.png}">
+    <img alt="" class="--icon3" th:src="@{/resources/images/l2.png}">
     <sapn class="--text" rel="text">무언가를 불러오고 있습니다. 잠시만 기다려 주세요.</sapn>
 <!--    /resources/images/images/review1.png-->
 </div>
+
+<article class="side-bar" th:fragment="sideBar">
+    <h1 class="title">CS CENTER</h1>
+    <ul>
+        <li><a th:href="@{/board/notice}">공지사항</a></li>
+        <li><a>자주 묻는 질문</a></li>
+        <li><a>상품문의</a></li>
+        <li><a>상품후기</a></li>
+        <li><a>대량구매</a></li>
+
+    </ul>
+
+
+</article>
 
 
 <main>몸

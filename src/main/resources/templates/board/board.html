@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>BBQ몰 글목록</title>
+
+    <th:block th:replace="~{fragments/head :: common}"></th:block>
+
+    <link rel="stylesheet" th:href="@{/bbs/resources/stylesheets/board.css}">
+    <script defer th:src="@{/bbs/resources/scripts/board.js}"></script>
+
+
+</head>
+<body>
+<th:block th:replace="~{fragments/body :: header}"></th:block> <!-- block 자리에 body.html 파일의 replace 태그와 치환한다. -->
+<th:block th:replace="~{fragments/body :: cover}"></th:block>
+
+
+<main class="cs-center">
+    <th:block th:replace="~{fragments/body ::sideBar}"></th:block>
+    <div class="content">
+        <div class="title-container">
+            <h1>공지사항</h1>
+        </div>
+
+        <form class="search-form">
+<!--            <div class="search-row">-->
+                <label>
+                    <select name="bid">
+                        <option value="all">- 전체 -</option>
+                        <option value="notice">공지</option>
+                        <option value="event">이벤트</option>
+                        <option value="urgent">긴급공지</option>
+                    </select>
+
+                </label>
+
+                <span class="spring"></span>
+
+                <label>
+                    <input type="text" placeholder="제목, 내용">
+                </label>
+
+                <input type="submit" value="검색">
+<!--            </div>-->
+        </form>
+
+        <table class="content-table">
+            <thead>
+            <tr>
+                <td>     <h3 class="number">번호</h3></td>
+                <td>     <h3 class="board-id">분류</h3></td>
+                <td class="content-title">     <h3>제목</h3></td>
+                <td>     <h3 class="written-on">등록일</h3></td>
+                <td>     <h3 class="view-count">조회</h3></td>
+            </tr>
+            </thead>
+            <tbody>
+                <tr class="article-notice">
+                    <td>
+                        <h3 class="number">[공지]</h3>
+                    </td>
+
+                    <td>
+                        <h3 class="board-id">공지글</h3>
+                    </td>
+
+
+
+                    <td class="content-title">     <h3>제목입니다</h3></td>
+
+
+                    <td>
+                       <h3 class="written-on"> 2022.52.22</h3>
+                    </td>
+                    <td>
+                        <h3 class="view-count">1</h3>
+                    </td>
+                </tr>
+
+                <tr class="article">
+                    <td>
+                        <h3 class="number">[공지]</h3>
+                    </td>
+
+                    <td>
+                        <h3 class="board-id">공지글</h3>
+                    </td>
+
+
+
+                    <td class="content-title">     <h3>제목입니다</h3></td>
+
+
+                    <td>
+                        <h3 class="written-on"> 2022.52.22</h3>
+                    </td>
+                    <td>
+                        <h3 class="view-count">1</h3>
+                    </td>
+                </tr>
+                <tr class="article">
+                    <td>
+                        <h3 class="number">[공지]</h3>
+                    </td>
+
+                    <td>
+                        <h3 class="board-id">공지글</h3>
+                    </td>
+
+
+
+                    <td class="content-title">     <h3>제목입니다</h3></td>
+
+
+                    <td>
+                        <h3 class="written-on"> 2022.52.22</h3>
+                    </td>
+                    <td>
+                        <h3 class="view-count">1</h3>
+                    </td>
+                </tr>
+                <tr class="article">
+                    <td>
+                        <h3 class="number">[공지]</h3>
+                    </td>
+
+                    <td>
+                        <h3 class="board-id">공지글</h3>
+                    </td>
+
+
+
+                    <td class="content-title">     <h3>제목입니다</h3></td>
+
+
+                    <td>
+                        <h3 class="written-on"> 2022.52.22</h3>
+                    </td>
+                    <td>
+                        <h3 class="view-count">1</h3>
+                    </td>
+                </tr>
+
+            </tbody>
+
+
+
+        </table>
+
+    </div>
+
+
+</main>
+
+
+<th:block th:replace="~{fragments/body :: footer}"></th:block>
+
+</body>
+</html>

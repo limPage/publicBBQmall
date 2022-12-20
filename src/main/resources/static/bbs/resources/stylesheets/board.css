@@ -1,0 +1,198 @@
+
+body>main>.content{
+    width: 100%;
+    align-items: stretch;
+    display: flex;
+    flex-direction: column ;
+    justify-content: flex-start;
+
+    padding-bottom: 50px;
+    margin-bottom: 50px;
+
+}
+
+body> main> .content>.title-container{
+    padding-top: 65px;
+    padding-bottom: 32px;
+    font-size: 32px;
+    text-align: center;
+    letter-spacing: -2px;
+}
+body> main> .content>.search-form{
+    margin-top: 9px;
+    padding-bottom: 10px;
+
+    align-items: stretch;
+    display: flex;
+    flex-direction: row ;
+    justify-content: flex-start;
+
+    height: 32px;
+
+}
+body> main> .content>.search-form>.spring{
+    flex: 1;
+}
+
+body> main> .content>.search-form>label{
+    padding: unset;
+    margin: unset;
+}
+
+body> main> .content>.search-form>label>select{
+    padding-left: 5px;
+    height: 32px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: rgba(0,0,0,0.5);
+    font-family: inherit;
+
+    border: 1px solid rgba(0,0,0,0.25);
+    border-radius: 2px;
+
+}
+
+
+body>main>.content>.search-form>input[type='submit']
+
+{
+    font-size:0.8rem;
+    padding:0 9px 0 9px ;
+    margin-left: 0.25rem;
+    height: 32px;
+    width: 60px;
+    font-weight: 500;
+    font-family: inherit;
+
+    border: 1px solid rgba(0,0,0,0.25);
+    border-radius: 2px;
+    background-color: white;
+
+}
+body> main> .content>.search-form>label>input[type='text']{
+    padding:0 9px 0 9px;
+
+    font-size: 0.8rem;
+
+    width: 200px;
+    height: 30px;
+    margin: 0;
+    font-weight: 500;
+    font-family: inherit;
+    border: 1px solid rgba(0,0,0,0.25);
+    border-radius: 2px;
+
+
+}
+
+body>main>.content>.content-table{
+    border-top: 1px black solid;
+border-bottom:  1px rgba(0,0,0,0.3) solid;
+
+    align-items: stretch;
+    display: flex;
+    flex-direction: column ;
+    justify-content: flex-start;
+
+
+}
+body>main>.content>.content-table>thead,
+body>main>.content>.content-table>tbody
+
+{
+    width: 100%;
+    /*align-items: stretch;*/
+    /*display: flex;*/
+    /*flex-direction: row ;*/
+    /*justify-content: flex-start;*/
+    display: table-row;
+    font-size: 14px;
+    letter-spacing: -1px;
+
+}
+body>main>.content>.content-table tr{
+    width: 100%;
+
+
+    display: flex;
+    flex-direction: row ;
+    justify-content: flex-start;
+
+}
+body>main>.content>.content-table >thead>tr{
+    background-color:  #F7f7f7;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+
+
+}
+
+
+body>main>.content>.content-table tr>td{
+    /*width: 100%;*/
+    padding: 15px 5px;
+}
+
+body>main>.content>.content-table tr>td>.number{
+    width: 38px;
+    text-align: center;
+
+}
+body>main>.content>.content-table tr>td>.board-id{
+
+    width: 70px;
+    text-align: center;
+
+}
+
+
+
+body>main>.content>.content-table>thead> tr>.content-title{
+    flex: 1;
+
+    display: flex;
+    justify-content: center;
+    /*background-color: black;*/
+}
+
+
+body>main>.content>.content-table tr>.content-title>td{
+
+}
+
+
+body>main>.content>.content-table tr>td>.written-on{
+  text-align: center;
+    width: 90px;
+}
+body>main>.content>.content-table tr>td>.view-count{
+    width: 35px;
+    text-align: center;
+}
+
+body>main>.content>.content-table>tbody> tr>.content-title{
+    flex: 1;
+
+    display: flex;
+    justify-content: flex-start;
+}
+
+
+body>main>.content>.content-table>tbody{
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column ;
+    justify-content: flex-start;
+
+}
+body>main>.content>.content-table>tbody>.article-notice{
+    background-color: rgba(0,0,0,02%);
+
+}
+
+body>main>.content>.content-table>tbody>.article{
+
+    border-top: 1px solid rgba(0,0,0,0.1);
+
+}
+
+

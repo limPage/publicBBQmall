@@ -249,7 +249,7 @@ body >main>.content>.form> table>tbody>.checkbox-row>td>label>input:checked{
 
     background-color: rgba(0,0,0,0.2);
 
-    background-image: url("/resources/images/images/checkbox.jpg");
+    background-image: url("/resources/images/checkbox.jpg");
     background-size: 100%;
     box-shadow: 0 0  0 2px  #0ea31a;
     border-radius: 5px;
@@ -399,18 +399,18 @@ body> main> .content> .easy-login-row>.icon-row>ul>li>a{
 }
 body> main> .content> .easy-login-row>.icon-row>ul>li>.kakao{
 
-    background-image: url("/resources/images/images/sns_icon_kakaosync.png");
+    background-image: url("/resources/images/sns_icon_kakaosync.png");
 }
 body> main> .content> .easy-login-row>.icon-row>ul>li>.facebook{
-    background-image: url("/resources/images/images/sns_icon_facebook.png");
+    background-image: url("/resources/images/sns_icon_facebook.png");
 
 }
 
 body> main> .content> .easy-login-row>.icon-row>ul>li>.naver{
-    background-image: url("/resources/images/images/sns_icon_naver.png");
+    background-image: url("/resources/images/sns_icon_naver.png");
 }
 body> main> .content> .easy-login-row>.icon-row>ul>li>.apple{
-    background-image: url("/resources/images/images/apple_login.png");
+    background-image: url("/resources/images/apple_login.png");
     /*background-size: 110%;*/
 
 
