@@ -28,6 +28,14 @@ public class CategoryService {
         return this.categoryMapper.selectCategoryByIndex(index);
     }
 
+    public Enum<? extends IResult> getProductQuantity (int index) {
+        ProductEntity existingProduct = this.categoryMapper.selectSaleQuantityByIndex(index);
+        if(existingProduct == null) {
+            return CategoryResult.NO_PRODUCTS;
+        }
+        return CommonResult.SUCCESS;
+    }
+
     @Transactional
     public Enum<? extends IResult> sendCategoryIndex(CategoryEntity category, ProductEntity product) {
 

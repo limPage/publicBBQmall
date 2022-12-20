@@ -1,3 +1,4 @@
+//const form = window.document.getElementById('form');
 form['emailButton'].addEventListener('click', ()=>{
 
     alert('ddd');

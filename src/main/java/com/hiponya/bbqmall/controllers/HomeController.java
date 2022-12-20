@@ -26,13 +26,6 @@ public class HomeController {
         return modelAndView;
     }
 
-//    @GetMapping(value = "catalog", produces = MediaType.TEXT_HTML_VALUE)
-//    public ModelAndView getCatalog() {
-//        ModelAndView modelAndView = new ModelAndView("member/catalog");
-//
-//        return modelAndView;
-//    }
-
 
     @GetMapping(value = "view", produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getDetailMenu() {

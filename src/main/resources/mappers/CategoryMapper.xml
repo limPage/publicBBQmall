@@ -31,5 +31,39 @@
         where binary product_index = #{productIndex}
     </select>
 
+    <select id="selectSaleQuantityByIndex" resultType="com.hiponya.bbqmall.entities.product.ProductEntity">
+        select `product_index` as `productIndex`,
+               `detail_index` as `detailIndex`,
+               `product_name` as `productName`,
+               `price` as `price`,
+               `content` as `content`,
+               `view` as `view`,
+               `created_on` as `createdOn`,
+               `modified_on` as `modifiedOn`,
+               `amount` as `amount`,
+               `onsale` as `onsale`,
+               `sale_quantity` as `saleQuantity`
+        from bbqmall.products
+        where binary product_index = #{productIndex}
+        order by saleQuantity desc;
+    </select>
+
+<!--    <select id="selectSaleQuantityByIndex" resultType="com.hiponya.bbqmall.entities.product.ProductEntity">-->
+<!--        select `product_index` as `productIndex`,-->
+<!--               `detail_index` as `detailIndex`,-->
+<!--               `product_name` as `productName`,-->
+<!--               `price` as `price`,-->
+<!--               `content` as `content`,-->
+<!--               `view` as `view`,-->
+<!--               `created_on` as `createdOn`,-->
+<!--               `modified_on` as `modifiedOn`,-->
+<!--               `amount` as `amount`,-->
+<!--               `onsale` as `onsale`,-->
+<!--               `sale_quantity` as `saleQuantity`-->
+<!--        from `bbqmall`.`products`-->
+<!--        where binary `product_index` = #{productIndex}-->
+<!--        order by saleQuantity desc-->
+<!--    </select>-->
+
 
 </mapper>

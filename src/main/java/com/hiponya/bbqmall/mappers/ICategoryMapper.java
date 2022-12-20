@@ -15,5 +15,8 @@ public interface ICategoryMapper {
 
     ProductEntity[] selectProducts();
 
+    ProductEntity selectSaleQuantityByIndex(@Param(value = "index") int index);
+
+
 
 }
