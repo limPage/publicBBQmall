@@ -1,11 +1,12 @@
 
+
 body>.swiper-row> .swiper>div{
     width: 100%;
     height: 545px;
-    align-items: stretch;
-    display: flex;
-    flex-direction: row ;
-    justify-content: stretch;
+align-items: stretch;
+display: flex;
+flex-direction: row ;
+justify-content: stretch;
 
 
 }
@@ -59,7 +60,7 @@ body > main > .goods-row >.goods-container {
 }
 
 body > main > .goods-row >.goods-container>div {
-    height: 480px;
+   height: 480px;
     max-width: 308px;
 
     padding: unset;
@@ -93,7 +94,7 @@ body > main > .goods-row >.goods-container>.goods>.goods-info >.price{
 }
 
 body > main > .goods-row >.goods-container>.goods>.goods-info >span> .small-text {
-    font-size:16px;
+        font-size:16px;
 }
 
 body>main>.event-row{

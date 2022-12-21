@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
 import java.security.NoSuchAlgorithmException;
 
 @Controller
-@RequestMapping("/member")
+@RequestMapping("member")
 public class MemberController {
 
     private final MemberService memberService;
@@ -33,14 +33,14 @@ public class MemberController {
     }
 
 
-    @GetMapping(value = "/register", produces = MediaType.TEXT_HTML_VALUE)
+    @GetMapping(value = "register", produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getRegister() {
         ModelAndView modelAndView = new ModelAndView("member/register");
 
         return modelAndView;
     }
 
-    @GetMapping(value = "/login", produces = MediaType.TEXT_HTML_VALUE)
+    @GetMapping(value = "login", produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getLogin() {
         ModelAndView modelAndView = new ModelAndView("member/login");
 

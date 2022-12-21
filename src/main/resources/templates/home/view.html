@@ -15,11 +15,12 @@
 <body>
 <th:block th:replace="~{fragments/body :: header}"></th:block>
 <main>
+<!--    <input type="hidden" name = "index" th:value="${product.getIndex()}">-->
     <div class="products-view">
         <div class="products">
 
             <div class="image-container">
-                <img src="/resources/images/images/kimbob-title.png" class="image" alt>
+                <img src="/resources/images/kimbob-title.png" class="image" alt>
                 <div class="pagination">
                     <span class="count">
                         <input type="button" class="left" id="left" name="left" value="<">
@@ -71,9 +72,9 @@
                     </div>
                     <div class="quantity-container">
                         <span class="quantity">구매수량</span>
-                        <input type="button" id="add" class="add" value="+">
-                        <input type="number" class="quantity-number" id="quantityNumber" name="quantityNumber">
                         <input type="button" id="min" class="min" value="-">
+                        <input type="number" class="quantity-number" id="quantityNumber" name="quantityNumber">
+                        <input type="button" id="add" class="add" value="+">
                     </div>
                     <div class="total-container"><span class="total">총 상품금액
                             <span class="total-price">17,300</span>

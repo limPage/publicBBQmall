@@ -19,20 +19,12 @@ public class HomeController {
         return modelAndView;
     }
 
-    @GetMapping(value = "register", produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getRegister() {
-        ModelAndView modelAndView = new ModelAndView("member/register");
-
-        return modelAndView;
-    }
-
-
-    @GetMapping(value = "view", produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getDetailMenu() {
-        ModelAndView modelAndView = new ModelAndView("home/view");
-
-        return modelAndView;
-    }
+//    @GetMapping(value = "register", produces = MediaType.TEXT_HTML_VALUE)
+//    public ModelAndView getRegister() {
+//        ModelAndView modelAndView = new ModelAndView("member/register");
+//
+//        return modelAndView;
+//    }
 
 
 

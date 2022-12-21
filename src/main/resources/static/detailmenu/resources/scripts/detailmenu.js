@@ -1,4 +1,8 @@
 //const form = window.document.getElementById('form');
-// form['cart'].addEventListener('click', ()=> {
-//     alert('장바구니');
-// });
+const cartButton = window.document.getElementById('cart');
+const productForm = window.document.getElementById('productsForm');
+
+cartButton.addEventListener('click', ()=> {
+    alert('장바구니');
+});
+

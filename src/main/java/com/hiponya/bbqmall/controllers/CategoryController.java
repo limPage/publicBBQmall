@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.print.attribute.standard.Media;
 
 @Controller
-@RequestMapping(value = "category")
+@RequestMapping(value = "/")
 public class CategoryController {
 
     private final CategoryService categoryService;
@@ -23,7 +23,7 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    @RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    @RequestMapping(value = "category", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getCategory(@RequestParam(value = "cid") String cid, CategoryEntity category, ProductEntity product) {
         ModelAndView modelAndView = new ModelAndView("home/category");
         ProductEntity[] products = this.categoryService.getProducts();
@@ -35,6 +35,13 @@ public class CategoryController {
         modelAndView.addObject("index",category.getIndex());
         modelAndView.addObject("title", category.getTitle());
         modelAndView.addObject("cid", cid);
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "view", method=RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getView() {
+        ModelAndView modelAndView = new ModelAndView("home/view");
+
         return modelAndView;
     }
 
@@ -50,6 +57,7 @@ public class CategoryController {
 
         modelAndView.addObject("products", products);
 
+
         return modelAndView;
     }
 
@@ -58,10 +66,9 @@ public class CategoryController {
         JSONObject responseObject = new JSONObject();
         Enum<?> result =this.categoryService.getProductQuantity(cid);
         responseObject.put("result", result.name().toLowerCase());
-        responseObject.put("category", category);
-        responseObject.put("product", product);
-        responseObject.put("title", category.getTitle());
         responseObject.put("index", category.getIndex());
+        responseObject.put("title", category.getTitle());
+
 
         return responseObject.toString();
     }

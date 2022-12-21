@@ -64,9 +64,9 @@
                     <div class="search-item-display" id="searchItemDisplay">
                         <ul class="ul">
                             <li class="goods-list" th:each = "product : ${products}">
-                                <div class="item-area">
+                                <div class="item-area" th:value="${product.getProductName()}">
                                     <a href="/view" class="goods" name="1">
-                                        <img src="/resources/images/images/new1.png" width="300px" alt>
+                                        <img src="/resources/images/new1.png" width="300px" alt>
                                         <div class="goods-title" rel="goodsTitle">
                                             BBQ닭가슴살 맛보기세트 12종 2팩씩 (신제품)
                                         </div>
@@ -81,7 +81,7 @@
                                 </div>
                                 <div class="item-area">
                                     <a th:href= "@{/view?cid=${category.getIndex()}}" class="goods">
-                                        <img src="/resources/images/images/new1.png" width="300px" alt>
+                                        <img src="/resources/images/new1.png" width="300px" alt>
                                         <div class="goods-title">
                                             BBQ간편식 골라담기 (신제품)
                                         </div>
@@ -95,7 +95,7 @@
                                 </div>
                                 <div class="item-area">
                                     <a href="/view" class="goods">
-                                        <img src="/resources/images/images/new1.png" width="300px" alt>
+                                        <img src="/resources/images/new1.png" width="300px" alt>
                                         <div class="goods-title">
                                             BBQ간편식 맛보기세트 15종 (신제품)
                                         </div>
@@ -109,7 +109,7 @@
                                 </div>
                                 <div class="item-area">
                                     <a href="/view" class="goods">
-                                        <img src="/resources/images/images/new1.png" width="300px" alt>
+                                        <img src="/resources/images/new1.png" width="300px" alt>
                                         <div class="goods-title">
                                             [냉동] BBQ 구운 왕갈비맛 삼각밥 100g 10팩
                                         </div>
@@ -126,7 +126,7 @@
                             <li class="goods-list">
                                 <div class="item-area">
                                     <a href="/view" class="goods">
-                                        <img src="/resources/images/images/new1.png" width="300px" alt>
+                                        <img src="/resources/images/new1.png" width="300px" alt>
                                         <div class="goods-title">
                                             BBQ닭가슴살 맛보기세트 12종 2팩씩 (신제품)
                                         </div>
@@ -141,7 +141,7 @@
                                 </div>
                                 <div class="item-area">
                                     <a href="/view" class="goods">
-                                        <img src="/resources/images/images/new1.png" width="300px" alt>
+                                        <img src="/resources/images/new1.png" width="300px" alt>
                                         <div class="goods-title">
                                             BBQ간편식 골라담기 (신제품)
                                         </div>
@@ -155,7 +155,7 @@
                                 </div>
                                 <div class="item-area">
                                     <a href="/view" class="goods">
-                                        <img src="/resources/images/images/new1.png" width="300px" alt>
+                                        <img src="/resources/images/new1.png" width="300px" alt>
                                         <div class="goods-title">
                                             BBQ간편식 맛보기세트 15종 (신제품)
                                         </div>
@@ -169,7 +169,7 @@
                                 </div>
                                 <div class="item-area">
                                     <a href="/view" class="goods">
-                                        <img src="/resources/images/images/new1.png" width="300px" alt>
+                                        <img src="/resources/images/new1.png" width="300px" alt>
                                         <div class="goods-title">
                                             [냉동] BBQ 구운 왕갈비맛 삼각밥 100g 10팩
                                         </div>
@@ -186,7 +186,7 @@
                             <li class="goods-list">
                                 <div class="item-area">
                                     <a href="/view" class="goods">
-                                        <img src="/resources/images/images/new1.png" width="300px" alt>
+                                        <img src="/resources/images/new1.png" width="300px" alt>
                                         <div class="goods-title">
                                             BBQ닭가슴살 맛보기세트 12종 2팩씩 (신제품)
                                         </div>
@@ -201,7 +201,7 @@
                                 </div>
                                 <div class="item-area">
                                     <a href="/view" class="goods">
-                                        <img src="/resources/images/images/new1.png" width="300px" alt>
+                                        <img src="/resources/images/new1.png" width="300px" alt>
                                         <div class="goods-title">
                                             BBQ간편식 골라담기 (신제품)
                                         </div>
@@ -215,7 +215,7 @@
                                 </div>
                                 <div class="item-area">
                                     <a href="/view" class="goods">
-                                        <img src="/resources/images/images/new1.png" width="300px" alt>
+                                        <img src="/resources/images/new1.png" width="300px" alt>
                                         <div class="goods-title">
                                             BBQ간편식 맛보기세트 15종 (신제품)
                                         </div>
@@ -229,7 +229,7 @@
                                 </div>
                                 <div class="item-area">
                                     <a href="/view" class="goods">
-                                        <img src="/resources/images/images/new1.png" width="300px" alt>
+                                        <img src="/resources/images/new1.png" width="300px" alt>
                                         <div class="goods-title">
                                             [냉동] BBQ 구운 왕갈비맛 삼각밥 100g 10팩
                                         </div>
@@ -246,7 +246,7 @@
                             <li class="goods-list">
                                 <div class="item-area">
                                     <a href="/view" class="goods">
-                                        <img src="/resources/images/images/new1.png" width="300px" alt>
+                                        <img src="/resources/images/new1.png" width="300px" alt>
                                         <div class="goods-title">
                                             BBQ닭가슴살 맛보기세트 12종 2팩씩 (신제품)
                                         </div>
@@ -261,7 +261,7 @@
                                 </div>
                                 <div class="item-area">
                                     <a href="/view" class="goods">
-                                        <img src="/resources/images/images/new1.png" width="300px" alt>
+                                        <img src="/resources/images/new1.png" width="300px" alt>
                                         <div class="goods-title">
                                             BBQ간편식 골라담기 (신제품)
                                         </div>
@@ -275,7 +275,7 @@
                                 </div>
                                 <div class="item-area">
                                     <a href="/view" class="goods">
-                                        <img src="/resources/images/images/new1.png" width="300px" alt>
+                                        <img src="/resources/images/new1.png" width="300px" alt>
                                         <div class="goods-title">
                                             BBQ간편식 맛보기세트 15종 (신제품)
                                         </div>
@@ -289,7 +289,7 @@
                                 </div>
                                 <div class="item-area">
                                     <a href="/view" class="goods">
-                                        <img src="/resources/images/images/new1.png" width="300px" alt>
+                                        <img src="/resources/images/new1.png" width="300px" alt>
                                         <div class="goods-title">
                                             [냉동] BBQ 구운 왕갈비맛 삼각밥 100g 10팩
                                         </div>
