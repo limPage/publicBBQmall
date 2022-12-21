@@ -1,18 +1,28 @@
 package com.hiponya.bbqmall.controllers;
 
 
-import com.hiponya.bbqmall.entities.board.NoticeEntity;
+import com.hiponya.bbqmall.entities.bbs.ImageEntity;
+import com.hiponya.bbqmall.entities.bbs.NoticeBoardEntity;
+import com.hiponya.bbqmall.entities.bbs.NoticeEntity;
 import com.hiponya.bbqmall.entities.member.UserEntity;
 import com.hiponya.bbqmall.enums.CommonResult;
 import com.hiponya.bbqmall.enums.bbs.WriteResult;
 import com.hiponya.bbqmall.interfaces.IResult;
+import com.hiponya.bbqmall.models.PagingModel;
 import com.hiponya.bbqmall.services.BbsService;
+import com.hiponya.bbqmall.vos.bbs.NoticeReadVo;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.io.IOException;
 
 @Controller
 @RequestMapping(value = "board")
@@ -28,19 +38,74 @@ public class BbsController {
     }
 
 
+    @RequestMapping(value = "/", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getBoard(@SessionAttribute(value = "user", required = false) UserEntity user,
+                                @RequestParam(value = "bid", required = false) String bid,
+                                @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+                                @RequestParam(value = "criterion", required = false) String criterion,
+                                @RequestParam(value = "keyword", required = false) String keyword ) {
+        //페이지 안보내줫을때는 펄즈, 펄즈도 인식하게 인티저, 펄즈일시 디폴트 1
+        page=Math.max(1,page);
 
-    @GetMapping(value = "/" ,produces = MediaType.TEXT_HTML_VALUE)
-    public  ModelAndView getBoard(){
+
         ModelAndView modelAndView = new ModelAndView("board/board");
+        if (bid!=null) {
+            NoticeBoardEntity noticeBoard = this.bbsService.getNoticeBoard(bid);
+//            modelAndView.addObject("board", noticeBoard);//뺄지말지##########################
+
+            if (noticeBoard != null) {
+                int totalCount = this.bbsService.getNoticeCount(noticeBoard, criterion, keyword);
+
+                PagingModel paging = new PagingModel(totalCount, page);
+                modelAndView.addObject("paging", paging); //게시글개수
+
+                NoticeReadVo[] notice = this.bbsService.getNotice(noticeBoard, paging, criterion, keyword);
+
+
+                modelAndView.addObject("notice", notice);
+                modelAndView.addObject("user", user);
+
+            }
+        }else {
+
+            int totalCount = this.bbsService.getNoticeCountAll(criterion, keyword);
+
+            PagingModel paging = new PagingModel(totalCount, page);
+            modelAndView.addObject("paging", paging); //게시글개수
+            NoticeReadVo[] notice = this.bbsService.getNoticeAll(paging, criterion, keyword);
+            modelAndView.addObject("notice", notice);
+            modelAndView.addObject("user", user);
+        }
+
         return modelAndView;
     }
 
 
-    @GetMapping(value = "/notice" ,produces = MediaType.TEXT_HTML_VALUE)
-    public  ModelAndView getNotice(){
+
+
+
+
+
+
+    @GetMapping(value = "/readNotice" ,produces = MediaType.TEXT_HTML_VALUE)
+    public  ModelAndView getNotice(@RequestParam(value = "nid", required = false) int nid){
         ModelAndView modelAndView = new ModelAndView("board/readNotice");
+        NoticeReadVo notice = this.bbsService.readNotice(nid);
+
+
+        modelAndView.addObject("notice", notice);
+
+//        if (notice != null) { 공지가 있다면 어떤 보드 공지인지
+//
+//            modelAndView.addObject("board", this.bbsService.getNoticeBoard(notice.getBoardId()));
+//        }
+
         return modelAndView;
     }
+
+
+
+
 
 
     @RequestMapping(value = "/writeNotice", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
@@ -86,14 +151,54 @@ public class BbsController {
 
                 responseObject.put("index", notice.getIndex());//인트의 기본값은 0이다.
 
-
             }
-
-
         }
-
         responseObject.put("result", result.name().toLowerCase());
         return responseObject.toString();
     }
+
+
+
+
+
+    //이미지 읽어오기
+    @RequestMapping(value = "image", method = RequestMethod.GET)
+    public ResponseEntity<byte[]> getImage(@RequestParam(value = "idd") int id) { //이미지 자체로 보여주려면 리스판스 엔티티
+
+        ImageEntity image = this.bbsService.getImage(id); //-1 -99를 넣으면 null
+        if (image == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", image.getFileMime()); //파일형식을 결정하는 header의 마임타입을 받는게 중요하다
+
+
+        return new ResponseEntity<>(image.getData(), headers, HttpStatus.OK);
+    }
+
+
+    //이미지 붙이기
+    @RequestMapping(value = "image", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String postImage(@RequestParam(value = "upload") MultipartFile file) throws IOException {
+        ImageEntity image = new ImageEntity();
+        image.setFileName(file.getOriginalFilename());
+        image.setFileMime(file.getContentType());
+        image.setData(file.getBytes());
+
+
+        Enum<?> result = this.bbsService.addImage(image);
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("result", result.name().toLowerCase());
+        if (result == CommonResult.SUCCESS) {
+
+            responseObject.put("url", "http://localhost:8080/board/image?idd=" + image.getIndex()); //idd값으로 get이 들어감
+
+        }
+
+
+        return responseObject.toString();
+    }
+
 
 }

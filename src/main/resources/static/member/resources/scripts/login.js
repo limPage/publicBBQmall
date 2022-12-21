@@ -1,17 +1,17 @@
  const form = window.document.getElementById('form');
 const content = window.document.getElementById('content');
 
- function save (saveTitle, saveBoolean) {
-     const title = saveTitle;
+ function save (saveId, saveBoolean) {
+     const id = saveId;
      const checked = saveBoolean;
-     window.localStorage.savedTitle = title;
+     window.localStorage.savedId = id;
      window.localStorage.savedChecked= checked;
 
  }
 
 
  const load = () => {
-     form['id'].value = window.localStorage.savedTitle ?? '';
+     form['id'].value = window.localStorage.savedId ?? '';
      if (window.localStorage.savedChecked==='true'){
          form['checkbox'].checked= true
      }

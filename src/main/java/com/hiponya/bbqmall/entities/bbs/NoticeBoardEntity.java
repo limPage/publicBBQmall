@@ -1,16 +1,15 @@
-package com.hiponya.bbqmall.entities.board;
+package com.hiponya.bbqmall.entities.bbs;
 
 public class NoticeBoardEntity {
 
-    private int id;
+    private String  id;
     private String text;
 
-
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public NoticeBoardEntity setId(int id) {
+    public NoticeBoardEntity setId(String id) {
         this.id = id;
         return this;
     }

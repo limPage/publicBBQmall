@@ -86,7 +86,7 @@ public class MemberService {
         MimeMessage mail = this.mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mail, "UTF-8");
         helper.setTo(user.getEmail());
-        helper.setSubject("[스터디] 회원가입 인증번호");
+        helper.setSubject("[BBQ몰] 회원가입 인증번호입니다.");
         helper.setText(text, true);
         this.mailSender.send(mail);
 
@@ -203,7 +203,7 @@ public class MemberService {
         MimeMessage mail = this.mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mail, "UTF-8");
         helper.setTo(emailAuthVo.getEmail());
-        helper.setSubject("[스터디] 비밀번호 재설정 인증 링크");
+        helper.setSubject("[BBQ몰] 비밀번호 재설정 인증 링크입니다.");
         helper.setText(text, true);
         this.mailSender.send(mail);
 

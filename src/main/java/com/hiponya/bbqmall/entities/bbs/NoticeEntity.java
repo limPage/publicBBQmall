@@ -1,4 +1,4 @@
-package com.hiponya.bbqmall.entities.board;
+package com.hiponya.bbqmall.entities.bbs;
 
 import java.util.Date;
 
@@ -9,7 +9,7 @@ public class NoticeEntity {
   private int  index;
     private String boardId;
     private String title;
-    private Date written_on;
+    private Date writtenOn;
     private int view;
     private Boolean important;
 
@@ -44,12 +44,12 @@ public class NoticeEntity {
         return this;
     }
 
-    public Date getWritten_on() {
-        return written_on;
+    public Date getWrittenOn() {
+        return writtenOn;
     }
 
-    public NoticeEntity setWritten_on(Date written_on) {
-        this.written_on = written_on;
+    public NoticeEntity setWrittenOn(Date writtenOn) {
+        this.writtenOn = writtenOn;
         return this;
     }
 

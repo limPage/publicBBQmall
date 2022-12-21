@@ -20,17 +20,17 @@
     <th:block th:replace="~{fragments/body ::sideBar}"></th:block>
     <div class="content">
         <div class="title-container">
-            <h1>공지사항</h1>
+            <h1 >공지사항</h1>
         </div>
 
         <form class="search-form">
 <!--            <div class="search-row">-->
                 <label>
-                    <select name="bid">
-                        <option value="all">- 전체 -</option>
-                        <option value="notice">공지</option>
-                        <option value="event">이벤트</option>
-                        <option value="urgent">긴급공지</option>
+                    <select name="criterion" th:with="criterion = ${#request.getParameter('criterion')}">
+                        <option th:selected="${criterion ==null || criterion.equals('all')}">- 전체 -</option>
+                        <option th:selected="${criterion != null && criterion.equals('notice')}">공지</option>
+                        <option th:selected="${criterion != null && criterion.equals('evnet')}">이벤트</option>
+                        <option th:selected="${criterion != null && criterion.equals('urgent')}">긴급공지</option>
                     </select>
 
                 </label>
@@ -38,7 +38,7 @@
                 <span class="spring"></span>
 
                 <label>
-                    <input type="text" placeholder="제목, 내용">
+                    <input type="text" placeholder="제목, 내용" th:value="${#request.getParameter('keyword')}">
                 </label>
 
                 <input type="submit" value="검색">
@@ -56,94 +56,86 @@
             </tr>
             </thead>
             <tbody>
-                <tr class="article-notice">
+                <tr class="article-notice" th:each="article: ${notice}" >
                     <td>
-                        <h3 class="number">[공지]</h3>
+                        <h3 class="number" th:text="${article.getIndex()}">-</h3>
                     </td>
 
                     <td>
-                        <h3 class="board-id">공지글</h3>
-                    </td>
-
-
-
-                    <td class="content-title">     <h3>제목입니다</h3></td>
-
-
-                    <td>
-                       <h3 class="written-on"> 2022.52.22</h3>
-                    </td>
-                    <td>
-                        <h3 class="view-count">1</h3>
-                    </td>
-                </tr>
-
-                <tr class="article">
-                    <td>
-                        <h3 class="number">[공지]</h3>
-                    </td>
-
-                    <td>
-                        <h3 class="board-id">공지글</h3>
+                        <h3 class="board-id" th:text="${article.getText()}">-</h3>
                     </td>
 
 
 
-                    <td class="content-title">     <h3>제목입니다</h3></td>
+                    <td class="content-title">   <a th:href="@{/board/readNotice (nid=${article.getIndex()})}">  <h3  th:text="${article.getTitle()}">-</h3></a></td>
 
 
                     <td>
-                        <h3 class="written-on"> 2022.52.22</h3>
+                       <h3 class="written-on" th:text="${#dates.format(article.getModifiedOn(),'yyyy-MM-dd HH:mm:ss')}"> 2022.52.22</h3>
                     </td>
                     <td>
-                        <h3 class="view-count">1</h3>
+                        <h3 class="view-count" th:text="${article.getView()}">1</h3>
                     </td>
                 </tr>
-                <tr class="article">
-                    <td>
-                        <h3 class="number">[공지]</h3>
-                    </td>
-
-                    <td>
-                        <h3 class="board-id">공지글</h3>
-                    </td>
 
 
 
-                    <td class="content-title">     <h3>제목입니다</h3></td>
-
-
-                    <td>
-                        <h3 class="written-on"> 2022.52.22</h3>
-                    </td>
-                    <td>
-                        <h3 class="view-count">1</h3>
-                    </td>
-                </tr>
-                <tr class="article">
-                    <td>
-                        <h3 class="number">[공지]</h3>
-                    </td>
-
-                    <td>
-                        <h3 class="board-id">공지글</h3>
-                    </td>
-
-
-
-                    <td class="content-title">     <h3>제목입니다</h3></td>
-
-
-                    <td>
-                        <h3 class="written-on"> 2022.52.22</h3>
-                    </td>
-                    <td>
-                        <h3 class="view-count">1</h3>
-                    </td>
-                </tr>
 
             </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="5">
+                    <!--                            with는 변수선언이라고 보면된다.-->
+                    <div class="page-container" th:with="urlBulder = ${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder).fromCurrentRequest()}">
 
+                        <a class="page"
+                           th:if ="${paging.requestPage >1}"
+                           th:href="@{${urlBulder.replaceQueryParam('page', paging.minPage).build().toUriString()}}">
+
+
+                            <i class="fa-solid fa-angles-left"></i>
+
+                        </a>
+
+                        <a class="page"
+                           th:if ="${paging.requestPage >1}"
+                           th:href="@{${urlBulder.replaceQueryParam('page', paging.requestPage -1).build().toUriString()}}">
+
+                            <i class="fa-solid fa-angle-left"></i>
+                        </a>
+
+                        <!--                                시퀀스를하면 정수 시작부터 정수끝을 배열로 돌려준다.-->
+                        <a th:each="page: ${#numbers.sequence(paging.startPage, paging.endPage)}"
+                           th:class="${'page ' + (page==paging.requestPage? 'selected':'')}"
+                           th:text="${page}"
+                           th:href="@{${urlBulder.replaceQueryParam('page', page).build().toUriString()}}">
+                            <!--                                    클릭시 값을 페이지라고 적혀ㅓ잇는곳을 페이지값으로 바꾸겟다 검색어에서도 사용하기위해 빌드쓴다-->
+
+                        </a>
+
+
+                        <a class="page"
+                           th:if="${paging.requestPage < paging.maxPage}"
+                           th:href="@{${urlBulder.replaceQueryParam('page', paging.requestPage +1).build().toUriString()}}">
+
+
+                            <i class="fa-solid fa-angle-right"></i>
+
+                        </a>
+
+                        <a class="page"
+                           th:if="${paging.requestPage < paging.maxPage}"
+                           th:href="@{${urlBulder.replaceQueryParam('page', paging.maxPage).build().toUriString()}}">
+                            <i class="fa-solid fa-angles-right"></i>
+                        </a>
+
+                    </div>
+                </td>
+
+            </tr>
+
+
+            </tfoot>
 
 
         </table>
