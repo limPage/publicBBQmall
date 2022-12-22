@@ -134,9 +134,9 @@
             useGeneratedKeys="true" keyProperty="index"
             keyColumn="index"
             parameterType="com.hiponya.bbqmall.entities.bbs.NoticeEntity">
-        INSERT INTO `bbq_bbs`.`notice` ( `board_id`, `title`, `content`, `view`, `important`
+        INSERT INTO `bbq_bbs`.`notice` ( `board_id`, `title`, `content`, `view`, `important_flag`
                                        , `written_on`, `modified_on`)
-        VALUES ( #{boardId}, #{title}, #{content}, #{view}, IFNULL(#{important}, DEFAULT(`important`))
+        VALUES ( #{boardId}, #{title}, #{content}, #{view}, IFNULL(#{isImportant}, DEFAULT(`important_flag`))
                , IFNULL(#{writtenOn}, DEFAULT(`written_on`)), IFNULL(#{modifiedOn}, DEFAULT(`modified_on`)))
 
 

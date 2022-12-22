@@ -11,7 +11,7 @@ public class NoticeEntity {
     private String title;
     private Date writtenOn;
     private int view;
-    private Boolean important;
+    private Boolean isImportant;
 
     private String content;
 
@@ -63,11 +63,11 @@ public class NoticeEntity {
     }
 
     public Boolean isImportant() {
-        return important;
+        return isImportant;
     }
 
     public NoticeEntity setImportant(Boolean important) {
-        this.important = important;
+        this.isImportant = important;
         return this;
     }
 
