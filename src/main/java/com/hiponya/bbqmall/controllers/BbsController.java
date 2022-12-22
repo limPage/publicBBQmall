@@ -42,39 +42,43 @@ public class BbsController {
     public ModelAndView getBoard(@SessionAttribute(value = "user", required = false) UserEntity user,
                                 @RequestParam(value = "bid", required = false) String bid,
                                 @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
-                                @RequestParam(value = "criterion", required = false) String criterion,
                                 @RequestParam(value = "keyword", required = false) String keyword ) {
         //페이지 안보내줫을때는 펄즈, 펄즈도 인식하게 인티저, 펄즈일시 디폴트 1
         page=Math.max(1,page);
 
 
         ModelAndView modelAndView = new ModelAndView("board/board");
-        if (bid!=null) {
+
+
+        if(bid==null|| bid.equals("all")) {
+
+            int totalCount = this.bbsService.getNoticeCountAll( keyword);
+
+            PagingModel paging = new PagingModel(totalCount, page);
+            modelAndView.addObject("paging", paging); //게시글개수
+            NoticeReadVo[] notice = this.bbsService.getNoticeAll(paging,  keyword);
+            modelAndView.addObject("notice", notice);
+            modelAndView.addObject("user", user);
+        }
+
+
+        else{
             NoticeBoardEntity noticeBoard = this.bbsService.getNoticeBoard(bid);
 //            modelAndView.addObject("board", noticeBoard);//뺄지말지##########################
 
             if (noticeBoard != null) {
-                int totalCount = this.bbsService.getNoticeCount(noticeBoard, criterion, keyword);
+                int totalCount = this.bbsService.getNoticeCount(noticeBoard, keyword);
 
                 PagingModel paging = new PagingModel(totalCount, page);
                 modelAndView.addObject("paging", paging); //게시글개수
 
-                NoticeReadVo[] notice = this.bbsService.getNotice(noticeBoard, paging, criterion, keyword);
+                NoticeReadVo[] notice = this.bbsService.getNotice(noticeBoard, paging, keyword);
 
 
                 modelAndView.addObject("notice", notice);
                 modelAndView.addObject("user", user);
 
             }
-        }else {
-
-            int totalCount = this.bbsService.getNoticeCountAll(criterion, keyword);
-
-            PagingModel paging = new PagingModel(totalCount, page);
-            modelAndView.addObject("paging", paging); //게시글개수
-            NoticeReadVo[] notice = this.bbsService.getNoticeAll(paging, criterion, keyword);
-            modelAndView.addObject("notice", notice);
-            modelAndView.addObject("user", user);
         }
 
         return modelAndView;

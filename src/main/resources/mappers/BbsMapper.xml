@@ -25,7 +25,7 @@
         WHERE `board_id` = #{boardId}
 
 
-        <if test="criterion != null and criterion.equals('all')">
+        <if test="keyword != null">
 
             AND (REPLACE(`title`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%')
             OR REPLACE(`content`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%'))
@@ -39,9 +39,9 @@
         SELECT COUNT(0)
         FROM `bbq_bbs`.`notice` AS `notice`
 
-        <if test="criterion != null and criterion.equals('all')">
+        <if test="keyword != null">
 
-            AND (REPLACE(`title`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%')
+            WHERE (REPLACE(`title`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%')
             OR REPLACE(`content`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%'))
         </if>
 
@@ -65,7 +65,7 @@
 
 
         #한글자는 오류가 날수 있다고함
-        <if test="criterion != null and criterion.equals('all')">
+        <if test="keyword != null">
 
             AND (REPLACE(`notice`.`title`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%')
             OR REPLACE(`notice`.`content`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%'))
@@ -94,9 +94,9 @@
 
 
         #한글자는 오류가 날수 있다고함
-        <if test="criterion != null and criterion.equals('all')">
+        <if test="keyword != null">
 
-            AND (REPLACE(`notice`.`title`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%')
+            WHERE (REPLACE(`notice`.`title`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%')
             OR REPLACE(`notice`.`content`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%'))
         </if>
 

@@ -64,7 +64,7 @@ public class BbsService {
     }
 
 
-    public int getNoticeCount(NoticeBoardEntity board, String criterion, String keyword) { //검색조건이 크리테리온 검색어가 키워드 보드가 어느 게시판
+    public int getNoticeCount(NoticeBoardEntity board, String keyword) { //검색조건이 크리테리온 검색어가 키워드 보드가 어느 게시판
 //        if (criterion == null || keyword == null) { //검색어가 없을시  게시판 전체
 //            return this.bbsMapper.selectArticleCountByBoardId(board.getId());
 //        } else if (criterion.equals("title")) {
@@ -75,12 +75,12 @@ public class BbsService {
 //        } else {
 //            return this.bbsMapper.selectArticleCountByBoardIdTitleContent(board.getId(), keyword);
 //        }
-        return this.bbsMapper.selectNoticeCountByNoticeBoardId(board.getId(), criterion ,keyword);
+        return this.bbsMapper.selectNoticeCountByNoticeBoardId(board.getId() ,keyword);
 
     }
-    public int getNoticeCountAll( String criterion, String keyword) { //검색조건이 크리테리온 검색어가 키워드 보드가 어느 게시판
+    public int getNoticeCountAll(  String keyword) { //검색조건이 크리테리온 검색어가 키워드 보드가 어느 게시판
 //     
-        return this.bbsMapper.selectNoticeCountAll(criterion ,keyword);
+        return this.bbsMapper.selectNoticeCountAll(keyword);
 
     }
 
@@ -88,15 +88,15 @@ public class BbsService {
 
 
 
-    public NoticeReadVo[] getNotice(NoticeBoardEntity board, PagingModel paging, String criterion, String keyword) {
+    public NoticeReadVo[] getNotice(NoticeBoardEntity board, PagingModel paging,  String keyword) {
 
-        return this.bbsMapper.selectNoticeByBoardId(board.getId(), criterion,keyword, paging.countPerPage,(paging.requestPage - 1) * (paging.countPerPage));
+        return this.bbsMapper.selectNoticeByBoardId(board.getId(), keyword, paging.countPerPage,(paging.requestPage - 1) * (paging.countPerPage));
 
     }
 
-    public NoticeReadVo[] getNoticeAll(PagingModel paging, String criterion, String keyword) {
+    public NoticeReadVo[] getNoticeAll(PagingModel paging,  String keyword) {
 
-        return this.bbsMapper.selectNoticeAll( criterion,keyword, paging.countPerPage,(paging.requestPage - 1) * (paging.countPerPage) );
+        return this.bbsMapper.selectNoticeAll( keyword, paging.countPerPage,(paging.requestPage - 1) * (paging.countPerPage) );
 
     }
 

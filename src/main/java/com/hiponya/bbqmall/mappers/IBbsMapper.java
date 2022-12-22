@@ -12,24 +12,23 @@ public interface IBbsMapper {
 
 
     NoticeBoardEntity selectNoticeBoardId(@Param(value = "id") String id);
-    int selectNoticeCountAll(@Param(value = "criterion") String criterion,
+    int selectNoticeCountAll(
                              @Param(value = "keyword") String keyword);
 
 
     int selectNoticeCountByNoticeBoardId(@Param(value = "boardId") String boardId,
-                                    @Param(value = "criterion") String criterion,
 
                                           @Param(value = "keyword") String keyword);
 
 
 
     NoticeReadVo[] selectNoticeByBoardId(@Param(value = "boardId") String boardId,
-                                            @Param(value = "criterion") String criterion,
+
                                             @Param(value = "keyword") String keyword,
                                             @Param(value = "limit") int limit,
                                             @Param(value = "offset") int offset);
     NoticeReadVo[] selectNoticeAll(
-                                         @Param(value = "criterion") String criterion,
+
                                          @Param(value = "keyword") String keyword,
                                          @Param(value = "limit") int limit,
                                          @Param(value = "offset") int offset);
