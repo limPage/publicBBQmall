@@ -45,7 +45,7 @@ public class CategoryController {
         return modelAndView;
     }
 
-    @GetMapping(value = "list", produces = MediaType.TEXT_HTML_VALUE)
+    @GetMapping(value = "list", produces = MediaType.APPLICATION_JSON_VALUE)
     public ModelAndView getList(@RequestParam(value = "cid") int cid, CategoryEntity category,ProductEntity product) {
         ModelAndView modelAndView = new ModelAndView("home/list");
 

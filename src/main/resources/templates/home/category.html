@@ -24,7 +24,7 @@
                             <ul class="search-list" rel="searchList">
                                 <li class = "li">
                                     <label class="active">
-                                        <input type="button" name="ranking" value="랭킹순" class = "button" id="sorting">&nbsp
+                                        <input type="button" name="ranking" value="랭킹순" class = "button" id="ranking" rel="ranking">&nbsp
                                         <input type="hidden" name = "index" th:value="${category.getIndex()}">
                                     </label>
                                 </li>
@@ -65,7 +65,7 @@
                         <ul class="ul">
                             <li class="goods-list" th:each = "product : ${products}">
                                 <div class="item-area" th:value="${product.getProductName()}">
-                                    <a href="/view" class="goods" name="1">
+                                    <a href="/view" class="goods">
                                         <img src="/resources/images/new1.png" width="300px" alt>
                                         <div class="goods-title" rel="goodsTitle">
                                             BBQ닭가슴살 맛보기세트 12종 2팩씩 (신제품)
