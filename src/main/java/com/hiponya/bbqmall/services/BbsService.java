@@ -64,6 +64,7 @@ public class BbsService {
     }
 
 
+    //페이징을 불러온다
     public int getNoticeCount(NoticeBoardEntity board, String keyword) { //검색조건이 크리테리온 검색어가 키워드 보드가 어느 게시판
 //        if (criterion == null || keyword == null) { //검색어가 없을시  게시판 전체
 //            return this.bbsMapper.selectArticleCountByBoardId(board.getId());
@@ -75,33 +76,38 @@ public class BbsService {
 //        } else {
 //            return this.bbsMapper.selectArticleCountByBoardIdTitleContent(board.getId(), keyword);
 //        }
+        System.out.println(board.getId());
+        System.out.println("k="+keyword);
         return this.bbsMapper.selectNoticeCountByNoticeBoardId(board.getId() ,keyword);
 
     }
-    public int getNoticeCountAll(  String keyword) { //검색조건이 크리테리온 검색어가 키워드 보드가 어느 게시판
-//     
-        return this.bbsMapper.selectNoticeCountAll(keyword);
+    //페이징을 불러온다 그냥 홈페이지로 갔을 경우
 
-    }
+//    public int getNoticeCountAll(  String keyword) { //검색조건이 크리테리온 검색어가 키워드 보드가 어느 게시판
+////
+//        return this.bbsMapper.selectNoticeCountAll(keyword);
+//
+//    }
+//
 
 
 
-
-
+            //공지게시판을 불러온다
     public NoticeReadVo[] getNotice(NoticeBoardEntity board, PagingModel paging,  String keyword) {
 
         return this.bbsMapper.selectNoticeByBoardId(board.getId(), keyword, paging.countPerPage,(paging.requestPage - 1) * (paging.countPerPage));
 
     }
+    //공지게시판을 불러온다 항목을 선택하지 않았을때 전체
 
-    public NoticeReadVo[] getNoticeAll(PagingModel paging,  String keyword) {
+//    public NoticeReadVo[] getNoticeAll(PagingModel paging,  String keyword) {
+//
+//        return this.bbsMapper.selectNoticeAll( keyword, paging.countPerPage,(paging.requestPage - 1) * (paging.countPerPage) );
+//
+//    }
 
-        return this.bbsMapper.selectNoticeAll( keyword, paging.countPerPage,(paging.requestPage - 1) * (paging.countPerPage) );
 
-    }
-
-
-
+    //게시물에 들어가는 동시에 조회수를 올려줌
 
     public NoticeReadVo readNotice(int index) {
         NoticeReadVo article = this.bbsMapper.selectNoticeByIndex(index);

@@ -50,24 +50,23 @@ public class BbsController {
         ModelAndView modelAndView = new ModelAndView("board/board");
 
 
-        if(bid==null|| bid.equals("all")) {
+//        if(bid==null|| bid.equals("all")) {
+//
+//            int totalCount = this.bbsService.getNoticeCountAll( keyword);
+//
+//            PagingModel paging = new PagingModel(totalCount, page);
+//            modelAndView.addObject("paging", paging); //게시글개수
+//            NoticeReadVo[] notice = this.bbsService.getNoticeAll(paging,  keyword);
+//            modelAndView.addObject("notice", notice);
+//            modelAndView.addObject("user", user);
+//        }
+        NoticeBoardEntity noticeBoard = new NoticeBoardEntity(); //게시판 선택안하거나 전채선택일경우 빈껍데기
+                     if (bid!=null && !bid.equals("all") ) {
 
-            int totalCount = this.bbsService.getNoticeCountAll( keyword);
 
-            PagingModel paging = new PagingModel(totalCount, page);
-            modelAndView.addObject("paging", paging); //게시글개수
-            NoticeReadVo[] notice = this.bbsService.getNoticeAll(paging,  keyword);
-            modelAndView.addObject("notice", notice);
-            modelAndView.addObject("user", user);
-        }
-
-
-        else{
-            NoticeBoardEntity noticeBoard = this.bbsService.getNoticeBoard(bid);
-//            modelAndView.addObject("board", noticeBoard);//뺄지말지##########################
-
-            if (noticeBoard != null) {
-                int totalCount = this.bbsService.getNoticeCount(noticeBoard, keyword);
+                  noticeBoard = this.bbsService.getNoticeBoard(bid);
+             }
+            int totalCount = this.bbsService.getNoticeCount(noticeBoard, keyword);
 
                 PagingModel paging = new PagingModel(totalCount, page);
                 modelAndView.addObject("paging", paging); //게시글개수
@@ -78,8 +77,26 @@ public class BbsController {
                 modelAndView.addObject("notice", notice);
                 modelAndView.addObject("user", user);
 
-            }
-        }
+
+
+//        else{
+//            NoticeBoardEntity noticeBoard = this.bbsService.getNoticeBoard(bid);
+////            modelAndView.addObject("board", noticeBoard);//뺄지말지##########################
+//
+//            if (noticeBoard != null) {
+//                int totalCount = this.bbsService.getNoticeCount(noticeBoard, keyword);
+//
+//                PagingModel paging = new PagingModel(totalCount, page);
+//                modelAndView.addObject("paging", paging); //게시글개수
+//
+//                NoticeReadVo[] notice = this.bbsService.getNotice(noticeBoard, paging, keyword);
+//
+//
+//                modelAndView.addObject("notice", notice);
+//                modelAndView.addObject("user", user);
+//
+//            }
+//        }
 
         return modelAndView;
     }
