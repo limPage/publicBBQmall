@@ -62,34 +62,34 @@
             </tr>
             </thead>
             <tbody>
-                <tr class="article-notice"  th:each="article: ${notice}" th:if="${article.isImportant()}" >
+                <tr class="article-notice"  th:each="Notice: ${articleNotice}" >
                     <td>
                         <img th:src="@{/resources/images/icon_notice.gif}">
                     </td>
 
                     <td>
-                        <h3 class="board-id" th:text="${article.getText()}">-</h3>
+                        <h3 class="board-id" th:text="${Notice.getText()}">-</h3>
                     </td>
 
 
 
                     <td class="content-title">
-                        <a th:href="@{/board/readNotice (nid=${article.getIndex()})}">
-                            <h3  th:text="${article.getTitle()}">제목</h3>
+                        <a th:href="@{/board/readNotice (nid=${Notice.getIndex()})}">
+                            <h3  th:text="${Notice.getTitle()}">제목</h3>
                             <img  alt="new" class="is-new-icon new"
                                   th:src="@{/resources/images/icon_new.gif}">
 
-                            <img alt="hot" th:if="${article.getView()>0}"
+                            <img alt="hot" th:if="${Notice.getView()>0}"
                                  th:src="@{/resources/images/icon_hot.gif}">
 
                     </a></td>
 
 
                     <td>
-                       <h3 class="written-on" th:text="${#dates.format(article.getModifiedOn(),'yyyy.MM.dd')}"> 2022.52.22</h3>
+                       <h3 class="written-on" th:text="${#dates.format(Notice.getModifiedOn(),'yyyy.MM.dd')}"> 2022.52.22</h3>
                     </td>
                     <td>
-                        <h3 class="view-count" th:text="${article.getView()}">1</h3>
+                        <h3 class="view-count" th:text="${Notice.getView()}">1</h3>
                     </td>
                 </tr>
 

@@ -16,6 +16,16 @@ public class NoticeEntity {
 
     private Date modifiedOn;
 
+    public Date getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(Date expirationDate) {
+        this.expirationDate = expirationDate;
+    }
+
+    private Date expirationDate;
+
     public int getIndex() {
         return index;
     }

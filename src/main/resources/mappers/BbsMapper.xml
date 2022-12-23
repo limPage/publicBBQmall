@@ -59,6 +59,23 @@
 
 <!--    </select>-->
 
+    <select id="selectArticleNotice" resultType="com.hiponya.bbqmall.vos.bbs.NoticeReadVo">
+    SELECT `notice`.`index` AS `index`,
+    `notice`.`board_id` AS `boardId`,
+    `notice`.`title` AS `title`,
+    `notice_board`.`text` AS `text`,
+    `notice`.`content`     AS `content`,
+    `notice`.`board_id`    AS `boardId`,
+    `notice`.`view` AS `view`,
+    `notice`.`important_flag` AS `isImportant`,
+    `notice`.`written_on` AS `writtenOn`,
+    `notice`.`modified_on` AS `modifiedOn`
+    FROM `bbq_bbs`.`notice` AS `notice`
+    LEFT JOIN `bbq_bbs`.`notice_boards` AS `notice_board` on `id` = `notice`.`board_id`
+    WHERE important_flag =1;
+
+
+    </select>
 
     <select id="selectNoticeByBoardId" resultType="com.hiponya.bbqmall.vos.bbs.NoticeReadVo">
         SELECT `notice`.`index` AS `index`,
@@ -160,9 +177,9 @@
             keyColumn="index"
             parameterType="com.hiponya.bbqmall.entities.bbs.NoticeEntity">
         INSERT INTO `bbq_bbs`.`notice` ( `board_id`, `title`, `content`, `view`, `important_flag`
-                                       , `written_on`, `modified_on`)
+                                       , `written_on`, `modified_on`,`expiration_date`)
         VALUES ( #{boardId}, #{title}, #{content}, #{view}, IFNULL(#{isImportant}, DEFAULT(`important_flag`))
-               , IFNULL(#{writtenOn}, DEFAULT(`written_on`)), IFNULL(#{modifiedOn}, DEFAULT(`modified_on`)))
+               , IFNULL(#{writtenOn}, DEFAULT(`written_on`)), IFNULL(NOW(), DEFAULT(`modified_on`)), #{expirationDate})
 
 
     </insert>

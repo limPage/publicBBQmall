@@ -9,9 +9,12 @@ import com.hiponya.bbqmall.interfaces.IResult;
 import com.hiponya.bbqmall.mappers.IBbsMapper;
 import com.hiponya.bbqmall.models.PagingModel;
 import com.hiponya.bbqmall.vos.bbs.NoticeReadVo;
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
+
+import java.util.Date;
 
 @Service(value = "com.hiponya.services.BbsService")
 
@@ -41,6 +44,8 @@ public class BbsService {
             return WriteResult.NO_SUCH_BOARD;
         }
 
+
+        notice.setExpirationDate(DateUtils.addDays(new Date(), 1));
 //        if(this.bbsMapper.insertArticle(article)==0){
 //            return CommonResult.FAILURE;
 
@@ -90,7 +95,9 @@ public class BbsService {
 //    }
 //
 
-
+public NoticeReadVo[] getArticleNotice(){
+        return this.bbsMapper.selectArticleNotice();
+}
 
             //공지게시판을 불러온다
     public NoticeReadVo[] getNotice(NoticeBoardEntity board, PagingModel paging,  String keyword) {

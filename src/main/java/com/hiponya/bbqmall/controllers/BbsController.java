@@ -42,7 +42,7 @@ public class BbsController {
     public ModelAndView getBoard(@SessionAttribute(value = "user", required = false) UserEntity user,
                                 @RequestParam(value = "bid", required = false) String bid,
                                 @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
-                                @RequestParam(value = "keyword", required = false) String keyword ) {
+                                @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword ) {
         //페이지 안보내줫을때는 펄즈, 펄즈도 인식하게 인티저, 펄즈일시 디폴트 1
         page=Math.max(1,page);
 
@@ -72,8 +72,9 @@ public class BbsController {
                 modelAndView.addObject("paging", paging); //게시글개수
 
                 NoticeReadVo[] notice = this.bbsService.getNotice(noticeBoard, paging, keyword);
+                NoticeReadVo[] articleNotice =this.bbsService.getArticleNotice();
 
-
+                modelAndView.addObject("articleNotice", articleNotice);
                 modelAndView.addObject("notice", notice);
                 modelAndView.addObject("user", user);
 

@@ -21,7 +21,7 @@ public interface IBbsMapper {
                                           @Param(value = "keyword") String keyword);
 
 
-
+    NoticeReadVo[] selectArticleNotice();
     NoticeReadVo[] selectNoticeByBoardId(@Param(value = "boardId") String boardId,
 
                                             @Param(value = "keyword") String keyword,
