@@ -167,7 +167,7 @@ body>main>.content>.content-table>thead> tr>.content-title{
 }
 
 
-body>main>.content>.content-table>tbody> .article-notice>.content-title>a {
+body>main>.content>.content-table>tbody> tr>.content-title>a>h3 {
     color: rgba(0,0,0,0.8);
 
 }
@@ -221,6 +221,11 @@ body>main>.content>.content-table>tbody>.article-notice{
     border-bottom: 1px solid rgba(0,0,0,0.1);
 
 }
+body>main>.content>.content-table>tbody>.article-notice>td>img{
+    margin:   0 13px ;
+}
+
+
 
 body>main>.content>.content-table>tbody>.article{
 
@@ -229,3 +234,54 @@ body>main>.content>.content-table>tbody>.article{
 }
 
 
+body>main>.content>.content-table>tfoot>tr{
+    display: flex;
+    justify-content: center;
+}
+body>main>.content>.content-table>tfoot>tr>td>.page-container{
+    /*display: flex;*/
+    padding: unset;
+    /*border-collapse: collapse;*/
+    display: table;
+
+}
+
+
+body>main>.content>.content-table>tfoot>tr>td>.page-container>.page{
+    /*background-color: rebeccapurple;*/
+    width: 32px;
+    height: 32px;
+    /*padding: 0.4rem 1rem 0.4rem 1rem;*/
+    color: #333333;
+    border: 0.0625rem solid rgba(0,0,0,0.15);
+    border-radius: 1rem;
+    font-size: 12px;
+    /*display: flex;*/
+    justify-content: center;
+    /*align-items: center;*/
+    margin: -1px;
+    padding: unset;
+    display : table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+body>main>.content>.content-table>tfoot>tr>td>.page-container>.page:hover{
+
+    background-color: rgba(0,0,0,0.1);
+    border: 0.0625rem solid rgba(0,0,0,0.2);
+}
+
+
+
+body>main>.content>.write-notice-button{
+    display: flex;
+justify-content: flex-end;
+
+}
+body>main>.content>.write-notice-button>a{
+    padding:  0.9rem 1.3rem ;
+    background-color: #CF152D;
+    margin: 0.5rem ;
+    border-radius: 3px;
+    color: white;
+}
