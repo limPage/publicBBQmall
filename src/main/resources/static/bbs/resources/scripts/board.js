@@ -1,4 +1,4 @@
-const save = () => {
+function save ()  {
 
     window.localStorage.savedNoticeBoardId = form['bid'].value;
 
@@ -71,4 +71,11 @@ for (let i = 0; i < isNew.length; i++) {
  console.log("아이이템ㅇ"+item.value)
 
 
+}
+
+
+form['bid'].oninput=()=>{
+    save ();
+
+    document.form.submit();
 }

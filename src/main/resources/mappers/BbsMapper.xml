@@ -57,6 +57,7 @@
         `notice`.`content`     AS `content`,
         `notice`.`board_id`    AS `boardId`,
         `notice`.`view` AS `view`,
+        `notice`.`important_flag` AS `isImportant`,
         `notice`.`written_on` AS `writtenOn`,
         `notice`.`modified_on` AS `modifiedOn`
         FROM `bbq_bbs`.`notice` AS `notice`
@@ -87,6 +88,7 @@
         `notice`.`content`     AS `content`,
         `notice`.`board_id`    AS `boardId`,
         `notice`.`view` AS `view`,
+        `notice`.`important_flag` AS `isImportant`,
         `notice`.`written_on` AS `writtenOn`,
         `notice`.`modified_on` AS `modifiedOn`
         FROM `bbq_bbs`.`notice` AS `notice`
@@ -117,6 +119,7 @@
                `notice_board`.`text`  AS `text`,
                `notice`.`board_id`    AS `boardId`,
                `notice`.`title`       AS `title`,
+               `notice`.`important_flag` AS `isImportant`,
                `notice`.`content`     AS `content`,
                `notice`.`view`        AS `view`,
                `notice`.`written_on`  AS `writtenOn`,
@@ -170,6 +173,7 @@
             `title`       = #{title},
             `content`     = #{content},
             `view`        = IFNULL(#{view}, DEFAULT(`view`)),
+            `important_flag`        = IFNULL(#{isImportant}, DEFAULT(`important_flag`)),
             `written_on`  = IFNULL(#{writtenOn}, DEFAULT(`written_on`)),
             `modified_on` = IFNULL(#{modifiedOn}, DEFAULT(`modified_on`))
         WHERE `index` = #{index}

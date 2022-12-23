@@ -62,9 +62,9 @@
             </tr>
             </thead>
             <tbody>
-                <tr class="article-notice" th:each="article: ${notice}" >
+                <tr class="article-notice"  th:each="article: ${notice}" th:if="${article.isImportant()}" >
                     <td>
-                        <h3 class="number" th:text="${article.getIndex()}">-</h3>
+                        <img th:src="@{/resources/images/icon_notice.gif}">
                     </td>
 
                     <td>
@@ -76,6 +76,9 @@
                     <td class="content-title">
                         <a th:href="@{/board/readNotice (nid=${article.getIndex()})}">
                             <h3  th:text="${article.getTitle()}">제목</h3>
+                            <img  alt="new" class="is-new-icon new"
+                                  th:src="@{/resources/images/icon_new.gif}">
+
                             <img alt="hot" th:if="${article.getView()>0}"
                                  th:src="@{/resources/images/icon_hot.gif}">
 
@@ -184,7 +187,9 @@
 
 
 
+        <div class="write-notice-button">
         <a th:href="@{/board/writeNotice}">공지작성</a>
+        </div>
     </div>
 
 

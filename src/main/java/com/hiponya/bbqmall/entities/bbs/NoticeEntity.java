@@ -12,7 +12,6 @@ public class NoticeEntity {
     private Date writtenOn;
     private int view;
     private Boolean isImportant;
-
     private String content;
 
     private Date modifiedOn;
