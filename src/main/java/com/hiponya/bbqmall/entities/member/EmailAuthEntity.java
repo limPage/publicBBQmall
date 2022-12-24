@@ -86,4 +86,8 @@ public class EmailAuthEntity {
     public boolean equals(Object obj) {
         return super.equals(obj);
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> origin/bbqmall1208

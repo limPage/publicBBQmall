@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>BBQ몰 고객센터</title>
+
+
+    <th:block th:replace="~{fragments/head :: common}"></th:block>
+
+    <link rel="stylesheet" th:href="@{/member/resources/stylesheets/csCenter.css}">
+    <script defer th:src="@{/member/resources/scripts/csCenter.js}"></script>
+
+
+</head>
+<body>
+<th:block th:replace="~{fragments/body :: header}"></th:block> <!-- block 자리에 body.html 파일의 replace 태그와 치환한다. -->
+<th:block th:replace="~{fragments/body :: cover}"></th:block>
+
+<main class="cs-center">
+
+<!--    <article class="side-bar">-->
+<!--        <h1 class="title">CS CENTER</h1>-->
+<!--        <ul>-->
+<!--            <li><a>공지사항</a></li>-->
+<!--            <li><a>자주 묻는 질문</a></li>-->
+<!--            <li><a>상품문의</a></li>-->
+<!--            <li><a>상품후기</a></li>-->
+<!--            <li><a>대량구매</a></li>-->
+
+<!--        </ul>-->
+
+
+<!--    </article>-->
+<th:block th:replace="~{fragments/body ::sideBar}"></th:block>
+    <div class="content">
+
+
+        <ul>
+            <li>
+
+                <a>
+                    <img src="/resources/images/icon_cs_02.png">
+                    배송문의
+                </a>
+
+            </li>
+
+            <li>
+
+
+                <a>
+                    <img src="/resources/images/icon_cs_03.png">
+                    반품/교환문의
+                </a>
+
+            </li>
+            <li>
+
+
+                <a>
+                    <img src="/resources/images/icon_cs_01.png">
+                    상품문의
+                </a>
+
+            </li>
+            <li>
+
+
+                <a>
+                    <img src="/resources/images/icon_cs_09.png">
+                    쿠폰내역
+                </a>
+
+            </li>
+            <li>
+
+
+                <a>
+                    <img src="/resources/images/icon_cs_10.png">
+                    적립금내역
+                </a>
+
+            </li>
+            <li>
+
+
+                <a>
+                    <img src="/resources/images/icon_cs_05.png">
+                    자주묻는질문
+                </a>
+
+            </li>
+
+
+        </ul>
+
+        <div class="question">
+            <div class="title-row">
+            <h1 class="title">자주 묻는 질문 TOP5</h1>
+                <span class="spring"></span>
+                <span class="more">더보기 ＞</span>
+        </div>
+            <div class="bar"></div>
+            <ul class="question-ul">
+
+                <li>
+                    <div>
+                        <span>Q</span>
+                        <a>[배송문의] 브랜드 별 배송비 알고싶어요!</a>
+                    </div>
+                </li>
+
+                <li>
+                    <div>
+                        <span>Q</span>
+                        <a>[상품문의] 수령한 상품을 확인해보니 파손되어 있어요.</a>
+                    </div>
+                </li>
+                <li>
+                    <div>
+
+                        <span>Q</span>
+                        <a>[교환&반품] 불량, 하자, 오배송되어 교환하고 싶습니다.</a>
+                    </div>
+                </li>
+
+                <li>
+                    <div>
+                        <span>Q</span>
+                        <a>[회원가입/로그인] 아이디/패스워드를 분실했습니다. 어떻게 하나요?</a>
+                    </div>
+                </li>
+
+                <li>
+                    <div>
+                        <span>Q</span>
+                        <a>[회원가입/로그인] 꼭 회원가입을 해야하나요? 비회원으로 주문하려면 어떻게 해야 하나요?</a>
+                    </div>
+                </li>
+
+
+            </ul>
+        </div>
+
+
+    </div>
+
+
+</main>
+
+<th:block th:replace="~{fragments/body :: footer}"></th:block>
+
+</body>
+
+</html>

@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> origin/bbqmall1208
 body>main>.content{
     width: 100%;
 
@@ -36,8 +41,13 @@ body>main>.content>ul>li:last-of-type{
 
 
 body>main>.content>ul>li>a{
+<<<<<<< HEAD
     width: 100%;
     height: calc(10rem - 0.125rem);
+=======
+width: 100%;
+height: calc(10rem - 0.125rem);
+>>>>>>> origin/bbqmall1208
 
 
     align-items: center;
@@ -116,4 +126,9 @@ body>main>.content>.question>.question-ul>li>div>span{
     left: 0.465rem;
     position: relative;
     color: rgba(0,0,0,0.8);
+<<<<<<< HEAD
 }
+=======
+}
+
+>>>>>>> origin/bbqmall1208

@@ -1,17 +1,13 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <script defer th:src = "@{/resources/libraries/ckeditor/ckeditor.js}"></script>
-    <script defer th:src="@{/resources/scripts/common.js}"></script>
-</head>
+
 
 <body>
 
 <header th:fragment="header">
     <div class="logo-row">
         <div class="logo-container">
-            <a href="/">
+            <a href="#">
                 <img alt="" src="https://mall.bbq.co.kr/data/skin/responsive_ver1_default_gl/images/bbq/bbq_logo.svg"
                      width="118px"></a>
             <div class="search">
@@ -32,13 +28,13 @@
             <div class="user-menu">
                 <ul>
                     <li>
-                        <a th:href = "@{/member/register}">회원가입</a>
+                        <a href="#">회원가입</a>
                     </li>
                     <span></span>
 
                     <li>
                         <span class="bar"></span>
-                        <a th:href = "@{/member/login}">로그인</a>
+                        <a href="#">로그인</a>
                         <span class="bar"></span>
 
                     </li>
@@ -78,27 +74,25 @@
                         </div>
                         <strong>전체상품</strong></a>
                 </li>
-                <!--/*@thymesVar id="categories" type="com.hiponya.bbqmall.entities.product.CategoryEntity"*/-->
-                <li class="menu" th:each="category : ${categories}">
-                    <!--<a href="/category"><strong class="new"></strong></a>-->
-                    <a th:text="${category.getTitle()}" th:href = "@{/category (cid=${category.getIndex()})}"></a>
+                <li class="menu">
+                    <a href="#"><strong class="new">NEW</strong></a>
                 </li>
-<!--                <li class="menu">-->
-<!--                    <a href="/category"><strong class="en">669 세트</strong></a>-->
-<!--                </li>-->
+                <li class="menu">
+                    <a href="#"><strong class="en">669 세트</strong></a>
+                </li>
 
-<!--                <li class="menu">-->
-<!--                    <a href="/category"><strong class="en">BBQ베스트</strong></a>-->
-<!--                </li>-->
-<!--                <li class="menu">-->
-<!--                    <a href="/category"><strong>현명한특가</strong></a>-->
-<!--                </li>-->
-<!--                <li class="menu">-->
-<!--                    <a href="/category"><strong>브랜드관</strong></a>-->
-<!--                </li>-->
-<!--                <li class="menu">-->
-<!--                    <a href="/category"><strong>이벤트/혜택</strong></a>-->
-<!--                </li>-->
+                <li class="menu">
+                    <a href="#"><strong class="en">BBQ베스트</strong></a>
+                </li>
+                <li class="menu">
+                    <a href="#"><strong>현명한특가</strong></a>
+                </li>
+                <li class="menu">
+                    <a href="#"><strong>브랜드관</strong></a>
+                </li>
+                <li class="menu">
+                    <a href="#"><strong>이벤트/혜택</strong></a>
+                </li>
                 <span class="spring"></span>
                 <li class="my-menu">
                     <a href="#"><img alt=""
@@ -120,11 +114,6 @@
         </div>
     </div>
 </header>
-<div class="--cover" id = "cover" th:fragment="cover">
-    <img alt = "" class = "--icon" th:src = "@{/resources/images/loading.png}">
-    <span class = "--text" rel = "text">무언가를 불러오고 있습니다. 잠시만 기다려 주세요.</span>
-</div>
-
 <main>몸
 
 

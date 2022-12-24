@@ -5,4 +5,8 @@ import com.hiponya.bbqmall.interfaces.IResult;
 
 public enum SendEmailAuthResult implements IResult {
     EMAIL_DUPLICATED
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> origin/bbqmall1208

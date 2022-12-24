@@ -13,9 +13,15 @@
 <body>
 <th:block th:replace="~{fragments/body :: header}"></th:block> <!-- block 자리에 body.html 파일의 replace 태그와 치환한다. -->
 <th:block th:replace="~{fragments/body :: cover}"></th:block>
+<<<<<<< HEAD
 <main class="--main main">
     <div class="content " id="content">
         <form class="form recover-mode-id" id="form">
+=======
+<main class="main">
+    <div class="content " id="content">
+        <form class="form recover-mode-id " id="form">
+>>>>>>> origin/bbqmall1208
             <h1 class="title">아이디/비밀번호 찾기</h1>
 
             <table>
@@ -92,7 +98,11 @@
                     <td>
 
                         <span class="no-select">고객님의 아이디는&nbsp;&nbsp;</span>
+<<<<<<< HEAD
                         <span rel="result-id">null</span>
+=======
+                            <span rel="result-id">null</span>
+>>>>>>> origin/bbqmall1208
                         <span class="no-select">&nbsp;&nbsp;입니다.</span>
                     </td>
 
@@ -150,12 +160,20 @@
                 <tr class="result-button-row">
                     <td>
                         <label>
+<<<<<<< HEAD
                             <input class="login" type="button" value="로그인" name="">
+=======
+                            <input class="login" type="button" value="로그인" name="login">
+>>>>>>> origin/bbqmall1208
                         </label>
 
 
                         <label>
+<<<<<<< HEAD
                             <input  class= " gray-button" type="button" value="회원가입" name="">
+=======
+                            <input  class= " gray-button" type="button" value="회원가입" name="register">
+>>>>>>> origin/bbqmall1208
                         </label>
                     </td>
                 </tr>
@@ -169,6 +187,10 @@
             <label>
                 <input hidden name="code">
                 <input hidden name="salt">
+<<<<<<< HEAD
+=======
+                <input hidden name="recoverMode" th:value="${find}">
+>>>>>>> origin/bbqmall1208
             </label>
 
         </form>

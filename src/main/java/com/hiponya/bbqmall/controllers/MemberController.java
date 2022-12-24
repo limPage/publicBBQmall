@@ -11,10 +11,14 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+<<<<<<< HEAD
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+=======
+import org.springframework.web.bind.annotation.*;
+>>>>>>> origin/bbqmall1208
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.mail.MessagingException;
@@ -22,7 +26,11 @@ import javax.servlet.http.HttpSession;
 import java.security.NoSuchAlgorithmException;
 
 @Controller
+<<<<<<< HEAD
 @RequestMapping("member")
+=======
+@RequestMapping("/member")
+>>>>>>> origin/bbqmall1208
 public class MemberController {
 
     private final MemberService memberService;
@@ -33,14 +41,22 @@ public class MemberController {
     }
 
 
+<<<<<<< HEAD
     @GetMapping(value = "register", produces = MediaType.TEXT_HTML_VALUE)
+=======
+    @GetMapping(value = "/register", produces = MediaType.TEXT_HTML_VALUE)
+>>>>>>> origin/bbqmall1208
     public ModelAndView getRegister() {
         ModelAndView modelAndView = new ModelAndView("member/register");
 
         return modelAndView;
     }
 
+<<<<<<< HEAD
     @GetMapping(value = "login", produces = MediaType.TEXT_HTML_VALUE)
+=======
+    @GetMapping(value = "/login", produces = MediaType.TEXT_HTML_VALUE)
+>>>>>>> origin/bbqmall1208
     public ModelAndView getLogin() {
         ModelAndView modelAndView = new ModelAndView("member/login");
 
@@ -126,7 +142,11 @@ public class MemberController {
 
 //        session.removeAttribute("user");
         session.setAttribute("user", null);
+<<<<<<< HEAD
         ModelAndView modelAndView = new ModelAndView( "redirect:./"); //리다이렉션
+=======
+        ModelAndView modelAndView = new ModelAndView( "redirect:/"); //리다이렉션
+>>>>>>> origin/bbqmall1208
 
         System.out.println("로그아웃");
         return modelAndView;
@@ -134,9 +154,15 @@ public class MemberController {
 
 
     @GetMapping(value = "recover", produces = MediaType.TEXT_HTML_VALUE)
+<<<<<<< HEAD
     public ModelAndView getRecover() {
         ModelAndView modelAndView = new ModelAndView("member/recover");
 
+=======
+    public ModelAndView getRecover(@RequestParam (value = "find") String find) {
+        ModelAndView modelAndView = new ModelAndView("member/recover");
+        modelAndView.addObject("find", find);
+>>>>>>> origin/bbqmall1208
         return modelAndView;
     }
 
@@ -202,6 +228,33 @@ public class MemberController {
         return modelAndView;
     }
 
+<<<<<<< HEAD
 
 
 }
+=======
+    @RequestMapping(value = "recoverPassword", method = RequestMethod.PATCH, produces = MediaType.TEXT_HTML_VALUE)
+    @ResponseBody
+    public String patchRecoverPassword(EmailAuthEntity emailAuth, UserEntity user){
+        Enum<?> result = this.memberService.recoverPassword(emailAuth ,user);
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("result", result.name().toLowerCase());
+
+        return responseObject.toString();
+    }
+
+
+    @GetMapping(value = "csCenter",produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getCsCenter(){
+        ModelAndView modelAndView = new ModelAndView("member/csCenter");
+        return modelAndView;
+    }
+
+
+
+}
+
+
+
+
+>>>>>>> origin/bbqmall1208

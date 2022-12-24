@@ -7,4 +7,8 @@ public enum RegisterResult implements IResult {
 
 
     EMAIL_NOT_VERIFIED
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> origin/bbqmall1208
