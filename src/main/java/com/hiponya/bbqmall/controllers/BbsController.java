@@ -76,6 +76,11 @@ public class BbsController {
 
                 modelAndView.addObject("articleNotice", articleNotice);
                 modelAndView.addObject("notice", notice);
+
+
+
+
+
                 modelAndView.addObject("user", user);
 
 
@@ -220,6 +225,27 @@ public class BbsController {
 
 
         return responseObject.toString();
+    }
+
+
+    @RequestMapping(value = "readNotice", method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String patchModify(@SessionAttribute(value = "user") UserEntity user , @RequestParam(value = "nid") int nid,
+                              @RequestParam(value = "isImportant" , required = false) Boolean isImportant) {
+        JSONObject responseObject = new JSONObject();
+        NoticeReadVo notice = new NoticeReadVo();
+        notice.setIndex(nid);
+        notice.setImportant(isImportant);
+
+        Enum<?> result = this.bbsService.modifyNotice(notice, user);
+
+        responseObject.put("result", result.name().toLowerCase());
+
+        if (result == CommonResult.SUCCESS) {
+            responseObject.put("nid", nid);
+        }
+        return responseObject.toString();
+
     }
 
 

@@ -76,7 +76,10 @@
                     <td class="content-title">
                         <a th:href="@{/board/readNotice (nid=${Notice.getIndex()})}">
                             <h3  th:text="${Notice.getTitle()}">제목</h3>
-                            <img  alt="new" class="is-new-icon new"
+<!--                            <img  alt="new" class="is-new-icon new"-->
+<!--                                  th:src="@{/resources/images/icon_new.gif}">-->
+                            <img  alt="new"
+                                  th:if="${Notice.isNew()}"
                                   th:src="@{/resources/images/icon_new.gif}">
 
                             <img alt="hot" th:if="${Notice.getView()>0}"
@@ -106,8 +109,12 @@
 
 
                     <td class="content-title">   <a th:href="@{/board/readNotice (nid=${article.getIndex()})}">  <h3  th:text="${article.getTitle()}">-</h3>
-                        <img  alt="new" class="is-new-icon new"
-                             th:src="@{/resources/images/icon_new.gif}">
+<!--                        <img  alt="new" class="is-new-icon new"-->
+<!--                             th:src="@{/resources/images/icon_new.gif}">-->
+                        <img  alt="new"
+                        th:if="${article.isNew()}"
+                              th:src="@{/resources/images/icon_new.gif}">
+
 
                         <img alt="hot" th:if="${article.getView()>0}"
                              th:src="@{/resources/images/icon_hot.gif}">
@@ -154,7 +161,9 @@
                         <a th:each="page: ${#numbers.sequence(paging.startPage, paging.endPage)}"
                            th:class="${'page ' + (page==paging.requestPage? 'selected':'')}"
                            th:text="${page}"
-                           th:href="@{${urlBulder.replaceQueryParam('page', page).build().toUriString()}}">
+                           th:href="@{${urlBulder.replaceQueryParam('page', page).build().toUriString()}}"
+
+                        >
                             <!--                                    클릭시 값을 페이지라고 적혀ㅓ잇는곳을 페이지값으로 바꾸겟다 검색어에서도 사용하기위해 빌드쓴다-->
 
                         </a>

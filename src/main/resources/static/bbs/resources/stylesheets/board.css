@@ -67,8 +67,14 @@ body>main>.content>.form>input[type='submit']
     border: 1px solid rgba(0,0,0,0.25);
     border-radius: 2px;
     background-color: white;
+    cursor: pointer;
 
 }
+body>main>.content>.form>input[type='submit']:hover{
+    border: rgba(0,0,0,0.4) solid 0.0625rem;
+}
+
+
 body> main> .content>.form>label>input[type='text']{
     padding:0 9px 0 9px;
 
@@ -185,12 +191,7 @@ body>main>.content>.content-table>tbody .content-title>a {
 body>main>.content>.content-table>tbody .content-title>a>img {
     margin-left: 0.2rem;
 }
-body>main>.content>.content-table>tbody .content-title>a>.is-new-icon {
-    display: none;
-}
-body>main>.content>.content-table>tbody .content-title>a>.is-new-icon.new {
-    display: inline-block;
-}
+
 
 body>main>.content>.content-table tr>td>.written-on{
   text-align: center;
@@ -265,6 +266,14 @@ body>main>.content>.content-table>tfoot>tr>td>.page-container>.page{
     text-align: center;
     vertical-align: middle;
 }
+body>main>.content>.content-table>tfoot>tr>td>.page-container>.page.selected{
+    border:1px  solid rgba(0,0,0,0.9);
+    user-select: none;
+
+}
+
+
+
 body>main>.content>.content-table>tfoot>tr>td>.page-container>.page:hover{
 
     background-color: rgba(0,0,0,0.1);
@@ -284,4 +293,8 @@ body>main>.content>.write-notice-button>a{
     margin: 0.5rem ;
     border-radius: 3px;
     color: white;
+}
+body>main>.content>.write-notice-button>a:hover{
+    background-color: rgba(0,0,0,0.8);
+
 }

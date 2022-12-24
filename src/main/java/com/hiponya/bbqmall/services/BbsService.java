@@ -3,7 +3,9 @@ package com.hiponya.bbqmall.services;
 import com.hiponya.bbqmall.entities.bbs.ImageEntity;
 import com.hiponya.bbqmall.entities.bbs.NoticeBoardEntity;
 import com.hiponya.bbqmall.entities.bbs.NoticeEntity;
+import com.hiponya.bbqmall.entities.member.UserEntity;
 import com.hiponya.bbqmall.enums.CommonResult;
+import com.hiponya.bbqmall.enums.bbs.ModifyArticleResult;
 import com.hiponya.bbqmall.enums.bbs.WriteResult;
 import com.hiponya.bbqmall.interfaces.IResult;
 import com.hiponya.bbqmall.mappers.IBbsMapper;
@@ -102,6 +104,8 @@ public NoticeReadVo[] getArticleNotice(){
             //공지게시판을 불러온다
     public NoticeReadVo[] getNotice(NoticeBoardEntity board, PagingModel paging,  String keyword) {
 
+        System.out.println("업데이트된 수 "+this.bbsMapper.updateNoticeIsNew());
+
         return this.bbsMapper.selectNoticeByBoardId(board.getId(), keyword, paging.countPerPage,(paging.requestPage - 1) * (paging.countPerPage));
 
     }
@@ -125,6 +129,34 @@ public NoticeReadVo[] getArticleNotice(){
 
         return article;
 
+    }
+
+
+    public Enum<? extends IResult> modifyNotice(NoticeEntity notice, UserEntity user) {
+
+        if (user == null) {
+            return ModifyArticleResult.NOT_SIGNED;
+        }
+        NoticeEntity existingArticle = this.bbsMapper.selectNoticeByIndex(notice.getIndex());
+
+        if (existingArticle == null) { //게시글이 없거나 권한이 없거나
+
+            return ModifyArticleResult.NO_SUCH_ARTICLE;
+//        }
+//        if (!user.isAdmin=0) { 관리자가 아닐때
+//
+//            return ModifyArticleResult.NOT_ALLOWED;
+        } else {
+
+            existingArticle.setContent(notice.getContent());
+            existingArticle.setTitle(notice.getTitle());
+//            existingArticle.setUserEmail(user.getEmail());
+            existingArticle.setModifiedOn(new Date());
+            existingArticle.setImportant(notice.isImportant());
+
+
+            return this.bbsMapper.updateNotice(existingArticle) > 0 ? CommonResult.SUCCESS : CommonResult.FAILURE;
+        }
     }
 
 

@@ -112,10 +112,12 @@ body>main>.content>form>table>tbody>.button-row> td>label>input{
     color: white;
     cursor: pointer;
     letter-spacing: -1px;
+    font-family: inherit;
 }
 body>main>.content>form>table>tbody>.button-row> td>label>.before{
 
     background-color: #333333;
+
 
 }
 body>main>.content>form>table>tbody>.button-row> td>label>.submit{
@@ -123,6 +125,11 @@ body>main>.content>form>table>tbody>.button-row> td>label>.submit{
     background-color: #E31134;
 
 }
+body>main>.content>form>table>tbody>.button-row> td>label>.submit:hover{
+    background-color: rgba(0,0,0,0.8);
+}
+
+
 
 .ck-editor__editable{
     min-height: 20rem;

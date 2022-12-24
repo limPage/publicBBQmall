@@ -16,6 +16,19 @@ public class NoticeEntity {
 
     private Date modifiedOn;
 
+    private Date expirationDate;
+
+    private Boolean isNew;
+
+    public Boolean isNew() {
+        return isNew;
+    }
+
+    public NoticeEntity setNew(Boolean isNew) {
+        this.isNew = isNew;
+        return this;
+    }
+
     public Date getExpirationDate() {
         return expirationDate;
     }
@@ -24,7 +37,7 @@ public class NoticeEntity {
         this.expirationDate = expirationDate;
     }
 
-    private Date expirationDate;
+
 
     public int getIndex() {
         return index;
