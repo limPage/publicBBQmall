@@ -42,6 +42,7 @@ body>main>.content>.content-table tr{
     justify-content: flex-start;
     /*height: 2rem;*/
 
+
 }
 body>main>.content>.content-table>tbody> .info-row{
     border-left: 1px solid rgba(0,0,0,0.1);
@@ -100,13 +101,26 @@ body> main> .content >.content-table> thead>tr>td{
 
 }
 
+body> main> .content >.content-table> tbody>.content-row{
+    border-left: transparent solid 0.0625rem;
+    border-right: transparent solid 0.0625rem;
+}
+
+
 body> main> .content >.content-table> tbody>.content-row>td{
+
 
 
     min-height: 20rem;
     width: 100%;
     padding:  30px 10px 30px 10px;
 }
+
+body> main> .content >.content-table> tbody>.content-row *{
+    max-width: 100%;
+}
+
+
 body> main> .content >.content-table> tfoot {
 
 
@@ -156,6 +170,10 @@ body> main> .content >.content-table> tfoot > .management-row>td>a{
     border-radius: 3px;
     font-size: 13px;
 }
+body> main> .content >.content-table> tfoot > .management-row>td>a:hover{
+    background-color: rgba(0,0,0,0.8);
+}
+
 body> main> .content >.content-table> tfoot > .management-row>td>.spring{
     width: 100%;
     align-items: flex-start;
@@ -172,4 +190,5 @@ body> main> .content >.content-table> tfoot > .management-row>td>a:not(:last-of-
 }
 body> main> .content >.content-table> tfoot > .management-row>td>.announce-button{
     background-color: #CF152D;
+    cursor: pointer;
 }
