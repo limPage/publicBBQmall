@@ -9,7 +9,7 @@ form['ranking'].addEventListener('click', (e)=>{
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
     formData.append('index', form['index'].value);
-    formData.append('title', form['productTitle'].value);
+    formData.append('title', form['goodsTitle'].value);
     xhr.open('POST', './category');
     xhr.onreadystatechange = () => {
         if(xhr.readyState === XMLHttpRequest.DONE) {
@@ -33,10 +33,6 @@ form['ranking'].addEventListener('click', (e)=>{
 });
 
 
-form['1'].addEventListener('click', () => {
-    alert('add');
-});
-
 form.onsubmit = e => {
     e.preventDefault();
     Warning.hide();
@@ -46,17 +42,13 @@ form.onsubmit = e => {
         form['productTitle'].focus();
         return false;
     }
-    if(editor.getData() === '') {
-        Warning.show('내용을 입력해 주세요.');
-        editor.focus();
-        return false;
-    }
 
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
     formData.append('index', form['index'].value);
     formData.append('title', form['productTitle'].value);
     formData.append('cid', form['cid'].value);
+    formData.append('price',form['goodsPrice'].value);
     xhr.open('POST', './category');
     xhr.onreadystatechange = () => {
         if(xhr.readyState === XMLHttpRequest.DONE) {

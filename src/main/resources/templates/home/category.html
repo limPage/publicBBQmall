@@ -31,26 +31,31 @@
                                 <li class = "li">
                                     <label class="active">
                                         <input type="button" name="regist" value="신규등록순" class = "button">&nbsp
+                                        <input type="hidden" name = "index" th:value="${category.getIndex()}">
                                     </label>
                                 </li>
                                 <li class = "li">
                                     <label class="active">
                                         <input type="button" name="low-price" value="낮은가격순" class = "button">&nbsp
+                                        <input type="hidden" name = "index" th:value="${category.getIndex()}">
                                     </label>
                                 </li>
                                 <li class = "li">
                                     <label class="active">
                                         <input type="button" name="high-price" value="높은가격순" class = "button">&nbsp
+                                        <input type="hidden" name = "index" th:value="${category.getIndex()}">
                                     </label>
                                 </li>
                                 <li class = "li">
                                     <label class="active">
                                         <input type="button" name="review" value="상품평많은순" class = "button">&nbsp
+                                        <input type="hidden" name = "index" th:value="${category.getIndex()}">
                                     </label>
                                 </li>
                                 <li class = "li">
                                     <label class="active">
                                         <input type="button" name="view" value="조회순" class = "button">
+                                        <input type="hidden" name = "index" th:value="${category.getIndex()}">
                                     </label>
                                 </li>
                             </ul>
@@ -65,12 +70,12 @@
                         <ul class="ul">
                             <li class="goods-list" th:each = "product : ${products}">
                                 <div class="item-area" th:value="${product.getProductName()}">
-                                    <a href="/view" class="goods" name="1">
+                                    <a href="/view" class="goods">
                                         <img src="/resources/images/new1.png" width="300px" alt>
-                                        <div class="goods-title" rel="goodsTitle">
+                                        <div class="goods-title" rel="goodsTitle" name="goodsTitle">
                                             BBQ닭가슴살 맛보기세트 12종 2팩씩 (신제품)
                                         </div>
-                                        <div class="goods-price" rel="goodsPrice">
+                                        <div class="goods-price" rel="goodsPrice" th:value="${product.getPrice()}" name="goodsPrice">
                                             41% 44,900원
                                         </div>
                                     </a>

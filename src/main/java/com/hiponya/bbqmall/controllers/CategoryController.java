@@ -4,6 +4,7 @@ import com.hiponya.bbqmall.entities.product.CategoryEntity;
 import com.hiponya.bbqmall.entities.product.ProductEntity;
 import com.hiponya.bbqmall.enums.CommonResult;
 import com.hiponya.bbqmall.services.CategoryService;
+import jdk.jfr.Category;
 import org.json.JSONObject;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -28,7 +29,6 @@ public class CategoryController {
         ModelAndView modelAndView = new ModelAndView("home/category");
         ProductEntity[] products = this.categoryService.getProducts();
 
-
         modelAndView.addObject("products", products);
         modelAndView.addObject("category", category);
         modelAndView.addObject("product", product);
@@ -39,8 +39,18 @@ public class CategoryController {
     }
 
     @RequestMapping(value = "view", method=RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getView() {
+    public ModelAndView getView(@RequestParam(value = "cid") int cid, CategoryEntity category,ProductEntity product) {
         ModelAndView modelAndView = new ModelAndView("home/view");
+
+        CategoryEntity category1 = this.categoryService.getCategoryIndex(cid);
+        modelAndView.addObject("category1", category1);
+
+        ProductEntity[] products = this.categoryService.getProducts();
+        modelAndView.addObject("products", products);
+
+        JSONObject commentObject = new JSONObject();
+        commentObject.put("productName", product.getProductName());
+        commentObject.put("price", product.getPrice());
 
         return modelAndView;
     }
@@ -54,9 +64,11 @@ public class CategoryController {
         modelAndView.addObject("product", product);
 
         ProductEntity[] products = this.categoryService.getProducts();
-
         modelAndView.addObject("products", products);
 
+        JSONObject commentObject = new JSONObject();
+        commentObject.put("productName", product.getProductName());
+        commentObject.put("price", product.getPrice());
 
         return modelAndView;
     }
@@ -84,6 +96,7 @@ public class CategoryController {
         responseObject.put("product", product);
         responseObject.put("title", category.getTitle());
         responseObject.put("index", category.getIndex());
+        responseObject.put("price", product.getPrice());
 
         return responseObject.toString();
     }
