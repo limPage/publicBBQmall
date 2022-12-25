@@ -32,3 +32,14 @@ form['bid'].oninput=()=>{
 
     document.form.submit();
 }
+form.onsubmit=()=>{
+
+
+    save ();
+}
+let page= window.document.querySelectorAll('.page')
+for( let i = 0; i < page.length; i++ ) {
+    let item = page.item(i);
+
+    item.addEventListener('click', save);
+}

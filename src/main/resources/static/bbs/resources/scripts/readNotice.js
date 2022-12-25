@@ -1,4 +1,13 @@
-window.document.querySelector('.announce-button').addEventListener('click',()=>{
+const important= window.document.getElementById('important').value;
+const announceButton= window.document.querySelector('.announce-button');
+
+if(important==='false'){
+    announceButton.innerText="공지해제"
+}else announceButton.innerText="공지등록"
+
+
+
+announceButton.addEventListener('click',()=>{
 
     if (!confirm('공지글로 변경 하시겠습니까?')) {
 
@@ -8,7 +17,9 @@ window.document.querySelector('.announce-button').addEventListener('click',()=>{
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
     // formData.append('isImportant', 'true');
-    xhr.open('PATCH', window.location.href+'&isImportant=true');//메소드방식은 아무능력이 없음  window.location.href 를쓰면 boardid bid를 안보내도댐
+
+    xhr.open('PATCH', window.location.href+'&isImportant='+important );
+    //메소드방식은 아무능력이 없음  window.location.href 를쓰면 boardid bid를 안보내도댐
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {//4 성공인게 아니고 작업의끝
             Cover.hide();
@@ -17,7 +28,13 @@ window.document.querySelector('.announce-button').addEventListener('click',()=>{
                 switch (responseObject['result']) {
 
                     case 'success':
-                        alert("삭제성공");
+                        if(important==='false'){
+                            alert("공지를 해제하였습니다.");
+                        }else {announceButton.innerText="공지등록"
+                        alert("공지로 등록하였습니다.");}
+
+
+                        window.location.href="/board/"
 
                         break;
                     case 'no_such_article':

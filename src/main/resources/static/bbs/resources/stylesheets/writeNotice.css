@@ -55,7 +55,7 @@ body>main>.content>form>table>tbody>tr{
 
 
  }
-body>main>.content>form>table>tbody>tr>td>label{
+body>main>.content>form>table>tbody>tr:not(:last-of-type)>td>label{
     margin: unset;
 
     width: 100%;
@@ -101,6 +101,9 @@ body>main>.content>form>table>tbody>.text-box-row>td>label>textarea{
 
 
 }
+body>main>.content>form>table>tbody>.button-row> td>label{
+    padding: 0.5rem;
+}
 
 body>main>.content>form>table>tbody>.button-row> td>label>input{
     height: 3rem;
@@ -113,13 +116,24 @@ body>main>.content>form>table>tbody>.button-row> td>label>input{
     cursor: pointer;
     letter-spacing: -1px;
     font-family: inherit;
+
+
 }
 body>main>.content>form>table>tbody>.button-row> td>label>.before{
 
     background-color: #333333;
 
-
 }
+body>main>.content>form>table>tbody>.button-row> td>label>.before>label{
+    width: border-box;
+}
+
+
+body>main>.content>form>table>tbody>.button-row> td>label>.before:hover{
+    background-color: rgba(0,0,0,0.5);
+}
+
+
 body>main>.content>form>table>tbody>.button-row> td>label>.submit{
 
     background-color: #E31134;
