@@ -46,7 +46,7 @@ public class BbsService {
             return WriteResult.NO_SUCH_BOARD;
         }
 
-
+            //글쓸때 글의 새 개시물 알림뜰 기간을 내일까지로 정한다.
         notice.setExpirationDate(DateUtils.addDays(new Date(), 1));
 //        if(this.bbsMapper.insertArticle(article)==0){
 //            return CommonResult.FAILURE;
@@ -83,8 +83,8 @@ public class BbsService {
 //        } else {
 //            return this.bbsMapper.selectArticleCountByBoardIdTitleContent(board.getId(), keyword);
 //        }
-        System.out.println(board.getId());
-        System.out.println("k="+keyword);
+        System.out.println("공지종류는="+board.getId());
+        System.out.println("keyword="+keyword);
         return this.bbsMapper.selectNoticeCountByNoticeBoardId(board.getId() ,keyword);
 
     }
@@ -97,13 +97,14 @@ public class BbsService {
 //    }
 //
 
-public NoticeReadVo[] getArticleNotice(){
-        return this.bbsMapper.selectArticleNotice();
+public NoticeReadVo[] getAnnounceNotice(){
+        return this.bbsMapper.selectAnnounceNotice();
 }
 
             //공지게시판을 불러온다
     public NoticeReadVo[] getNotice(NoticeBoardEntity board, PagingModel paging,  String keyword) {
 
+        //만들어진지 1일이 지난 게시물의 새게시물 여부를 새로고침 한다.
         System.out.println("업데이트된 수 "+this.bbsMapper.updateNoticeIsNew());
 
         return this.bbsMapper.selectNoticeByBoardId(board.getId(), keyword, paging.countPerPage,(paging.requestPage - 1) * (paging.countPerPage));
@@ -121,36 +122,50 @@ public NoticeReadVo[] getArticleNotice(){
     //게시물에 들어가는 동시에 조회수를 올려줌
 
     public NoticeReadVo readNotice(int index) {
-        NoticeReadVo article = this.bbsMapper.selectNoticeByIndex(index);
-        if (article != null) {
-            article.setView(article.getView() + 1);
-            this.bbsMapper.updateNotice(article);
+        NoticeReadVo notice = this.bbsMapper.selectNoticeByIndex(index);
+        if (notice != null) {
+            notice.setView(notice.getView() + 1);
+            this.bbsMapper.updateNotice(notice);
         }
 
-        return article;
+        return notice;
 
     }
 
-
-    public Enum<? extends IResult> modifyNotice(NoticeEntity notice, UserEntity user) {
-
+    //작성 공지 수정하기
+    public Enum<? extends IResult> modifyNotice(NoticeEntity notice, UserEntity user, Boolean isImportant) {
+            //로그인 안했다면 실패
         if (user == null) {
             return ModifyArticleResult.NOT_SIGNED;
         }
+    //    공지로 등록하려고 왔을 경우
+        if(isImportant!=null){
+            //관리지가 아니면 권한이 없음을 알린다.
+
+
+
+            if( !user.isAdmin()) {
+                return  ModifyArticleResult.NOT_ALLOWED;
+            }
+
+        }
+
         NoticeEntity existingArticle = this.bbsMapper.selectNoticeByIndex(notice.getIndex());
 
-        if (existingArticle == null) { //게시글이 없거나 권한이 없거나
+        if (existingArticle == null) { //게시글이 없으면 실패
 
             return ModifyArticleResult.NO_SUCH_ARTICLE;
-//        }
-//        if (!user.isAdmin=0) { 관리자가 아닐때
-//
-//            return ModifyArticleResult.NOT_ALLOWED;
-        } else {
 
-            existingArticle.setContent(notice.getContent());
-            existingArticle.setTitle(notice.getTitle());
-//            existingArticle.setUserEmail(user.getEmail());
+                //수정 시작
+        } else {
+            //게시물 수정인경우->(단순 공지 등록이아님) 타이틀과 컨텐츠가 있음
+            if(notice.getTitle()!=null){
+
+                existingArticle.setContent(notice.getContent());
+                existingArticle.setTitle(notice.getTitle());
+            }
+
+
             existingArticle.setModifiedOn(new Date());
             existingArticle.setImportant(notice.isImportant());
 

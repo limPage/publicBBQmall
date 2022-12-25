@@ -104,12 +104,17 @@ public class MemberController {
 //        MediaType mediaType = new MediaType("member/login");
 
 
+
         Enum<? extends IResult> result = this.memberService.login(user);
 
         JSONObject responseObject = new JSONObject();
         responseObject.put("result", result.name().toLowerCase());
 
         if(result == CommonResult.SUCCESS){
+
+            UserEntity isAdminMode= this.memberService.isAdminMode(user);
+            System.out.println("어드민이에요?"+isAdminMode.isAdmin());
+            user.setAdmin(isAdminMode.isAdmin());
             session.setAttribute("user",user);
             System.out.println("로그인 성공");
         }else System.out.println("로그인실패");

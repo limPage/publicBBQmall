@@ -150,6 +150,12 @@ public class MemberService {
 
         return CommonResult.SUCCESS;
     }
+    @Transactional
+    public UserEntity isAdminMode(UserEntity user){
+        return this.memberMapper.selectUserLogin(user.getId(), user.getPassword());
+    }
+
+
 
 
     @Transactional

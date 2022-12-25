@@ -96,7 +96,8 @@
                `address_primary`   AS `addressPrimary`,
                `address_primary`   AS `addressPrimary`,
                `address_secondary` AS `addressSecondary`,
-               `registered_on`     AS `registeredOn`
+               `registered_on`     AS `registeredOn`,
+                `admin` AS `isAdmin`
         FROM `bbqmall`.`users`
         WHERE BINARY `id` = #{id}
           AND BINARY `password` = #{password}

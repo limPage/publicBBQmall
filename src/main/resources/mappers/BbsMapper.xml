@@ -59,7 +59,7 @@
 
 <!--    </select>-->
 
-    <select id="selectArticleNotice" resultType="com.hiponya.bbqmall.vos.bbs.NoticeReadVo">
+    <select id="selectAnnounceNotice" resultType="com.hiponya.bbqmall.vos.bbs.NoticeReadVo">
     SELECT `notice`.`index` AS `index`,
     `notice`.`board_id` AS `boardId`,
     `notice`.`title` AS `title`,

@@ -26,6 +26,16 @@ public class UserEntity {
 
     private String birth;
 
+    private Boolean isAdmin;
+
+    public Boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(Boolean admin) {
+        isAdmin = admin;
+    }
+
     public void setEmail(String email) {
         this.email = email;
     }

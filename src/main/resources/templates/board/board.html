@@ -62,43 +62,44 @@
             </tr>
             </thead>
             <tbody>
-                <tr class="article-notice"  th:each="Notice: ${articleNotice}" >
+                <tr class="announce-notice" th:each="aNotice: ${announceNotice}" >
                     <td>
                         <img th:src="@{/resources/images/icon_notice.gif}">
                     </td>
 
                     <td>
-                        <h3 class="board-id" th:text="${Notice.getText()}">-</h3>
+                        <h3 class="board-id" th:text="${aNotice.getText()}">-</h3>
                     </td>
 
 
 
                     <td class="content-title">
-                        <a th:href="@{/board/readNotice (nid=${Notice.getIndex()})}">
-                            <h3  th:text="${Notice.getTitle()}">제목</h3>
+                        <a th:href="@{/board/readNotice (nid=${aNotice.getIndex()})}">
+                            <h3  th:text="${aNotice.getTitle()}">제목</h3>
 <!--                            <img  alt="new" class="is-new-icon new"-->
 <!--                                  th:src="@{/resources/images/icon_new.gif}">-->
                             <img  alt="new"
-                                  th:if="${Notice.isNew()}"
+                                  th:if="${aNotice.isNew()}"
                                   th:src="@{/resources/images/icon_new.gif}">
 
-                            <img alt="hot" th:if="${Notice.getView()>0}"
+                            <img alt="hot" th:if="${aNotice.getView()>0}"
                                  th:src="@{/resources/images/icon_hot.gif}">
 
                     </a></td>
 
 
                     <td>
-                       <h3 class="written-on" th:text="${#dates.format(Notice.getModifiedOn(),'yyyy.MM.dd')}"> 2022.52.22</h3>
+                       <h3 class="written-on" th:text="${#dates.format(aNotice.getWrittenOn(),'yyyy.MM.dd')}"> 2022.52.22</h3>
                     </td>
                     <td>
-                        <h3 class="view-count" th:text="${Notice.getView()}">1</h3>
+                        <h3 class="view-count" th:text="${aNotice.getView()}">1</h3>
                     </td>
                 </tr>
 
-                <tr class="article" th:each="article: ${notice}" >
+                <tr class="article" th:each="article, i: ${notice}" >
+                    <!--공지의 특성상 10개가 넘어가지 않으므로 실사이트에선 게시물 번호가 아닌 10 내림차순으로 보여주는 듯 합니다.                    -->
                     <td>
-                        <h3 class="number" th:text="${article.getIndex()}">-</h3>
+                        <h3 class="number" th:text="${i.size - i.index}">-</h3>
                     </td>
 
                     <td>
@@ -125,7 +126,7 @@
 
 
                     <td>
-                        <h3 class="written-on" th:text="${#dates.format(article.getModifiedOn(),'yyyy.MM.dd')}"> 2022.52.22</h3>
+                        <h3 class="written-on" th:text="${#dates.format(article.getWrittenOn(),'yyyy.MM.dd')}"> 2022.52.22</h3>
                     </td>
                     <td>
                         <h3 class="view-count" th:text="${article.getView()}">1</h3>

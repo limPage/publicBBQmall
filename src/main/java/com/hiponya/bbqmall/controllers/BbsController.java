@@ -72,9 +72,9 @@ public class BbsController {
                 modelAndView.addObject("paging", paging); //게시글개수
 
                 NoticeReadVo[] notice = this.bbsService.getNotice(noticeBoard, paging, keyword);
-                NoticeReadVo[] articleNotice =this.bbsService.getArticleNotice();
+                NoticeReadVo[] announceNotice =this.bbsService.getAnnounceNotice();
 
-                modelAndView.addObject("articleNotice", articleNotice);
+                modelAndView.addObject("announceNotice", announceNotice);
                 modelAndView.addObject("notice", notice);
 
 
@@ -231,13 +231,16 @@ public class BbsController {
     @RequestMapping(value = "readNotice", method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String patchModify(@SessionAttribute(value = "user") UserEntity user , @RequestParam(value = "nid") int nid,
-                              @RequestParam(value = "isImportant" , required = false) Boolean isImportant) {
+                              @RequestParam(value = "isImportant" , required = false) Boolean isImportant, NoticeReadVo notice) {
         JSONObject responseObject = new JSONObject();
-        NoticeReadVo notice = new NoticeReadVo();
+
+
+//
+
         notice.setIndex(nid);
         notice.setImportant(isImportant);
+        Enum<?> result = this.bbsService.modifyNotice(notice, user, isImportant);
 
-        Enum<?> result = this.bbsService.modifyNotice(notice, user);
 
         responseObject.put("result", result.name().toLowerCase());
 

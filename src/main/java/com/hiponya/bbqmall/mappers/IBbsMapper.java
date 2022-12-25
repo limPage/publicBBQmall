@@ -22,7 +22,7 @@ public interface IBbsMapper {
 
     int updateNoticeIsNew();
 
-    NoticeReadVo[] selectArticleNotice();
+    NoticeReadVo[] selectAnnounceNotice();
     NoticeReadVo[] selectNoticeByBoardId(@Param(value = "boardId") String boardId,
 
                                             @Param(value = "keyword") String keyword,
@@ -35,7 +35,7 @@ public interface IBbsMapper {
                                          @Param(value = "offset") int offset);
     NoticeReadVo selectNoticeByIndex(@Param(value = "index") int index);
 
-    int updateNotice(NoticeEntity article);
+    int updateNotice(NoticeEntity notice);
 
 
     int insertNotice(NoticeEntity notice);

@@ -30,7 +30,7 @@
             <thead>
             <tr>
                 <td th:utext="${notice.getTitle()}">
-                   [ujkl ]제목입니다.
+                   제목
                 </td>
             </tr>
             </thead>
@@ -98,8 +98,11 @@
                               <a href="./" >목록</a>
 
                             <span class="spring"></span>
-
-                                <a class="announce-button">공지로 등록</a>
+                                <input id="important" class="important" hidden  th:value="${!notice.isImportant()}" type="text">
+                                <a class="announce-button"
+                                th:if ="${session.user != null && session.user.isAdmin()==true}">공지등록</a>
+<!--                                <a class="announce-button"-->
+<!--                                   th:if="${session.user != null && session.user.isAdmin()==true && notice.isImportant()}">공지해제</a>-->
                                 <a href="#">수정</a>
                                 <a href="#">삭제</a>
                             </td>
@@ -114,6 +117,7 @@
 
 
         </table>
+
 
 
     </div>
