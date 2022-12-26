@@ -14,7 +14,7 @@ public class CommonInterceptor implements HandlerInterceptor{
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        CategoryEntity[] categories = this.categoryService.getBoards();
+        CategoryEntity[] categories = this.categoryService.getCategories();
         request.setAttribute("categories", categories);
         System.out.println("카테고리 " + categories.length + "개 있음");
         return true;

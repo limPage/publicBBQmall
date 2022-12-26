@@ -3,6 +3,7 @@ package com.hiponya.bbqmall.services;
 import com.hiponya.bbqmall.entities.member.EmailAuthEntity;
 import com.hiponya.bbqmall.entities.product.CategoryEntity;
 import com.hiponya.bbqmall.entities.product.ProductEntity;
+import com.hiponya.bbqmall.entities.product.SortEntity;
 import com.hiponya.bbqmall.enums.CommonResult;
 import com.hiponya.bbqmall.enums.member.CategoryResult;
 import com.hiponya.bbqmall.enums.member.VerifyEmailAuthResult;
@@ -11,6 +12,7 @@ import com.hiponya.bbqmall.mappers.ICategoryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Date;
 
@@ -58,12 +60,21 @@ public class CategoryService {
         return CommonResult.SUCCESS;
     }
 
-    public CategoryEntity[] getBoards() {
+    public CategoryEntity[] getCategories() {
         return this.categoryMapper.selectCategories();
     }
 
-    public ProductEntity[] getProducts() {
-        return this.categoryMapper.selectProducts();
+    public CategoryEntity getCategories2(int cid) {
+        return this.categoryMapper.selectCategories2(cid);
     }
+
+    public ProductEntity[] getProducts(int cid) {
+        return this.categoryMapper.selectProducts(cid);
+    }
+
+    public SortEntity[] getSorts() {
+        return this.categoryMapper.selectSorts();
+    }
+
 
 }

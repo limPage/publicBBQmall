@@ -2,6 +2,7 @@ package com.hiponya.bbqmall.controllers;
 
 import com.hiponya.bbqmall.entities.product.CategoryEntity;
 import com.hiponya.bbqmall.entities.product.ProductEntity;
+import com.hiponya.bbqmall.entities.product.SortEntity;
 import com.hiponya.bbqmall.enums.CommonResult;
 import com.hiponya.bbqmall.services.CategoryService;
 import jdk.jfr.Category;
@@ -25,16 +26,32 @@ public class CategoryController {
     }
 
     @RequestMapping(value = "category", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getCategory(@RequestParam(value = "cid") String cid, CategoryEntity category, ProductEntity product) {
+    public ModelAndView getCategory(@RequestParam(value = "cid") int cid, CategoryEntity category, ProductEntity product, SortEntity sort) {
         ModelAndView modelAndView = new ModelAndView("home/category");
-        ProductEntity[] products = this.categoryService.getProducts();
+        CategoryEntity[] categories = this.categoryService.getCategories();
+        ProductEntity[] products = this.categoryService.getProducts(cid);
+        CategoryEntity categories2 = this.categoryService.getCategories2(cid);
+        SortEntity[] sorts = this.categoryService.getSorts();
+
+        category.setIndex(category.getIndex());
+
+        category.setTitle(category.getTitle());
+
+        modelAndView.addObject("sort", sort);
+        modelAndView.addObject("sorts", sorts);
 
         modelAndView.addObject("products", products);
+        modelAndView.addObject("categories", categories);
         modelAndView.addObject("category", category);
         modelAndView.addObject("product", product);
         modelAndView.addObject("index",category.getIndex());
-        modelAndView.addObject("title", category.getTitle());
         modelAndView.addObject("cid", cid);
+
+        if(product != null) {
+            modelAndView.addObject("title", categories2.getTitle());
+        }
+
+        System.out.println(category.getTitle());
         return modelAndView;
     }
 
@@ -45,7 +62,7 @@ public class CategoryController {
         CategoryEntity category1 = this.categoryService.getCategoryIndex(cid);
         modelAndView.addObject("category1", category1);
 
-        ProductEntity[] products = this.categoryService.getProducts();
+        ProductEntity[] products = this.categoryService.getProducts(cid);
         modelAndView.addObject("products", products);
 
         JSONObject commentObject = new JSONObject();
@@ -63,7 +80,7 @@ public class CategoryController {
         modelAndView.addObject("category", category);
         modelAndView.addObject("product", product);
 
-        ProductEntity[] products = this.categoryService.getProducts();
+        ProductEntity[] products = this.categoryService.getProducts(cid);
         modelAndView.addObject("products", products);
 
         JSONObject commentObject = new JSONObject();
