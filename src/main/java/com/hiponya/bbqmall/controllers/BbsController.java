@@ -226,29 +226,75 @@ public class BbsController {
         return responseObject.toString();
     }
 
+    @GetMapping(value = "modifyNotice", produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getModifyNotice(@SessionAttribute(value = "user", required = false) UserEntity user, @RequestParam(value = "nid") int nid){
+        ModelAndView modelAndView =new ModelAndView("board/modifyNotice");
 
-    @RequestMapping(value = "readNotice", method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
+        NoticeReadVo existingNotice = this.bbsService.readNotice(nid);
+
+
+        Enum<?> result = this.bbsService.prepareModifyNotice(user, nid);
+
+        System.out.println(existingNotice.getTitle());
+        System.out.println(existingNotice.getContent());
+
+        modelAndView.addObject("result", result.name());
+
+        if(result == CommonResult.SUCCESS){
+
+            modelAndView.addObject("notice", existingNotice);
+        }
+
+
+//        if (result == CommonResult.SUCCESS) {
+//            modelAndView.addObject("board", this.bbsService.getBoard(existingArticle.getBoardId()));
+//        }
+
+        return modelAndView;
+    }
+
+
+    @RequestMapping(value = "modifyNotice", method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String patchModify(@SessionAttribute(value = "user") UserEntity user , @RequestParam(value = "nid") int nid,
-                              @RequestParam(value = "isImportant" , required = false) Boolean isImportant, NoticeReadVo notice) {
+    public String patchModify(@SessionAttribute(value = "user") UserEntity user , NoticeReadVo notice) {
         JSONObject responseObject = new JSONObject();
 
 
-//
 
-        notice.setIndex(nid);
-        notice.setImportant(isImportant);
-        Enum<?> result = this.bbsService.modifyNotice(notice, user, isImportant);
+        Enum<?> result = this.bbsService.modifyNotice(notice, user);
 
 
         responseObject.put("result", result.name().toLowerCase());
 
         if (result == CommonResult.SUCCESS) {
-            responseObject.put("nid", nid);
+            responseObject.put("nid", notice.getIndex());
         }
         return responseObject.toString();
 
     }
+
+    @ResponseBody
+    @RequestMapping(value = "deleteNotice", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public String deleteNotice(@SessionAttribute(value = "user", required = false) UserEntity user,
+                             @RequestParam(value = "nid") int nid
+//                             ArticleEntity article 주소로 받아왔기때문에 파람을 쓴다.
+    ) {
+        NoticeEntity notice = new NoticeEntity();
+        notice.setIndex(nid);
+        JSONObject responseObject = new JSONObject();
+
+        Enum<?> result = this.bbsService.deleteNotice(notice, user);
+        responseObject.put("result", result.name().toLowerCase());
+//
+//        if (result == CommonResult.SUCCESS) {
+//
+//            responseObject.put("bid", notice.getBoardId());
+//
+//        }
+
+        return responseObject.toString();
+    }
+
 
 
 }

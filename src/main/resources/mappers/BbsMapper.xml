@@ -233,4 +233,13 @@
 
 
     </update>
+
+    <delete id="deleteNoticeByIndex" parameterType="com.hiponya.bbqmall.entities.bbs.NoticeEntity">
+
+        DELETE
+        FROM `bbq_bbs`.`notice`
+        WHERE `index` = #{index}
+        LIMIT 1;
+
+    </delete>
 </mapper>
