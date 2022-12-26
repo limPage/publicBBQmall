@@ -13,22 +13,13 @@
   <script th:if="${result.equals('NO_SUCH_ARTICLE')}">
     alert('존재하지 않는 게시판입니다.');
 
-    if (window.history.length>1){
-      window.history.back();
-    }else {
-      window.close();
-
-    }
+    window.location.href='/board/' ;
   </script>
   <script th:if="${result.equals('NOT_ALLOWED')}">
     alert('수정할 권한이 없습니다.');
 
-    if (window.history.length>1){
-      window.history.back();
-    }else {
-      window.close();
+    window.location.href='/board/' ;
 
-    }
   </script>
   <script th:if="${result.equals('NOT_SIGNED')}">
     alert('로그인이 되었는지 확인후 다시 시도해 주세요.');
@@ -50,7 +41,7 @@
 <main class="cs-center">
 
   <th:block th:replace="~{fragments/body ::sideBar}"></th:block>
-  <div class="content">
+  <div class="content" th:if="${notice!=null}">
 
     <div class="title-container">
       <h1>공지사항 수정</h1>

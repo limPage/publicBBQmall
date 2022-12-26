@@ -40,7 +40,7 @@
             WHERE
             (REPLACE(`title`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%')
             OR REPLACE(`content`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%'))
-
+            AND `board_id` != 'qna'
         </if>
 
     </select>
@@ -105,8 +105,8 @@
 
         </if>
 
-        <if test='boardId == null and keyword != null'>
-
+        <if test='boardId == null'>
+            AND `board_id` != 'qna'
 
         </if>
 

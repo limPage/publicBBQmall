@@ -7,6 +7,8 @@
     <th:block th:replace="~{fragments/head :: common}"></th:block>
 
     <link rel="stylesheet" th:href="@{/bbs/resources/stylesheets/board.css}">
+    <link rel="stylesheet" th:href="@{/bbs/resources/stylesheets/boardQna.css}">
+
     <script defer th:src="@{/bbs/resources/scripts/board.js}"></script>
 
 
@@ -15,10 +17,10 @@
 <th:block th:replace="~{fragments/body :: header}"></th:block> <!-- block 자리에 body.html 파일의 replace 태그와 치환한다. -->
 <th:block th:replace="~{fragments/body :: cover}"></th:block>
 
-
+<!--<input class="board" name="board" id="board" hidden th:value="${bid==null || bid.equals('notice')|| bid.equals('event') || bid.equals('urgent')? 'notice':bid} ">-->
 <main class="cs-center">
     <th:block th:replace="~{fragments/body ::sideBar}"></th:block>
-    <div class="content">
+    <div class="content notice" th:if="${bid==null ||  !bid.equals('qna')}">
         <div class="title-container">
             <h1 >공지사항</h1>
         </div>
@@ -32,6 +34,7 @@
 <!--                        <option th:selected="${criterion != null && criterion.equals('evnet')}" value="event">이벤트</option>-->
 <!--                        <option th:selected="${criterion != null && criterion.equals('urgent')}" value="urgent">긴급공지</option>-->
 <!--                    </select>-->
+                    <input hidden name="isNoticeBoard" value="notice">
                     <select name="bid" class="bid" rel="bid">
                         <option  value="all" >- 전체 -</option>
                         <option value="notice">공지</option>
@@ -202,7 +205,108 @@
         </div>
     </div>
 
+    <div class="content qna" th:if="${bid!=null && bid.equals('qna')}">
+        <div class="title-container">
+            <h1 >자주묻는질문</h1>
+        </div>
 
+
+                            <ul class="qna-button-container">
+
+                                <li>
+                                    <a class="button" href="#">전체</a>
+
+                                </li>
+                                <li>
+                                    <a class="button" href="#">회원가입/로그인</a>
+
+                                </li>
+                                <li>
+                                    <a class="button" href="#">주문결제</a>
+
+                                </li>
+                                <li>
+                                    <a class="button" href="#">배송문의</a>
+
+                                </li>
+                                <li>
+                                    <a class="button" href="#">교환&반품</a>
+
+                                </li>
+                                <li>
+                                    <a class="button" href="#">상품문의</a>
+
+                                </li>
+                                <li>
+                                    <a class="button" href="#">기타</a>
+
+                                </li>
+
+
+                            </ul>
+
+                        <form id="form">
+                            <label>
+                                <input hidden name="isNoticeBoard" value="qna">
+
+                                <input type="text" maxlength="15" placeholder="제목, 내용">
+                                <input type="submit" value="검색" >
+
+                            </label>
+                        </form>
+
+
+                    <ul class="qna-container">
+                            <li>
+                                <div class="question">
+                                    <h1>Q</h1>
+                                    <p class="questionOpen">
+                                    <span>[배송문의] </span> <span> 브랜드 별 배송비 알고싶어요!</span></p></div>
+
+                                <div class="anther">
+                                    <h1>A</h1>
+                                        <p>
+                                             <span>BBQ 배송과 각 브랜드 개별 배송비는 별도로 부과됩니다.
+                                                 <br>브랜드 개별 배송: 브랜드 정책에 따라 무료배송 혹은 배송비 부과 (3,000원)
+                                             </span>
+
+                                        </p>
+                                </div>
+
+                            </li>
+
+                        <li>
+                            <div class="question">
+                                <h1>Q</h1>
+                                <p class="questionOpen">
+                                    <span>[배송문의] </span> <span> 브랜드 별 배송비 알고싶어요!</span></p></div>
+
+                            <div class="anther">
+                                <h1>A</h1>
+                                <p>
+                                             <span>BBQ 배송과 각 브랜드 개별 배송비는 별도로 부과됩니다.
+                                                 <br>브랜드 개별 배송: 브랜드 정책에 따라 무료배송 혹은 배송비 부과 (3,000원)
+                                             </span>
+
+                                </p>
+                            </div>
+
+                        </li>
+
+                    </uL>
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
 </main>
 
 
