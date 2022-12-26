@@ -76,7 +76,8 @@ public class BbsController {
 
                 modelAndView.addObject("announceNotice", announceNotice);
                 modelAndView.addObject("notice", notice);
-
+        System.out.println("bid는"+bid);
+                modelAndView.addObject("bid",bid);
 
 
 
@@ -236,8 +237,9 @@ public class BbsController {
 
         Enum<?> result = this.bbsService.prepareModifyNotice(user, nid);
 
-        System.out.println(existingNotice.getTitle());
-        System.out.println(existingNotice.getContent());
+//        System.out.println(existingNotice.getTitle());
+//        System.out.println(existingNotice.getContent());
+        System.out.println("리절트는"+result.name());
 
         modelAndView.addObject("result", result.name());
 
