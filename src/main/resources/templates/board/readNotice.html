@@ -9,8 +9,19 @@
     <link rel="stylesheet" th:href="@{/bbs/resources/stylesheets/readNotice.css}">
     <script defer th:src="@{/bbs/resources/scripts/readNotice.js}"></script>
 
+    <script th:if="${notice==null}">
+        alert('존재하지 않는 게시물입니다.');
+
+        window.location.href='/board/'
+    </script>
+
+
+
+
 </head>
-<body>
+
+
+<body >
 <th:block th:replace="~{fragments/body :: header}"></th:block> <!-- block 자리에 body.html 파일의 replace 태그와 치환한다. -->
 <th:block th:replace="~{fragments/body :: cover}"></th:block>
 
@@ -18,7 +29,7 @@
 <main class="cs-center">
     <th:block th:replace="~{fragments/body ::sideBar}"></th:block>
 
-    <div class="content">
+    <div class="content" th:if="${notice!=null}">
 
         <div class="title-container">
             <h1>공지사항</h1>
@@ -103,8 +114,13 @@
                                 th:if ="${session.user != null && session.user.isAdmin()==true}">공지등록</a>
 <!--                                <a class="announce-button"-->
 <!--                                   th:if="${session.user != null && session.user.isAdmin()==true && notice.isImportant()}">공지해제</a>-->
-                                <a href="#">수정</a>
-                                <a href="#">삭제</a>
+                                <a    th:href="@{./modifyNotice (nid=${notice.getIndex()})}"
+                                        th:if="${session.user!=null && session.user.isAdmin()}">
+                                       수정</a>
+                                <a  id="deleteButton"  href="#"
+                                      th:if="${session.user!=null && session.user.isAdmin()}">
+                                    삭제</a>
+
                             </td>
                         </tr>
 
@@ -119,7 +135,7 @@
         </table>
 
 
-
+    <input th:value="${notice.getIndex()}" hidden id="index">
     </div>
 
 

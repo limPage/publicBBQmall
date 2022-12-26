@@ -22,6 +22,8 @@ public interface IBbsMapper {
 
     int updateNoticeIsNew();
 
+    int deleteNoticeByIndex(@Param(value = "index") int index);
+
     NoticeReadVo[] selectAnnounceNotice();
     NoticeReadVo[] selectNoticeByBoardId(@Param(value = "boardId") String boardId,
 

@@ -133,15 +133,18 @@ public NoticeReadVo[] getAnnounceNotice(){
     }
 
     //작성 공지 수정하기
-    public Enum<? extends IResult> modifyNotice(NoticeEntity notice, UserEntity user, Boolean isImportant) {
-            //로그인 안했다면 실패
+    public Enum<? extends IResult> modifyNotice(NoticeEntity notice, UserEntity user) {
+        System.out.println("인덱스는"+notice.getIndex());
+        NoticeEntity existingArticle = this.bbsMapper.selectNoticeByIndex(notice.getIndex());
+
+        //로그인 안했다면 실패
         if (user == null) {
             return ModifyArticleResult.NOT_SIGNED;
         }
     //    공지로 등록하려고 왔을 경우
-        if(isImportant!=null){
+        if(notice.isImportant()!=null){
             //관리지가 아니면 권한이 없음을 알린다.
-
+            existingArticle.setImportant(notice.isImportant());
 
 
             if( !user.isAdmin()) {
@@ -150,7 +153,6 @@ public NoticeReadVo[] getAnnounceNotice(){
 
         }
 
-        NoticeEntity existingArticle = this.bbsMapper.selectNoticeByIndex(notice.getIndex());
 
         if (existingArticle == null) { //게시글이 없으면 실패
 
@@ -163,6 +165,8 @@ public NoticeReadVo[] getAnnounceNotice(){
 
                 existingArticle.setContent(notice.getContent());
                 existingArticle.setTitle(notice.getTitle());
+
+
             }
 
 
@@ -174,5 +178,42 @@ public NoticeReadVo[] getAnnounceNotice(){
         }
     }
 
+    public Enum<? extends IResult> prepareModifyNotice(UserEntity user, int nid) {
 
+        NoticeReadVo existingNotice = this.bbsMapper.selectNoticeByIndex(nid);
+
+        if (user == null) {
+            return ModifyArticleResult.NOT_SIGNED;  //로그인이 안되어있거나, 관리자가 아닐경우
+        }
+
+        if (existingNotice == null) { //게시글이 없으면
+
+            return ModifyArticleResult.NO_SUCH_ARTICLE;
+        }
+        if (!user.isAdmin()) {   //권한이 없으면
+
+            return ModifyArticleResult.NOT_ALLOWED;       //리턴 값을 줍니다
+        }
+
+
+        return CommonResult.SUCCESS;
+    }
+
+    public Enum<? extends IResult> deleteNotice(NoticeEntity notice, UserEntity user) {
+        NoticeEntity existingArticle = this.bbsMapper.selectNoticeByIndex(notice.getIndex());
+
+        if (existingArticle == null) {
+            return WriteResult.NO_SUCH_BOARD; //게시물이 없다
+        }
+
+        if (user == null || !user.isAdmin()) {
+            return WriteResult.NOT_ALLOWED; //권한이 없다
+        }
+
+//        notice.setUserEmail(user.getEmail());
+//        notice.setBoardId(existingArticle.getBoardId());
+
+        return this.bbsMapper.deleteNoticeByIndex(notice.getIndex()) > 0 ? CommonResult.SUCCESS : CommonResult.FAILURE;
+    }
 }
+
