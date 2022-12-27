@@ -48,6 +48,9 @@ if (form['isNoticeBoard'].value==="notice"){
     }
 
 
+    window.document.getElementById('sideBarN').style.cssText= `  color: rgba(0,0,0,0.9);
+    font-weight: 700;`;
+
 }
 
 else if (form['isNoticeBoard'].value === "qna"){
@@ -73,26 +76,32 @@ else if (form['isNoticeBoard'].value === "qna"){
 
    const qid= form['qid'].value;
     if (qid===''){
-        window.document.getElementById('all').style.cssText= `backgroundColor:red ;color:white; `;
-        // cssText=`color: pink; font-size: 20px;`
+        window.document.getElementById('all').style.cssText= `background-color: black;
+        color:white; `;
     }
     if (qid==='user'){
-        window.document.getElementById('user').style.backgroundColor='red';
+        window.document.getElementById('user').style.cssText= `background-color: black;
+        color:white; `;
     }
     if (qid==='payment'){
-        window.document.getElementById('payment').style.backgroundColor='red';
+        window.document.getElementById('payment').style.cssText= `background-color: black;
+        color:white; `;
     }
     if (qid==='shipping'){
-        window.document.getElementById('shipping').style.backgroundColor='red';
+        window.document.getElementById('shipping').style.cssText= `background-color: black;
+        color:white; `;
     }
     if (qid==='productService'){
-        window.document.getElementById('productService').style.backgroundColor='red';
+        window.document.getElementById('productService').style.cssText= `background-color: black;
+        color:white; `;
     }
     if (qid==='product'){
-        window.document.getElementById('product').style.backgroundColor='red';
+        window.document.getElementById('product').style.cssText= `background-color: black;
+        color:white; `;
     }
     if (qid==='other') {
-        window.document.getElementById('other').style.backgroundColor = 'red';
+        window.document.getElementById('other').style.cssText= `background-color: black;
+        color:white; `;
     }
 
 
@@ -109,7 +118,8 @@ else if (form['isNoticeBoard'].value === "qna"){
     })
 
 
-
+    window.document.getElementById('sideBarQ').style.cssText= `  color: rgba(0,0,0,0.9);
+    font-weight: 700;`;
 }
 
 

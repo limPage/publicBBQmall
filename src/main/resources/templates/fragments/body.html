@@ -131,19 +131,33 @@
 </div>
 
 <article class="side-bar" th:fragment="sideBar">
-    <h1 class="title">CS CENTER</h1>
+    <h1 class="title"><a th:href="@{/member/csCenter}">CS CENTER</a></h1>
     <ul>
-        <li><a th:href="@{/board/}" class="get-notice-board">공지사항</a></li>
-        <li><a href="/board/?bid=qna">자주 묻는 질문</a></li>
-        <li><a>상품문의</a></li>
-        <li><a>상품후기</a></li>
-        <li><a>대량구매</a></li>
+        <li><a th:href="@{/board/}" class="get-notice-board" id="sideBarN">공지사항</a></li>
+        <li><a href="/board/?bid=qna" id="sideBarQ">자주 묻는 질문</a></li>
+        <li><a href="/board/?bid=pi" id="sideBarPI">상품문의</a></li>
+        <li><a href="/board/?bid=pr" id="sideBarPR">상품후기</a></li>
+        <li><a href="/board/?bid=bp" id="sideBarBP">대량구매</a></li>
 
     </ul>
 
 
 </article>
 
+<ul class="floating-banner" th:fragment="floatingBanner">
+    <li class="banner-image">
+        <img alt="추천인이벤트배너" src="/resources/images/banner.png" title="추천인이벤트배너">
+        <span><b>추천인</b><br>
+        이벤트
+        </span>
+
+    </li>
+    <li class="banner-li"><a>등급별 혜택</a></li>
+    <li class="banner-li"><a>리뷰 보러가기</a></li>
+    <li class="banner-li"><a>룰렛 돌리기</a></li>
+
+
+</ul>
 
 <main>몸
 

@@ -763,8 +763,13 @@ body>main>article>.title{
     font-weight: 700;
     letter-spacing: -0.083rem;
 
-
 }
+body>main>article>.title>a{
+    color: rgba(0,0,0,0.8);
+}
+
+
+
 body>main>article>ul{
     margin: unset;
     padding: unset;
@@ -772,6 +777,12 @@ body>main>article>ul{
 body>main>article>ul>li{
     height: 100%;
 
+}
+body>main>article>ul>li:hover>a{
+    transform: translateX(0.5rem);
+    transition-duration: 100ms;
+    color: rgba(0,0,0,0.9);
+    font-weight: 700;
 }
 
 
@@ -787,7 +798,61 @@ body>main>article>ul>li>a{
     letter-spacing: -0.05rem;
     /*padding-bottom: 1px;*/
 }
+
 /*cs*/
+/*플로팅배너*/
+body>.floating-banner{
+    position: fixed;
+    top: 20.3%;
+    right: 9.45rem;
+    box-shadow: 0 4px 5px 1px rgba(0,0,0,0.1);
+}
+body>.floating-banner>.banner-image{
+    height: 184px;
+}
+
+
+body>.floating-banner>.banner-image>span{
+    top:6%;
+    left: 50%;
+    position: absolute;
+    /*z-index: 1000;*/
+    /*display: inline;*/
+    transform: translateX(-50%);
+    font-size: 1.5rem;
+    color: white;
+    /*font-weight: 600;*/
+    line-height:1.75rem;
+    display: inline;
+
+}
+
+body>.floating-banner>.banner-li{
+    width: 140px;
+    /*border: 1px solid black;*/
+    display: flex;
+    justify-content: center;
+
+}
+body>.floating-banner>.banner-li:nth-of-type(3){
+
+    border-top: 1px solid rgba(0,0,0,0.1);
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+
+body>.floating-banner>.banner-li>a{
+    padding:0.9rem;
+    font-size: 17px;
+    color: rgba(0,0,0,0.9);
+    letter-spacing: -1px;
+}
+/*플로팅배너*/
+
+
+
+
+
 
 .--cover{
     top: 0;
