@@ -4,6 +4,8 @@ import com.hiponya.bbqmall.entities.product.CategoryEntity;
 import com.hiponya.bbqmall.entities.product.ProductEntity;
 import com.hiponya.bbqmall.entities.product.SortEntity;
 import com.hiponya.bbqmall.enums.CommonResult;
+import com.hiponya.bbqmall.enums.member.CategoryResult;
+import com.hiponya.bbqmall.interfaces.IResult;
 import com.hiponya.bbqmall.services.CategoryService;
 import jdk.jfr.Category;
 import org.json.JSONObject;
@@ -26,7 +28,7 @@ public class CategoryController {
     }
 
     @RequestMapping(value = "category", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getCategory(@RequestParam(value = "cid") int cid, CategoryEntity category, ProductEntity product, SortEntity sort) {
+    public ModelAndView getCategory(@RequestParam(value = "cid") int cid,  CategoryEntity category, ProductEntity product, SortEntity sort) {
         ModelAndView modelAndView = new ModelAndView("home/category");
         CategoryEntity[] categories = this.categoryService.getCategories();
         ProductEntity[] products = this.categoryService.getProducts(cid);
@@ -51,7 +53,7 @@ public class CategoryController {
             modelAndView.addObject("title", categories2.getTitle());
         }
 
-        System.out.println(category.getTitle());
+        System.out.println(categories2.getTitle());
         return modelAndView;
     }
 
@@ -72,7 +74,7 @@ public class CategoryController {
         return modelAndView;
     }
 
-    @GetMapping(value = "list", produces = MediaType.TEXT_HTML_VALUE)
+    @GetMapping(value = "list", produces = MediaType.APPLICATION_JSON_VALUE)
     public ModelAndView getList(@RequestParam(value = "cid") int cid, CategoryEntity category,ProductEntity product) {
         ModelAndView modelAndView = new ModelAndView("home/list");
 
@@ -103,17 +105,30 @@ public class CategoryController {
     }
 
     @PostMapping(value="/", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String postCategory(CategoryEntity category, ProductEntity product) {
+    public String postCategory(@RequestParam(value = "cid") int cid, CategoryEntity category, ProductEntity product) {
         JSONObject responseObject = new JSONObject();
 
-        Enum<?> result =this.categoryService.sendCategoryIndex(category, product);
+        Enum<? extends IResult> result =this.categoryService.sendCategoryIndex(category, product);
+
+        if (category == null) {
+            result = CategoryResult.NO_CATEGORY;
+        } else {
+            category.setIndex(cid);
+            category.setTitle(category.getTitle());
+            product.setPrice(product.getPrice());
+            product.setDetailIndex(category.getIndex());
+
+            result = this.categoryService.getProductQuantity(category.getIndex());
+            if (result == CommonResult.SUCCESS) {
+                responseObject.put("cid", category.getIndex());
+            }
+        }
 
         responseObject.put("result", result.name().toLowerCase());
         responseObject.put("category", category);
         responseObject.put("product", product);
-        responseObject.put("title", category.getTitle());
-        responseObject.put("index", category.getIndex());
         responseObject.put("price", product.getPrice());
+
 
         return responseObject.toString();
     }

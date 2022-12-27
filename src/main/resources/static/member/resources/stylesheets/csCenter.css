@@ -1,3 +1,4 @@
+
 body>main>.content{
     width: 100%;
 
@@ -38,7 +39,6 @@ body>main>.content>ul>li:last-of-type{
 body>main>.content>ul>li>a{
     width: 100%;
     height: calc(10rem - 0.125rem);
-
 
     align-items: center;
     display: flex;
@@ -117,3 +117,4 @@ body>main>.content>.question>.question-ul>li>div>span{
     position: relative;
     color: rgba(0,0,0,0.8);
 }
+

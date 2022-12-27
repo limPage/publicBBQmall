@@ -86,7 +86,7 @@ public class MemberService {
         MimeMessage mail = this.mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mail, "UTF-8");
         helper.setTo(user.getEmail());
-        helper.setSubject("[스터디] 회원가입 인증번호");
+        helper.setSubject("[BBQ몰] 회원가입 인증번호입니다.");
         helper.setText(text, true);
         this.mailSender.send(mail);
 
@@ -150,6 +150,12 @@ public class MemberService {
 
         return CommonResult.SUCCESS;
     }
+    @Transactional
+    public UserEntity isAdminMode(UserEntity user){
+        return this.memberMapper.selectUserLogin(user.getId(), user.getPassword());
+    }
+
+
 
 
     @Transactional
@@ -203,7 +209,7 @@ public class MemberService {
         MimeMessage mail = this.mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mail, "UTF-8");
         helper.setTo(emailAuthVo.getEmail());
-        helper.setSubject("[스터디] 비밀번호 재설정 인증 링크");
+        helper.setSubject("[BBQ몰] 비밀번호 재설정 인증 링크입니다.");
         helper.setText(text, true);
         this.mailSender.send(mail);
 
@@ -244,6 +250,32 @@ public class MemberService {
 
 
     }
+
+    @Transactional
+    public Enum<? extends IResult> recoverPassword (EmailAuthEntity emailAuth, UserEntity user){
+
+        EmailAuthEntity existingEmailAuth = this.memberMapper.selectEmailAuthByEmailCodeSalt(emailAuth.getEmail(),emailAuth.getCode(),emailAuth.getSalt());
+
+        if(existingEmailAuth == null || !existingEmailAuth.isExpired() ){
+            return CommonResult.FAILURE;
+        }
+//
+        UserEntity existingUser = this.memberMapper.selectUserByEmail(existingEmailAuth.getEmail());
+
+
+
+
+
+
+        existingUser.setPassword( CryptoUtils.hashSha512(user.getPassword()));
+
+        if(this.memberMapper.updateUser(existingUser)==0){//user는 페스워드와 이메일만갖고잇음
+            return CommonResult.FAILURE;
+        }
+
+        return CommonResult.SUCCESS;
+    }
+
 
 
 }

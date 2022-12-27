@@ -1,0 +1,417 @@
+/*@charset "UTF-8";*/
+
+body > main > .content{
+
+    width: 360px;
+}
+
+
+
+
+body > main > .content> .form{
+    align-items: center;
+    display: flex;
+    flex-direction: column ;
+    justify-content: center;
+
+    width:100%;
+    /*background-color: ivory;*/
+}
+
+td,input{
+    margin: unset;
+    padding: unset;
+    box-sizing: border-box;
+    border: unset;
+
+}
+
+table{
+    /*border-collapse: separate;*/
+    /*border-spacing: 0 0px;*/
+
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+body > main > .content> .form >.title{
+
+    text-align: center;
+    font-size: 32px;
+    font-weight: 700;
+    color: #333333;
+    padding:  65px 0 32px 0;
+    /*background-color: red;*/
+    letter-spacing: -1px;
+}
+body > main > .content> .form > .title2{
+ font-size: 16px;
+    text-align: center;
+    margin-bottom: 20px;
+
+    text-shadow: 0 0 1px rgba(0,0,0,0.7);
+
+    /*border-bottom: red solid 1px;*/
+}
+body > main > .content> .form > .title2>.icon{
+    color: #ee3400;
+    border: #FFCC00 3px solid;
+    border-radius: 999rem;
+}
+
+body >main>.content>.form> table>tbody>tr,
+body >main>.content>.form> table>tbody>tr>td,
+body >main>.content>.form> table>tbody>tr>td>label
+
+{width: 100%;
+    height: 100%;
+
+}
+
+
+body > main > .content> .form >.email-check-page> table >tbody{
+
+    width: 100%;
+    /*align-items: center;*/
+    display: flex;
+    /*flex-direction:  column;*/
+    justify-content: center;
+    font-size: 15px;
+
+    color: #767676;
+}
+body >main>.content>.form> table>tbody>tr>td{
+    /*align-items: stretch;*/
+    display: flex;
+    flex-direction: row ;
+    justify-content: flex-start;
+
+}
+
+
+body >main>.content>.form> table>tbody>.login-mode-row{
+    /*height: 40px;*/
+    /*background-color: red;*/
+    /*width: 100%;*/
+}
+body >main>.content>.form> table>tbody>.login-mode-row>td{
+    margin-bottom: 40px;
+
+}
+body >main>.content>.form> table>tbody>.login-mode-row>td>label>input{
+
+    cursor: pointer;
+    width: 180px;
+    height: 40px;
+    font-family: inherit;
+    font-weight: inherit;
+    font-size: 16px;
+
+}
+
+
+
+
+body >main>.content.login-mode-user>.form> table>tbody>.login-mode-row>td>label>.login-user{
+    border-top: rgba(0,0,0,0.5) solid 0.0625rem;
+    border-left:  rgba(0,0,0,0.5) solid 0.0625rem;
+    border-right: rgba(0,0,0,0.5) solid 0.0625rem;
+    background-color: white;
+}
+body >main>.content.login-mode-user>.form> table>tbody>.login-mode-row>td>label>.login-null{
+    border-top:    rgba(0,0,0,0.2) solid 0.0625rem;
+    border-right:  rgba(0,0,0,0.2) solid 0.0625rem;
+    border-bottom: rgba(0,0,0,0.5)  solid 0.0625rem;
+    color: rgba(0,0,0,0.5);
+
+}
+
+body >main>.content.login-mode-null>.form> table>tbody>.login-mode-row>td>label>.login-user{
+    border-top:    rgba(0,0,0,0.2) solid 0.0625rem;
+    border-left:  rgba(0,0,0,0.2) solid 0.0625rem;
+    border-bottom: rgba(0,0,0,0.5)  solid 0.0625rem;
+    color: rgba(0,0,0,0.5);
+
+}
+body >main>.content.login-mode-null>.form> table>tbody>.login-mode-row>td>label>.login-null{
+
+
+
+    border-top: rgba(0,0,0,0.5) solid 0.0625rem;
+    border-left:  rgba(0,0,0,0.5) solid 0.0625rem;
+    border-right: rgba(0,0,0,0.5) solid 0.0625rem;
+
+    background-color: white;
+
+
+}
+
+
+
+
+
+
+
+
+body >main>.content>.form> table>tbody>.id-row>td>label>input,
+body >main>.content>.form> table>tbody>.password-row>td>label>input
+
+{
+    /*border:gray solid 0.0625rem;*/
+    height: 40px;
+    width: 100%;
+    margin-bottom: 15px;
+    border-radius: 3px;
+    border:  rgba(0,0,0,0.2) solid 1px;
+    padding: 15px;
+}
+body >main>.content>.form> table>tbody>.id-row>td>label>input::placeholder,
+body >main>.content>.form> table>tbody>.password-row>td>label>input::placeholder
+{
+
+    /*text-align: center;*/
+
+    color: rgba(0,0,0,0.4);
+    font-weight: 600;
+    font-size: 15px;
+}
+
+body >main>.content>.form> table>tbody>.id-row>td>label>input:focus,
+body >main>.content>.form> table>tbody>.password-row>td>label>input:focus{
+    outline: unset;
+}
+
+
+
+body >main>.content>.form> table>tbody>.checkbox-row{
+    padding-bottom: 11px;
+    /*background-color: red;*/
+    display: block;
+}
+body >main>.content>.form> table>tbody>.hidden-row{
+    font-size: 14px;
+    color: rgba(0,0,0,0.5);
+    font-weight: 500;
+    padding-bottom: 15px;
+    display: none;
+}
+body >main>.content.login-mode-null>.form> table>tbody>.hidden-row{
+    display: block;
+}
+
+body >main>.content.login-mode-null>.form> table>tbody>.checkbox-row,
+body >main>.content.login-mode-null>.login-service-row,
+body >main>.content.login-mode-null>.easy-login-row,
+body >main>.content.login-mode-null>.form> table>tbody>.button-row,
+body >main>.content.login-mode-user>.form> table>tbody>.button-row-null-mode
+
+{
+    display: none;
+}
+
+
+
+
+body >main>.content>.form> table>tbody>.checkbox-row>td>label{
+    align-items: center;
+    display: flex;
+    flex-direction: row ;
+    justify-content: flex-start;
+    color: rgba(0,0,0,0.5);
+    font-weight: 500;
+
+
+    /*box-shadow: #989898;*/
+    /*border: 1px red solid;*/
+    /*display: inline-block;*/
+    /*border-radius: 999rem;*/
+}
+
+
+
+
+
+body >main>.content>.form> table>tbody>.checkbox-row>td>label>input{
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+
+    appearance: none;
+
+    /*background-image: url("/resources/images/images/checkbox_icon.png");*/
+
+    /*background-size: 100%;*/
+    box-shadow: 0 0  0 1px  rgba(0,0,0,0.2);
+
+    border: solid rgba(0,0,0,0.4) 0.0625rem;
+}
+body >main>.content>.form> table>tbody>.checkbox-row>td>label>input:checked{
+
+    background-color: rgba(0,0,0,0.2);
+
+    background-image: url("/resources/images/checkbox.jpg");
+    background-size: 100%;
+    box-shadow: 0 0  0 2px  #0ea31a;
+    border-radius: 5px;
+
+
+}
+
+
+
+body >main>.content>.form> table>tbody>tr>td>label>input[type='submit']
+{
+
+    height: 48px;
+    width: 360px;
+    background-color: #E31134;
+    border: unset;
+
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 450;
+}
+body >main>.content>.form> table>tbody>tr>td>label>input[type='submit']:hover{
+    background-color: #FFCC00;
+    transition-duration: 500ms;
+}
+
+
+
+body >main>.content>.form> table>tbody>.button-row-null-mode{
+    padding-bottom: 10rem;
+    display: block;
+}
+
+
+
+body> main> .content> .login-service-row{
+    align-items: center;
+    display: flex;
+    flex-direction: row ;
+    justify-content: center;
+
+    margin: unset;
+    padding: unset;
+
+    position: relative;
+
+}
+body> main> .content> .login-service-row>li>a{
+    color: inherit;
+
+}
+
+
+body> main> .content> .login-service-row>li>a:hover{
+    text-decoration: underline;
+
+}
+
+
+body> main> .content> .login-service-row>.bar{
+
+    height: 0.8rem;
+    border-right: rgba(0,0,0,0.2) solid 0.1rem;
+
+    /*top: 1rem;*/
+    position: relative;
+}
+
+
+body> main> .content> .login-service-row> li>a{
+
+    padding: 18px 10px;
+    font-size: 16px;
+    display: block;
+
+}
+body> main> .content> .easy-login-row{
+
+    align-items: center;
+    display: flex;
+    flex-direction: column ;
+    justify-content: center;
+
+
+}
+body> main> .content> .easy-login-row>.title-row{
+
+    align-items: center;
+    display: flex;
+    flex-direction: row ;
+    justify-content: center;
+
+    color: rgba(0,0,0,0.3);
+    font-weight: 550;
+    font-size: 14px;
+
+    padding: 25px 0 8px 0;
+}
+
+
+body> main> .content> .easy-login-row>.title-row> .bar2{
+    /*height: 1;*/
+    width: 110px;
+
+    color: rgba(0,0,0,0.2);
+    border-bottom: 1px solid rgba(0,0,0,0.2);;
+    /*display: inline-block;*/
+    /*border-bottom: black solid 1px;*/
+    /*border: black solid 1px;*/
+    /*background-color: red;*/
+}
+
+body> main> .content> .easy-login-row>.title-row>.text{
+
+
+    padding:0 10px;
+
+}
+body> main> .content> .easy-login-row>.icon-row{
+    padding-bottom: 60px;
+
+}
+
+
+body> main> .content> .easy-login-row>.icon-row>ul{
+    align-items: center;
+    display: flex;
+    flex-direction: row ;
+    justify-content: center;
+
+    /*display: flex;*/
+    margin: unset;
+    padding: unset;
+}
+
+
+body> main> .content> .easy-login-row>.icon-row>ul>li>a{
+
+    width: 50px;
+    height: 50px;
+    display: block;
+    background-repeat: no-repeat;
+    /*background-color: red;*/
+    background-size: 100%;
+    margin: 10px;
+}
+body> main> .content> .easy-login-row>.icon-row>ul>li>.kakao{
+
+    background-image: url("/resources/images/sns_icon_kakaosync.png");
+}
+body> main> .content> .easy-login-row>.icon-row>ul>li>.facebook{
+    background-image: url("/resources/images/sns_icon_facebook.png");
+
+}
+
+body> main> .content> .easy-login-row>.icon-row>ul>li>.naver{
+    background-image: url("/resources/images/sns_icon_naver.png");
+}
+body> main> .content> .easy-login-row>.icon-row>ul>li>.apple{
+    background-image: url("/resources/images/apple_login.png");
+    /*background-size: 110%;*/
+
+
+}

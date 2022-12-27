@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hiponya.bbqmall.mappers.IBbsMapper">
+
+
+    <select id="selectNoticeBoardId" resultType="com.hiponya.bbqmall.entities.bbs.NoticeBoardEntity">
+        SELECT `id`   AS `id`,
+               `text` AS `text`
+
+        FROM `bbq_bbs`.`notice_boards`
+        where `id` = #{id}
+            LIMIT 1;
+
+
+    </select>
+
+
+    <select id="selectNoticeCountByNoticeBoardId" resultType="int">
+
+        SELECT COUNT(0)
+        FROM `bbq_bbs`.`notice` AS `notice`
+
+
+
+
+        <if test='boardId != null and keyword != null'>
+            WHERE `board_id` = #{boardId}
+            AND (REPLACE(`title`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%')
+            OR REPLACE(`content`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%'))
+        </if>
+
+        <if test='boardId != null and keyword == null'>
+            WHERE `board_id` = #{boardId}
+
+        </if>
+
+        <if test='boardId == null and keyword != null'>
+            WHERE
+            (REPLACE(`title`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%')
+            OR REPLACE(`content`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%'))
+
+        </if>
+
+    </select>
+
+    <!--    <select id="selectNoticeCountAll" resultType="int">-->
+
+    <!--        SELECT COUNT(0)-->
+    <!--        FROM `bbq_bbs`.`notice` AS `notice`-->
+
+    <!--        <if test="keyword != null">-->
+
+    <!--            WHERE (REPLACE(`title`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%')-->
+    <!--            OR REPLACE(`content`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%'))-->
+    <!--        </if>-->
+
+
+    <!--    </select>-->
+
+    <select id="selectAnnounceNotice" resultType="com.hiponya.bbqmall.vos.bbs.NoticeReadVo">
+        SELECT `notice`.`index` AS `index`,
+               `notice`.`board_id` AS `boardId`,
+               `notice`.`title` AS `title`,
+               `notice_board`.`text` AS `text`,
+               `notice`.`content`     AS `content`,
+               `notice`.`board_id`    AS `boardId`,
+               `notice`.`view` AS `view`,
+               `notice`.`important_flag` AS `isImportant`,
+               `notice`.`written_on` AS `writtenOn`,
+               `notice`.`modified_on` AS `modifiedOn`,
+               `notice`.`new_flag` AS `isNew`
+        FROM `bbq_bbs`.`notice` AS `notice`
+                 LEFT JOIN `bbq_bbs`.`notice_boards` AS `notice_board` on `id` = `notice`.`board_id`
+        WHERE important_flag =1;
+
+
+    </select>
+
+    <select id="selectNoticeByBoardId" resultType="com.hiponya.bbqmall.vos.bbs.NoticeReadVo">
+        SELECT `notice`.`index` AS `index`,
+        `notice`.`board_id` AS `boardId`,
+        `notice`.`title` AS `title`,
+        `notice_board`.`text` AS `text`,
+        `notice`.`content`     AS `content`,
+        `notice`.`board_id`    AS `boardId`,
+        `notice`.`view` AS `view`,
+        `notice`.`important_flag` AS `isImportant`,
+        `notice`.`written_on` AS `writtenOn`,
+        `notice`.`modified_on` AS `modifiedOn`,
+        `notice`.`new_flag` AS `isNew`
+        FROM `bbq_bbs`.`notice` AS `notice`
+        LEFT JOIN `bbq_bbs`.`notice_boards` AS `notice_board` on `id` = `notice`.`board_id`
+        WHERE
+        (REPLACE(`title`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%')
+        OR REPLACE(`content`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%'))
+
+        <if test='boardId != null and keyword != null'>
+            AND `board_id` = #{boardId}
+
+        </if>
+
+        <if test='boardId != null and keyword == null'>
+
+        </if>
+
+        <if test='boardId == null and keyword != null'>
+
+
+        </if>
+
+
+
+
+
+        GROUP BY `notice`.`index`
+        ORDER BY `notice`.`index` DESC
+        LIMIT ${limit}
+        OFFSET ${offset}
+
+    </select>
+
+    <!--    <select id="selectNoticeAll" resultType="com.hiponya.bbqmall.vos.bbs.NoticeReadVo">-->
+    <!--        SELECT `notice`.`index` AS `index`,-->
+    <!--        `notice`.`board_id` AS `boardId`,-->
+    <!--        `notice`.`title` AS `title`,-->
+    <!--        `notice_board`.`text` AS `text`,-->
+    <!--        `notice`.`content`     AS `content`,-->
+    <!--        `notice`.`board_id`    AS `boardId`,-->
+    <!--        `notice`.`view` AS `view`,-->
+    <!--        `notice`.`important_flag` AS `isImportant`,-->
+    <!--        `notice`.`written_on` AS `writtenOn`,-->
+    <!--        `notice`.`modified_on` AS `modifiedOn`-->
+    <!--        FROM `bbq_bbs`.`notice` AS `notice`-->
+    <!--        LEFT JOIN `bbq_bbs`.`notice_boards` AS `notice_board` on `id` = `notice`.`board_id`-->
+
+
+    <!--        #한글자는 오류가 날수 있다고함-->
+    <!--        <if test="keyword != null">-->
+
+    <!--            WHERE (REPLACE(`notice`.`title`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%')-->
+    <!--            OR REPLACE(`notice`.`content`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%'))-->
+    <!--        </if>-->
+
+
+    <!--        GROUP BY `notice`.`index`-->
+    <!--        ORDER BY `notice`.`index` DESC-->
+    <!--        LIMIT ${limit}-->
+    <!--        OFFSET ${offset}-->
+
+    <!--    </select>-->
+
+
+
+
+
+    <select id="selectNoticeByIndex" resultType="com.hiponya.bbqmall.vos.bbs.NoticeReadVo">
+        SELECT `index`                AS `index`,
+               `notice_board`.`text`  AS `text`,
+               `notice`.`board_id`    AS `boardId`,
+               `notice`.`title`       AS `title`,
+               `notice`.`important_flag` AS `isImportant`,
+               `notice`.`content`     AS `content`,
+               `notice`.`view`        AS `view`,
+               `notice`.`written_on`  AS `writtenOn`,
+               `notice`.`modified_on` AS `modifiedOn`,
+               `notice`.`new_flag` AS `isNew`
+        FROM `bbq_bbs`.`notice` AS `notice`
+                 LEFT JOIN `bbq_bbs`.`notice_boards` AS `notice_board` on `id` = `notice`.`board_id`
+        WHERE `index` = #{index}
+
+            LIMIT 1;
+
+
+    </select>
+
+    <insert id="insertNotice"
+            useGeneratedKeys="true" keyProperty="index"
+            keyColumn="index"
+            parameterType="com.hiponya.bbqmall.entities.bbs.NoticeEntity">
+        INSERT INTO `bbq_bbs`.`notice` ( `board_id`, `title`, `content`, `view`, `important_flag`
+                                       , `written_on`, `modified_on`,`expiration_date`)
+        VALUES ( #{boardId}, #{title}, #{content}, #{view}, IFNULL(#{isImportant}, DEFAULT(`important_flag`))
+               , IFNULL(#{writtenOn}, DEFAULT(`written_on`)), IFNULL(NOW(), DEFAULT(`modified_on`)), #{expirationDate})
+
+
+    </insert>
+
+    <insert id="insertImage" keyColumn="index" useGeneratedKeys="true" keyProperty="index"
+            parameterType="com.hiponya.bbqmall.entities.bbs.ImageEntity">
+        INSERT INTO `bbq_bbs`.`images` (`file_name`, `file_mime`, `data`)
+        VALUES (#{fileName}, #{fileMime}, #{data})
+
+
+    </insert>
+
+    <select id="selectImageByIndex" resultType="com.hiponya.bbqmall.entities.bbs.ImageEntity">
+
+        SELECT `index`     AS `index`,
+               `file_name` AS `fileName`,
+               `file_mime` AS `fileMime`,
+               `data`      AS `data`
+
+        FROM `bbq_bbs`.`images`
+        WHERE `index` = #{index}
+            LIMIT 1;
+
+    </select>
+
+    <update id="updateNotice" parameterType="com.hiponya.bbqmall.entities.bbs.NoticeEntity">
+
+        UPDATE `bbq_bbs`.`notice`
+        SET `board_id`    = #{boardId},
+            `title`       = #{title},
+            `content`     = #{content},
+            `view`        = IFNULL(#{view}, DEFAULT(`view`)),
+            `important_flag`        = IFNULL(#{isImportant}, DEFAULT(`important_flag`)),
+            `written_on`  = IFNULL(#{writtenOn}, DEFAULT(`written_on`)),
+            `modified_on` = IFNULL(#{modifiedOn}, DEFAULT(`modified_on`))
+        WHERE `index` = #{index}
+
+    </update>
+
+    <update id="updateNoticeIsNew" parameterType="com.hiponya.bbqmall.entities.bbs.NoticeEntity">
+        UPDATE `bbq_bbs`.`notice`
+
+        SET `new_flag` = 0
+
+        WHERE  `expiration_date` &lt; NOW()
+
+
+
+
+    </update>
+</mapper>
