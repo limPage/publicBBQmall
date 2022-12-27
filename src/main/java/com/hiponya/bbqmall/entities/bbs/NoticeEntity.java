@@ -20,6 +20,16 @@ public class NoticeEntity {
 
     private Boolean isNew;
 
+    private String qnaBoardId;
+
+    public String getQnaBoardId() {
+        return qnaBoardId;
+    }
+
+    public void setQnaBoardId(String qnaBoardId) {
+        this.qnaBoardId = qnaBoardId;
+    }
+
     public Boolean isNew() {
         return isNew;
     }

@@ -54,7 +54,7 @@ else if (form['isNoticeBoard'].value === "qna"){
 
 
    const questionOpen= window.document.querySelectorAll('.questionOpen');
-   const antherLi=  window.document.querySelectorAll('.anther');
+   const antherLi=  window.document.querySelectorAll('.answer');
 
     for(let i=0 ;i< questionOpen.length; i++){
 
@@ -71,5 +71,45 @@ else if (form['isNoticeBoard'].value === "qna"){
             }
     )}
 
- }
+   const qid= form['qid'].value;
+    if (qid===''){
+        window.document.getElementById('all').style.cssText= `backgroundColor:red ;color:white; `;
+        // cssText=`color: pink; font-size: 20px;`
+    }
+    if (qid==='user'){
+        window.document.getElementById('user').style.backgroundColor='red';
+    }
+    if (qid==='payment'){
+        window.document.getElementById('payment').style.backgroundColor='red';
+    }
+    if (qid==='shipping'){
+        window.document.getElementById('shipping').style.backgroundColor='red';
+    }
+    if (qid==='productService'){
+        window.document.getElementById('productService').style.backgroundColor='red';
+    }
+    if (qid==='product'){
+        window.document.getElementById('product').style.backgroundColor='red';
+    }
+    if (qid==='other') {
+        window.document.getElementById('other').style.backgroundColor = 'red';
+    }
+
+
+
+
+    form['searchButton'].addEventListener('click',()=>{
+
+        const text= form['text'].value;
+
+        // http://localhost:8080/board/
+        alert(text)
+        window.location.href='/board/?bid=qna&qid='+qid+'&keyword='+text
+
+    })
+
+
+
+}
+
 

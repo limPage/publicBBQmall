@@ -38,7 +38,7 @@ body>main>.qna>form>label{
 }
 
 
-body>main>.qna>form>label>input[type="submit"] {
+body>main>.qna>form>label>input[type="button"] {
     height: 32px;
     padding: 0 18px;
     font-size: 13px;
@@ -51,6 +51,14 @@ body>main>.qna>form>label>input[type="submit"] {
 
 
 }
+body>main>.qna>form>label>input[type="button"]:hover,
+body>main>.qna>.qna-button-container>li>a:hover{
+
+    border: rgba(0,0,0,0.4) solid 0.0625rem;
+
+}
+
+
 body>main>.qna>form>label>input[type="text"]{
     width: 198px;
     height: 28px;
@@ -105,7 +113,7 @@ body>main>.qna>.qna-container>li h1
 
 }
 
-body>main>.qna>.qna-container>li>.anther{
+body>main>.qna>.qna-container>li>.answer{
     font-size: 14px;
     /*vertical-align: middle;*/
 
@@ -116,18 +124,18 @@ body>main>.qna>.qna-container>li>.anther{
     margin-bottom: 10px;
 
 }
-body>main>.qna>.qna-container>li>.anther.visible{
+body>main>.qna>.qna-container>li>.answer.visible{
     display: flex;
 }
 
 
-body>main>.qna>.qna-container>li>.anther>h1 {
+body>main>.qna>.qna-container>li>.answer>h1 {
     color: rgba(0, 0, 0, 0.4);
     height: 100%;
 }
 
 
-body>main>.qna>.qna-container>li>.anther>p{
+body>main>.qna>.qna-container>li>.answer>p{
     margin: unset;
     padding: 14px 10px 10px 10px;
  width: 100%;
@@ -135,10 +143,49 @@ body>main>.qna>.qna-container>li>.anther>p{
 
 
 }
-body>main>.qna>.qna-container>li>.anther>p>span{
+body>main>.qna>.qna-container>li>.answer>p>span{
     display: block;
     padding: 4px;
     line-height: 2rem;
     color: rgba(0,0,0,0.6);
     font-weight: 500;
 }
+
+body>main>.qna>.qna-page-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+body>main>.qna>.qna-page-container>.page{
+    /*background-color: rebeccapurple;*/
+    width: 32px;
+    height: 32px;
+    /*padding: 0.4rem 1rem 0.4rem 1rem;*/
+    color: #333333;
+    border: 0.0625rem solid rgba(0,0,0,0.15);
+    border-radius: 1rem;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1px;
+    padding: unset;
+
+    /*text-align: center;*/
+    /*vertical-align: middle;*/
+}
+
+body>main>.qna>.qna-page-container>.page.selected{
+    border:1px  solid rgba(0,0,0,0.9);
+    user-select: none;
+
+}
+
+
+
+body>main>.qna>.qna-page-container>.page:hover{
+
+    background-color: rgba(0,0,0,0.1);
+    border: 0.0625rem solid rgba(0,0,0,0.2);
+}
+
