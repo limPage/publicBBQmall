@@ -41,11 +41,11 @@ public class CategoryController {
 
         modelAndView.addObject("sort", sort);
         modelAndView.addObject("sorts", sorts);
+        modelAndView.addObject("product", product);
 
         modelAndView.addObject("products", products);
         modelAndView.addObject("categories", categories);
         modelAndView.addObject("category", category);
-        modelAndView.addObject("product", product);
         modelAndView.addObject("index",category.getIndex());
         modelAndView.addObject("cid", cid);
 
@@ -58,14 +58,16 @@ public class CategoryController {
     }
 
     @RequestMapping(value = "view", method=RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getView(@RequestParam(value = "cid") int cid, CategoryEntity category,ProductEntity product) {
+    public ModelAndView getView( CategoryEntity category,ProductEntity product) {
         ModelAndView modelAndView = new ModelAndView("home/view");
 
-        CategoryEntity category1 = this.categoryService.getCategoryIndex(cid);
-        modelAndView.addObject("category1", category1);
+        this.categoryService.getCategoryIndex(category.getIndex());
+        modelAndView.addObject("category", category);
+        modelAndView.addObject("cid", category.getIndex());
 
-        ProductEntity[] products = this.categoryService.getProducts(cid);
+        ProductEntity[] products = this.categoryService.getProducts(category.getIndex());
         modelAndView.addObject("products", products);
+        modelAndView.addObject("product", product);
 
         JSONObject commentObject = new JSONObject();
         commentObject.put("productName", product.getProductName());
@@ -93,19 +95,24 @@ public class CategoryController {
     }
 
     @RequestMapping(value = "view", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public String postCategoryQuantity(@RequestParam(value = "cid") int cid, CategoryEntity category, ProductEntity product) {
+    public String postCategoryQuantity(@RequestParam(value = "cid") int cid, @RequestParam(value = "sid") int sid, CategoryEntity category, SortEntity sort) {
         JSONObject responseObject = new JSONObject();
         Enum<?> result =this.categoryService.getProductQuantity(cid);
         responseObject.put("result", result.name().toLowerCase());
+        sort.setIndex(sid);
         responseObject.put("index", category.getIndex());
         responseObject.put("title", category.getTitle());
+        if (result == CommonResult.SUCCESS) {
+            responseObject.put("cid", category.getIndex());
+            responseObject.put("sid", sid);
+        }
 
 
         return responseObject.toString();
     }
 
-    @PostMapping(value="/", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String postCategory(@RequestParam(value = "cid") int cid, CategoryEntity category, ProductEntity product) {
+    @PostMapping(value="category", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String postCategory(@RequestParam(value = "cid") int cid, @RequestParam(value = "sid") int sid, CategoryEntity category, ProductEntity product, SortEntity sort) {
         JSONObject responseObject = new JSONObject();
 
         Enum<? extends IResult> result =this.categoryService.sendCategoryIndex(category, product);
@@ -117,10 +124,12 @@ public class CategoryController {
             category.setTitle(category.getTitle());
             product.setPrice(product.getPrice());
             product.setDetailIndex(category.getIndex());
+            sort.setIndex(sid);
 
             result = this.categoryService.getProductQuantity(category.getIndex());
             if (result == CommonResult.SUCCESS) {
                 responseObject.put("cid", category.getIndex());
+                responseObject.put("sid", sort.getIndex());
             }
         }
 

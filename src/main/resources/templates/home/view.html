@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>BBQ몰 - 디테일메뉴</title>
+    <title th:text = "${'BBQ몰 - ' + (product.getProductName())}"></title>
     <link rel="stylesheet" th:href="@{/bbq/resources/stylesheets/index.css}">
     <link rel="stylesheet" th:href="@{/detailmenu/resources/stylesheets/detailmenu.css}">
     <th:block th:replace="~{fragments/head :: common}"></th:block>
@@ -15,7 +15,7 @@
 <body>
 <th:block th:replace="~{fragments/body :: header}"></th:block>
 <main>
-<!--    <input type="hidden" name = "index" th:value="${product.getIndex()}">-->
+    <input type="hidden" name = "pid" th:value="${product.getProductIndex()}">
     <div class="products-view">
         <div class="products">
 

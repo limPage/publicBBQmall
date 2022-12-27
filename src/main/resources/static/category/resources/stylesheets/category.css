@@ -60,35 +60,52 @@ main > .swiper > div > .catalog-page > .goods-search-form > .border-line {
     border-bottom : 0.0125rem solid rgb(213, 216, 220);
 }
 
-.goods-search-form > .search-item-display > .ul > .goods-list {
-    align-items : stretch;
-    display : flex;
-    flex-direction : row;
-    justify-content : center;
-    flex-wrap: wrap;
+.product-container {
+    display: grid;
+    gap: 2rem 2.5rem;
+    grid-template-columns: repeat(4, 1fr);
+    list-style-type: none;
+    margin: unset;
+    margin-top: 3rem;
+    padding: unset;
 }
 
-.goods-search-form > .search-item-display > .ul > .goods-list > .item-area {
+.product-container > .products {
     align-items : stretch;
-    display : flex;
+    display : grid;
     flex-direction : row;
     justify-content : center;
-    padding : 0.625rem;
-    margin-top : 1rem;
-    flex-wrap: wrap;
 }
 
-main > .swiper > div > .catalog-page > .goods-search-form > .paging-navigation {
-    align-items : stretch;
-    display : flex;
-    flex-direction : row;
-    justify-content : center;
+/*.goods-search-form > .search-item-display > .ul > .goods-list {*/
+/*    align-items : stretch;*/
+/*    display : flex;*/
+/*    flex-direction : row;*/
+/*    justify-content : center;*/
+/*    flex-wrap: wrap;*/
+/*}*/
 
-    box-sizing : border-box;
-    text-decoration: none;
-    font-size : 1rem;
-    margin-bottom : 5rem;
-}
+/*.goods-search-form > .search-item-display > .ul > .goods-list > .item-area {*/
+/*    align-items : stretch;*/
+/*    display : flex;*/
+/*    flex-direction : row;*/
+/*    justify-content : center;*/
+/*    padding : 0.625rem;*/
+/*    margin-top : 1rem;*/
+/*    flex-wrap: wrap;*/
+/*}*/
+
+/*main > .swiper > div > .catalog-page > .goods-search-form > .paging-navigation {*/
+/*    align-items : stretch;*/
+/*    display : flex;*/
+/*    flex-direction : row;*/
+/*    justify-content : center;*/
+
+/*    box-sizing : border-box;*/
+/*    text-decoration: none;*/
+/*    font-size : 1rem;*/
+/*    margin-bottom : 5rem;*/
+/*}*/
 
 main > .swiper > div > .catalog-page > .goods-search-form > .paging-navigation > .page {
     border-top : 0.0125rem solid rgb(213, 216, 220);

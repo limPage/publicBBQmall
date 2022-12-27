@@ -16,7 +16,7 @@ public interface ICategoryMapper {
 
     CategoryEntity selectCategories2(@Param(value = "index") int index);
 
-    ProductEntity[] selectProducts(@Param(value = "index") int index);
+    ProductEntity[] selectProducts(@Param(value = "cid") int cid);
 
     SortEntity[] selectSorts();
 
