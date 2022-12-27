@@ -4,6 +4,7 @@ package com.hiponya.bbqmall.controllers;
 import com.hiponya.bbqmall.entities.bbs.ImageEntity;
 import com.hiponya.bbqmall.entities.bbs.NoticeBoardEntity;
 import com.hiponya.bbqmall.entities.bbs.NoticeEntity;
+import com.hiponya.bbqmall.entities.bbs.QnaAnswerEntity;
 import com.hiponya.bbqmall.entities.member.UserEntity;
 import com.hiponya.bbqmall.enums.CommonResult;
 import com.hiponya.bbqmall.enums.bbs.WriteResult;
@@ -42,7 +43,8 @@ public class BbsController {
     public ModelAndView getBoard(@SessionAttribute(value = "user", required = false) UserEntity user,
                                 @RequestParam(value = "bid", required = false) String bid,
                                 @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
-                                @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword ) {
+                                @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword,
+                                 @RequestParam(value = "qid" ,required = false) String qid) {
         //페이지 안보내줫을때는 펄즈, 펄즈도 인식하게 인티저, 펄즈일시 디폴트 1
         page=Math.max(1,page);
 
@@ -66,12 +68,26 @@ public class BbsController {
 
                   noticeBoard = this.bbsService.getNoticeBoard(bid);
              }
-            int totalCount = this.bbsService.getNoticeCount(noticeBoard, keyword);
 
-                PagingModel paging = new PagingModel(totalCount, page);
+        int totalCount = this.bbsService.getNoticeCount(noticeBoard, keyword, qid);
+        PagingModel paging = new PagingModel(totalCount, page);
+
+
+                     if(bid!=null&&bid.equals("qna")){
+                         QnaAnswerEntity[] answer= this.bbsService.getAnswer();
+                         modelAndView.addObject("answer", answer); //게시글개수
+
+                         paging= new PagingModel(20,totalCount,page);
+                         System.out.println("qid는"+qid);
+                         System.out.println("qid 키워드는="+keyword);
+                         modelAndView.addObject("qid",qid);
+
+                     }
+
+
                 modelAndView.addObject("paging", paging); //게시글개수
 
-                NoticeReadVo[] notice = this.bbsService.getNotice(noticeBoard, paging, keyword);
+                NoticeReadVo[] notice = this.bbsService.getNotice(noticeBoard, paging, keyword, qid);
                 NoticeReadVo[] announceNotice =this.bbsService.getAnnounceNotice();
 
                 modelAndView.addObject("announceNotice", announceNotice);

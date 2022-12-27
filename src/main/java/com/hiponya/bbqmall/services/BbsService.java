@@ -3,6 +3,7 @@ package com.hiponya.bbqmall.services;
 import com.hiponya.bbqmall.entities.bbs.ImageEntity;
 import com.hiponya.bbqmall.entities.bbs.NoticeBoardEntity;
 import com.hiponya.bbqmall.entities.bbs.NoticeEntity;
+import com.hiponya.bbqmall.entities.bbs.QnaAnswerEntity;
 import com.hiponya.bbqmall.entities.member.UserEntity;
 import com.hiponya.bbqmall.enums.CommonResult;
 import com.hiponya.bbqmall.enums.bbs.ModifyArticleResult;
@@ -72,7 +73,7 @@ public class BbsService {
 
 
     //페이징을 불러온다
-    public int getNoticeCount(NoticeBoardEntity board, String keyword) { //검색조건이 크리테리온 검색어가 키워드 보드가 어느 게시판
+    public int getNoticeCount(NoticeBoardEntity board, String keyword,String qid) { //검색조건이 크리테리온 검색어가 키워드 보드가 어느 게시판
 //        if (criterion == null || keyword == null) { //검색어가 없을시  게시판 전체
 //            return this.bbsMapper.selectArticleCountByBoardId(board.getId());
 //        } else if (criterion.equals("title")) {
@@ -85,7 +86,7 @@ public class BbsService {
 //        }
         System.out.println("공지종류는="+board.getId());
         System.out.println("keyword="+keyword);
-        return this.bbsMapper.selectNoticeCountByNoticeBoardId(board.getId() ,keyword);
+        return this.bbsMapper.selectNoticeCountByNoticeBoardId(board.getId() ,keyword ,qid);
 
     }
     //페이징을 불러온다 그냥 홈페이지로 갔을 경우
@@ -102,12 +103,16 @@ public NoticeReadVo[] getAnnounceNotice(){
 }
 
             //공지게시판을 불러온다
-    public NoticeReadVo[] getNotice(NoticeBoardEntity board, PagingModel paging,  String keyword) {
+    public NoticeReadVo[] getNotice(NoticeBoardEntity board, PagingModel paging,  String keyword, String qid) {
 
         //만들어진지 1일이 지난 게시물의 새게시물 여부를 새로고침 한다.
         System.out.println("업데이트된 수 "+this.bbsMapper.updateNoticeIsNew());
 
-        return this.bbsMapper.selectNoticeByBoardId(board.getId(), keyword, paging.countPerPage,(paging.requestPage - 1) * (paging.countPerPage));
+        return this.bbsMapper.selectNoticeByBoardId(board.getId(),
+                keyword,
+                paging.countPerPage,
+                (paging.requestPage - 1) * (paging.countPerPage),
+                qid);
 
     }
     //공지게시판을 불러온다 항목을 선택하지 않았을때 전체
@@ -214,6 +219,12 @@ public NoticeReadVo[] getAnnounceNotice(){
 //        notice.setBoardId(existingArticle.getBoardId());
 
         return this.bbsMapper.deleteNoticeByIndex(notice.getIndex()) > 0 ? CommonResult.SUCCESS : CommonResult.FAILURE;
+    }
+
+
+    public QnaAnswerEntity[] getAnswer(){
+
+       return this.bbsMapper.selectAnswer();
     }
 }
 

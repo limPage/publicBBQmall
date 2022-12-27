@@ -22,26 +22,27 @@
         SELECT COUNT(0)
         FROM `bbq_bbs`.`notice` AS `notice`
 
-
+        WHERE (REPLACE(`title`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%')
+        OR REPLACE(`content`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%'))
 
 
         <if test='boardId != null and keyword != null'>
-            WHERE `board_id` = #{boardId}
-            AND (REPLACE(`title`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%')
-            OR REPLACE(`content`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%'))
+            AND `board_id` = #{boardId}
+
         </if>
 
         <if test='boardId != null and keyword == null'>
-            WHERE `board_id` = #{boardId}
+#             WHERE `board_id` = #{boardId}
 
         </if>
 
         <if test='boardId == null and keyword != null'>
-            WHERE
-            (REPLACE(`title`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%')
-            OR REPLACE(`content`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%'))
             AND `board_id` != 'qna'
         </if>
+        <if test='qid!=null'>
+            AND `qna_board_id` = 'qna'
+        </if>
+
 
     </select>
 
@@ -89,14 +90,15 @@
         `notice`.`important_flag` AS `isImportant`,
         `notice`.`written_on` AS `writtenOn`,
         `notice`.`modified_on` AS `modifiedOn`,
-        `notice`.`new_flag` AS `isNew`
+        `notice`.`new_flag` AS `isNew`,
+        `notice`.`qna_board_id` AS `qnaBoardId`
         FROM `bbq_bbs`.`notice` AS `notice`
         LEFT JOIN `bbq_bbs`.`notice_boards` AS `notice_board` on `id` = `notice`.`board_id`
         WHERE
             (REPLACE(`title`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%')
-        OR REPLACE(`content`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%'))
+            OR REPLACE(`content`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%'))
 
-        <if test='boardId != null and keyword != null'>
+        <if test='boardId != null  and keyword != null'>
             AND `board_id` = #{boardId}
 
         </if>
@@ -108,6 +110,10 @@
         <if test='boardId == null'>
             AND `board_id` != 'qna'
 
+        </if>
+
+        <if test='qid!=null and qid!= "" '>
+            AND `qna_board_id`= #{qid}
         </if>
 
 
@@ -205,6 +211,17 @@
         FROM `bbq_bbs`.`images`
         WHERE `index` = #{index}
         LIMIT 1;
+
+    </select>
+
+    <select id="selectAnswer" resultType="com.hiponya.bbqmall.entities.bbs.QnaAnswerEntity">
+
+        SELECT `index`     AS `index`,
+               `question_index` AS `questionIndex`,
+               `content` AS `content`
+
+        FROM `bbq_bbs`.`qna_answer`
+
 
     </select>
 
