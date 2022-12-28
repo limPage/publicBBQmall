@@ -122,4 +122,63 @@ else if (form['isNoticeBoard'].value === "qna"){
     font-weight: 700;`;
 }
 
+else if (form['isNoticeBoard'].value==="bp"){
+//대량구매 탭일 경우
 
+    let text= form['keyword'].value;
+
+
+    function saveBbid ()  {
+
+        window.localStorage.savedBpBoardId =form['bbid'].value;
+
+    }
+
+    const loadBbid = () => {
+        form['bbid'].value = window.localStorage.savedBpBoardId ?? '0';
+    };
+    window.addEventListener('load', () =>{
+        loadBbid();
+        delete window.localStorage.savedBpBoardId;
+    })
+        window.addEventListener('load', function () {
+
+       delete window.localStorage.savedBpBoardId;
+            // form['bbid'].value='0'
+    })
+
+
+    form['bbid'].oninput=()=>{
+        let bbid = form['bbid'].value;
+        saveBbid ();
+        window.location.href='/board/?bid=bp&bbid='+bbid+'&keyword='+text
+
+    }
+
+    let page= window.document.querySelectorAll('.page')
+    for( let i = 0; i < page.length; i++ ) {
+        let item = page.item(i);
+        let bbid = form['bbid'].value;
+
+        item.addEventListener('click',  ()=>{
+            saveBbid ();
+
+        })
+    }
+
+
+    form['searchButton'].addEventListener('click',()=>{
+        let text= form['keyword'].value;
+        let bbid= form['bbid'].value;
+
+        saveBbid ();
+
+        window.location.href='/board/?bid=bp&bbid='+bbid+'&keyword='+text
+
+    })
+
+
+    window.document.getElementById('sideBarBP').style.cssText= `  color: rgba(0,0,0,0.9);
+    font-weight: 700;`;
+
+}

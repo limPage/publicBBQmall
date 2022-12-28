@@ -77,7 +77,7 @@
 
 
                 <td class="content-title">
-                    <a th:href="@{/board/readNotice (nid=${aNotice.getIndex()})}">
+                    <a th:href="@{/board/readNotice (bid=notice,nid=${aNotice.getIndex()}) }">
                         <h3 th:text="${aNotice.getTitle()}">제목</h3>
                         <!--                            <img  alt="new" class="is-new-icon new"-->
                         <!--                                  th:src="@{/resources/images/icon_new.gif}">-->
@@ -113,7 +113,7 @@
                 <input class="is-new" hidden th:value="${#dates.format(article.getModifiedOn(),'yyyyMMdd')}">
 
 
-                <td class="content-title"><a th:href="@{/board/readNotice (nid=${article.getIndex()})}"><h3
+                <td class="content-title"><a th:href="@{/board/readNotice (bid=notice,nid=${article.getIndex()})}"><h3
                         th:text="${article.getTitle()}">-</h3>
                     <!--                        <img  alt="new" class="is-new-icon new"-->
                     <!--                             th:src="@{/resources/images/icon_new.gif}">-->
@@ -669,8 +669,8 @@
                 <!--                        <option th:selected="${criterion != null && criterion.equals('urgent')}" value="urgent">긴급공지</option>-->
                 <!--                    </select>-->
                 <input hidden name="isNoticeBoard" value="bp">
-                <select name="bp" class="bp" rel="bp" >
-                    <option value="all">- 질문유형전체 -</option>
+                <select name="bbid" class="bbid" rel="bbid" >
+                    <option value="0" >- 질문유형전체 -</option>
                     <option value="1">대량구매문의</option>
                     <option value="2">제휴문의</option>
                     <option value="3">견적문의</option>
@@ -684,7 +684,7 @@
                 <input type="text" placeholder="상품명, 회사명, 문의자, 제목, 내용" th:value="${#request.getParameter('keyword')}" name="keyword">
             </label>
 
-            <input type="submit" value="검색">
+            <input type="button" name="searchButton" value="검색">
             <!--            </div>-->
         </form>
 
@@ -702,10 +702,10 @@
             </thead>
             <tbody>
 
-            <tr class="article" th:each="article, i: ${notice}">
+            <tr class="article" th:each="bpArticle, i: ${bpArticles}">
                 <!--공지의 특성상 10개가 넘어가지 않으므로 실사이트에선 게시물 번호가 아닌 10 내림차순으로 보여주는 듯 합니다.                    -->
                 <td>
-                    <h3 class="number" th:text="${i.size - i.index}">-</h3>
+                    <h3 class="number" th:text="${i.size - i.index }">-</h3>
                 </td>
 
                 <td>
@@ -713,33 +713,25 @@
                 </td>
 
                 <td>
-                    <h3 class="board-id" th:text="${article.getText()}">-</h3>
+                    <h3 class="board-id" th:text="${bpArticle.getText()}">-</h3>
                 </td>
 
-                <input class="is-new" hidden th:value="${#dates.format(article.getModifiedOn(),'yyyyMMdd')}">
 
 
-                <td class="content-title"><a th:href="@{/board/readNotice (nid=${article.getIndex()})}"><h3
-                        th:text="${article.getTitle()}">-</h3>
-                    <!--                        <img  alt="new" class="is-new-icon new"-->
-                    <!--                             th:src="@{/resources/images/icon_new.gif}">-->
-                    <img alt="new"
-                         th:if="${article.isNew()}"
-                         th:src="@{/resources/images/icon_new.gif}">
-
-
-                    <img alt="hot" th:if="${article.getView()>0}"
-                         th:src="@{/resources/images/icon_hot.gif}">
-
+                <td class="content-title">
+                    <a th:href="@{/board/readNotice (bid=bpArticle,bbid=${bpArticle.getIndex()})}">
+                        <h3
+                        th:text="${bpArticle.getTitle()}">-</h3>
 
                 </a></td>
+
                 <td>
-                    <h3 class="id" >성함</h3>
+                    <h3 class="id"  th:text="${bpArticle.getId()}" >성함</h3>
                 </td>
 
 
                 <td>
-                    <h3 class="written-on" th:text="${#dates.format(article.getWrittenOn(),'yyyy.MM.dd')}">
+                    <h3 class="written-on" th:text="${#dates.format(bpArticle.getWrittenOn(),'yyyy.MM.dd')}">
                         2022.52.22</h3>
                 </td>
 
@@ -755,7 +747,7 @@
                          th:with="urlBulder = ${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder).fromCurrentRequest()}">
 
                         <a class="page"
-                           th:if="${paging.requestPage >1}"
+                           th:if="${paging.requestPage >2}"
                            th:href="@{${urlBulder.replaceQueryParam('page', paging.minPage).build().toUriString()}}">
 
 
@@ -792,7 +784,7 @@
                         </a>
 
                         <a class="page"
-                           th:if="${paging.requestPage < paging.maxPage}"
+                           th:if="${  paging.maxPage - paging.requestPage >1  }"
                            th:href="@{${urlBulder.replaceQueryParam('page', paging.maxPage).build().toUriString()}}">
                             <i class="fa-solid fa-angles-right"></i>
                         </a>
@@ -809,7 +801,7 @@
 
 
         <div class="write-notice-button">
-            <a th:href="@{/board/writeBp}">공지작성</a>
+            <a th:href="@{/board/writeBp}">대량구매 문의</a>
         </div>
     </div>
 

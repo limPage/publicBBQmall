@@ -95,6 +95,13 @@ form.onsubmit = e =>{
         return false;
     }
 
+    let replySms;
+    let replyEmail;
+   if (form['replySms'].checked){replySms=true;}
+   if (form['replyEmail'].checked){replyEmail=true;}
+
+
+
     Cover.show('게시글을 작성 중 입니다.')
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
@@ -105,6 +112,9 @@ form.onsubmit = e =>{
     formData.append('contact', form['contact'].value);
     formData.append('company', form['company'].value);
     formData.append('requestDate', form['requestDate'].value);
+    formData.append('requestPrice', form['requestPrice'].value);
+    formData.append('replySms', replySms);
+    formData.append('replyEmail', replyEmail);
     formData.append('pay', form['pay'].value);
     formData.append('requestEvidence', form['requestEvidence'].value);
     formData.append('title', form['title'].value);
