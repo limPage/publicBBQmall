@@ -9,11 +9,11 @@
     <link rel="stylesheet" th:href="@{/bbs/resources/stylesheets/readNotice.css}">
     <script defer th:src="@{/bbs/resources/scripts/readNotice.js}"></script>
 
-    <script th:if="${notice==null}">
-        alert('존재하지 않는 게시물입니다.');
+<!--    <script th:if="${notice==null}">-->
+<!--        alert('존재하지 않는 게시물입니다.');-->
 
-        window.location.href='/board/'
-    </script>
+<!--        window.location.href='/board/'-->
+<!--    </script>-->
 
 
 
@@ -139,6 +139,7 @@
 
     <input th:value="${notice.getIndex()}" hidden id="index">
     </div>
+
 
 
 </main>

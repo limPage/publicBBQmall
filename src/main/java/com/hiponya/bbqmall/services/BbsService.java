@@ -1,9 +1,6 @@
 package com.hiponya.bbqmall.services;
 
-import com.hiponya.bbqmall.entities.bbs.ImageEntity;
-import com.hiponya.bbqmall.entities.bbs.NoticeBoardEntity;
-import com.hiponya.bbqmall.entities.bbs.NoticeEntity;
-import com.hiponya.bbqmall.entities.bbs.QnaAnswerEntity;
+import com.hiponya.bbqmall.entities.bbs.*;
 import com.hiponya.bbqmall.entities.member.UserEntity;
 import com.hiponya.bbqmall.enums.CommonResult;
 import com.hiponya.bbqmall.enums.bbs.ModifyArticleResult;
@@ -11,6 +8,7 @@ import com.hiponya.bbqmall.enums.bbs.WriteResult;
 import com.hiponya.bbqmall.interfaces.IResult;
 import com.hiponya.bbqmall.mappers.IBbsMapper;
 import com.hiponya.bbqmall.models.PagingModel;
+import com.hiponya.bbqmall.vos.bbs.BpReadVo;
 import com.hiponya.bbqmall.vos.bbs.NoticeReadVo;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,14 +87,12 @@ public class BbsService {
         return this.bbsMapper.selectNoticeCountByNoticeBoardId(board.getId() ,keyword ,qid);
 
     }
-    //페이징을 불러온다 그냥 홈페이지로 갔을 경우
+    public int getBpArticleCount(String bbid, String keyword) { //검색조건이 크리테리온 검색어가 키워드 보드가 어느 게시판
+//
+        System.out.println("bp보드keyword="+keyword);
+        return this.bbsMapper.selectBpArticleCountByBpBoardId(bbid ,keyword );
 
-//    public int getNoticeCountAll(  String keyword) { //검색조건이 크리테리온 검색어가 키워드 보드가 어느 게시판
-////
-//        return this.bbsMapper.selectNoticeCountAll(keyword);
-//
-//    }
-//
+    }
 
 public NoticeReadVo[] getAnnounceNotice(){
         return this.bbsMapper.selectAnnounceNotice();
@@ -123,6 +119,14 @@ public NoticeReadVo[] getAnnounceNotice(){
 //
 //    }
 
+
+    public BpReadVo[] getBpArticles(PagingModel paging, String keyword, String bbid) {
+
+        //만들어진지 1일이 지난 게시물의 새게시물 여부를 새로고침 한다.
+
+        return this.bbsMapper.selectBpArticleByBoardId(bbid, keyword, paging.countPerPage, (paging.requestPage - 1) * (paging.countPerPage));
+
+    }
 
     //게시물에 들어가는 동시에 조회수를 올려줌
 
@@ -224,7 +228,26 @@ public NoticeReadVo[] getAnnounceNotice(){
 
     public QnaAnswerEntity[] getAnswer(){
 
-       return this.bbsMapper.selectAnswer();
+       return this.bbsMapper.selectAnswers();
+    }
+
+
+
+
+
+
+    public Enum<? extends IResult> writeBpArticle(BpArticleEntity bpArticle) {
+//        article.setWrittenOn(new Date());
+//        article.setModifiedOn(new Date());
+
+        BpBoardEntity bpBoard = this.bbsMapper.selectBpBoardById(bpArticle.getBpBoardId());
+        if (bpBoard == null) {
+            return WriteResult.NO_SUCH_BOARD;
+        }
+
+
+
+        return this.bbsMapper.insertBpArticle(bpArticle) > 0 ? CommonResult.SUCCESS : CommonResult.FAILURE;
     }
 }
 

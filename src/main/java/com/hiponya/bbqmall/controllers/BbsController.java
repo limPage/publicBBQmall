@@ -1,16 +1,14 @@
 package com.hiponya.bbqmall.controllers;
 
 
-import com.hiponya.bbqmall.entities.bbs.ImageEntity;
-import com.hiponya.bbqmall.entities.bbs.NoticeBoardEntity;
-import com.hiponya.bbqmall.entities.bbs.NoticeEntity;
-import com.hiponya.bbqmall.entities.bbs.QnaAnswerEntity;
+import com.hiponya.bbqmall.entities.bbs.*;
 import com.hiponya.bbqmall.entities.member.UserEntity;
 import com.hiponya.bbqmall.enums.CommonResult;
 import com.hiponya.bbqmall.enums.bbs.WriteResult;
 import com.hiponya.bbqmall.interfaces.IResult;
 import com.hiponya.bbqmall.models.PagingModel;
 import com.hiponya.bbqmall.services.BbsService;
+import com.hiponya.bbqmall.vos.bbs.BpReadVo;
 import com.hiponya.bbqmall.vos.bbs.NoticeReadVo;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +42,8 @@ public class BbsController {
                                 @RequestParam(value = "bid", required = false) String bid,
                                 @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
                                 @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword,
-                                 @RequestParam(value = "qid" ,required = false) String qid) {
+                                 @RequestParam(value = "qid" ,required = false) String qid,
+                                 @RequestParam(value = "bbid" ,required = false) String bbid) {
         //페이지 안보내줫을때는 펄즈, 펄즈도 인식하게 인티저, 펄즈일시 디폴트 1
         page=Math.max(1,page);
 
@@ -63,43 +62,61 @@ public class BbsController {
 //            modelAndView.addObject("user", user);
 //        }
         NoticeBoardEntity noticeBoard = new NoticeBoardEntity(); //게시판 선택안하거나 전채선택일경우 빈껍데기
+
+
+
                      if (bid!=null && !bid.equals("all") ) {
 
 
                   noticeBoard = this.bbsService.getNoticeBoard(bid);
              }
 
-        int totalCount = this.bbsService.getNoticeCount(noticeBoard, keyword, qid);
-        PagingModel paging = new PagingModel(totalCount, page);
+                if (bid!=null &&bid.equals("bp") ){
+                    System.out.println("bbid는"+bbid);
+//                    int totalCount = this.bbsService.getBpArticleCount(bbid, keyword);
+                    int totalCount = this.bbsService.getBpArticleCount(bbid, keyword);
+                    PagingModel paging = new PagingModel(totalCount, page);
+//
+                    BpReadVo[] bpArticles = this.bbsService.getBpArticles( paging, keyword, bbid);
+//
+                    modelAndView.addObject("bid",bid);
+                    modelAndView.addObject("bpArticles",bpArticles);
 
-
-                     if(bid!=null&&bid.equals("qna")){
-                         QnaAnswerEntity[] answer= this.bbsService.getAnswer();
-                         modelAndView.addObject("answer", answer); //게시글개수
-
-                         paging= new PagingModel(20,totalCount,page);
-                         System.out.println("qid는"+qid);
-                         System.out.println("qid 키워드는="+keyword);
-                         modelAndView.addObject("qid",qid);
-
-                     }
-
-
-                modelAndView.addObject("paging", paging); //게시글개수
-
-                NoticeReadVo[] notice = this.bbsService.getNotice(noticeBoard, paging, keyword, qid);
-                NoticeReadVo[] announceNotice =this.bbsService.getAnnounceNotice();
-
-                modelAndView.addObject("announceNotice", announceNotice);
-                modelAndView.addObject("notice", notice);
-        System.out.println("bid는"+bid);
-                modelAndView.addObject("bid",bid);
+                    modelAndView.addObject("paging", paging); //게시글개수
 
 
 
+                }else {
 
-                modelAndView.addObject("user", user);
 
+                    int totalCount = this.bbsService.getNoticeCount(noticeBoard, keyword, qid);
+                    PagingModel paging = new PagingModel(totalCount, page);
+
+
+                    if (bid != null && bid.equals("qna")) {
+                        QnaAnswerEntity[] answer = this.bbsService.getAnswer();
+                        modelAndView.addObject("answer", answer); //게시글개수
+
+                        paging = new PagingModel(20, totalCount, page);
+                        System.out.println("qid는" + qid);
+                        System.out.println("qid 키워드는=" + keyword);
+                        modelAndView.addObject("qid", qid);
+
+                    }
+
+
+                    modelAndView.addObject("paging", paging); //게시글개수
+
+                    NoticeReadVo[] notice = this.bbsService.getNotice(noticeBoard, paging, keyword, qid);
+                    NoticeReadVo[] announceNotice = this.bbsService.getAnnounceNotice();
+
+                    modelAndView.addObject("announceNotice", announceNotice);
+                    modelAndView.addObject("notice", notice);
+                    System.out.println("bid는" + bid);
+                    modelAndView.addObject("bid", bid);
+
+
+                    modelAndView.addObject("user", user);
 
 
 //        else{
@@ -120,7 +137,7 @@ public class BbsController {
 //
 //            }
 //        }
-
+                }
         return modelAndView;
     }
 
@@ -132,18 +149,26 @@ public class BbsController {
 
 
     @GetMapping(value = "/readNotice" ,produces = MediaType.TEXT_HTML_VALUE)
-    public  ModelAndView getNotice(@RequestParam(value = "nid", required = false) int nid){
+    public  ModelAndView getNotice( @RequestParam(value = "bid", required = false) String bid,
+                                     @RequestParam(value = "nid", required = false) Integer nid,
+                                   @RequestParam(value = "bbid", required = false) String bbid){
         ModelAndView modelAndView = new ModelAndView("board/readNotice");
-        NoticeReadVo notice = this.bbsService.readNotice(nid);
 
 
-        modelAndView.addObject("notice", notice);
+        if(bid.equals("bpArticle")){
 
-//        if (notice != null) { 공지가 있다면 어떤 보드 공지인지
-//
-//            modelAndView.addObject("board", this.bbsService.getNoticeBoard(notice.getBoardId()));
-//        }
 
+            return modelAndView;
+
+        }else {
+            NoticeReadVo notice = this.bbsService.readNotice(nid);
+            modelAndView.addObject("notice", notice);
+
+        if (notice != null) { //공지가 있다면 어떤 보드 공지인지
+
+            modelAndView.addObject("board", this.bbsService.getNoticeBoard(notice.getBoardId()));
+        }
+    }
         return modelAndView;
     }
 
@@ -314,6 +339,50 @@ public class BbsController {
         return responseObject.toString();
     }
 
+
+
+    @RequestMapping(value = "/writeBp", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getBulkPurchase(@SessionAttribute(value = "user", required = false) UserEntity user) { //컨트로롤러에서 셋아트리뷰트 한 user값을 가져온다. 세션에서 가져온 값이다. required false가 있어야 null일때 userEntity값을 안요구하게된다. 400예방 false일때 null이 드감
+        //비드를 문자열로 전달
+        ModelAndView modelAndView;
+        if (user == null) {//로그인확인
+            modelAndView = new ModelAndView("redirect:/member/login");
+        } else {
+            modelAndView = new ModelAndView("board/writeBulkPurchase");
+
+
+        }
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "writeBp", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String postWrite(@SessionAttribute(value = "user", required = false) UserEntity user,
+                            BpArticleEntity bpArticle) {//컨트로롤러에서 셋아트리뷰트 한 user값을 가져온다. 세션에서 가져온 값이다. required false가 있어야 null일때 userEntity값을 안요구하게된다. 400예방
+        Enum<? extends IResult> result;//bid값으로 받아와서 그것을 id로 지정해준다.
+        JSONObject responseObject = new JSONObject();
+
+        BpBoardEntity board= new BpBoardEntity();
+
+
+        System.out.println("contact는"+bpArticle.getContact());
+        if (user == null) {
+            result = WriteResult.NOT_ALLOWED;
+        } else {
+//            bpArticle.setBpBoardId(bid);
+            System.out.println(bpArticle.getBpBoardId());
+//            notice.setUserEmail(user.getEmail());
+            result = this.bbsService.writeBpArticle(bpArticle);
+
+            if (result == CommonResult.SUCCESS) {
+
+                responseObject.put("index", bpArticle.getIndex());//인트의 기본값은 0이다.
+
+            }
+        }
+        responseObject.put("result", result.name().toLowerCase());
+        return responseObject.toString();
+    }
 
 
 }
