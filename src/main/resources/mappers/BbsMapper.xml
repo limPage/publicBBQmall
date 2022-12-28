@@ -16,6 +16,17 @@
 
     </select>
 
+    <select id="selectBpBoardById" resultType="com.hiponya.bbqmall.entities.bbs.BpBoardEntity">
+        SELECT `id`   AS `id`,
+               `text` AS `text`
+
+        FROM `bbq_bbs`.`bp_board`
+        where `id` = #{id}
+        LIMIT 1;
+
+
+    </select>
+
 
     <select id="selectNoticeCountByNoticeBoardId" resultType="int">
 
@@ -192,6 +203,21 @@
 
 
     </insert>
+    <insert id="insertBpArticle"
+            useGeneratedKeys="true" keyProperty="index"
+            keyColumn="index"
+            parameterType="com.hiponya.bbqmall.entities.bbs.BpArticleEntity">
+        INSERT INTO `bbq_bbs`.`bp_articles` ( `id`, `bp_board_id`, `name`, `email`, `contact`, `company`, `request_date`,
+                                             `request_price`, `pay`, `request_evidence`, `reply_sms`, `reply_email`, `title`,
+                                             `content`, `written_on`, `modified_on`)
+        VALUES (#{id}, #{bpBoardId},#{name},#{email},#{contact},#{company},#{requestDate},#{requestPrice},#{pay},  #{requestEvidence}, #{replySms}, #{replyEmail},
+                #{title},#{content}, IFNULL(#{writtenOn}, DEFAULT(`written_on`)), IFNULL(NOW(), DEFAULT(`modified_on`)))
+
+
+    </insert>
+
+
+
 
     <insert id="insertImage" keyColumn="index" useGeneratedKeys="true" keyProperty="index"
             parameterType="com.hiponya.bbqmall.entities.bbs.ImageEntity">
@@ -214,13 +240,13 @@
 
     </select>
 
-    <select id="selectAnswer" resultType="com.hiponya.bbqmall.entities.bbs.QnaAnswerEntity">
+    <select id="selectAnswers" resultType="com.hiponya.bbqmall.entities.bbs.QnaAnswerEntity">
 
         SELECT `index`     AS `index`,
                `question_index` AS `questionIndex`,
                `content` AS `content`
 
-        FROM `bbq_bbs`.`qna_answer`
+        FROM `bbq_bbs`.`qna_answers`
 
 
     </select>

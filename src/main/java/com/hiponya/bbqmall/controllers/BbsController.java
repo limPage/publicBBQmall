@@ -1,10 +1,7 @@
 package com.hiponya.bbqmall.controllers;
 
 
-import com.hiponya.bbqmall.entities.bbs.ImageEntity;
-import com.hiponya.bbqmall.entities.bbs.NoticeBoardEntity;
-import com.hiponya.bbqmall.entities.bbs.NoticeEntity;
-import com.hiponya.bbqmall.entities.bbs.QnaAnswerEntity;
+import com.hiponya.bbqmall.entities.bbs.*;
 import com.hiponya.bbqmall.entities.member.UserEntity;
 import com.hiponya.bbqmall.enums.CommonResult;
 import com.hiponya.bbqmall.enums.bbs.WriteResult;
@@ -314,6 +311,50 @@ public class BbsController {
         return responseObject.toString();
     }
 
+
+
+    @RequestMapping(value = "/writeBp", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getBulkPurchase(@SessionAttribute(value = "user", required = false) UserEntity user) { //컨트로롤러에서 셋아트리뷰트 한 user값을 가져온다. 세션에서 가져온 값이다. required false가 있어야 null일때 userEntity값을 안요구하게된다. 400예방 false일때 null이 드감
+        //비드를 문자열로 전달
+        ModelAndView modelAndView;
+        if (user == null) {//로그인확인
+            modelAndView = new ModelAndView("redirect:/member/login");
+        } else {
+            modelAndView = new ModelAndView("board/writeBulkPurchase");
+
+
+        }
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "writeBp", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String postWrite(@SessionAttribute(value = "user", required = false) UserEntity user,
+                            BpArticleEntity bpArticle) {//컨트로롤러에서 셋아트리뷰트 한 user값을 가져온다. 세션에서 가져온 값이다. required false가 있어야 null일때 userEntity값을 안요구하게된다. 400예방
+        Enum<? extends IResult> result;//bid값으로 받아와서 그것을 id로 지정해준다.
+        JSONObject responseObject = new JSONObject();
+
+        BpBoardEntity board= new BpBoardEntity();
+
+
+        System.out.println("contact는"+bpArticle.getContact());
+        if (user == null) {
+            result = WriteResult.NOT_ALLOWED;
+        } else {
+//            bpArticle.setBpBoardId(bid);
+            System.out.println(bpArticle.getBpBoardId());
+//            notice.setUserEmail(user.getEmail());
+            result = this.bbsService.writeBpArticle(bpArticle);
+
+            if (result == CommonResult.SUCCESS) {
+
+                responseObject.put("index", bpArticle.getIndex());//인트의 기본값은 0이다.
+
+            }
+        }
+        responseObject.put("result", result.name().toLowerCase());
+        return responseObject.toString();
+    }
 
 
 }

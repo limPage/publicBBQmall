@@ -1,9 +1,6 @@
 package com.hiponya.bbqmall.services;
 
-import com.hiponya.bbqmall.entities.bbs.ImageEntity;
-import com.hiponya.bbqmall.entities.bbs.NoticeBoardEntity;
-import com.hiponya.bbqmall.entities.bbs.NoticeEntity;
-import com.hiponya.bbqmall.entities.bbs.QnaAnswerEntity;
+import com.hiponya.bbqmall.entities.bbs.*;
 import com.hiponya.bbqmall.entities.member.UserEntity;
 import com.hiponya.bbqmall.enums.CommonResult;
 import com.hiponya.bbqmall.enums.bbs.ModifyArticleResult;
@@ -224,7 +221,22 @@ public NoticeReadVo[] getAnnounceNotice(){
 
     public QnaAnswerEntity[] getAnswer(){
 
-       return this.bbsMapper.selectAnswer();
+       return this.bbsMapper.selectAnswers();
+    }
+
+
+    public Enum<? extends IResult> writeBpArticle(BpArticleEntity bpArticle) {
+//        article.setWrittenOn(new Date());
+//        article.setModifiedOn(new Date());
+
+        BpBoardEntity bpBoard = this.bbsMapper.selectBpBoardById(bpArticle.getBpBoardId());
+        if (bpBoard == null) {
+            return WriteResult.NO_SUCH_BOARD;
+        }
+
+
+
+        return this.bbsMapper.insertBpArticle(bpArticle) > 0 ? CommonResult.SUCCESS : CommonResult.FAILURE;
     }
 }
 
