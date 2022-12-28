@@ -1,6 +1,7 @@
 package com.hiponya.bbqmall.mappers;
 
 import com.hiponya.bbqmall.entities.bbs.*;
+import com.hiponya.bbqmall.vos.bbs.BpReadVo;
 import com.hiponya.bbqmall.vos.bbs.NoticeReadVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -19,6 +20,12 @@ public interface IBbsMapper {
                                           @Param(value = "keyword") String keyword,
                                           @Param(value = "qid") String qid);
 
+    int selectBpArticleCountByBpBoardId(@Param(value = "bpBoardId") String bpBoardId,
+
+                                         @Param(value = "keyword") String keyword);
+
+
+
     int updateNoticeIsNew();
 
     int deleteNoticeByIndex(@Param(value = "index") int index);
@@ -30,7 +37,11 @@ public interface IBbsMapper {
                                             @Param(value = "limit") int limit,
                                             @Param(value = "offset") int offset,
                                             @Param(value = "qid") String qid);
-
+    BpReadVo[] selectBpArticleByBoardId(@Param(value = "bpBoardId") String bpBoardId,
+                                        @Param(value = "keyword") String keyword,
+                                        @Param(value = "limit") int limit,
+                                        @Param(value = "offset") int offset
+                                         );
     NoticeReadVo selectNoticeByIndex(@Param(value = "index") int index);
 
     QnaAnswerEntity[] selectAnswers();

@@ -8,6 +8,7 @@ import com.hiponya.bbqmall.enums.bbs.WriteResult;
 import com.hiponya.bbqmall.interfaces.IResult;
 import com.hiponya.bbqmall.models.PagingModel;
 import com.hiponya.bbqmall.services.BbsService;
+import com.hiponya.bbqmall.vos.bbs.BpReadVo;
 import com.hiponya.bbqmall.vos.bbs.NoticeReadVo;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,8 @@ public class BbsController {
                                 @RequestParam(value = "bid", required = false) String bid,
                                 @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
                                 @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword,
-                                 @RequestParam(value = "qid" ,required = false) String qid) {
+                                 @RequestParam(value = "qid" ,required = false) String qid,
+                                 @RequestParam(value = "bbid" ,required = false) String bbid) {
         //페이지 안보내줫을때는 펄즈, 펄즈도 인식하게 인티저, 펄즈일시 디폴트 1
         page=Math.max(1,page);
 
@@ -60,43 +62,61 @@ public class BbsController {
 //            modelAndView.addObject("user", user);
 //        }
         NoticeBoardEntity noticeBoard = new NoticeBoardEntity(); //게시판 선택안하거나 전채선택일경우 빈껍데기
+
+
+
                      if (bid!=null && !bid.equals("all") ) {
 
 
                   noticeBoard = this.bbsService.getNoticeBoard(bid);
              }
 
-        int totalCount = this.bbsService.getNoticeCount(noticeBoard, keyword, qid);
-        PagingModel paging = new PagingModel(totalCount, page);
+                if (bid!=null &&bid.equals("bp") ){
+                    System.out.println("bbid는"+bbid);
+//                    int totalCount = this.bbsService.getBpArticleCount(bbid, keyword);
+                    int totalCount = this.bbsService.getBpArticleCount(bbid, keyword);
+                    PagingModel paging = new PagingModel(totalCount, page);
+//
+                    BpReadVo[] bpArticles = this.bbsService.getBpArticles( paging, keyword, bbid);
+//
+                    modelAndView.addObject("bid",bid);
+                    modelAndView.addObject("bpArticles",bpArticles);
 
-
-                     if(bid!=null&&bid.equals("qna")){
-                         QnaAnswerEntity[] answer= this.bbsService.getAnswer();
-                         modelAndView.addObject("answer", answer); //게시글개수
-
-                         paging= new PagingModel(20,totalCount,page);
-                         System.out.println("qid는"+qid);
-                         System.out.println("qid 키워드는="+keyword);
-                         modelAndView.addObject("qid",qid);
-
-                     }
-
-
-                modelAndView.addObject("paging", paging); //게시글개수
-
-                NoticeReadVo[] notice = this.bbsService.getNotice(noticeBoard, paging, keyword, qid);
-                NoticeReadVo[] announceNotice =this.bbsService.getAnnounceNotice();
-
-                modelAndView.addObject("announceNotice", announceNotice);
-                modelAndView.addObject("notice", notice);
-        System.out.println("bid는"+bid);
-                modelAndView.addObject("bid",bid);
+                    modelAndView.addObject("paging", paging); //게시글개수
 
 
 
+                }else {
 
-                modelAndView.addObject("user", user);
 
+                    int totalCount = this.bbsService.getNoticeCount(noticeBoard, keyword, qid);
+                    PagingModel paging = new PagingModel(totalCount, page);
+
+
+                    if (bid != null && bid.equals("qna")) {
+                        QnaAnswerEntity[] answer = this.bbsService.getAnswer();
+                        modelAndView.addObject("answer", answer); //게시글개수
+
+                        paging = new PagingModel(20, totalCount, page);
+                        System.out.println("qid는" + qid);
+                        System.out.println("qid 키워드는=" + keyword);
+                        modelAndView.addObject("qid", qid);
+
+                    }
+
+
+                    modelAndView.addObject("paging", paging); //게시글개수
+
+                    NoticeReadVo[] notice = this.bbsService.getNotice(noticeBoard, paging, keyword, qid);
+                    NoticeReadVo[] announceNotice = this.bbsService.getAnnounceNotice();
+
+                    modelAndView.addObject("announceNotice", announceNotice);
+                    modelAndView.addObject("notice", notice);
+                    System.out.println("bid는" + bid);
+                    modelAndView.addObject("bid", bid);
+
+
+                    modelAndView.addObject("user", user);
 
 
 //        else{
@@ -117,7 +137,7 @@ public class BbsController {
 //
 //            }
 //        }
-
+                }
         return modelAndView;
     }
 
@@ -129,18 +149,26 @@ public class BbsController {
 
 
     @GetMapping(value = "/readNotice" ,produces = MediaType.TEXT_HTML_VALUE)
-    public  ModelAndView getNotice(@RequestParam(value = "nid", required = false) int nid){
+    public  ModelAndView getNotice( @RequestParam(value = "bid", required = false) String bid,
+                                     @RequestParam(value = "nid", required = false) Integer nid,
+                                   @RequestParam(value = "bbid", required = false) String bbid){
         ModelAndView modelAndView = new ModelAndView("board/readNotice");
-        NoticeReadVo notice = this.bbsService.readNotice(nid);
 
 
-        modelAndView.addObject("notice", notice);
+        if(bid.equals("bpArticle")){
 
-//        if (notice != null) { 공지가 있다면 어떤 보드 공지인지
-//
-//            modelAndView.addObject("board", this.bbsService.getNoticeBoard(notice.getBoardId()));
-//        }
 
+            return modelAndView;
+
+        }else {
+            NoticeReadVo notice = this.bbsService.readNotice(nid);
+            modelAndView.addObject("notice", notice);
+
+        if (notice != null) { //공지가 있다면 어떤 보드 공지인지
+
+            modelAndView.addObject("board", this.bbsService.getNoticeBoard(notice.getBoardId()));
+        }
+    }
         return modelAndView;
     }
 
