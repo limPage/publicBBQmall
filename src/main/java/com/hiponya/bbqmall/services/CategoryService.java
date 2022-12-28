@@ -41,23 +41,23 @@ public class CategoryService {
     @Transactional
     public Enum<? extends IResult> sendCategoryIndex(CategoryEntity category, ProductEntity product) {
 
-
         CategoryEntity existingCategory = this.categoryMapper.selectCategoryIndexByDetailIndex(product.getDetailIndex());
-
-
         if (existingCategory == null) {
             return CommonResult.FAILURE;
         }
-
         if(category.getIndex() != product.getDetailIndex()) {
             return CategoryResult.NO_PRODUCTS;
         }
-
         if(category.getTitle() == null) {
             return CategoryResult.NO_CATEGORY;
         }
 
         return CommonResult.SUCCESS;
+    }
+
+    public ProductEntity getProductByIndex(int pid) {
+
+        return this.categoryMapper.selectProductByIndex(pid);
     }
 
     public CategoryEntity[] getCategories() {

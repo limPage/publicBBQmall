@@ -32,7 +32,7 @@
             <div class = "products-container">
                 <form class="products-form" id="productsForm">
                     <div class="products-spec">
-                        <div class="title">[냉동] BBQ 구운 왕갈비맛 삼각밥 100g 10팩</div>
+                        <div class="title" th:text="${product.getProductName()}">[냉동] BBQ 구운 왕갈비맛 삼각밥 100g 10팩</div>
                         <div class="star-container">
                             <i class="fa-regular fa-star star"></i>
                             <i class="fa-regular fa-star star"></i>
@@ -43,9 +43,9 @@
                         </div>
                         <div class="price-container">
                             <span class="sale">13%</span>
-                            <span class="price">17,300</span>
+                            <span class="price" th:text="${product.getPrice()}">17,300</span>
                             <span class="won">원</span>
-                            <span class="basic-price">20,000원</span>
+                            <span class="basic-price" th:text="${product.getPrice()}">20,000원</span>
                         </div>
                     </div>
 
@@ -72,9 +72,9 @@
                     </div>
                     <div class="quantity-container">
                         <span class="quantity">구매수량</span>
-                        <input type="button" id="min" class="min" value="-">
-                        <input type="number" class="quantity-number" id="quantityNumber" name="quantityNumber">
-                        <input type="button" id="add" class="add" value="+">
+                        <input type="button" id="min" class="min" value="-" name="min">
+                        <input type="text" class="quantity-number" id="quantityNumber" name="quantityNumber" value="0">
+                        <input type="button" id="add" class="add" value="+" name="add">
                     </div>
                     <div class="total-container"><span class="total">총 상품금액
                             <span class="total-price">17,300</span>

@@ -1,4 +1,28 @@
-// const form = window.document.getElementById('form');
+const form = window.document.getElementById('form');
+
+// const Cover = {
+//     show : (text) => {
+//         const cover = window.document.getElementById('cover');;
+//         cover.querySelector('[rel="text"]').innerText = text;
+//         cover.classList.add('visible');
+//     },
+//     hide : () => {
+//         window.document.getElementById('cover').classList.remove('visible');
+//     }
+// };
+//
+// const Warning = {
+//     getElement:()=> form.querySelector('[rel="warningRow"]'),
+//     show : (text) => {
+//         const warningRow = Warning.getElement();
+//         warningRow.querySelector('.text').innerText = text;
+//         warningRow.classList.add('visible');
+//     },
+//     hide : () => {
+//         const warningRow = Warning.getElement();
+//         warningRow.classList.remove('visible');
+//     }
+// }
 //
 // let categoryTitle = form.querySelectorAll('[rel = "categoryTitle"]');
 // for(let i = 0; i < categoryTitle.length; i++) {

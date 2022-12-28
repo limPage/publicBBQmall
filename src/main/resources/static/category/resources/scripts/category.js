@@ -1,44 +1,37 @@
 // form['back'].addEventListener('click', () => window.history.length < 2 ? window.close() : window.history.back());
 
+const ranking = window.document.getElementById('ranking');
+const cid = window.document.getElementById('cid');
+const rankingSid=  window.document.getElementById('rankingSid');
+ranking.addEventListener('click', (e) => {
+    e.preventDefault();
+    alert('랭킹순');
+    const xhr = new XMLHttpRequest();
+    const formData = new FormData();
+    formData.append('cid', cid.value);
+    formData.append('sid', rankingSid.value);
+    xhr.open('GET', window.location.href);
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                // const responseObject = JSON.parse(xhr.responseText); // responseObject에 controller에서 받아온 값을 넣고
+                // switch (responseObject['result']) { // responseObject의 값을 switch할 때
+                //     case 'success':
+                //          const index = responseObject['index'];
+                //          window.location.href = `category?cid=${index}`;
+                //         break;
+                //         default:
+                //             break;
+                //              alert('알 수 없는 이유로 게시글을 작성하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
+                // }
+            } else {
 
-
-let sorting = form.querySelectorAll('[rel = "sorting"]');
-let sid = form.querySelectorAll('[rel="sid"]');
-for(let i = 0; i < sorting.length; i++) {
-    let item = sorting.item(i);
-    let sidItem = sid.item(i);
-    item.addEventListener('click', () => {
-
-        console.log(item.value);
-        alert(item.value);
-
-        const xhr = new XMLHttpRequest();
-        const formData = new FormData();
-        formData.append('cid', form['cid'].value);
-        formData.append('sid', form['sid'].value);
-
-        xhr.open('POST', window.location.href);
-        xhr.onreadystatechange = () => {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                Cover.hide();
-                if (xhr.status >= 200 && xhr.status < 300) {
-                    const responseObject = JSON.parse(xhr.responseText); // responseObject에 controller에서 받아온 값을 넣고
-                    switch (responseObject['result']) { // responseObject의 값을 switch할 때
-                        case 'success':
-                            const index = responseObject['index'];
-                            window.location.href = `category?cid=${index}&sid=${sidItem.value}`;
-                            break;
-                        default:
-                            Warning.show('알 수 없는 이유로 게시글을 작성하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
-                    }
-                } else {
-                    Warning.show('서버와 통신하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
-                }
             }
-        };
-        xhr.send(formData);
-    });
-}
+        }
+    };
+    xhr.send(formData);
+});
+
 
 
 // form['ranking'].addEventListener = () => {

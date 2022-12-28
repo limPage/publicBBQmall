@@ -28,7 +28,7 @@ public class CategoryController {
     }
 
     @RequestMapping(value = "category", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getCategory(@RequestParam(value = "cid") int cid,  CategoryEntity category, ProductEntity product, SortEntity sort) {
+    public ModelAndView getCategory(@RequestParam(value = "cid") int cid,CategoryEntity category, ProductEntity product, SortEntity sort) {
         ModelAndView modelAndView = new ModelAndView("home/category");
         CategoryEntity[] categories = this.categoryService.getCategories();
         ProductEntity[] products = this.categoryService.getProducts(cid);
@@ -54,24 +54,33 @@ public class CategoryController {
         }
 
         System.out.println(categories2.getTitle());
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "cart", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getCart() {
+        ModelAndView modelAndView = new ModelAndView("home/cart");
+
         return modelAndView;
     }
 
     @RequestMapping(value = "view", method=RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getView( CategoryEntity category,ProductEntity product) {
+    public ModelAndView getView(@RequestParam(value = "pid") int pid, CategoryEntity category) {
         ModelAndView modelAndView = new ModelAndView("home/view");
 
-        this.categoryService.getCategoryIndex(category.getIndex());
+
         modelAndView.addObject("category", category);
         modelAndView.addObject("cid", category.getIndex());
+        modelAndView.addObject("pid", pid);
 
-        ProductEntity[] products = this.categoryService.getProducts(category.getIndex());
-        modelAndView.addObject("products", products);
+        ProductEntity product = this.categoryService.getProductByIndex(pid);
         modelAndView.addObject("product", product);
 
-        JSONObject commentObject = new JSONObject();
-        commentObject.put("productName", product.getProductName());
-        commentObject.put("price", product.getPrice());
+
+//        JSONObject commentObject = new JSONObject();
+//        commentObject.put("productName", product.getProductName());
+//        commentObject.put("price", product.getPrice());
 
         return modelAndView;
     }

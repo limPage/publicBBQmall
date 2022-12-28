@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title th:text = "${'BBQ몰 - 구매페이지'}"></title>
+    <link rel="stylesheet" th:href="@{/bbq/resources/stylesheets/index.css}">
+    <link rel="stylesheet" th:href="@{/cart/resources/stylesheets/cart.css}">
+    <th:block th:replace="~{fragments/head :: common}"></th:block>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script defer th:src="@{/cart/resources/scripts/cart.js}"></script>
+</head>
+<body>
+<th:block th:replace="~{fragments/body :: header}"></th:block>
+<main>
+    <form id="cartForm" class="cart-form" name="cartForm">
+        <div class="title-container">
+            <h2>주문/결제</h2>
+        </div>
+        <div class="order-layout" id="orderLayout">
+            <div class="cartPage-container">
+                <h2 class="title">주문상품 정보</h2>
+                <div class="cart-content">
+                    <ul class="cart-list">
+                        <li class="th">배송 :
+                            <span>택배</span>
+                            <span class="ship-pay">(선불)</span>
+                            <span class="ship-price">무료</span>
+                            <input type="button" class="shipping-modify" value="배송 변경"><!--배송 변경-->
+                        </li>
+<!--                        <li class="shipping">-->
+<!--                            <span>택배</span>-->
+<!--                            <span class="ship-pay">(선불)</span>-->
+<!--                            <span class="ship-price">무료</span>-->
+<!--                        </li>-->
+                        <li class="cart-goods">
+                            <div class="cart-detail">
+                                <div class="cart-content">
+                                    <div class="block">
+                                        <ul>
+                                            <li class="image-container">
+                                                <a href="#">
+                                                    <img src="/resources/images/event1.jpg">
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </form>
+</main>
+
+<th:block th:replace="~{fragments/body :: footer}"></th:block>
+</body>
+</html>
