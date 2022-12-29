@@ -35,7 +35,146 @@ body > header {
     box-shadow: 0 0 0.3rem rgba(0, 0, 0, 15%);
 }
 
-main > .cart-form > .title-container > h2 {
-    font-size : 2rem;
+main > #cartForm {
+    align-items : stretch;
+    display : flex;
+    flex-direction : column;
+    justify-content : stretch;
+    margin : 1rem;
+
+    padding-top : 2rem;
+    padding-bottom : 2rem;
+}
+main > .cart-form > .title-container {
+    align-items : stretch;
+    display : flex;
+    flex-direction : row;
+    justify-content : center;
+
+    padding-top : 1.5rem;
+    padding-bottom : 2rem;
 
 }
+
+main > #cartForm > .title {
+    border-bottom: 0.0125rem solid gray;
+    padding-bottom : 0.5rem;
+}
+
+main > .cart-form > .title-container > h2 {
+    font-size : 2rem;
+}
+
+main > #cartForm > .order-layout > .cartPage-container > .cart-content > .cart-list > .delivery {
+    padding-top : 1rem;
+    padding-bottom : 1rem;
+    /*margin-left : 1rem;*/
+
+    border-bottom : 0.0125rem solid gray;
+}
+
+main > #cartForm > .order-layout > .cartPage-container > .cart-content > .cart-list > .delivery > .shipping-modify {
+    margin-left : 35rem;
+    background-color : rgb(255, 255, 255);
+    border : 0.0125rem solid gray;
+    padding: 0.15rem 0.3rem;
+    font-size : 0.8rem;
+    color : gray;
+
+}
+
+main > #cartForm > .order-layout > .cartPage-container > .cart-content > .cart-list >.cart-goods > .cart-detail {
+    margin-bottom : 0.5rem;
+}
+
+main > #cartForm > .order-layout > .cartPage-container > .cart-content > .cart-list >.cart-goods > .cart-detail > .cart-content > .block {
+    align-items : stretch;
+    display : flex;
+    flex-direction : row;
+    justify-content : stretch;
+}
+
+main > #cartForm > .order-layout > .cartPage-container > .cart-content > .cart-list >.cart-goods > .cart-detail > .cart-content > .block > ul {
+    display : flex;
+    flex-direction : row;
+
+    padding : 1rem;
+}
+
+main > #cartForm > .order-layout > .cartPage-container > .cart-content > .cart-list > .cart-goods > .cart-detail > .cart-content > .block > ul > .option-container {
+    align-items : stretch;
+    display : flex;
+    flex-direction : column;
+    justify-content : stretch;
+
+    padding : 0.5rem;
+}
+
+main > #cartForm > .order-layout > .cartPage-container > .cart-content > .cart-list > .cart-goods > .cart-detail > .cart-content > .block > ul > .option-container > .product-name {
+    font-size : 1.3rem;
+    font-style: inherit;
+    margin-bottom : 0.4rem;
+}
+
+.cart-content > .cart-list > .cart-goods > .cart-detail > .cart-content > .block {
+    border-bottom : 0.0125rem solid gray;
+}
+
+.cart-content > .cart-list > .cart-goods > .cart-detail > .cart-content > .block > ul > .option-container > .cart-option,
+.cart-content > .cart-list > .cart-goods > .cart-detail > .cart-content > .block > ul > .option-container > .cart-quantity {
+    padding-top : 0.15rem;
+    padding-bottom : 0.15rem;
+}
+
+.cart-content > .cart-list > .cart-goods > .cart-detail > .cart-content > .block > ul > .option-container > .cart-option > li > .product-title,
+.cart-content > .cart-list > .cart-goods > .cart-detail > .cart-content > .block > ul > .option-container > .cart-quantity > .quantity {
+    border : 0.0125rem solid rgb(128, 140, 152);
+    color : rgb(128, 140, 152);
+
+    padding-left : 0.3rem;
+    padding-right : 0.3rem;
+}
+
+.gift-container {
+    align-items : stretch;
+    display : flex;
+    flex-direction : column;
+    justify-content : stretch;
+
+
+    border-top : 0.0125rem solid rgb(128, 140, 152);
+    padding-top : 0.5rem;
+}
+
+.gift-container > .title {
+    margin-left : 1rem;
+}
+
+.gift-container > .gift-content {
+    margin-top : 0.5rem;
+    padding-top : 0.2rem;
+
+}
+
+.gift-container > .gift-content > .title2 {
+    border-top : 0.0125rem solid rgb(128, 140, 152);
+    font-size : 0.85rem;
+
+    padding : 1rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
