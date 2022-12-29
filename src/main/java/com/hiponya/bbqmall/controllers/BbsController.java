@@ -151,12 +151,18 @@ public class BbsController {
     @GetMapping(value = "/readNotice" ,produces = MediaType.TEXT_HTML_VALUE)
     public  ModelAndView getNotice( @RequestParam(value = "bid", required = false) String bid,
                                      @RequestParam(value = "nid", required = false) Integer nid,
-                                   @RequestParam(value = "bbid", required = false) String bbid){
+                                   @RequestParam(value = "bbid", required = false) Integer bbid){
         ModelAndView modelAndView = new ModelAndView("board/readNotice");
 
 
         if(bid.equals("bpArticle")){
+            System.out.println("bbid는" + bbid);
+            modelAndView.addObject("bid",bid);//이게 무슨 보드꺼를 읽느냐 알려줌
+            System.out.println(this.bbsService.readBpArticle(bbid)!=null?"c":"x" );
+          BpReadVo bpArticle=  this.bbsService.readBpArticle(bbid);
 
+
+            modelAndView.addObject("bpArticle",bpArticle);//이게 무슨 보드꺼를 읽느냐 알려줌
 
             return modelAndView;
 
@@ -270,29 +276,29 @@ public class BbsController {
     }
 
     @GetMapping(value = "modifyNotice", produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getModifyNotice(@SessionAttribute(value = "user", required = false) UserEntity user, @RequestParam(value = "nid") int nid){
+    public ModelAndView getModifyNotice(@SessionAttribute(value = "user", required = false)UserEntity user,
+                                        @RequestParam(value = "nid", required = false) int nid,
+                                        @RequestParam(value = "bbid",required = false) Integer bbid,
+                                        @RequestParam(value = "bid") String bid){
         ModelAndView modelAndView =new ModelAndView("board/modifyNotice");
 
-        NoticeReadVo existingNotice = this.bbsService.readNotice(nid);
+        if (bid.equals("notice")) {
+            NoticeReadVo existingNotice = this.bbsService.readNotice(nid);
+            Enum<?> result = this.bbsService.prepareModifyNotice(user, nid);
+            System.out.println("리절트는" + result.name());
+
+            modelAndView.addObject("result", result.name());
+
+            if (result == CommonResult.SUCCESS) {
+                modelAndView.addObject("notice", existingNotice);
+            }
+        } else if (bid.equals("bp")) {
+            BpReadVo existingBpArticle = this.bbsService.readBpArticle(bbid);
+            Enum<?> result = this.bbsService.prepareModifyBpArticle(user,bbid);
 
 
-        Enum<?> result = this.bbsService.prepareModifyNotice(user, nid);
-
-//        System.out.println(existingNotice.getTitle());
-//        System.out.println(existingNotice.getContent());
-        System.out.println("리절트는"+result.name());
-
-        modelAndView.addObject("result", result.name());
-
-        if(result == CommonResult.SUCCESS){
-
-            modelAndView.addObject("notice", existingNotice);
         }
 
-
-//        if (result == CommonResult.SUCCESS) {
-//            modelAndView.addObject("board", this.bbsService.getBoard(existingArticle.getBoardId()));
-//        }
 
         return modelAndView;
     }

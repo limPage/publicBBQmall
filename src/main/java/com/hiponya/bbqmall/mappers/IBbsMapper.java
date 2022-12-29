@@ -42,6 +42,7 @@ public interface IBbsMapper {
                                         @Param(value = "limit") int limit,
                                         @Param(value = "offset") int offset
                                          );
+    BpReadVo selectBpArticleByBoardIdJustOne(@Param(value = "bpBoardId") int bpBoardId);
     NoticeReadVo selectNoticeByIndex(@Param(value = "index") int index);
 
     QnaAnswerEntity[] selectAnswers();

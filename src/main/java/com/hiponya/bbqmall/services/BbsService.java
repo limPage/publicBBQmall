@@ -140,6 +140,10 @@ public NoticeReadVo[] getAnnounceNotice(){
         return notice;
 
     }
+    public BpReadVo readBpArticle(int bbid) {
+        return this.bbsMapper.selectBpArticleByBoardIdJustOne(bbid);
+
+    }
 
     //작성 공지 수정하기
     public Enum<? extends IResult> modifyNotice(NoticeEntity notice, UserEntity user) {
@@ -207,6 +211,27 @@ public NoticeReadVo[] getAnnounceNotice(){
 
         return CommonResult.SUCCESS;
     }
+    public Enum<? extends IResult> prepareModifyBpArticle(UserEntity user, int bbid) {
+
+        BpReadVo existingBpArticle = this.bbsMapper.selectBpArticleByBoardIdJustOne(bbid);
+
+        if (user == null) {
+            return ModifyArticleResult.NOT_SIGNED;  //로그인이 안되어있거나, 관리자가 아닐경우
+        }
+
+        if (existingBpArticle == null) { //게시글이 없으면
+
+            return ModifyArticleResult.NO_SUCH_ARTICLE;
+        }
+        if (user.getId().equals(existingBpArticle.getId())) {   //권한이 없으면
+
+            return ModifyArticleResult.NOT_ALLOWED;       //리턴 값을 줍니다
+        }
+
+
+        return CommonResult.SUCCESS;
+    }
+
 
     public Enum<? extends IResult> deleteNotice(NoticeEntity notice, UserEntity user) {
         NoticeEntity existingArticle = this.bbsMapper.selectNoticeByIndex(notice.getIndex());

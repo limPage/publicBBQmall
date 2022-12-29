@@ -196,6 +196,34 @@
 
     </select>
 
+    <select id="selectBpArticleByBoardIdJustOne" resultType="com.hiponya.bbqmall.vos.bbs.BpReadVo">
+    SELECT
+    `bp_article`.`index` AS `index`,
+    `bp_article`.`id` AS `id`,
+    `bp_article`.`bp_board_id` AS `bpBoardId`,
+    `bp_article`.`name` AS `name`,
+    `bp_article`.`email` AS `email`,
+    `bp_article`.`contact` AS `contact`,
+    `bp_article`.`company` AS `company`,
+    `bp_article`.`request_date` AS `requestDate`,
+    `bp_article`.`request_price` AS `requestPrice`,
+    `bp_article`.`pay` AS `pay`,
+    `bp_article`.`request_evidence` AS `requestEvidence`,
+    `bp_article`.`reply_sms` AS `replySms`,
+    `bp_article`.`reply_email` AS `replyEmaiil`,
+    `bp_article`.`title` AS `title`,
+    `bp_article`.`content` AS `content`,
+    `bp_article`.`written_on` AS `writtenOn`,
+    `bp_article`.`modified_on` AS `modifiedOn`,
+    `bp_board`.`text` AS `text`
+
+
+
+    FROM `bbq_bbs`.`bp_articles` AS `bp_article`
+    LEFT JOIN `bbq_bbs`.`bp_boards` AS `bp_board` on `bp_board_id` = `bp_board`.`id`
+    WHERE `index` = #{bpBoardId}
+    LIMIT 1
+    </select>
 
 
 
