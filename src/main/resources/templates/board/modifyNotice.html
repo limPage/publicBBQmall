@@ -44,7 +44,7 @@
 <main class="cs-center">
   <input hidden name="bidValue" th:value="${bid}">
   <th:block th:replace="~{fragments/body ::sideBar}"></th:block>
-  <div class="content" th:if="${bid=='notice'}">
+  <div class="content" th:if="${session.user!=null && bid=='notice'}">
 
     <div class="title-container">
       <h1>공지사항 수정</h1>
@@ -62,6 +62,7 @@
             <label class="label">
 
               <span hidden>보드아이디</span>
+              <input hidden id="bidLoad" th:value="${notice.getBoardId()}">
               <select name="bid">
                 <option selected value="notice">
                   공지
@@ -138,7 +139,7 @@
 
 
   </div>
-  <div class="content" th:if="${bid=='bp'}">
+  <div class="content" th:if="${session.user!=null && bid=='bp'}">
 
       <div class="title-container">
         <h1>대량구매</h1>
@@ -168,6 +169,8 @@
 
 
               <label class="label">
+                  <input hidden id="bpIndex" th:value="${BpArticle.getIndex()}">
+                <input hidden id="bbidLoad" th:value="${BpArticle.getBpBoardId()}">
 
                 <span hidden>보드아이디</span>
                 <select name="bbid" th:value="${BpArticle.getBpBoardId()}">
@@ -260,6 +263,20 @@
               </label>
             </td>
           </tr>
+          <tr class="title-row request-row">
+            <th>상품정보</th>
+            <td>
+
+
+              <label class="label">
+
+                <span hidden>상품정보</span>
+                <input  maxlength="100" name="productInfo" placeholder="문의하시는 상품을 기술해주세요."
+                       type="text" th:value="${BpArticle.getProductInfo()}">
+
+              </label>
+            </td>
+          </tr>
           <tr class="title-row">
             <th>요청금액</th>
             <td>
@@ -269,7 +286,7 @@
 
                 <span hidden>요청금액</span>
                 <input class="--object-input input" maxlength="30" name="requestPrice"
-                       type="text" th:value="${BpArticle.requestPrice}">
+                       type="number" th:value="${BpArticle.requestPrice}">
                 <span>원</span>
               </label>
 

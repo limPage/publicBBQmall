@@ -20,6 +20,10 @@ public class BpArticleEntity {
 
     private String requestDate;
 
+    private String productInfo;
+
+
+
     private String requestPrice;
 
     private String pay;
@@ -35,6 +39,14 @@ public class BpArticleEntity {
     private Date writtenOn;
 
     private Date modifiedOn;
+
+    public String getProductInfo() {
+        return productInfo;
+    }
+
+    public void setProductInfo(String productInfo) {
+        this.productInfo = productInfo;
+    }
 
     public int getIndex() {
         return index;
