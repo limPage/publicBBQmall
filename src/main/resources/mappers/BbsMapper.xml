@@ -160,6 +160,8 @@
             `bp_article`.`contact` AS `contact`,
             `bp_article`.`company` AS `company`,
             `bp_article`.`request_date` AS `requestDate`,
+            `bp_article`.`product_info` AS `productInfo`,
+
             `bp_article`.`request_price` AS `requestPrice`,
             `bp_article`.`pay` AS `pay`,
             `bp_article`.`request_evidence` AS `requestEvidence`,
@@ -206,6 +208,7 @@
     `bp_article`.`contact` AS `contact`,
     `bp_article`.`company` AS `company`,
     `bp_article`.`request_date` AS `requestDate`,
+    `bp_article`.`product_info` AS `productInfo`,
     `bp_article`.`request_price` AS `requestPrice`,
     `bp_article`.`pay` AS `pay`,
     `bp_article`.`request_evidence` AS `requestEvidence`,
@@ -264,10 +267,10 @@
             useGeneratedKeys="true" keyProperty="index"
             keyColumn="index"
             parameterType="com.hiponya.bbqmall.entities.bbs.BpArticleEntity">
-        INSERT INTO `bbq_bbs`.`bp_articles` ( `id`, `bp_board_id`, `name`, `email`, `contact`, `company`, `request_date`,
+        INSERT INTO `bbq_bbs`.`bp_articles` ( `id`, `bp_board_id`, `name`, `email`, `contact`, `company`, `request_date`,`product_info`,
                                              `request_price`, `pay`, `request_evidence`, `reply_sms`, `reply_email`, `title`,
                                              `content`, `written_on`, `modified_on`)
-        VALUES (#{id}, #{bpBoardId},#{name},#{email},#{contact},#{company},#{requestDate},#{requestPrice},#{pay},  #{requestEvidence}, #{replySms}, #{replyEmail},
+        VALUES (#{id}, #{bpBoardId},#{name},#{email},#{contact},#{company},#{requestDate},#{productInfo}, #{requestPrice},#{pay},  #{requestEvidence}, #{replySms}, #{replyEmail},
                 #{title},#{content}, IFNULL(#{writtenOn}, DEFAULT(`written_on`)), IFNULL(NOW(), DEFAULT(`modified_on`)))
 
 
@@ -332,6 +335,7 @@
             `contact`  = #{contact},
             `company`  = #{company},
             `request_date`  = #{requestDate},
+            `product_info`  = #{productInfo},
             `request_price`  = #{requestPrice},
             `pay`  = #{pay},
             `request_evidence`  = #{requestEvidence},

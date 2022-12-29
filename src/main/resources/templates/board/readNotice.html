@@ -30,6 +30,7 @@
 
 
 <main class="cs-center">
+    <input id="bid"  th:value="${session.user!=null && session.user.isAdmin()==true}? ${bid}:''" hidden>
     <th:block th:replace="~{fragments/body ::sideBar}"></th:block>
 
     <div class="content" th:if="${notice!=null}">
@@ -136,8 +137,6 @@
 
 
         </table>
-
-
     <input th:value="${notice.getIndex()}" hidden id="index">
     </div>
 
@@ -206,10 +205,8 @@
                     상품정보
                 </th>
 
-                <td >
-                        1<br>
-                    2<br>
-                    3
+                <td th:text="${bpArticle.getProductInfo()}">
+
                 </td>
             </tr>
             <tr class="bp-info-row">

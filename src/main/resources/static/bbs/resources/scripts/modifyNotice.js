@@ -13,17 +13,17 @@ form['back'].addEventListener('click', () => window.history.length < 2 ? window.
 
 if(form['bidValue'].value==="notice") {
 
-    ClassicEditor
-        .create(form['content'], {
-            simpleUpload: { //심플업로드는 오브젝트다.
-                uploadUrl: './image'
-            }
-        })
-        .then(e => editor = e); // e가 e2 > editor > form content .focus;
+    // ClassicEditor
+    //     .create(form['content'], {
+    //         simpleUpload: { //심플업로드는 오브젝트다.
+    //             uploadUrl: './image'
+    //         }
+    //     })
+    //     .then(e => editor = e); // e가 e2 > editor > form content .focus;
+    //
+    // form['back'].addEventListener('click', () => window.history.length < 2 ? window.close() : window.history.back());
 
-    form['back'].addEventListener('click', () => window.history.length < 2 ? window.close() : window.history.back());
-
-
+    form['bid'].value=form['bidLoad'].value;
     form.onsubmit = e => {
 
 
@@ -93,6 +93,9 @@ if(form['bidValue'].value==="notice") {
     };
 }
 else if(form['bidValue'].value==="bp") {
+    form['bbid'].value=form['bbidLoad'].value;
+
+
 
     form['submit'].addEventListener("click",()=>{
 
@@ -121,10 +124,15 @@ else if(form['bidValue'].value==="bp") {
             alert('회사명을 입력해 주세요.');
             form['company'].focus();
             return false;
-        }if(form['requestDate'].value===''){
+        }if(form['requestDate'].value==='') {
             alert('배송요청일을 선택해 주세요.');
             form['requestDate'].focus();
             return false;
+        }if(form['productInfo'].value===''){
+            alert('문의 상품을 기술해주세요.');
+            form['productInfo'].focus();
+            return false;
+
         }if(form['requestPrice'].value===''){
             alert('요청가격을 입력해 주세요.');
             form['requestPrice'].focus();
@@ -148,15 +156,15 @@ else if(form['bidValue'].value==="bp") {
         }
 
         Cover.show('게시글 수정을 처리중 입니다.')
-        let replySms;
-        let replyEmail;
-        if (form['replySms'].checked){replySms=true;}
-        if (form['replyEmail'].checked){replyEmail=true;}
+        // let replySms;
+        // let replyEmail;
+        // if (form['replySms'].checked){replySms=true;}
+        // if (form['replyEmail'].checked){replyEmail=true;}
 
-        let replySmsBp;
-        let replyEmailBp;
-        replySmsBp = form['replySms'].checked?true:false;
-        replyEmailBp = form['replyEmail'].checked?true:false;
+        // let replySmsBp;
+        // let replyEmailBp;
+        // replySmsBp =
+        // replyEmailBp = ;
 
 
 
@@ -164,6 +172,7 @@ else if(form['bidValue'].value==="bp") {
         Cover.show('게시글을 작성 중 입니다.')
         const xhr = new XMLHttpRequest();
         const formData = new FormData();
+        formData.append('index', form['bpIndex'].value);
         formData.append('id', form['id'].value);
         formData.append('bpBoardId', form['bbid'].value);
         formData.append('name', form['name'].value);
@@ -171,9 +180,11 @@ else if(form['bidValue'].value==="bp") {
         formData.append('contact', form['contact'].value);
         formData.append('company', form['company'].value);
         formData.append('requestDate', form['requestDate'].value);
+        formData.append('productInfo', form['productInfo'].value);
+
         formData.append('requestPrice', form['requestPrice'].value);
-        formData.append('replySms', replySms);
-        formData.append('replyEmail', replyEmail);
+        formData.append('replySms', form['replySms'].checked?true:false);
+        formData.append('replyEmail', form['replyEmail'].checked?true:false);
         formData.append('pay', form['pay'].value);
         formData.append('requestEvidence', form['requestEvidence'].value);
         formData.append('title', form['title'].value);
@@ -191,7 +202,7 @@ else if(form['bidValue'].value==="bp") {
 
                             alert('작성 성공');
 
-                            window.location.href = `http://localhost:8080/board/`;//자바스크립트문법
+                            window.location.href = `http://localhost:8080/board/?bid=bp`;//자바스크립트문법
 
 
                             break;

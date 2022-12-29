@@ -156,9 +156,7 @@ public class BbsController {
 
 
         if(bid.equals("bpArticle")){
-            System.out.println("bbid는" + bbid);
             modelAndView.addObject("bid",bid);//이게 무슨 보드꺼를 읽느냐 알려줌
-            System.out.println(this.bbsService.readBpArticle(bbid)!=null?"c":"x" );
           BpReadVo bpArticle=  this.bbsService.readBpArticle(bbid);
 
 
@@ -167,6 +165,8 @@ public class BbsController {
             return modelAndView;
 
         }else {
+            modelAndView.addObject("bid",bid);//이게 무슨 보드꺼를 읽느냐 알려줌
+
             NoticeReadVo notice = this.bbsService.readNotice(nid);
             modelAndView.addObject("notice", notice);
 
@@ -293,6 +293,7 @@ public class BbsController {
                 modelAndView.addObject("notice", existingNotice);
             }
         } else if (bid.equals("bp")) {
+
             BpReadVo existingBpArticle = this.bbsService.readBpArticle(bbid);
             Enum<?> result = this.bbsService.prepareModifyBpArticle(user,bbid);
             modelAndView.addObject("result", result.name());
