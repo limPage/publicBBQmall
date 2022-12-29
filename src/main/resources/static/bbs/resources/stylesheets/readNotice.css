@@ -44,7 +44,8 @@ body>main>.content>.content-table tr{
 
 
 }
-body>main>.content>.content-table>tbody> .info-row{
+body>main>.content>.content-table>tbody> .info-row,
+body>main>.content>.content-table>tbody> .bp-info-row{
     border-left: 1px solid rgba(0,0,0,0.1);
     border-right:  1px solid rgba(0,0,0,0.1);
     border-bottom:  1px solid rgba(0,0,0,0.1);
@@ -54,7 +55,8 @@ body>main>.content>.content-table>tbody> .info-row{
 
 
 
-body>main>.content>.content-table>tbody> .info-row>td:first-of-type{
+body>main>.content>.content-table>tbody> .info-row>td:first-of-type,
+body>main>.content>.content-table>tbody> .bp-info-row:first-of-type>td:first-of-type{
 
     border-right:  1px solid rgba(0,0,0,0.1);
 
@@ -191,4 +193,26 @@ body> main> .content >.content-table> tfoot > .management-row>td>a:not(:last-of-
 body> main> .content >.content-table> tfoot > .management-row>td>.announce-button{
     background-color: #CF152D;
     cursor: pointer;
+}
+
+
+
+body>main>.content>.content-table>tbody> .bp-info-row:first-of-type>td{
+    width: 38%;
+}
+
+
+body>main>.content>.content-table>tbody> .bp-info-row>th{
+    width: 8%;
+    padding:8px 9px;
+    background-color: rgba(0,0,0,0.05);
+    font-size: 13px;
+    border-right:  1px solid rgba(0,0,0,0.1);
+    font-weight: 400;
+}
+body>main>.content>.content-table>tbody> .bp-info-row>td{
+
+    padding: 8px 9px;
+    font-weight: 400;
+
 }

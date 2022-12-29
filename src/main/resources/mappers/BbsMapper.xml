@@ -222,6 +222,30 @@
 
     </update>
 
+    <update id="updateBpArticle" parameterType="com.hiponya.bbqmall.entities.bbs.BpArticleEntity">
+
+        UPDATE `bbq_bbs`.`bp_articles`
+        SET
+            `bp_board_id` =#{bpBoardId},
+            `name` = #{name},
+            `email`  = #{email},
+            `contact`  = #{contact},
+            `company`  = #{company},
+            `request_date`  = #{requestDate},
+            `request_price`  = #{requestPrice},
+            `pay`  = #{pay},
+            `request_evidence`  = #{requestEvidence},
+            `reply_sms`  = #{replySms},
+            `reply_email`  = #{replyEmail},
+            `title`  = #{title},
+            `content`  = #{content},
+            `written_on`  = IFNULL(#{writtenOn}, DEFAULT(`written_on`)),
+            `modified_on` = IFNULL(#{modifiedOn}, DEFAULT(`modified_on`))
+        WHERE `index` = #{index}
+
+    </update>
+
+
     <update id="updateNoticeIsNew" parameterType="com.hiponya.bbqmall.entities.bbs.NoticeEntity">
         UPDATE `bbq_bbs`.`notice`
 

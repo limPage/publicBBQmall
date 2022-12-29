@@ -38,6 +38,8 @@ public interface IBbsMapper {
     NoticeReadVo selectNoticeByIndex(@Param(value = "index") int index);
 
     int updateNotice(NoticeEntity notice);
+    int updateBpArticle(BpArticleEntity bpArticle);
+
 
 
     int insertNotice(NoticeEntity notice);

@@ -44,7 +44,7 @@ body>main>.content>.content-table tr{
 
 
 }
-body>main>.content>.content-table>tbody> .info-row{
+body>main>.content>.content-table>tbody> .bp-info-row{
     border-left: 1px solid rgba(0,0,0,0.1);
     border-right:  1px solid rgba(0,0,0,0.1);
     border-bottom:  1px solid rgba(0,0,0,0.1);
@@ -55,16 +55,16 @@ body>main>.content>.content-table>tbody> .info-row{
 
 
 
-body>main>.content>.content-table>tbody> .info-row:first-of-type>td:first-of-type{
+body>main>.content>.content-table>tbody> .bp-info-row:first-of-type>td:first-of-type{
 
     border-right:  1px solid rgba(0,0,0,0.1);
 }
-body>main>.content>.content-table>tbody> .info-row:first-of-type>td{
+body>main>.content>.content-table>tbody> .bp-info-row:first-of-type>td{
     width: 38%;
 }
 
 
-body>main>.content>.content-table>tbody> .info-row>th{
+body>main>.content>.content-table>tbody> .bp-info-row>th{
     width: 8%;
     padding:8px 9px;
     background-color: rgba(0,0,0,0.05);
@@ -72,7 +72,7 @@ body>main>.content>.content-table>tbody> .info-row>th{
     border-right:  1px solid rgba(0,0,0,0.1);
     font-weight: 400;
 }
-body>main>.content>.content-table>tbody> .info-row>td{
+body>main>.content>.content-table>tbody> .bp-info-row>td{
 
     float: right;
     padding: 8px 9px;
