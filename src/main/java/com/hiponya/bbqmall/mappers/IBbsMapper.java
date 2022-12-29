@@ -47,6 +47,8 @@ public interface IBbsMapper {
 
     QnaAnswerEntity[] selectAnswers();
     int updateNotice(NoticeEntity notice);
+    int updateBpArticle(BpArticleEntity bpArticle);
+
 
 
     int insertNotice(NoticeEntity notice);

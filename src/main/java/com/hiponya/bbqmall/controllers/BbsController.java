@@ -277,7 +277,7 @@ public class BbsController {
 
     @GetMapping(value = "modifyNotice", produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getModifyNotice(@SessionAttribute(value = "user", required = false)UserEntity user,
-                                        @RequestParam(value = "nid", required = false) int nid,
+                                        @RequestParam(value = "nid", required = false) Integer nid,
                                         @RequestParam(value = "bbid",required = false) Integer bbid,
                                         @RequestParam(value = "bid") String bid){
         ModelAndView modelAndView =new ModelAndView("board/modifyNotice");
@@ -295,11 +295,14 @@ public class BbsController {
         } else if (bid.equals("bp")) {
             BpReadVo existingBpArticle = this.bbsService.readBpArticle(bbid);
             Enum<?> result = this.bbsService.prepareModifyBpArticle(user,bbid);
-
+            modelAndView.addObject("result", result.name());
+            if (result == CommonResult.SUCCESS) {
+                modelAndView.addObject("BpArticle", existingBpArticle);
+            }
 
         }
 
-
+        modelAndView.addObject("bid", bid);
         return modelAndView;
     }
 
@@ -322,6 +325,23 @@ public class BbsController {
         return responseObject.toString();
 
     }
+    @RequestMapping(value = "modifyBpArticle", method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String patchyModifyBpArticle(@SessionAttribute(value = "user") UserEntity user , BpArticleEntity bpArticle) {
+        JSONObject responseObject = new JSONObject();
+
+        Enum<?> result = this.bbsService.modifyBpArticle(bpArticle, user);
+
+
+        responseObject.put("result", result.name().toLowerCase());
+
+        if (result == CommonResult.SUCCESS) {
+            responseObject.put("bbid", bpArticle.getIndex());
+        }
+        return responseObject.toString();
+
+    }
+
 
     @ResponseBody
     @RequestMapping(value = "deleteNotice", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
