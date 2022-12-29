@@ -140,6 +140,10 @@ public NoticeReadVo[] getAnnounceNotice(){
         return notice;
 
     }
+    public BpReadVo readBpArticle(int bbid) {
+        return this.bbsMapper.selectBpArticleByBoardIdJustOne(bbid);
+
+    }
 
     //작성 공지 수정하기
     public Enum<? extends IResult> modifyNotice(NoticeEntity notice, UserEntity user) {
@@ -187,6 +191,37 @@ public NoticeReadVo[] getAnnounceNotice(){
         }
     }
 
+    public Enum<? extends IResult> modifyBpArticle(BpArticleEntity bpArticle, UserEntity user) {
+        System.out.println("인덱스는"+bpArticle.getIndex());
+        BpArticleEntity existingBpArticle = this.bbsMapper.selectBpArticleByBoardIdJustOne(bpArticle.getIndex());
+
+        //로그인 안했다면 실패
+        if (user == null) {
+            return ModifyArticleResult.NOT_SIGNED;
+        }
+
+        if (existingBpArticle == null) { //게시글이 없으면 실패
+
+            return ModifyArticleResult.NO_SUCH_ARTICLE;
+
+            //수정 시작
+        }   if( !user.getId().equals(existingBpArticle.getId())) {
+            return  ModifyArticleResult.NOT_ALLOWED;
+        }
+
+        else {
+            //게시물 수정인경우->(단순 공지 등록이아님) 타이틀과 컨텐츠가 있음
+
+
+
+            bpArticle.setModifiedOn(new Date());
+
+
+            return this.bbsMapper.updateBpArticle(bpArticle) > 0 ? CommonResult.SUCCESS : CommonResult.FAILURE;
+        }
+    }
+
+
     public Enum<? extends IResult> prepareModifyNotice(UserEntity user, int nid) {
 
         NoticeReadVo existingNotice = this.bbsMapper.selectNoticeByIndex(nid);
@@ -207,6 +242,27 @@ public NoticeReadVo[] getAnnounceNotice(){
 
         return CommonResult.SUCCESS;
     }
+    public Enum<? extends IResult> prepareModifyBpArticle(UserEntity user, int bbid) {
+
+        BpReadVo existingBpArticle = this.bbsMapper.selectBpArticleByBoardIdJustOne(bbid);
+
+        if (user == null) {
+            return ModifyArticleResult.NOT_SIGNED;  //로그인이 안되어있거나, 관리자가 아닐경우
+        }
+
+        if (existingBpArticle == null) { //게시글이 없으면
+
+            return ModifyArticleResult.NO_SUCH_ARTICLE;
+        }
+        if (!user.getId().equals(existingBpArticle.getId())) {   //권한이 없으면
+
+            return ModifyArticleResult.NOT_ALLOWED;       //리턴 값을 줍니다
+        }
+
+
+        return CommonResult.SUCCESS;
+    }
+
 
     public Enum<? extends IResult> deleteNotice(NoticeEntity notice, UserEntity user) {
         NoticeEntity existingArticle = this.bbsMapper.selectNoticeByIndex(notice.getIndex());
