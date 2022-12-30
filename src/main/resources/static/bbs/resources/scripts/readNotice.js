@@ -129,5 +129,33 @@ if(window.document.getElementById('bid').value===("notice")) {
 
     })
 
-}
 
+
+
+}
+const commentButton =window.document.getElementById('commentButton');
+const commentCancel= window.document.getElementById('commentCancel');
+const commentWriteComplete= window.document.getElementById('commentWriteComplete');
+
+commentButton.addEventListener("click",()=>{
+    alert('asd')
+
+    window.document.querySelector('.write-comment-row').classList.add('visible');
+})
+
+commentCancel.addEventListener("click",()=>{
+    if(!confirm("답변작성을 취소하시겠습니까?")){
+        return false;
+    }
+
+    window.document.querySelector('.write-comment-row').classList.remove('visible');
+
+
+})
+commentWriteComplete.addEventListener("click",()=>{
+    if(!confirm("답변 작성겠습니까?")){
+        return false;
+    }
+    alert("안료")
+
+})
