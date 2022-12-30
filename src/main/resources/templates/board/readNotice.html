@@ -272,8 +272,9 @@
                 <td>
                     <form id="form">
                     <label>
+                        <input th:value="${bpArticle.getIndex()}" hidden id="bbid">
 
-                        <textarea  placeholder="답변을 입력해주세요." ></textarea>
+                        <textarea name="content"  placeholder="답변을 입력해주세요." ></textarea>
                     </label>
                     </form>
 
@@ -330,7 +331,6 @@
         </table>
 
 
-<!--        <input th:value="${notice.getIndex()}" hidden id="index2">-->
     </div>
 
 
