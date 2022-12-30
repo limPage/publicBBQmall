@@ -53,6 +53,9 @@ public interface IBbsMapper {
 
     int insertNotice(NoticeEntity notice);
     int insertBpArticle(BpArticleEntity bpArticle);
+    int insertAdminComment(AdminCommentEntity adminComment);
+
+
 
     int insertImage(ImageEntity image);
 

@@ -171,6 +171,7 @@
             `bp_article`.`content` AS `content`,
             `bp_article`.`written_on` AS `writtenOn`,
             `bp_article`.`modified_on` AS `modifiedOn`,
+            `bp_article`.`comment_count` AS `commentCount`,
             `bp_board`.`text` AS `text`
 
 
@@ -218,6 +219,7 @@
     `bp_article`.`content` AS `content`,
     `bp_article`.`written_on` AS `writtenOn`,
     `bp_article`.`modified_on` AS `modifiedOn`,
+    `bp_article`.`comment_count` AS `commentCount`,
     `bp_board`.`text` AS `text`
 
 
@@ -287,6 +289,15 @@
 
     </insert>
 
+    <insert id="insertAdminComment" keyColumn="index" useGeneratedKeys="true" keyProperty="index"
+            parameterType="com.hiponya.bbqmall.entities.bbs.AdminCommentEntity">
+
+    INSERT INTO `bbq_bbs`.`admin_comments`( `article_index`, `content`, `written_on`, `modified_on`)
+VALUES (#{articleIndex}, #{content},IFNULL(#{writtenOn}, DEFAULT(`written_on`)), IFNULL(NOW(), DEFAULT(`modified_on`)))
+
+    </insert>
+    
+    
     <select id="selectImageByIndex" resultType="com.hiponya.bbqmall.entities.bbs.ImageEntity">
 
         SELECT `index`     AS `index`,
@@ -344,7 +355,8 @@
             `title`  = #{title},
             `content`  = #{content},
             `written_on`  = IFNULL(#{writtenOn}, DEFAULT(`written_on`)),
-            `modified_on` = IFNULL(#{modifiedOn}, DEFAULT(`modified_on`))
+            `modified_on` = IFNULL(#{modifiedOn}, DEFAULT(`modified_on`)),
+            `comment_count`= #{commentCount}
         WHERE `index` = #{index}
 
     </update>

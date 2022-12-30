@@ -4,6 +4,7 @@ import com.hiponya.bbqmall.entities.bbs.*;
 import com.hiponya.bbqmall.entities.member.UserEntity;
 import com.hiponya.bbqmall.enums.CommonResult;
 import com.hiponya.bbqmall.enums.bbs.ModifyArticleResult;
+import com.hiponya.bbqmall.enums.bbs.WriteCommentResult;
 import com.hiponya.bbqmall.enums.bbs.WriteResult;
 import com.hiponya.bbqmall.interfaces.IResult;
 import com.hiponya.bbqmall.mappers.IBbsMapper;
@@ -305,5 +306,38 @@ public NoticeReadVo[] getAnnounceNotice(){
 
         return this.bbsMapper.insertBpArticle(bpArticle) > 0 ? CommonResult.SUCCESS : CommonResult.FAILURE;
     }
+
+    public Enum<? extends IResult> writeAdminComment(UserEntity user, int bbid, AdminCommentEntity adminComment ) {
+//        article.setWrittenOn(new Date());
+//        article.setModifiedOn(new Date());
+            //유저가 null
+                //어드민이 아닐경우
+        //게시물이 없을경우
+
+        if (user==null){
+            return WriteCommentResult.NOT_SIGNED;
+        }
+        if(!user.isAdmin()){
+            return WriteCommentResult.NOT_ALLOWED;
+        }
+        BpArticleEntity existingBpArticle= this.bbsMapper.selectBpArticleByBoardIdJustOne(bbid);
+        if(existingBpArticle==null){
+            return WriteCommentResult.NO_SUCH_ARTICLE;
+        }
+
+
+
+        adminComment.setArticleIndex(bbid);
+        if(this.bbsMapper.insertAdminComment(adminComment)>0){
+            existingBpArticle.setCommentCount(existingBpArticle.getCommentCount()+1);
+
+           if(this.bbsMapper.updateBpArticle(existingBpArticle)>0){
+               return  CommonResult.SUCCESS;
+           }
+        }
+
+        return  CommonResult.FAILURE;
+    }
+
 }
 

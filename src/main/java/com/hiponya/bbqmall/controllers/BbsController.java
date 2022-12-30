@@ -412,4 +412,25 @@ public class BbsController {
     }
 
 
+    @RequestMapping(value = "writeAdminComment", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String postAdminComment(@SessionAttribute(value = "user", required = false) UserEntity user,
+                              @RequestParam(value = "bbid" ,required = false) Integer bbid, AdminCommentEntity adminComment){
+        Enum<? extends IResult> result;
+        JSONObject responseObject = new JSONObject();
+
+        System.out.println(bbid);
+            result = this.bbsService.writeAdminComment(user, bbid, adminComment);
+
+            if (result == CommonResult.SUCCESS) {
+
+//                responseObject.put("index", adminComment.getIndex());//인트의 기본값은 0이다.
+
+            }
+
+        responseObject.put("result", result.name().toLowerCase());
+
+        return responseObject.toString();
+
+    }
 }

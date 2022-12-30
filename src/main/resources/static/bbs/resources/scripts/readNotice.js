@@ -156,6 +156,57 @@ commentWriteComplete.addEventListener("click",()=>{
     if(!confirm("답변 작성겠습니까?")){
         return false;
     }
-    alert("안료")
+    // alert("안료")
+    Cover.show('처리중 입니다.\n잠시만 기다려 주세요.');
+
+    const xhr = new XMLHttpRequest();
+    const formData = new FormData();
+    formData.append('bbid', form['bbid'].value);
+    formData.append('content', form['content'].value);
+    //주소로 보내게 되면 폼데이터가 필요없다.
+    xhr.open('POST', "./writeAdminComment");//  window.location.href 를쓰면 boardid bid를 안보내도댐
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {//4 성공인게 아니고 작업의끝
+            Cover.hide();
+            if (xhr.status >= 200 && xhr.status < 300) {
+                const responseObject = JSON.parse(xhr.responseText);//{resut:suceess로 가져온것을 { \n result \t 식으로 만듬}
+
+                switch (responseObject['result']) {
+                    case 'success':
+                        alert('작성성공');
+                        // const bid = responseObject['bid'];
+                        // window.location.href = `list?bid=` + commentForm['board'].value;
+                        window.location.href = `/board/?bid=bp`;
+                        break;
+                    case 'not_signed':
+                        alert('로그인 해주세요.');
+                        break;
+
+                    case 'not_allowed':
+                        alert('로그아웃되었거나 권한이 없습니다.');
+                        break;
+
+                    case 'no_such_article':
+                        alert('없는 게시물입니다.');
+                        window.location.href = `/board/?bid=bp`;
+
+                        break;
+
+                    default:
+                        alert('알 수 없는 이유로 실패 하였습니다. \n\n잠시후 다시 시도해 주세요.')
+                        break;
+                }
+            } else {
+                alert('서버와 통신하지 못하였습니다. 잠시 후 다시 시도해 주세요.')
+
+            }
+
+        }
+    }
+    xhr.send(formData);//데이터가 없음
+
 
 })
+
+
+

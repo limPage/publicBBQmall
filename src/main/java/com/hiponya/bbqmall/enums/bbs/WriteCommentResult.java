@@ -3,9 +3,10 @@ package com.hiponya.bbqmall.enums.bbs;
 
 import com.hiponya.bbqmall.interfaces.IResult;
 
-public enum WriteResult implements IResult {
+public enum WriteCommentResult implements IResult {
+    NO_SUCH_ARTICLE,
     NOT_ALLOWED,
-    NO_SUCH_BOARD,
-
     NOT_SIGNED
+
+
 }

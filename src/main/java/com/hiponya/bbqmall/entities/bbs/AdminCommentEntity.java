@@ -6,7 +6,7 @@ public class AdminCommentEntity {
 
 
     private int index;
-    private String boardId;
+    private int articleIndex;
     private String content;
     private Date writtenOn;
     private Date modifiedOn;
@@ -20,12 +20,12 @@ public class AdminCommentEntity {
         this.index = index;
     }
 
-    public String getBoardId() {
-        return boardId;
+    public int getArticleIndex() {
+        return articleIndex;
     }
 
-    public void setBoardId(String boardId) {
-        this.boardId = boardId;
+    public void setArticleIndex(int articleIndex) {
+        this.articleIndex = articleIndex;
     }
 
     public String getContent() {
