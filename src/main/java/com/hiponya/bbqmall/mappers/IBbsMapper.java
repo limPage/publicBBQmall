@@ -29,6 +29,8 @@ public interface IBbsMapper {
     int updateNoticeIsNew();
 
     int deleteNoticeByIndex(@Param(value = "index") int index);
+    int deleteBpArticleByIndex(@Param(value = "index") int index);
+    int deleteAdminCommentByIndex(@Param(value = "index") int index);
 
     NoticeReadVo[] selectAnnounceNotice();
     NoticeReadVo[] selectNoticeByBoardId(@Param(value = "boardId") String boardId,
@@ -46,8 +48,12 @@ public interface IBbsMapper {
     NoticeReadVo selectNoticeByIndex(@Param(value = "index") int index);
 
     QnaAnswerEntity[] selectAnswers();
+
+    AdminCommentEntity[] selectAdminCommentByIndex(@Param(value = "articleIndex") int articleIndex);
+    AdminCommentEntity selectAdminCommentByIndexJustOne(@Param(value = "index") int index);
     int updateNotice(NoticeEntity notice);
     int updateBpArticle(BpArticleEntity bpArticle);
+    int updateAdminComment(AdminCommentEntity adminComment);
 
 
 

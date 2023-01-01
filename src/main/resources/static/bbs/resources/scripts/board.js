@@ -121,7 +121,14 @@ else if (form['isNoticeBoard'].value === "qna"){
     window.document.getElementById('sideBarQ').style.cssText= `  color: rgba(0,0,0,0.9);
     font-weight: 700;`;
 }
-
+else if (form['isNoticeBoard'].value==="pi") {
+    window.document.getElementById('sideBarPI').style.cssText = `  color: rgba(0,0,0,0.9);
+    font-weight: 700;`;
+}
+else if (form['isNoticeBoard'].value==="pr"){
+    window.document.getElementById('sideBarPR').style.cssText = `  color: rgba(0,0,0,0.9);
+    font-weight: 700;`;
+}
 else if (form['isNoticeBoard'].value==="bp"){
 //대량구매 탭일 경우
 

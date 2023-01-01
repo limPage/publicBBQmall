@@ -237,7 +237,7 @@ body>main>.content>.content-table>tbody> .bp-info-row>td{
 
 body>main>.content>.content-table>tbody> .comment-row{
     border-top: black solid 1px;
-    border-bottom: black solid 1px;
+    /*border-bottom: black solid 1px;*/
     margin:   1rem 0 1rem 0;
     padding: 1rem 0;
 
@@ -259,12 +259,73 @@ body>main>.content>.content-table>tbody> .comment-row>td:nth-child(2){
     color: blue;
     padding: 0.8rem 0;
 }
+body>main>.content>.content-table>tbody> .comment-row>.modify-comment-row{
+    display: none;
+}
+body>main>.content>.content-table>tbody> .comment-row>.modify-comment-row.visible{
+    display: block;
+}
+
+
+body>main>.content>.content-table>tbody> .comment-row>.modify-comment-row>form>.submit-row{
+    display: flex;
+    justify-content: flex-end;
+
+}
+body>main>.content>.content-table>tbody> .comment-row>.modify-comment-row>form>.submit-row>label{
+    margin-left: 0.5rem;
+}
+
+
+body>main>.content>.content-table>tbody> .comment-row>.modify-comment-row>form>.submit-row>label>input{
+
+    background-color: #007CD2;
+    padding:0.3rem 0.4rem ;
+    border: unset;
+    color: white;
+
+    border-radius: 0.2rem;
+    cursor: pointer;
+    display: inline-block;
+}
+
+
+
+
+
+body>main>.content>.content-table>tbody> .comment-row>.modify-comment-row>form>.submit-row>input:first-of-type:hover{
+
+    background-color: #333333;
+}
+
+
+
+body>main>.content>.content-table>tbody> .comment-row>.modify-comment-row>form>label>textarea{
+    width: 98.5%;
+    min-height: 7rem;
+    border: 3px solid rgba(0,0,0,0.2);
+
+    resize: none;
+    margin-bottom: 0.5rem;
+    border-radius: 3px;
+
+}
+body>main>.content>.content-table>tbody> .comment-row>.modify-comment-row>form>label>textarea:focus{
+    border: 3px solid #007CD2;
+    outline: none;
+
+}
+
+
+
 body>main>.content>.content-table>tbody> .write-comment-row{
     display: none;
 }
 body>main>.content>.content-table>tbody> .write-comment-row.visible{
     display: flex;
 }
+
+
 
 
 body>main>.content>.content-table>tbody> .write-comment-row form> label>textarea{
@@ -303,5 +364,30 @@ body>main>.content>.content-table>tbody> .write-comment-row>.submit-row>input{
     cursor: pointer;
     border: unset;
     margin-left: 0.5rem;
+
+}
+body>main>.content>.content-table>tbody> .comment-row>.delete-row.visible{
+    display: flex;
+    justify-content: flex-end;
+
+}
+body>main>.content>.content-table>tbody> .comment-row>.delete-row{
+    display: none;
+}
+
+
+body>main>.content>.content-table>tbody> .comment-row>.delete-row>label>input{
+    background-color: rgba(0,0,0,0.5);
+    padding:0.3rem 0.4rem ;
+    border: unset;
+    color: white;
+    margin-left: 0.5rem;
+    border-radius: 0.2rem;
+    cursor: pointer;
+    display: inline-block;
+}
+body>main>.content>.content-table>tbody> .comment-row>.delete-row>label>input:hover,
+body>main>.content>.content-table>tbody> .comment-row>.modify-comment-row>form>.submit-row>label>input:hover{
+    background-color: #007CD2;
 
 }

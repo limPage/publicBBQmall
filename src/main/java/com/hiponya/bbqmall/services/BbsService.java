@@ -3,6 +3,7 @@ package com.hiponya.bbqmall.services;
 import com.hiponya.bbqmall.entities.bbs.*;
 import com.hiponya.bbqmall.entities.member.UserEntity;
 import com.hiponya.bbqmall.enums.CommonResult;
+import com.hiponya.bbqmall.enums.bbs.DeleteResult;
 import com.hiponya.bbqmall.enums.bbs.ModifyArticleResult;
 import com.hiponya.bbqmall.enums.bbs.WriteCommentResult;
 import com.hiponya.bbqmall.enums.bbs.WriteResult;
@@ -282,6 +283,45 @@ public NoticeReadVo[] getAnnounceNotice(){
         return this.bbsMapper.deleteNoticeByIndex(notice.getIndex()) > 0 ? CommonResult.SUCCESS : CommonResult.FAILURE;
     }
 
+    public Enum<? extends IResult> deleteBpArticle(int bbid, UserEntity user) {
+        BpArticleEntity bpArticle = this.bbsMapper.selectBpArticleByBoardIdJustOne(bbid);
+
+        if (bpArticle == null) {
+            return DeleteResult.NO_SUCH_ARTICLE; //게시물이 없다
+        }
+        if (user == null || !user.getId().equals(bpArticle.getId())) {
+            return DeleteResult.NOT_ALLOWED; //권한이 없다
+        }
+        return this.bbsMapper.deleteBpArticleByIndex(bpArticle.getIndex()) > 0 ? CommonResult.SUCCESS : CommonResult.FAILURE;
+    }
+
+    public Enum<? extends IResult> deleteAdminComment(UserEntity user,int bbid, int acIndex ) {
+        BpArticleEntity existingBpArticle = this.bbsMapper.selectBpArticleByBoardIdJustOne(bbid);//글이 없다
+
+        AdminCommentEntity adminComment = this.bbsMapper.selectAdminCommentByIndexJustOne(acIndex);//수정할 댓글이 없다
+
+        if (adminComment == null || existingBpArticle==null) {
+            return DeleteResult.NO_SUCH_ARTICLE; //게시물이 없다
+        }
+
+        if (user == null || !user.isAdmin()) {
+            return DeleteResult.NOT_ALLOWED; //권한이 없다
+        }
+        if( this.bbsMapper.deleteAdminCommentByIndex(acIndex) > 0 ){
+
+
+            existingBpArticle.setCommentCount(existingBpArticle.getCommentCount()-1);
+            if(this.bbsMapper.updateBpArticle(existingBpArticle)>0){
+                return  CommonResult.SUCCESS;
+            }
+        }
+        return CommonResult.FAILURE;
+
+    }
+
+
+
+
 
     public QnaAnswerEntity[] getAnswer(){
 
@@ -337,6 +377,39 @@ public NoticeReadVo[] getAnnounceNotice(){
         }
 
         return  CommonResult.FAILURE;
+    }
+
+    public AdminCommentEntity[] getAdminComments(BpReadVo article){
+
+        return this.bbsMapper.selectAdminCommentByIndex(article.getIndex());
+
+    }
+
+
+    public Enum<? extends IResult> modifyAdminComment(UserEntity user, AdminCommentEntity adminComment) {
+
+        BpArticleEntity existingBpArticle = this.bbsMapper.selectBpArticleByBoardIdJustOne(adminComment.getArticleIndex());
+        AdminCommentEntity existingAdminComment = this.bbsMapper.selectAdminCommentByIndexJustOne(adminComment.getIndex());
+
+        //로그인 안했다면 실패
+        if (user == null && !user.isAdmin()) {
+            return ModifyArticleResult.NOT_SIGNED;
+        }
+
+        if (existingBpArticle == null || existingAdminComment==null) { //게시글이 없으면 실패
+
+            return ModifyArticleResult.NO_SUCH_ARTICLE;
+
+            //수정 시작
+        }
+
+        else {
+            existingAdminComment.setModifiedOn(new Date());
+            existingAdminComment.setContent(adminComment.getContent());
+
+
+            return this.bbsMapper.updateAdminComment(existingAdminComment) > 0 ? CommonResult.SUCCESS : CommonResult.FAILURE;
+        }
     }
 
 }

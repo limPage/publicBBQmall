@@ -4,6 +4,7 @@ package com.hiponya.bbqmall.controllers;
 import com.hiponya.bbqmall.entities.bbs.*;
 import com.hiponya.bbqmall.entities.member.UserEntity;
 import com.hiponya.bbqmall.enums.CommonResult;
+import com.hiponya.bbqmall.enums.bbs.ModifyArticleResult;
 import com.hiponya.bbqmall.enums.bbs.WriteResult;
 import com.hiponya.bbqmall.interfaces.IResult;
 import com.hiponya.bbqmall.models.PagingModel;
@@ -78,7 +79,8 @@ public class BbsController {
                     PagingModel paging = new PagingModel(totalCount, page);
 //
                     BpReadVo[] bpArticles = this.bbsService.getBpArticles( paging, keyword, bbid);
-//
+                    BpReadVo bpReadVo = new BpReadVo();
+
                     modelAndView.addObject("bid",bid);
                     modelAndView.addObject("bpArticles",bpArticles);
 
@@ -159,6 +161,10 @@ public class BbsController {
             modelAndView.addObject("bid",bid);//이게 무슨 보드꺼를 읽느냐 알려줌
           BpReadVo bpArticle=  this.bbsService.readBpArticle(bbid);
 
+          if(bpArticle!=null){
+              AdminCommentEntity[] adminComments = this.bbsService.getAdminComments(bpArticle);
+              modelAndView.addObject("adminComments",adminComments);
+          }
 
             modelAndView.addObject("bpArticle",bpArticle);//이게 무슨 보드꺼를 읽느냐 알려줌
 
@@ -170,10 +176,10 @@ public class BbsController {
             NoticeReadVo notice = this.bbsService.readNotice(nid);
             modelAndView.addObject("notice", notice);
 
-        if (notice != null) { //공지가 있다면 어떤 보드 공지인지
-
-            modelAndView.addObject("board", this.bbsService.getNoticeBoard(notice.getBoardId()));
-        }
+//        if (notice != null) { //공지가 있다면 어떤 보드 공지인지
+//
+//            modelAndView.addObject("board", this.bbsService.getNoticeBoard(notice.getBoardId()));
+//        }
     }
         return modelAndView;
     }
@@ -282,7 +288,7 @@ public class BbsController {
                                         @RequestParam(value = "bid") String bid){
         ModelAndView modelAndView =new ModelAndView("board/modifyNotice");
 
-        if (bid.equals("notice")) {
+        if (!bid.equals("bp")) {
             NoticeReadVo existingNotice = this.bbsService.readNotice(nid);
             Enum<?> result = this.bbsService.prepareModifyNotice(user, nid);
             System.out.println("리절트는" + result.name());
@@ -328,7 +334,7 @@ public class BbsController {
     }
     @RequestMapping(value = "modifyBpArticle", method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String patchyModifyBpArticle(@SessionAttribute(value = "user") UserEntity user , BpArticleEntity bpArticle) {
+    public String patchyBpArticle(@SessionAttribute(value = "user") UserEntity user , BpArticleEntity bpArticle) {
         JSONObject responseObject = new JSONObject();
 
         Enum<?> result = this.bbsService.modifyBpArticle(bpArticle, user);
@@ -347,16 +353,28 @@ public class BbsController {
     @ResponseBody
     @RequestMapping(value = "deleteNotice", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     public String deleteNotice(@SessionAttribute(value = "user", required = false) UserEntity user,
-                             @RequestParam(value = "nid") int nid
-//                             ArticleEntity article 주소로 받아왔기때문에 파람을 쓴다.
-    ) {
+                             @RequestParam(value = "nid",required = false) Integer nid,
+                               @RequestParam(value= "bid") String bid,
+                               @RequestParam(value = "bbid",required = false ) Integer bbid ) {
+        JSONObject responseObject = new JSONObject();
+
+        if(bid.equals("notice")){
         NoticeEntity notice = new NoticeEntity();
         notice.setIndex(nid);
-        JSONObject responseObject = new JSONObject();
+
 
         Enum<?> result = this.bbsService.deleteNotice(notice, user);
         responseObject.put("result", result.name().toLowerCase());
-//
+
+        }
+
+
+        if (bid.equals("bp")){
+            Enum<?> result = this.bbsService.deleteBpArticle(bbid, user);
+            responseObject.put("result", result.name().toLowerCase());
+
+        }
+
 //        if (result == CommonResult.SUCCESS) {
 //
 //            responseObject.put("bid", notice.getBoardId());
@@ -433,4 +451,50 @@ public class BbsController {
         return responseObject.toString();
 
     }
+
+
+    @ResponseBody
+    @RequestMapping(value = "deleteAdminComment", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public String deleteAdminComment(@SessionAttribute(value = "user", required = false) UserEntity user,
+                               @RequestParam(value= "bid",required = false) String bid,
+                               @RequestParam(value = "bbid",required = false ) Integer bbid,
+                               @RequestParam(value = "acIndex",required = false) Integer acIndex) {
+        JSONObject responseObject = new JSONObject();
+
+        System.out.println("bid"+bid);
+        System.out.println("acIndex"+acIndex);
+        System.out.println("bbid"+bbid);
+
+        if(bid.equals("bpArticle")){
+
+            Enum<?> result = this.bbsService.deleteAdminComment( user,bbid, acIndex);
+            responseObject.put("result", result.name().toLowerCase());
+            System.out.println(result);
+
+        }
+        return responseObject.toString();
+    }
+
+    @RequestMapping(value = "modifyAdminComment", method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String patchAdminComment(@SessionAttribute(value = "user",required = false) UserEntity user,
+                                    @RequestParam(value = "bid",required = false) String bid,
+                                    AdminCommentEntity adminComment) {
+        JSONObject responseObject = new JSONObject();
+
+
+        if (bid.equals("bpArticle")) {
+
+            Enum<?> result = this.bbsService.modifyAdminComment(user, adminComment);
+
+
+            responseObject.put("result", result.name().toLowerCase());
+
+
+
+        }
+        return responseObject.toString();
+    }
+
+
 }

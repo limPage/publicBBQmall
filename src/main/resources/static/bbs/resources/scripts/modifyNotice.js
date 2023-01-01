@@ -13,6 +13,8 @@ form['back'].addEventListener('click', () => window.history.length < 2 ? window.
 
 if(form['bidValue'].value==="notice") {
 
+
+
     // ClassicEditor
     //     .create(form['content'], {
     //         simpleUpload: { //심플업로드는 오브젝트다.
@@ -94,10 +96,12 @@ if(form['bidValue'].value==="notice") {
 }
 else if(form['bidValue'].value==="bp") {
     form['bbid'].value=form['bbidLoad'].value;
-
+    window.document.getElementById('sideBarBP').style.cssText=  `  color: rgba(0,0,0,0.9);
+    font-weight: 700;`;
 
 
     form['submit'].addEventListener("click",()=>{
+
 
 
 
@@ -236,3 +240,18 @@ else if(form['bidValue'].value==="bp") {
 
 
 }
+if(window.document.getElementById('bidValue').value==="notice"){
+    window.document.getElementById('sideBarN').style.cssText = `  color: rgba(0,0,0,0.9);
+    font-weight: 700;`;
+}
+
+if(window.document.getElementById('bidValue').value==="pi"){
+    window.document.getElementById('sideBarPI').style.cssText = `  color: rgba(0,0,0,0.9);
+    font-weight: 700;`;
+}
+if(window.document.getElementById('bidValue').value==="pr"){
+    window.document.getElementById('sideBarPR').style.cssText = `  color: rgba(0,0,0,0.9);
+    font-weight: 700;`;
+}
+
+
