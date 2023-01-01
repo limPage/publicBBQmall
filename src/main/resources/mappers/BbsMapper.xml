@@ -175,6 +175,32 @@
 
     </select>
 
+
+    <select id="selectAdminCommentByIndex" resultType="com.hiponya.bbqmall.entities.bbs.AdminCommentEntity">
+        SELECT `index`  ,
+               `article_index`,
+                `content`  ,
+               `written_on`  ,
+               `modified_on`
+
+        FROM `bbq_bbs`.`admin_comments`
+        WHERE `article_index` = #{articleIndex}
+
+    </select>
+    <select id="selectAdminCommentByIndexJustOne" resultType="com.hiponya.bbqmall.entities.bbs.AdminCommentEntity">
+        SELECT `index`  ,
+               `article_index`,
+               `content`  ,
+               `written_on`  ,
+               `modified_on`
+
+        FROM `bbq_bbs`.`admin_comments`
+        WHERE `index` = #{index}
+        LIMIT 1
+
+    </select>
+
+
     <insert id="insertNotice"
             useGeneratedKeys="true" keyProperty="index"
             keyColumn="index"
@@ -258,6 +284,21 @@
 
     </update>
 
+    <update id="updateAdminComment" parameterType="com.hiponya.bbqmall.entities.bbs.AdminCommentEntity">
+        UPDATE `bbq_bbs`.`admin_comments`
+
+        SET `content` = #{content},
+            `modified_on` = #{modifiedOn}
+
+        WHERE  `index`= #{index}
+        LIMIT 1;
+
+
+
+
+    </update>
+
+
     <delete id="deleteNoticeByIndex" parameterType="com.hiponya.bbqmall.entities.bbs.NoticeEntity">
 
         DELETE
@@ -266,4 +307,23 @@
         LIMIT 1;
 
     </delete>
+
+    <delete id="deleteBpArticleByIndex" parameterType="com.hiponya.bbqmall.entities.bbs.BpArticleEntity">
+
+        DELETE
+        FROM `bbq_bbs`.`bp_articles`
+        WHERE `index` = #{index}
+        LIMIT 1;
+
+    </delete>
+
+    <delete id="deleteAdminCommentByIndex" parameterType="com.hiponya.bbqmall.entities.bbs.AdminCommentEntity">
+
+        DELETE
+        FROM `bbq_bbs`.`admin_comments`
+        WHERE `index` = #{index}
+        LIMIT 1;
+
+    </delete>
+
 </mapper>

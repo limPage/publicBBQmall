@@ -299,3 +299,24 @@ body>main>.content>.write-notice-button>a:hover{
 
 }
 
+body>main>.bp>.content-table>thead>tr>td>.state{
+    width: 2.8rem;
+    /*color: rebeccapurple;*/
+    text-align: center;
+}
+body>main>.bp>form>input[type="button"]{
+    background-color: white;
+    cursor: pointer;
+    margin-left: 0.5rem;
+    border-radius: 0.2rem;
+    border: rgba(0,0,0,0.3) solid 1px;
+    color: rgba(0,0,0,0.6);
+    font-weight: 600;
+    font-family: inherit;
+    padding:0 1rem ;
+}
+body>main>.bp>form>input[type="button"]:hover{
+    border: rgba(0,0,0,0.8) solid 1px;
+
+
+}

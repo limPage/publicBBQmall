@@ -364,7 +364,7 @@
                 <!--                        <option th:selected="${criterion != null && criterion.equals('evnet')}" value="event">이벤트</option>-->
                 <!--                        <option th:selected="${criterion != null && criterion.equals('urgent')}" value="urgent">긴급공지</option>-->
                 <!--                    </select>-->
-                <input hidden name="isNoticeBoard" value="notice">
+                <input hidden name="isNoticeBoard" value="pi">
                 <select name="bid" class="bid" rel="bid" disabled>
                     <option value="all">- 전체 -</option>
                     <option value="notice">공지</option>
@@ -377,10 +377,10 @@
             <span class="spring"></span>
 
             <label>
-                <input type="text" placeholder="제목, 내용, 상품평, 상품설명, 작성자" th:value="${#request.getParameter('keyword')}" name="keyword">
+                <input type="text" placeholder="제목, 내용, 상품평, 상품설명, 작성자" th:value="${#request.getParameter('keyword')}" name="keyword" disabled>
             </label>
 
-            <input type="submit" value="검색">
+            <input type="submit" value="검색" disabled>
             <!--            </div>-->
         </form>
 
@@ -396,7 +396,7 @@
             </thead>
             <tbody>
 
-            <tr class="article" th:each="article, i: ${notice}">
+            <tr class="article" th:each="article, i: ${notice}" th:with="pi=''">
                 <!--공지의 특성상 10개가 넘어가지 않으므로 실사이트에선 게시물 번호가 아닌 10 내림차순으로 보여주는 듯 합니다.                    -->
                 <td>
                     <h3 class="number" th:text="${i.size - i.index}">-</h3>
@@ -409,7 +409,7 @@
                 <input class="is-new" hidden th:value="${#dates.format(article.getModifiedOn(),'yyyyMMdd')}">
 
 
-                <td class="content-title"><a th:href="@{/board/readNotice (nid=${article.getIndex()})}"><h3
+                <td class="content-title"><a th:href="@{/board/readNotice (bid=pi,nid=${article.getIndex()})}"><h3
                         th:text="${article.getTitle()}">-</h3>
                     <!--                        <img  alt="new" class="is-new-icon new"-->
                     <!--                             th:src="@{/resources/images/icon_new.gif}">-->
@@ -516,7 +516,7 @@
                 <!--                        <option th:selected="${criterion != null && criterion.equals('evnet')}" value="event">이벤트</option>-->
                 <!--                        <option th:selected="${criterion != null && criterion.equals('urgent')}" value="urgent">긴급공지</option>-->
                 <!--                    </select>-->
-                <input hidden name="isNoticeBoard" value="notice">
+                <input hidden name="isNoticeBoard" value="pr">
                 <select name="bid" class="bid" rel="bid" disabled>
                     <option value="all">- 전체 -</option>
                     <option value="notice">공지</option>
@@ -529,10 +529,10 @@
             <span class="spring"></span>
 
             <label>
-                <input type="text" placeholder="제목, 내용, 상품평, 상품설명, 작성자" th:value="${#request.getParameter('keyword')}" name="keyword">
+                <input type="text" placeholder="제목, 내용, 상품평, 상품설명, 작성자" th:value="${#request.getParameter('keyword')}" name="keyword" disabled>
             </label>
 
-            <input type="submit" value="검색">
+            <input type="submit" value="검색" disabled>
             <!--            </div>-->
         </form>
 
@@ -548,7 +548,7 @@
             </thead>
             <tbody>
 
-            <tr class="article" th:each="article, i: ${notice}">
+            <tr class="article" th:each="article, i: ${notice}" th:with="pr=''">
                 <!--공지의 특성상 10개가 넘어가지 않으므로 실사이트에선 게시물 번호가 아닌 10 내림차순으로 보여주는 듯 합니다.                    -->
                 <td>
                     <h3 class="number" th:text="${i.size - i.index}">-</h3>
@@ -561,7 +561,7 @@
                 <input class="is-new" hidden th:value="${#dates.format(article.getModifiedOn(),'yyyyMMdd')}">
 
 
-                <td class="content-title"><a th:href="@{/board/readNotice (nid=${article.getIndex()})}"><h3
+                <td class="content-title"><a th:href="@{/board/readNotice (bid=pr,nid=${article.getIndex()})}"><h3
                         th:text="${article.getTitle()}">-</h3>
                     <!--                        <img  alt="new" class="is-new-icon new"-->
                     <!--                             th:src="@{/resources/images/icon_new.gif}">-->
@@ -654,7 +654,7 @@
         </div>
     </div>
 
-    <div class="content notice" th:if="${bid!=null &&  bid.equals('bp')}">
+    <div class="content bp" th:if="${bid!=null &&  bid.equals('bp')}">
         <div class="title-container">
             <h1>대량구매</h1>
         </div>
@@ -709,7 +709,7 @@
                 </td>
 
                 <td>
-                    <h3>답변전</h3>
+                    <h3 th:text="${bpArticle.getCommentCount()<=0? '답변대기':'답변완료'}">답변전</h3>
                 </td>
 
                 <td>
