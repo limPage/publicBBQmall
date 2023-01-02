@@ -163,18 +163,101 @@ main > #cartForm > .order-layout > .cartPage-container > .cart-content > .cart-l
     padding : 1rem;
 }
 
+.gift-container > .gift-content  > .list1 {
+    border-bottom: 0.0125rem solid rgb(128, 140, 152);
+}
+
+.gift-container > .gift-content  > .list1 > .label1 {
+    font-size : 0.85rem;
+    color : rgb(128, 140, 152);
+
+    padding : 0.5rem;
+}
+
+.sale-container {
+    align-items : stretch;
+    display : flex;
+    flex-direction : column;
+    justify-content : stretch;
+
+    padding-top : 1.5rem;
+    padding-bottom : 1rem;
+    border-bottom : 0.0125rem solid rgb(128, 140, 152);
+}
+
+.sale-container > .sale-area > .title2 {
+    display : none;
+}
+
+.sale-container > .sale-area > .list1 > .promotion-code {
+    align-items : stretch;
+    display : none;
+    flex-direction : row;
+    justify-content : stretch;
+}
+
+.sale-container > .sale-area > .list1 > .promotion-code.visible {
+    display : flex;
+}
+
+.sale-container > .sale-area > .list1 > .save-money > .reset-btn {
+    display : none;
+
+}
+
+.sale-container > .sale-area > .list1 >  .save-money > .reset-btn.visible {
+    display : flex;
+}
+
+.user-info-container {
+    align-items : stretch;
+    display : flex;
+    flex-direction : column;
+    justify-content : flex-start;
+
+    margin-top : 3rem;
+}
+
+.user-info-container > .order-info-input {
+    display : none;
+}
+
+.user-info-container > .order-info-input.visible {
+    display : flex;
+}
+
+.order-info {
+    align-items : stretch;
+    display : flex;
+    flex-direction : column;
+    justify-content : stretch;
+
+    border-bottom : 0.0125rem solid rgb(128, 140, 152);
+    margin-top : 1rem;
+    margin-bottom : 1rem;
+}
 
 
 
+.order-info-member > .modify-btn {
+    display : none;
+}
 
+.user-info-container {
+    margin-bottom : 5rem;
+}
 
+.cart-goods > .shipping-container > .title {
+    align-items : stretch;
+    display : flex;
+    flex-direction : row;
+    justify-content : stretch;
 
+    border-bottom : 0.0125rem solid rgb(128, 140, 152);
+    padding-bottom : 0.8rem;
+}
 
-
-
-
-
-
-
-
-
+.cart-goods > .shipping-container > .delivery-info-container {
+    padding-top : 1rem;
+    font-weight : 400;
+}

@@ -1,5 +1,7 @@
 package com.hiponya.bbqmall.controllers;
 
+import com.hiponya.bbqmall.entities.member.UserEntity;
+import com.hiponya.bbqmall.entities.product.CartEntity;
 import com.hiponya.bbqmall.entities.product.CategoryEntity;
 import com.hiponya.bbqmall.entities.product.ProductEntity;
 import com.hiponya.bbqmall.entities.product.SortEntity;
@@ -59,8 +61,20 @@ public class CategoryController {
     }
 
     @RequestMapping(value = "cart", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getCart() {
-        ModelAndView modelAndView = new ModelAndView("home/cart");
+    public ModelAndView getCart(@SessionAttribute(value = "user", required = false) UserEntity user, @RequestParam(value="cid", required = false) Integer cid) {
+        ModelAndView modelAndView = new ModelAndView("home/cart");;
+
+        if (user == null) {
+            modelAndView = new ModelAndView("redirect:/member/login");
+        } else {
+            modelAndView = new ModelAndView("home/cart");
+        }
+
+
+
+//        modelAndView.addObject("product", product);
+//        modelAndView.addObject("cart", cart);
+//        modelAndView.addObject("cartIndex", cart.getIndex());
 
         return modelAndView;
     }
@@ -150,4 +164,6 @@ public class CategoryController {
 
         return responseObject.toString();
     }
+
+
 }
