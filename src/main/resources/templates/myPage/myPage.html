@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>BBQ몰 - 로그인</title>
+    <th:block th:replace="~{fragments/head :: common}"></th:block>
+    <link rel="stylesheet" th:href="@{/myPage/resources/stylesheets/myPage.css}">
+    <script defer th:src="@{/member/resources/scripts/login.js}"></script>
+
+</head>
+<body>
+<th:block th:replace="~{fragments/body :: header}"></th:block> <!-- block 자리에 body.html 파일의 replace 태그와 치환한다. -->
+<th:block th:replace="~{fragments/body :: cover}"></th:block>
+<th:block th:replace="~{fragments/body :: floatingBanner}"></th:block>
+
+
+<main class="d">
+    <article class="my-page-side" >
+        <h1 class="title"><a th:href="@{/member/csCenter}">MY SHOPPING</a></h1>
+        <ul>
+            <li class="title-li"><a >나의 쇼핑</a></li>
+
+            <li><a >주문/배송</a></li>
+            <li><a >반품/교환</a></li>
+            <li><a >취소/환불</a></li>
+            <li><a >찜한 상품</a></li>
+            <li><a >최근 본 상품</a></li>
+            <li><a >개인결제</a></li>
+
+        </ul>
+        <ul>
+            <li class="title-li"><a >나의 혜택</a></li>
+            <li><a >적립금</a></li>
+            <li><a >쿠폰</a></li>
+
+        </ul>
+        <ul>
+            <li class="title-li"><a >나의 활동</a></li>
+            <li><a >나의 1:1문의</a></li>
+            <li><a >나의 상품문의</a></li>
+            <li><a >나의 상품후기</a></li>
+
+        </ul>
+
+        <ul class="title-li">
+            <li class="title-li"><a >나의 정보</a></li>
+            <li><a >회원정보 수정</a></li>
+            <li><a >회원 탈퇴</a></li>
+
+        </ul>
+
+    </article>
+
+
+
+<div class="content my-page-content">
+
+    <table>
+        <tbody>
+        <tr class="user-tr">
+           <td class="user-td">
+            <h1>임철홍님 반갑습니다.</h1>
+            <a>회원정보 수정</a>
+           </td>
+            <td class="spring"></td>
+            <td class="user-menu">
+                적립금 〉
+                <span>0</span>
+            </td>
+            <td class="user-menu">
+                쿠폰 〉
+                <span>0</span>
+
+            </td>
+            <td class="user-menu">
+                찜한상품 〉
+                <span>0</span>
+
+            </td>
+            <td class="user-menu">
+                최근본상품 〉
+                <span>0</span>
+
+            </td>
+
+        </tr>
+
+        <tr class="user-menu-tr">
+            <td>
+                <h1>최근주문내역</h1>
+                <a>더보기</a>
+            </td>
+
+            <td class="spring"></td>
+
+            <td class="user-menu">
+                주문접수 〉
+                <span>0</span>
+            </td>
+            <td class="user-menu">
+                결제확인 〉
+                <span>0</span>
+
+            </td>
+            <td class="user-menu">
+                상품준비중 〉
+                <span>0</span>
+
+            </td>
+            <td class="user-menu">
+                배송중 〉
+                <span>0</span>
+
+            </td>
+            <td class="user-menu">
+                배송완료
+                <span>0</span>
+
+            </td>
+
+        </tr>
+        <tr>
+
+            <td>
+                최근 1개월 내 내역이 없습니다.
+            </td>
+
+        </tr>
+
+        <tr>
+
+            <td>
+                반품 교환
+                <span>최근 1개월 내 내역이 없습니다.</span>
+            </td>
+            <td>
+                취소 환불
+                <span>최근 1개월 내 내역이 없습니다.</span>
+
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+
+</main>
+<th:block th:replace="~{fragments/body :: footer}"></th:block>
+</body>
+</html>
+
+

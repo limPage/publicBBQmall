@@ -8,6 +8,9 @@ class BbqmallApplicationTests {
 
     @Test
     void contextLoads() {
+
+
+
     }
 
 }

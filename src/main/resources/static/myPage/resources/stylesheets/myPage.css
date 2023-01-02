@@ -1,0 +1,95 @@
+body>main{
+    align-items: flex-start;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+
+    font-family: inherit;
+}
+
+body>main>.content{
+    width: 100%;
+
+
+    display: block;
+    padding-top: 5.5rem;
+    padding-bottom: 6.25rem;
+
+}
+
+
+body>main>.my-page-side>h1{
+
+    font-size: 26px;
+}
+body>main>.my-page-side>ul>.title-li{
+    padding: 4px 0 3px 0;
+    font-size: 20px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    margin-bottom: 0.3rem;
+}
+body>main>.my-page-side>ul>.title-li>a{
+
+    font-weight: 500;
+    letter-spacing: -1px;
+    color: rgba(0,0,0,0.6);
+
+}
+body>main>.my-page-side>ul{
+    padding-bottom: 1.9rem;
+}
+body>main>.my-page-content>table{
+    width: 100%;
+}
+
+body>main>.my-page-content>table>tbody{
+    width: 100%;
+    display: block;
+}
+
+body>main>.my-page-content>table>tbody>.user-tr>td>h1{
+    font-size: 32px;
+    font-weight: 400;
+}
+body>main>.my-page-content>table>tbody>.user-tr>td>a{
+    width: unset;
+    padding: 0.4rem;
+    border: 1px solid rgba(0,0,0,0.2);
+    margin-top: 0.5rem;
+}
+
+
+body>main>.my-page-content>table>tbody>.user-tr,
+body>main>.my-page-content>table>tbody>.user-menu-tr
+{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+
+}
+
+body>main>.my-page-content>table>tbody>.user-menu-tr{
+   padding-top: 5rem;
+    padding-bottom: 5rem;
+
+}
+
+
+body>main>.my-page-content>table>tbody>.user-menu-tr>td>h1{
+    font-size: 28px;
+    font-weight:700;
+}
+body>main>.my-page-content>table>tbody>tr>.spring{
+    flex: 1;
+
+}
+
+
+body>main>.my-page-content>table>tbody>tr>.user-td{
+    display: flex;
+flex-direction: column;
+}
+body>main>.my-page-content>table>tbody>tr>.user-menu{
+    display: flex;
+    flex-direction: column;
+}
