@@ -1,15 +1,15 @@
 package com.hiponya.bbqmall.controllers;
 
 
-import com.hiponya.bbqmall.entities.bbs.ImageEntity;
-import com.hiponya.bbqmall.entities.bbs.NoticeBoardEntity;
-import com.hiponya.bbqmall.entities.bbs.NoticeEntity;
+import com.hiponya.bbqmall.entities.bbs.*;
 import com.hiponya.bbqmall.entities.member.UserEntity;
 import com.hiponya.bbqmall.enums.CommonResult;
+import com.hiponya.bbqmall.enums.bbs.ModifyArticleResult;
 import com.hiponya.bbqmall.enums.bbs.WriteResult;
 import com.hiponya.bbqmall.interfaces.IResult;
 import com.hiponya.bbqmall.models.PagingModel;
 import com.hiponya.bbqmall.services.BbsService;
+import com.hiponya.bbqmall.vos.bbs.BpReadVo;
 import com.hiponya.bbqmall.vos.bbs.NoticeReadVo;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +28,7 @@ import java.io.IOException;
 @RequestMapping(value = "board")
 public class BbsController {
 
+
     private final BbsService bbsService;
 
 
@@ -41,7 +42,9 @@ public class BbsController {
     public ModelAndView getBoard(@SessionAttribute(value = "user", required = false) UserEntity user,
                                  @RequestParam(value = "bid", required = false) String bid,
                                  @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
-                                 @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword ) {
+                                 @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword,
+                                 @RequestParam(value = "qid" ,required = false) String qid,
+                                 @RequestParam(value = "bbid" ,required = false) String bbid) {
         //페이지 안보내줫을때는 펄즈, 펄즈도 인식하게 인티저, 펄즈일시 디폴트 1
         page=Math.max(1,page);
 
@@ -60,28 +63,62 @@ public class BbsController {
 //            modelAndView.addObject("user", user);
 //        }
         NoticeBoardEntity noticeBoard = new NoticeBoardEntity(); //게시판 선택안하거나 전채선택일경우 빈껍데기
+
+
+
         if (bid!=null && !bid.equals("all") ) {
 
 
             noticeBoard = this.bbsService.getNoticeBoard(bid);
         }
-        int totalCount = this.bbsService.getNoticeCount(noticeBoard, keyword);
 
-        PagingModel paging = new PagingModel(totalCount, page);
-        modelAndView.addObject("paging", paging); //게시글개수
+        if (bid!=null &&bid.equals("bp") ){
+            System.out.println("bbid는"+bbid);
+//                    int totalCount = this.bbsService.getBpArticleCount(bbid, keyword);
+            int totalCount = this.bbsService.getBpArticleCount(bbid, keyword);
+            PagingModel paging = new PagingModel(totalCount, page);
+//
+            BpReadVo[] bpArticles = this.bbsService.getBpArticles( paging, keyword, bbid);
+            BpReadVo bpReadVo = new BpReadVo();
 
-        NoticeReadVo[] notice = this.bbsService.getNotice(noticeBoard, paging, keyword);
-        NoticeReadVo[] announceNotice =this.bbsService.getAnnounceNotice();
+            modelAndView.addObject("bid",bid);
+            modelAndView.addObject("bpArticles",bpArticles);
 
-        modelAndView.addObject("announceNotice", announceNotice);
-        modelAndView.addObject("notice", notice);
-
+            modelAndView.addObject("paging", paging); //게시글개수
 
 
 
+        }else {
 
-        modelAndView.addObject("user", user);
 
+            int totalCount = this.bbsService.getNoticeCount(noticeBoard, keyword, qid);
+            PagingModel paging = new PagingModel(totalCount, page);
+
+
+            if (bid != null && bid.equals("qna")) {
+                QnaAnswerEntity[] answer = this.bbsService.getAnswer();
+                modelAndView.addObject("answer", answer); //게시글개수
+
+                paging = new PagingModel(20, totalCount, page);
+                System.out.println("qid는" + qid);
+                System.out.println("qid 키워드는=" + keyword);
+                modelAndView.addObject("qid", qid);
+
+            }
+
+
+            modelAndView.addObject("paging", paging); //게시글개수
+
+            NoticeReadVo[] notice = this.bbsService.getNotice(noticeBoard, paging, keyword, qid);
+            NoticeReadVo[] announceNotice = this.bbsService.getAnnounceNotice();
+
+            modelAndView.addObject("announceNotice", announceNotice);
+            modelAndView.addObject("notice", notice);
+            System.out.println("bid는" + bid);
+            modelAndView.addObject("bid", bid);
+
+
+            modelAndView.addObject("user", user);
 
 
 //        else{
@@ -102,7 +139,7 @@ public class BbsController {
 //
 //            }
 //        }
-
+        }
         return modelAndView;
     }
 
@@ -114,18 +151,36 @@ public class BbsController {
 
 
     @GetMapping(value = "/readNotice" ,produces = MediaType.TEXT_HTML_VALUE)
-    public  ModelAndView getNotice(@RequestParam(value = "nid", required = false) int nid){
+    public  ModelAndView getNotice( @RequestParam(value = "bid", required = false) String bid,
+                                    @RequestParam(value = "nid", required = false) Integer nid,
+                                    @RequestParam(value = "bbid", required = false) Integer bbid){
         ModelAndView modelAndView = new ModelAndView("board/readNotice");
-        NoticeReadVo notice = this.bbsService.readNotice(nid);
 
 
-        modelAndView.addObject("notice", notice);
+        if(bid.equals("bpArticle")){
+            modelAndView.addObject("bid",bid);//이게 무슨 보드꺼를 읽느냐 알려줌
+            BpReadVo bpArticle=  this.bbsService.readBpArticle(bbid);
 
-//        if (notice != null) { 공지가 있다면 어떤 보드 공지인지
+            if(bpArticle!=null){
+                AdminCommentEntity[] adminComments = this.bbsService.getAdminComments(bpArticle);
+                modelAndView.addObject("adminComments",adminComments);
+            }
+
+            modelAndView.addObject("bpArticle",bpArticle);//이게 무슨 보드꺼를 읽느냐 알려줌
+
+            return modelAndView;
+
+        }else {
+            modelAndView.addObject("bid",bid);//이게 무슨 보드꺼를 읽느냐 알려줌
+
+            NoticeReadVo notice = this.bbsService.readNotice(nid);
+            modelAndView.addObject("notice", notice);
+
+//        if (notice != null) { //공지가 있다면 어떤 보드 공지인지
 //
 //            modelAndView.addObject("board", this.bbsService.getNoticeBoard(notice.getBoardId()));
 //        }
-
+        }
         return modelAndView;
     }
 
@@ -227,29 +282,34 @@ public class BbsController {
     }
 
     @GetMapping(value = "modifyNotice", produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getModifyNotice(@SessionAttribute(value = "user", required = false) UserEntity user, @RequestParam(value = "nid") int nid){
+    public ModelAndView getModifyNotice(@SessionAttribute(value = "user", required = false)UserEntity user,
+                                        @RequestParam(value = "nid", required = false) Integer nid,
+                                        @RequestParam(value = "bbid",required = false) Integer bbid,
+                                        @RequestParam(value = "bid") String bid){
         ModelAndView modelAndView =new ModelAndView("board/modifyNotice");
 
-        NoticeReadVo existingNotice = this.bbsService.readNotice(nid);
+        if (!bid.equals("bp")) {
+            NoticeReadVo existingNotice = this.bbsService.readNotice(nid);
+            Enum<?> result = this.bbsService.prepareModifyNotice(user, nid);
+            System.out.println("리절트는" + result.name());
 
+            modelAndView.addObject("result", result.name());
 
-        Enum<?> result = this.bbsService.prepareModifyNotice(user, nid);
+            if (result == CommonResult.SUCCESS) {
+                modelAndView.addObject("notice", existingNotice);
+            }
+        } else if (bid.equals("bp")) {
 
-        System.out.println(existingNotice.getTitle());
-        System.out.println(existingNotice.getContent());
+            BpReadVo existingBpArticle = this.bbsService.readBpArticle(bbid);
+            Enum<?> result = this.bbsService.prepareModifyBpArticle(user,bbid);
+            modelAndView.addObject("result", result.name());
+            if (result == CommonResult.SUCCESS) {
+                modelAndView.addObject("BpArticle", existingBpArticle);
+            }
 
-        modelAndView.addObject("result", result.name());
-
-        if(result == CommonResult.SUCCESS){
-
-            modelAndView.addObject("notice", existingNotice);
         }
 
-
-//        if (result == CommonResult.SUCCESS) {
-//            modelAndView.addObject("board", this.bbsService.getBoard(existingArticle.getBoardId()));
-//        }
-
+        modelAndView.addObject("bid", bid);
         return modelAndView;
     }
 
@@ -272,20 +332,49 @@ public class BbsController {
         return responseObject.toString();
 
     }
+    @RequestMapping(value = "modifyBpArticle", method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String patchyBpArticle(@SessionAttribute(value = "user") UserEntity user , BpArticleEntity bpArticle) {
+        JSONObject responseObject = new JSONObject();
+
+        Enum<?> result = this.bbsService.modifyBpArticle(bpArticle, user);
+
+
+        responseObject.put("result", result.name().toLowerCase());
+
+        if (result == CommonResult.SUCCESS) {
+            responseObject.put("bbid", bpArticle.getIndex());
+        }
+        return responseObject.toString();
+
+    }
+
 
     @ResponseBody
     @RequestMapping(value = "deleteNotice", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     public String deleteNotice(@SessionAttribute(value = "user", required = false) UserEntity user,
-                             @RequestParam(value = "nid") int nid
-//                             ArticleEntity article 주소로 받아왔기때문에 파람을 쓴다.
-    ) {
-        NoticeEntity notice = new NoticeEntity();
-        notice.setIndex(nid);
+                               @RequestParam(value = "nid",required = false) Integer nid,
+                               @RequestParam(value= "bid") String bid,
+                               @RequestParam(value = "bbid",required = false ) Integer bbid ) {
         JSONObject responseObject = new JSONObject();
 
-        Enum<?> result = this.bbsService.deleteNotice(notice, user);
-        responseObject.put("result", result.name().toLowerCase());
-//
+        if(bid.equals("notice")){
+            NoticeEntity notice = new NoticeEntity();
+            notice.setIndex(nid);
+
+
+            Enum<?> result = this.bbsService.deleteNotice(notice, user);
+            responseObject.put("result", result.name().toLowerCase());
+
+        }
+
+
+        if (bid.equals("bp")){
+            Enum<?> result = this.bbsService.deleteBpArticle(bbid, user);
+            responseObject.put("result", result.name().toLowerCase());
+
+        }
+
 //        if (result == CommonResult.SUCCESS) {
 //
 //            responseObject.put("bid", notice.getBoardId());
@@ -295,6 +384,117 @@ public class BbsController {
         return responseObject.toString();
     }
 
+
+
+    @RequestMapping(value = "/writeBp", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getBulkPurchase(@SessionAttribute(value = "user", required = false) UserEntity user) { //컨트로롤러에서 셋아트리뷰트 한 user값을 가져온다. 세션에서 가져온 값이다. required false가 있어야 null일때 userEntity값을 안요구하게된다. 400예방 false일때 null이 드감
+        //비드를 문자열로 전달
+        ModelAndView modelAndView;
+        if (user == null) {//로그인확인
+            modelAndView = new ModelAndView("redirect:/member/login");
+        } else {
+            modelAndView = new ModelAndView("board/writeBulkPurchase");
+
+
+        }
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "writeBp", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String postWrite(@SessionAttribute(value = "user", required = false) UserEntity user,
+                            BpArticleEntity bpArticle) {//컨트로롤러에서 셋아트리뷰트 한 user값을 가져온다. 세션에서 가져온 값이다. required false가 있어야 null일때 userEntity값을 안요구하게된다. 400예방
+        Enum<? extends IResult> result;//bid값으로 받아와서 그것을 id로 지정해준다.
+        JSONObject responseObject = new JSONObject();
+
+        BpBoardEntity board= new BpBoardEntity();
+
+
+        System.out.println("contact는"+bpArticle.getContact());
+        if (user == null) {
+            result = WriteResult.NOT_ALLOWED;
+        } else {
+//            bpArticle.setBpBoardId(bid);
+            System.out.println(bpArticle.getBpBoardId());
+//            notice.setUserEmail(user.getEmail());
+            result = this.bbsService.writeBpArticle(bpArticle);
+
+            if (result == CommonResult.SUCCESS) {
+
+                responseObject.put("index", bpArticle.getIndex());//인트의 기본값은 0이다.
+
+            }
+        }
+        responseObject.put("result", result.name().toLowerCase());
+        return responseObject.toString();
+    }
+
+
+    @RequestMapping(value = "writeAdminComment", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String postAdminComment(@SessionAttribute(value = "user", required = false) UserEntity user,
+                                   @RequestParam(value = "bbid" ,required = false) Integer bbid, AdminCommentEntity adminComment){
+        Enum<? extends IResult> result;
+        JSONObject responseObject = new JSONObject();
+
+        System.out.println(bbid);
+        result = this.bbsService.writeAdminComment(user, bbid, adminComment);
+
+        if (result == CommonResult.SUCCESS) {
+
+//                responseObject.put("index", adminComment.getIndex());//인트의 기본값은 0이다.
+
+        }
+
+        responseObject.put("result", result.name().toLowerCase());
+
+        return responseObject.toString();
+
+    }
+
+
+    @ResponseBody
+    @RequestMapping(value = "deleteAdminComment", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public String deleteAdminComment(@SessionAttribute(value = "user", required = false) UserEntity user,
+                                     @RequestParam(value= "bid",required = false) String bid,
+                                     @RequestParam(value = "bbid",required = false ) Integer bbid,
+                                     @RequestParam(value = "acIndex",required = false) Integer acIndex) {
+        JSONObject responseObject = new JSONObject();
+
+        System.out.println("bid"+bid);
+        System.out.println("acIndex"+acIndex);
+        System.out.println("bbid"+bbid);
+
+        if(bid.equals("bpArticle")){
+
+            Enum<?> result = this.bbsService.deleteAdminComment( user,bbid, acIndex);
+            responseObject.put("result", result.name().toLowerCase());
+            System.out.println(result);
+
+        }
+        return responseObject.toString();
+    }
+
+    @RequestMapping(value = "modifyAdminComment", method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String patchAdminComment(@SessionAttribute(value = "user",required = false) UserEntity user,
+                                    @RequestParam(value = "bid",required = false) String bid,
+                                    AdminCommentEntity adminComment) {
+        JSONObject responseObject = new JSONObject();
+
+
+        if (bid.equals("bpArticle")) {
+
+            Enum<?> result = this.bbsService.modifyAdminComment(user, adminComment);
+
+
+            responseObject.put("result", result.name().toLowerCase());
+
+
+
+        }
+        return responseObject.toString();
+    }
 
 
 }

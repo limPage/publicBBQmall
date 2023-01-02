@@ -61,20 +61,15 @@ public class CategoryController {
     }
 
     @RequestMapping(value = "cart", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getCart(@SessionAttribute(value = "user", required = false) UserEntity user, @RequestParam(value="cid", required = false) Integer cid) {
+    public ModelAndView getCart( @RequestParam(value="cid", required = false) Integer cid, @RequestParam(value="pid", required = false) int pid, ProductEntity product) {
         ModelAndView modelAndView = new ModelAndView("home/cart");;
 
-        if (user == null) {
-            modelAndView = new ModelAndView("redirect:/member/login");
-        } else {
-            modelAndView = new ModelAndView("home/cart");
-        }
+        CartEntity cart = new CartEntity();
 
-
-
-//        modelAndView.addObject("product", product);
-//        modelAndView.addObject("cart", cart);
-//        modelAndView.addObject("cartIndex", cart.getIndex());
+        modelAndView.addObject("pid", pid);
+        modelAndView.addObject("product", product);
+        modelAndView.addObject("cart", cart);
+        modelAndView.addObject("cartIndex", cid);
 
         return modelAndView;
     }

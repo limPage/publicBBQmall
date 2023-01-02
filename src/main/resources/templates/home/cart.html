@@ -15,6 +15,7 @@
 <body>
 <th:block th:replace="~{fragments/body :: header}"></th:block>
 <main>
+    <input type="hidden" name = "pid" id="pid" th:value="${product.getProductIndex()}">
     <form id="cartForm" class="cart-form" name="cartForm">
         <div class="title-container">
             <h2>주문/결제</h2>
@@ -49,7 +50,7 @@
                                             </li>
                                             <li class="option-container">
                                                 <div class="product-name">
-                                                    <a href="#">/상품 이름 th:value 적을곳/</a>
+                                                    <a href="#" th:value="${product.getProductName()}">/상품 이름 th:value 적을곳/</a>
                                                 </div>
                                                 <ul class="cart-option">
                                                     <li>

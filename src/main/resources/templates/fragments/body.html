@@ -1,17 +1,13 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <script defer th:src = "@{/resources/libraries/ckeditor/ckeditor.js}"></script>
-    <script defer th:src="@{/resources/scripts/common.js}"></script>
-</head>
+
 
 <body>
 
 <header th:fragment="header">
     <div class="logo-row">
         <div class="logo-container">
-            <a href="/">
+            <a th:href="@{/}">
                 <img alt="" src="https://mall.bbq.co.kr/data/skin/responsive_ver1_default_gl/images/bbq/bbq_logo.svg"
                      width="118px"></a>
             <div class="search">
@@ -31,21 +27,28 @@
 
             <div class="user-menu">
                 <ul>
-                    <li>
-                        <a th:href = "@{/member/register}">회원가입</a>
+                    <li th:if="${session.user == null}">
+                        <a th:href="@{/member/register}">회원가입</a>
                     </li>
-                    <span></span>
 
-                    <li>
+
+                    <li th:if="${session.user == null}">
                         <span class="bar"></span>
-                        <a th:href = "@{/member/login}">로그인</a>
+                        <a th:href="@{/member/login}">로그인</a>
                         <span class="bar"></span>
 
                     </li>
-                    <span></span>
+
+                    <li class="--item" th:if="${session.user != null}">
+                        <a class="--link" th:href="@{/member/logout}">로그아웃</a>
+                        <span class="bar"></span>
+                    </li>
+
+
+
 
                     <li class="cs">
-                        <a href="#">
+                        <a th:href="@{/member/csCenter}">
                             <span>고객센터</span>
                             <span class="drop-down">▼</span>
                         </a>
@@ -65,68 +68,82 @@
         </div>
     </div>
     <div class="menu-row">
-        <form id="form" class="form">
-            <div class="menu-container">
-                <ul>
-                    <li class="menu-button">
+        <div class="menu-container">
+            <ul>
+                <li class="menu-button">
 
-                        <a href="#">
-                            <div class="menu-trigger">
-                                <span ></span>
-                                <span class="hover-trigger"></span>
-                                <span></span>
+                    <a href="#">
+                        <div class="menu-trigger">
+                            <span ></span>
+                            <span class="hover-trigger"></span>
+                            <span></span>
 
-                            </div>
-                            <strong>전체상품</strong></a>
-                    </li>
-                    <!--/*@thymesVar id="categories" type="com.hiponya.bbqmall.entities.product.CategoryEntity"*/-->
-                    <li class="menu" th:each="category : ${categories}">
-                        <!--<a href="/category"><strong class="new"></strong></a>-->
-                        <a th:text="${category.getTitle()}" th:href = "@{/category (cid=${category.getIndex()})}" rel="categoryTitle"></a>
-                    </li>
-<!--                    <li class="menu">-->
-<!--                        <a href="/category"><strong class="en">669 세트</strong></a>-->
-<!--                    </li>-->
-
-<!--                    <li class="menu">-->
-<!--                        <a href="/category"><strong class="en">BBQ베스트</strong></a>-->
-<!--                    </li>-->
-<!--                    <li class="menu">-->
-<!--                        <a href="/category"><strong>현명한특가</strong></a>-->
-<!--                    </li>-->
-<!--                    <li class="menu">-->
-<!--                        <a href="/category"><strong>브랜드관</strong></a>-->
-<!--                    </li>-->
-<!--                    <li class="menu">-->
-<!--                        <a href="/category"><strong>이벤트/혜택</strong></a>-->
-<!--                    </li>-->
-                    <span class="spring"></span>
-                    <li class="my-menu">
-                        <a href="#"><img alt=""
-                                         src="https://mall.bbq.co.kr/data/images/bbqnew/pc/%EB%A7%88%EC%9D%B4%ED%8E%98%EC%9D%B4%EC%A7%80.svg">
-                        </a>
-                    </li>
-                    <li class="my-menu">
-                        <a href="#"><img alt=""
-                                         src="https://mall.bbq.co.kr/data/images/bbqnew/pc/%EC%B0%9C%ED%95%9C%EB%AA%A9%EB%A1%9D.svg">
-                        </a>
-                    </li>
-                    <li class="my-menu">
-                        <a href="#"><img alt=""
-                                         src="https://mall.bbq.co.kr/data/images/bbqnew/pc/%EC%9E%A5%EB%B0%94%EA%B5%AC%EB%8B%88.svg"></a>
-                    </li>
+                        </div>
+                        <strong>전체상품</strong></a>
+                </li>
+                <!--/*@thymesVar id="categories" type="com.hiponya.bbqmall.entities.product.CategoryEntity"*/-->
+                <li class="menu" th:each="category : ${categories}">
+                    <!--<a href="/category"><strong class="new"></strong></a>-->
+                    <a th:text="${category.getTitle()}" th:href = "@{/category (cid=${category.getIndex()})}" rel="categoryTitle"></a>
+                </li>
+                <span class="spring"></span>
+                <li class="my-menu">
+                    <a href="#"><img alt=""
+                                     src="https://mall.bbq.co.kr/data/images/bbqnew/pc/%EB%A7%88%EC%9D%B4%ED%8E%98%EC%9D%B4%EC%A7%80.svg">
+                    </a>
+                </li>
+                <li class="my-menu">
+                    <a href="#"><img alt=""
+                                     src="https://mall.bbq.co.kr/data/images/bbqnew/pc/%EC%B0%9C%ED%95%9C%EB%AA%A9%EB%A1%9D.svg">
+                    </a>
+                </li>
+                <li class="my-menu">
+                    <a href="#"><img alt=""
+                                     src="https://mall.bbq.co.kr/data/images/bbqnew/pc/%EC%9E%A5%EB%B0%94%EA%B5%AC%EB%8B%88.svg"></a>
+                </li>
 
 
-                </ul>
-            </div>
-        </form>
+            </ul>
+        </div>
     </div>
-
 </header>
-<div class="--cover" id = "cover" th:fragment="cover">
-    <img alt = "" class = "--icon" th:src = "@{/resources/images/loading.png}">
-    <span class = "--text" rel = "text">무언가를 불러오고 있습니다. 잠시만 기다려 주세요.</span>
+
+<div class="--cover" id="cover" th:fragment="cover">
+    <img alt="" class="--icon" th:src="@{/resources/images/l2.png}">
+    <img alt="" class="--icon2" th:src="@{/resources/images/l2.png}">
+    <img alt="" class="--icon3" th:src="@{/resources/images/l2.png}">
+    <sapn class="--text" rel="text">무언가를 불러오고 있습니다. 잠시만 기다려 주세요.</sapn>
+    <!--    /resources/images/images/review1.png-->
 </div>
+
+<article class="side-bar" th:fragment="sideBar">
+    <h1 class="title"><a th:href="@{/member/csCenter}">CS CENTER</a></h1>
+    <ul>
+        <li><a th:href="@{/board/}" class="get-notice-board" id="sideBarN">공지사항</a></li>
+        <li><a href="/board/?bid=qna" id="sideBarQ">자주 묻는 질문</a></li>
+        <li><a href="/board/?bid=pi" id="sideBarPI">상품문의</a></li>
+        <li><a href="/board/?bid=pr" id="sideBarPR">상품후기</a></li>
+        <li><a href="/board/?bid=bp" id="sideBarBP">대량구매</a></li>
+
+    </ul>
+
+
+</article>
+
+<ul class="floating-banner" th:fragment="floatingBanner">
+    <li class="banner-image">
+        <img alt="추천인이벤트배너" src="/resources/images/banner.png" title="추천인이벤트배너">
+        <span><b>추천인</b><br>
+        이벤트
+        </span>
+
+    </li>
+    <li class="banner-li"><a>등급별 혜택</a></li>
+    <li class="banner-li"><a>리뷰 보러가기</a></li>
+    <li class="banner-li"><a>룰렛 돌리기</a></li>
+
+
+</ul>
 
 <main>몸
 

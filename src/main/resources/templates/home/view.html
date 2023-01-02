@@ -15,7 +15,7 @@
 <body>
 <th:block th:replace="~{fragments/body :: header}"></th:block>
 <main>
-    <input type="hidden" name = "pid" th:value="${product.getProductIndex()}">
+    <input type="hidden" name = "pid" id="pid" th:value="${product.getProductIndex()}">
     <div class="products-view">
         <div class="products">
 

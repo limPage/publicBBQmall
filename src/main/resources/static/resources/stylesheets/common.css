@@ -94,7 +94,7 @@ body > header > .logo-row > .logo-container {
 body > header > .logo-row > .logo-container > a {
     height: 100%;
     /*width: 100%;*/
-display: flex;
+    display: flex;
     align-items: center;
 
     /*padding: 1.75rem 0;*/
@@ -348,6 +348,7 @@ body > header > .logo-row > .logo-container > .search input::placeholder {
 
 body > header > .menu-row {
 
+
     /*width: 100%;*/
     align-items: center;
     /*display: block;*/
@@ -357,7 +358,7 @@ body > header > .menu-row {
 
 }
 
-body > header > .menu-row > .form > .menu-container {
+body > header > .menu-row > .menu-container {
     /*background-color: blueviolet;*/
 
     /*padding: 0 2.5rem;*/
@@ -367,7 +368,7 @@ body > header > .menu-row > .form > .menu-container {
     justify-content: center;
 
 }
-body > header > .menu-row > .form > .menu-container > ul > .menu-button >a{
+body > header > .menu-row > .menu-container > ul > .menu-button >a{
     display: flex;
     align-items: center;
     /*width: 100%;*/
@@ -375,7 +376,7 @@ body > header > .menu-row > .form > .menu-container > ul > .menu-button >a{
     padding: 0 37px 0 0;
 }
 
-body > header > .menu-row > .form > .menu-container > ul > .menu-button >a> .menu-trigger {
+body > header > .menu-row > .menu-container > ul > .menu-button >a> .menu-trigger {
     width: 34px;
     height: 34px;
     border: rgba(0,0,0,0.3) solid 1px;
@@ -386,7 +387,7 @@ body > header > .menu-row > .form > .menu-container > ul > .menu-button >a> .men
     justify-content: center;
     margin: 0 10px 0 0;
 }
-body > header > .menu-row > .form > .menu-container > ul > .menu-button >a> .menu-trigger>span {
+body > header > .menu-row > .menu-container > ul > .menu-button >a> .menu-trigger>span {
     width: 20px;
     height: 2px;
     background-color: #CF152D;
@@ -394,14 +395,14 @@ body > header > .menu-row > .form > .menu-container > ul > .menu-button >a> .men
     /*margin: 2px;*/
     padding: 0;
 }
-body > header > .menu-row > .form > .menu-container > ul > .menu-button >a> .menu-trigger> .hover-trigger {
+body > header > .menu-row > .menu-container > ul > .menu-button >a> .menu-trigger> .hover-trigger {
 
     margin: 3px;
 }
 
 
 
-body > header > .menu-row > .form > .menu-container > ul {
+body > header > .menu-row > .menu-container > ul {
 
     align-items: center;
     display: flex;
@@ -420,7 +421,7 @@ body > header > .menu-row > .form > .menu-container > ul {
 
 }
 
-body > header > .menu-row > .form > .menu-container > ul > .menu-button {
+body > header > .menu-row > .menu-container > ul > .menu-button {
 
     height: 100%;
 
@@ -430,14 +431,14 @@ body > header > .menu-row > .form > .menu-container > ul > .menu-button {
 
 
 
-body > header > .menu-row > .form > .menu-container > ul > .menu{
+body > header > .menu-row > .menu-container > ul > .menu{
     height: 100%;
     /*display: flex;*/
     /*align-items: center;*/
     /*align-content: center;*/
 }
 
-body > header > .menu-row > .form > .menu-container > ul > .menu>a {
+body > header > .menu-row > .menu-container > ul > .menu>a {
 
     font-size: 22px;
 
@@ -447,61 +448,61 @@ body > header > .menu-row > .form > .menu-container > ul > .menu>a {
     height: 100%;
     display: flex;
     align-items: center;
-/*position: relative;*/
+    /*position: relative;*/
 }
-body > header > .menu-row > .form > .menu-container > ul > .menu>a >span{
+body > header > .menu-row > .menu-container > ul > .menu>a >span{
     /*position: absolute;*/
     /*display: inline;*/
 
 }
 
 
-body > header > .menu-row > .form > .menu-container > ul > li >a>strong{
+body > header > .menu-row > .menu-container > ul > li >a>strong{
     color: black;
     font-weight: 500;
 
 }
-body > header > .menu-row > .form > .menu-container > ul > li >a:hover>strong{
+body > header > .menu-row > .menu-container > ul > li >a:hover>strong{
     font-weight: 700;
 }
-body > header > .menu-row > .form > .menu-container > ul > li >a:hover>.en{
+body > header > .menu-row > .menu-container > ul > li >a:hover>.en{
 
     letter-spacing: -1.75px;
 }
-body > header > .menu-row > .form > .menu-container > ul > li >a:hover>.new{
+body > header > .menu-row > .menu-container > ul > li >a:hover>.new{
     letter-spacing: -2px;
 }
 
 
 
 
-body > header > .menu-row > .form > .menu-container > ul > .spring{
+body > header > .menu-row > .menu-container > ul > .spring{
     flex: 1;
 
 }
 
 
 
-/*body > header > .menu-row > .form > .menu-container > ul >.menu-button{*/
+/*body > header > .menu-row > .menu-container > ul >.menu-button{*/
 /*    padding-right: 36px;*/
 /*}*/
-/*body > header > .menu-row > .form > .menu-container > ul >.menu{*/
+/*body > header > .menu-row > .menu-container > ul >.menu{*/
 
 
 /*}*/
-body > header > .menu-row > .form > .menu-container > ul > .my-menu{
+body > header > .menu-row > .menu-container > ul > .my-menu{
     display: flex;
     justify-content: flex-end;
     margin-top: 5px;
     width: 3rem;
 
 }
-body > header > .menu-row > .form > .menu-container > ul > .my-menu>a>img{
+body > header > .menu-row > .menu-container > ul > .my-menu>a>img{
 
 }
 
 
-body > header > .menu-row > .form > .menu-container > ul > .my-menu:last-of-type{
+body > header > .menu-row > .menu-container > ul > .my-menu:last-of-type{
     width: 50px;
 
 }
