@@ -1,0 +1,138 @@
+body>main{
+    align-items: flex-start;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+
+    font-family: inherit;
+}
+
+body>main>.content{
+    width: 100%;
+
+
+    display: block;
+    padding-top: 4.0625rem;
+    padding-bottom: 6.25rem;
+
+}
+
+body> main> .content>.title-container{
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: -2px;
+    border-bottom: 0.0625rem solid rgba(0,0,0,0.6);
+    padding-bottom: 2rem;
+
+}
+body> main> .my-page-content>form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+body> main> .my-page-content>form>table{
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.8125rem;
+    color: rgba(0,0,0,0.8);
+
+}
+
+body> main> .my-page-content>form>table>tbody>tr{
+    border-bottom: rgba(0,0,0,0.1) solid 0.0625rem;
+    width: 100%;
+
+}
+
+body> main> .my-page-content>form>table>tbody>tr>th{
+    background-color: rgba(0,0,0,0.05);
+    width: 9%;
+    padding: 0.625rem;
+    font-weight: 400;
+
+}
+
+body> main> .my-page-content>form>table>tbody>tr>td{
+    padding: 0.6rem 0.5rem ;
+    width: 90%;
+}
+body> main> .my-page-content>form>table>tbody>.reason-radio-row>td{
+    display: flex;
+}
+
+body> main> .my-page-content>form>table>tbody>.reason-radio-row>td>label{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0.25rem 1.15rem  0.25rem 0;
+}
+body> main> .my-page-content>form>table>tbody>.reason-radio-row>td>label>input{
+    margin: 0 0.25rem 0 0;
+    height: 1.1875rem;
+    width: 1.1875rem;
+
+}
+
+body> main> .my-page-content>form>table>tbody>.reason-text-row>td{
+    padding: 0.25rem;
+}
+
+
+body> main> .my-page-content>form>table>tbody>.reason-text-row>td>label>textarea{
+    min-height: 6rem;
+   width: 99%;
+    resize: none;
+    font-family: inherit;
+}
+body> main> .my-page-content>form>p{
+    padding-top: 1.25rem;
+    font-size: 0.8125rem;
+    margin: unset;
+    padding-bottom: 0.625rem;
+
+}
+
+body> main> .my-page-content>form>.last-check{
+    font-size: 0.8125rem;
+    padding-bottom: 1rem;
+    color: rgba(0,0,0,0.8);
+    display: flex;
+    align-items: center;
+
+
+}
+body> main> .my-page-content>form>.last-check>input[type="checkbox"]{
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    appearance: none;
+    box-shadow: 0 0  0 1px  rgba(0,0,0,0.2);
+    border: solid rgba(0,0,0,0.4) 0.0625rem;
+}
+body> main> .my-page-content>form>.last-check>input[type="checkbox"]:checked{
+    background-color: rgba(0,0,0,0.2);
+
+    background-image: url("/resources/images/checkbox.jpg");
+    background-size: 100%;
+    box-shadow: 0 0  0 2px  #0ea31a;
+    border-radius: 5px;
+
+
+}
+
+
+
+body> main> .my-page-content>form>input[type="submit"]{
+
+ padding: 1rem 2rem;
+    background-color: #E31134;
+    border: none;
+    border-radius: 0.25rem;
+    color: white;
+    font-family: inherit;
+    font-size: 1rem;
+}

@@ -298,7 +298,7 @@ public class BbsController {
             if (result == CommonResult.SUCCESS) {
                 modelAndView.addObject("notice", existingNotice);
             }
-        } else if (bid.equals("bp")) {
+        }  if (bid.equals("bp")) {
 
             BpReadVo existingBpArticle = this.bbsService.readBpArticle(bbid);
             Enum<?> result = this.bbsService.prepareModifyBpArticle(user,bbid);

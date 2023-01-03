@@ -16,5 +16,15 @@ public class MyPageController {
     public ModelAndView getMyPage(){
 
         return new ModelAndView("myPage/myPage");
+
     }
+
+
+    @GetMapping(value = "/withdrawal" , produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getMyPageWithdrawal(){
+
+        return new ModelAndView("myPage/myPageWithdrawal");
+
+    }
+
 }
