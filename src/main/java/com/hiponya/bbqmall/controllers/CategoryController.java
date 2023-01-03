@@ -61,11 +61,14 @@ public class CategoryController {
     }
 
     @RequestMapping(value = "cart", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getCart( @RequestParam(value="cid", required = false) Integer cid, @RequestParam(value="pid", required = false) int pid, ProductEntity product) {
+    public ModelAndView getCart( @RequestParam(value="cid", required = false) Integer cid, @RequestParam(value="pid", required = false) int pid, @RequestParam(value="quantity") int quantity) {
         ModelAndView modelAndView = new ModelAndView("home/cart");;
 
         CartEntity cart = new CartEntity();
 
+        ProductEntity product = this.categoryService.getProductByIndex(pid);
+
+        modelAndView.addObject("quantity", quantity);
         modelAndView.addObject("pid", pid);
         modelAndView.addObject("product", product);
         modelAndView.addObject("cart", cart);
@@ -75,8 +78,10 @@ public class CategoryController {
     }
 
     @RequestMapping(value = "view", method=RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getView(@RequestParam(value = "pid") int pid, CategoryEntity category) {
+    public ModelAndView getView(@RequestParam(value = "pid", required = false) int pid, CategoryEntity category, CartEntity cart) {
         ModelAndView modelAndView = new ModelAndView("home/view");
+
+        modelAndView.addObject("cart", cart);
 
 
         modelAndView.addObject("category", category);

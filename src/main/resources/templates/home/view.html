@@ -77,12 +77,14 @@
                         <input type="button" id="add" class="add" value="+" name="add">
                     </div>
                     <div class="total-container"><span class="total">총 상품금액
-                            <span class="total-price">17,300</span>
+                            <span class="total-price" th:text = "${product.getPrice} + '원'">17,300</span>
                             원</span>
                     </div>
                     <div class="button-container">
                         <input type="button" name="cart" id="cart" class="cart" value="장바구니">
-                        <input type="button" name="buy" id="buy" class="buy" value="바로구매">
+
+                            <input type="button" name="buy" id="buy" class="buy" value="바로구매">
+
                         <input type="button" name="jjim" id="jjim" class="jjim" value="♡">
                     </div>
                 </form>

@@ -12,19 +12,19 @@
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script defer th:src="@{/cart/resources/scripts/cart.js}"></script>
 </head>
-<body>
+<body >
 <th:block th:replace="~{fragments/body :: header}"></th:block>
 <main>
     <input type="hidden" name = "pid" id="pid" th:value="${product.getProductIndex()}">
+    <input type="hidden" name = "cartIndex" id="cartIndex" th:value="${cart.getIndex()}">
     <form id="cartForm" class="cart-form" name="cartForm">
         <div class="title-container">
             <h2>주문/결제</h2>
-
         </div>
+
         <h2 class="title">주문상품 정보</h2>
         <div class="order-layout" id="orderLayout">
             <div class="cartPage-container">
-
                 <div class="cart-content">
                     <ul class="cart-list">
                         <li class="delivery">배송 :
@@ -50,18 +50,18 @@
                                             </li>
                                             <li class="option-container">
                                                 <div class="product-name">
-                                                    <a href="#" th:value="${product.getProductName()}">/상품 이름 th:value 적을곳/</a>
+                                                    <a href="#" th:text="${product.getProductName()}">/상품 이름 th:value 적을곳/</a>
                                                 </div>
                                                 <ul class="cart-option">
                                                     <li>
                                                         <span class="product-title">상품</span>
-                                                        /상품 이름 2개와 가격 th적을곳/
+                                                        <span class="product" th:text="${product.getProductName()}">/상품 이름 2개와 가격 th적을곳/</span>
                                                     </li>
                                                 </ul>
                                                 <input type="hidden" name="coupon">
                                                 <div class="cart-quantity">
                                                     <span class="quantity">수량</span>
-                                                    th로 productQuantity 받을곳
+                                                    <span th:text="${quantity}"></span>
                                                     <span class="price-container">
                                                         (
                                                         <span class="price">/th로 productPrice 받을곳/</span>

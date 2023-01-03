@@ -76,6 +76,17 @@
         where binary product_index = #{pid}
     </select>
 
+    <select id="selectCartByIndex" resultType="com.hiponya.bbqmall.entities.product.CartEntity">
+        select `index` as `index`,
+               `id` as `id`,
+               `product_index` as `productIndex`,
+               `price` as `price`,
+               `amount` as `amount`,
+               `created_on` as `createdOn`,
+               `modified_on` as `modifiedOn`
+            from bbqmall.cart where index=#{cid}
+    </select>
+
 <!--    <select id="selectSaleQuantityByIndex" resultType="com.hiponya.bbqmall.entities.product.ProductEntity">-->
 <!--        select `product_index` as `productIndex`,-->
 <!--               `detail_index` as `detailIndex`,-->

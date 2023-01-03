@@ -1,5 +1,6 @@
 package com.hiponya.bbqmall.mappers;
 
+import com.hiponya.bbqmall.entities.product.CartEntity;
 import com.hiponya.bbqmall.entities.product.CategoryEntity;
 import com.hiponya.bbqmall.entities.product.ProductEntity;
 import com.hiponya.bbqmall.entities.product.SortEntity;
@@ -21,6 +22,8 @@ public interface ICategoryMapper {
     ProductEntity[] selectProducts(@Param(value = "cid") int cid);
 
     SortEntity[] selectSorts();
+
+    CartEntity selectCartByIndex(@Param(value = "cid") int cid);
 
     ProductEntity selectSaleQuantityByIndex(@Param(value = "index") int index);
 

@@ -103,21 +103,15 @@ main > .products-view > .products > .products-container > .products-form > .butt
     background-color: white;
     border : 0.0125rem solid rgb(213, 216, 220);
     border-radius : 0.25rem;
-    padding-right : 3rem;
-    padding-left : 3rem;
-    padding-top : 2rem;
-    padding-bottom : 2rem;
+    padding: 2rem 3rem;
 }
 
-main > .products-view > .products > .products-container > .products-form > .button-container > .buy {
+main > .products-view > .products > .products-container > .products-form > .button-container > .buy-button > .buy {
     background-color: red;
     color : white;
     border : 0.0125rem solid rgb(213, 216, 220);
     border-radius : 0.25rem;
-    padding-right : 3rem;
-    padding-left : 3rem;
-    padding-top : 2rem;
-    padding-bottom : 2rem;
+    padding: 2rem 3rem;
 }
 
 main > .products-view > .products > .products-container > .products-form > .quantity-container {

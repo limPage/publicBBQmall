@@ -1,6 +1,7 @@
 package com.hiponya.bbqmall.services;
 
 import com.hiponya.bbqmall.entities.member.EmailAuthEntity;
+import com.hiponya.bbqmall.entities.product.CartEntity;
 import com.hiponya.bbqmall.entities.product.CategoryEntity;
 import com.hiponya.bbqmall.entities.product.ProductEntity;
 import com.hiponya.bbqmall.entities.product.SortEntity;
@@ -58,6 +59,10 @@ public class CategoryService {
     public ProductEntity getProductByIndex(int pid) {
 
         return this.categoryMapper.selectProductByIndex(pid);
+    }
+
+    public CartEntity getCartByIndex(int cid) {
+        return this.categoryMapper.selectCartByIndex(cid);
     }
 
     public CategoryEntity[] getCategories() {
