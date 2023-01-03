@@ -42,4 +42,5 @@ public interface IMemberMapper {
 
     int updateUser(UserEntity user);
 
+    int deleteUserById(@Param(value = "id") String id);
 }

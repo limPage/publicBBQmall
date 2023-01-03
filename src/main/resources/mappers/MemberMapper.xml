@@ -198,4 +198,13 @@
 
     </update>
 
+
+    <delete id="deleteUserById" parameterType="com.hiponya.bbqmall.entities.member.UserEntity">
+
+        DELETE FROM `bbqmall`.`users` WHERE `id`=#{id}
+        LIMIT 1;
+
+
+    </delete>
+
 </mapper>
