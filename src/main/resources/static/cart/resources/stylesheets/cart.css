@@ -179,10 +179,9 @@ main > #cartForm > .order-layout > .cartPage-container > .cart-content > .cart-l
     display : flex;
     flex-direction : column;
     justify-content : stretch;
-
+    background-color: red;
     padding-top : 1.5rem;
     padding-bottom : 1rem;
-    border-bottom : 0.0125rem solid rgb(128, 140, 152);
 }
 
 .sale-container > .sale-area > .title2 {
@@ -192,7 +191,7 @@ main > #cartForm > .order-layout > .cartPage-container > .cart-content > .cart-l
 .sale-container > .sale-area > .list1 > .promotion-code {
     align-items : stretch;
     display : none;
-    flex-direction : row;
+    flex-direction : column;
     justify-content : stretch;
 }
 
@@ -206,6 +205,39 @@ main > #cartForm > .order-layout > .cartPage-container > .cart-content > .cart-l
 }
 
 .sale-container > .sale-area > .list1 >  .save-money > .reset-btn.visible {
+    display : flex;
+}
+
+.sale-container2 {
+    align-items : stretch;
+    display : flex;
+    flex-direction : column;
+    justify-content : stretch;
+    padding-top : 1.5rem;
+    padding-bottom : 1rem;
+}
+
+.sale-container2 > .sale-area > .title2 {
+    display : none;
+}
+
+.sale-container2 > .sale-area > .list1 > .promotion-code {
+    align-items : stretch;
+    display : none;
+    flex-direction : row;
+    justify-content : stretch;
+}
+
+.sale-container2 > .sale-area > .list1 > .promotion-code.visible {
+    display : flex;
+}
+
+.sale-container2 > .sale-area > .list1 > .save-money > .reset-btn {
+    display : none;
+
+}
+
+.sale-container2 > .sale-area > .list1 >  .save-money > .reset-btn.visible {
     display : flex;
 }
 

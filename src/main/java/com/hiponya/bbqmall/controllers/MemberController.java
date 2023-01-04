@@ -115,6 +115,8 @@ public class MemberController {
             UserEntity isAdminMode= this.memberService.isAdminMode(user);
             System.out.println("어드민이에요?"+isAdminMode.isAdmin());
             user.setAdmin(isAdminMode.isAdmin());
+            user.setEmail(isAdminMode.getEmail());
+
             session.setAttribute("user",user);
             System.out.println("로그인 성공");
         }else System.out.println("로그인실패");
@@ -224,3 +226,7 @@ public class MemberController {
 
 
 }
+
+
+
+

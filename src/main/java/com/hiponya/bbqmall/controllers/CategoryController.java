@@ -30,7 +30,10 @@ public class CategoryController {
     }
 
     @RequestMapping(value = "category", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getCategory(@RequestParam(value = "cid") int cid,CategoryEntity category, ProductEntity product, SortEntity sort) {
+    public ModelAndView getCategory(@RequestParam(value = "cid") int cid,
+                                    CategoryEntity category,
+                                    ProductEntity product,
+                                    SortEntity sort) {
         ModelAndView modelAndView = new ModelAndView("home/category");
         CategoryEntity[] categories = this.categoryService.getCategories();
         ProductEntity[] products = this.categoryService.getProducts(cid);
@@ -60,13 +63,24 @@ public class CategoryController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "cart", method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public String postWishlist() {
+        return null;
+    }
+
     @RequestMapping(value = "cart", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getCart( @RequestParam(value="cid", required = false) Integer cid, @RequestParam(value="pid", required = false) int pid, @RequestParam(value="quantity") int quantity) {
+    public ModelAndView getCart(@SessionAttribute(value = "user",required = false) UserEntity user,
+                                @RequestParam(value="cid", required = false) Integer cid,
+                                @RequestParam(value="pid", required = false) int pid,
+                                @RequestParam(value="quantity") int quantity) {
         ModelAndView modelAndView = new ModelAndView("home/cart");;
 
         CartEntity cart = new CartEntity();
 
         ProductEntity product = this.categoryService.getProductByIndex(pid);
+        if(user != null) {
+            modelAndView.addObject("user", user);
+        }
 
         modelAndView.addObject("quantity", quantity);
         modelAndView.addObject("pid", pid);
@@ -78,7 +92,9 @@ public class CategoryController {
     }
 
     @RequestMapping(value = "view", method=RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getView(@RequestParam(value = "pid", required = false) int pid, CategoryEntity category, CartEntity cart) {
+    public ModelAndView getView(@RequestParam(value = "pid", required = false) int pid,
+                                CategoryEntity category,
+                                CartEntity cart) {
         ModelAndView modelAndView = new ModelAndView("home/view");
 
         modelAndView.addObject("cart", cart);

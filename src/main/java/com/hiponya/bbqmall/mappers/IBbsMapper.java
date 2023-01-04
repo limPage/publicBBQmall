@@ -17,12 +17,12 @@ public interface IBbsMapper {
 
     int selectNoticeCountByNoticeBoardId(@Param(value = "boardId") String boardId,
 
-                                         @Param(value = "keyword") String keyword,
-                                         @Param(value = "qid") String qid);
+                                          @Param(value = "keyword") String keyword,
+                                          @Param(value = "qid") String qid);
 
     int selectBpArticleCountByBpBoardId(@Param(value = "bpBoardId") String bpBoardId,
 
-                                        @Param(value = "keyword") String keyword);
+                                         @Param(value = "keyword") String keyword);
 
 
 
@@ -35,15 +35,15 @@ public interface IBbsMapper {
     NoticeReadVo[] selectAnnounceNotice();
     NoticeReadVo[] selectNoticeByBoardId(@Param(value = "boardId") String boardId,
 
-                                         @Param(value = "keyword") String keyword,
-                                         @Param(value = "limit") int limit,
-                                         @Param(value = "offset") int offset,
-                                         @Param(value = "qid") String qid);
+                                            @Param(value = "keyword") String keyword,
+                                            @Param(value = "limit") int limit,
+                                            @Param(value = "offset") int offset,
+                                            @Param(value = "qid") String qid);
     BpReadVo[] selectBpArticleByBoardId(@Param(value = "bpBoardId") String bpBoardId,
                                         @Param(value = "keyword") String keyword,
                                         @Param(value = "limit") int limit,
                                         @Param(value = "offset") int offset
-    );
+                                         );
     BpReadVo selectBpArticleByBoardIdJustOne(@Param(value = "bpBoardId") int bpBoardId);
     NoticeReadVo selectNoticeByIndex(@Param(value = "index") int index);
 

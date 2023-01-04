@@ -21,7 +21,7 @@
 
         FROM `bbqmall`.`users`
         WHERE BINARY `email` = #{email}
-            LIMIT 1;
+        LIMIT 1;
     </select>
 
     <insert id="insertEmailAuth" useGeneratedKeys="true" keyProperty="index"
@@ -47,8 +47,8 @@
         WHERE BINARY `email` = #{email}
           AND BINARY `code` = #{code}
           AND BINARY `salt` = #{salt}
-            LIMIT 1;
-        # binary: 대소문자 구분. 하는게 좋겠죠?
+        LIMIT 1;
+# binary: 대소문자 구분. 하는게 좋겠죠?
     </select>
 
     <update id="updateEmailAuth"
@@ -62,7 +62,7 @@
             `expires_on`   = #{expiresOn},
             `expired_flag` = #{isExpired}
         WHERE BINARY `index` = #{index}
-            LIMIT 1
+        LIMIT 1
 
     </update>
 
@@ -97,11 +97,11 @@
                `address_primary`   AS `addressPrimary`,
                `address_secondary` AS `addressSecondary`,
                `registered_on`     AS `registeredOn`,
-               `admin` AS `isAdmin`
+                `admin` AS `isAdmin`
         FROM `bbqmall`.`users`
         WHERE BINARY `id` = #{id}
           AND BINARY `password` = #{password}
-            LIMIT 1;
+        LIMIT 1;
 
 
     </select>
@@ -123,7 +123,7 @@
         WHERE BINARY `name` = #{name}
           AND `email` = #{email}
 
-            LIMIT 1;
+        LIMIT 1;
 
     </select>
 
@@ -144,7 +144,7 @@
           AND `id` = #{id}
           AND `email` = #{email}
 
-            LIMIT 1;
+        LIMIT 1;
 
     </select>
 
@@ -156,7 +156,7 @@
         WHERE BINARY `email` = #{email}
           AND BINARY `code` = #{code}
           AND BINARY `salt` = #{salt}
-            LIMIT 1
+        LIMIT 1
 
 
     </update>
@@ -174,7 +174,7 @@
         FROM `bbqmall`.`email_auths`
         WHERE `index` = #{index}
 
-            LIMIT 1;
+        LIMIT 1;
 
 
     </select>
@@ -191,11 +191,20 @@
             address_secondary = #{addressSecondary},
             `registered_on`   = #{ registeredOn}
         WHERE BINARY `email` = #{email}
-            LIMIT 1
-            #프라이머리키를 제외하고 업데이트
+        LIMIT 1
+#프라이머리키를 제외하고 업데이트
 
 
 
     </update>
+
+
+    <delete id="deleteUserById" parameterType="com.hiponya.bbqmall.entities.member.UserEntity">
+
+        DELETE FROM `bbqmall`.`users` WHERE `id`=#{id}
+        LIMIT 1;
+
+
+    </delete>
 
 </mapper>

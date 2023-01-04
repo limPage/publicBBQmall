@@ -87,6 +87,14 @@
             from bbqmall.cart where index=#{cid}
     </select>
 
+<!--    <insert id="insertArticle" parameterType="com.khj.studymemberbbs.entities.bbs.ArticleEntity"-->
+<!--            useGeneratedKeys="true" keyColumn="index" keyProperty="index">-->
+<!--        insert into study_bbs.articles (`user_email`, `board_id`, `title`, `content`, `view`, `written_on`,-->
+<!--                                        `modified_on`)-->
+<!--        values (#{userEmail}, #{boardId}, #{title}, #{content}, #{view}, IFNULL(#{writtenOn}, DEFAULT(`written_on`)),-->
+<!--                IFNULL(#{modifiedOn}, DEFAULT(modified_on)))-->
+<!--    </insert>-->
+
 <!--    <select id="selectSaleQuantityByIndex" resultType="com.hiponya.bbqmall.entities.product.ProductEntity">-->
 <!--        select `product_index` as `productIndex`,-->
 <!--               `detail_index` as `detailIndex`,-->

@@ -26,7 +26,4 @@ public class EmailAuthVo extends EmailAuthEntity {
         this.name = name;
         return this;
     }
-
 }
-
-

@@ -4,6 +4,8 @@ const productForm = window.document.getElementById('productsForm');
 const pid = window.document.getElementById('pid');
 const cartIndex = window.document.getElementById('cartIndex');
 const quantityNumber = window.document.getElementById('quantityNumber');
+const price = window.document.getElementById('price');
+const totalPrice = window.document.getElementById('totalPrice');
 
 let addButton = window.document.getElementById('add');
 let minButton = window.document.getElementById('min');
@@ -40,6 +42,7 @@ cartButton.addEventListener('click', ()=> {
 
 addButton.addEventListener('click', () => {
     productForm['quantityNumber'].value =  ++num;
+    totalPrice.innerText = price.value * productForm['quantityNumber'].value;
     return false;
 });
 
@@ -48,10 +51,11 @@ minButton.addEventListener('click', () => {
         return false;
     }
     productForm['quantityNumber'].value = --num;
+    totalPrice.innerText = price.value * productForm['quantityNumber'].value;
     return false;
 });
 
 buyButton.addEventListener('click', () => {
     window.location.href='./cart?pid='+pid.value+'&quantity='+quantityNumber.value;
-
 });
+

@@ -6,6 +6,14 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title th:text = "${'BBQ몰 - 구매페이지'}"></title>
+    <script th:if="${user == null}">
+        alert('로그인 되어있지 않습니다.');
+        if(window.history.length > 1) {
+            window.history.back();
+        } else {
+            window.close();
+        }
+    </script>
     <link rel="stylesheet" th:href="@{/bbq/resources/stylesheets/index.css}">
     <link rel="stylesheet" th:href="@{/cart/resources/stylesheets/cart.css}">
     <th:block th:replace="~{fragments/head :: common}"></th:block>
@@ -50,7 +58,7 @@
                                             </li>
                                             <li class="option-container">
                                                 <div class="product-name">
-                                                    <a href="#" th:text="${product.getProductName()}">/상품 이름 th:value 적을곳/</a>
+                                                    <a th:href = "@{/view (pid = ${product.getProductIndex()})}" th:text="${product.getProductName()}">/상품 이름 th:value 적을곳/</a>
                                                 </div>
                                                 <ul class="cart-option">
                                                     <li>
@@ -64,28 +72,28 @@
                                                     <span th:text="${quantity}"></span>
                                                     <span class="price-container">
                                                         (
-                                                        <span class="price">/th로 productPrice 받을곳/</span>
+                                                        <span class="price" th:text="${(product.getPrice() * quantity) - (product.getPrice() / product.getSaleQuantity()) * quantity}">/th로 productPrice 받을곳/</span>
                                                         원)
                                                     </span>
                                                 </div>
                                             </li>
                                         </ul>
                                         <ul class="sale-container">
-                                            <li class="price">
+                                            <li class="price-raw">
                                                 <span class="price-title">상품금액</span>
-                                                /th로 price * quantity 받을곳/
+                                                <span class="price" th:text="${product.getPrice() * quantity}">/th로 price * quantity 받을곳/</span>
                                             </li>
                                             <li class="sale-price-container" id="salePriceContainer">
-                                                <span class="sale-title">할인금액</span>
-                                                <div class="total-sale">-</div>
+                                                <div class="sale-title">할인금액</div>
+                                                <div class="total-sale" th:text="${(product.getPrice() / product.getSaleQuantity()) * quantity}">-</div>
                                                 <div class="sale-option">
                                                     <button type="button" class="layout">내역</button>
                                                     <!-- 할인내역 css로 내역버튼누를시 나오게할것 -->
-                                                    <div class="detail-sale">
-
+                                                    <div class="detail-sale" hidden>
                                                         <h1>할인내역</h1>
                                                         <div class="sale-textarea">
-                                                            <caption>할인내역</caption>
+                                                            <caption th:text="${product.getSaleQuantity()}">할인내역</caption>
+                                                            <span class="percent">%</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -93,7 +101,7 @@
 
                                             <li class="sale-apply">
                                                 <span class="title">할인적용금액</span>
-                                                <span class="saled-price">th:price 할인적용금액 적을곳</span>
+                                                <span class="sale-price" th:text="${(product.getPrice - (product.getPrice() / product.getSaleQuantity())) * quantity}">th:price 할인적용금액 적을곳</span>
                                                 원
                                             </li>
                                         </ul>
@@ -129,7 +137,7 @@
 
                             <!-- 적립금 -->
 
-                            <div class="sale-container">
+                            <div class="sale-container2">
                                 <div class="sale-area">
                                     <h3 class="title2">
                                         <span>할인</span>

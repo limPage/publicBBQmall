@@ -1,6 +1,8 @@
 package com.hiponya.bbqmall.services;
 
 import com.hiponya.bbqmall.entities.member.EmailAuthEntity;
+import com.hiponya.bbqmall.enums.bbs.DeleteResult;
+import com.hiponya.bbqmall.enums.member.DeleteUserResult;
 import com.hiponya.bbqmall.enums.member.RegisterResult;
 import com.hiponya.bbqmall.entities.member.UserEntity;
 import com.hiponya.bbqmall.enums.CommonResult;
@@ -10,6 +12,7 @@ import com.hiponya.bbqmall.interfaces.IResult;
 import com.hiponya.bbqmall.mappers.IMemberMapper;
 import com.hiponya.bbqmall.utils.CryptoUtils;
 import com.hiponya.bbqmall.vos.member.EmailAuthVo;
+import org.apache.catalina.User;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +30,6 @@ import java.util.Date;
 
 @Service(value = "com.hiponya.bbqmall.services.MemberService")
 public class MemberService {
-
 
 
     private final JavaMailSender mailSender;
@@ -140,28 +142,27 @@ public class MemberService {
     }
 
     @Transactional
-    public Enum<? extends IResult> login(UserEntity user){
+    public Enum<? extends IResult> login(UserEntity user) {
         user.setPassword(CryptoUtils.hashSha512(user.getPassword()));
         UserEntity exising = this.memberMapper.selectUserLogin(user.getId(), user.getPassword());
 
-        if (exising== null ){
+        if (exising == null) {
             return CommonResult.FAILURE;
         }
 
         return CommonResult.SUCCESS;
     }
+
     @Transactional
-    public UserEntity isAdminMode(UserEntity user){
+    public UserEntity isAdminMode(UserEntity user) {
         return this.memberMapper.selectUserLogin(user.getId(), user.getPassword());
     }
 
 
-
-
     @Transactional
-    public Enum<? extends IResult> recoverId(UserEntity user){
+    public Enum<? extends IResult> recoverId(UserEntity user) {
         UserEntity exisingUser = this.memberMapper.selectUserByNameContact(user.getName(), user.getEmail());
-        if (exisingUser== null ){
+        if (exisingUser == null) {
             return CommonResult.FAILURE;
         }
         user.setId(exisingUser.getId());
@@ -174,7 +175,7 @@ public class MemberService {
     public Enum<? extends IResult> recoverPasswordSend(EmailAuthVo emailAuthVo) throws MessagingException {
 
         UserEntity existingUser = this.memberMapper.selectUserByNameIdEmail(
-                emailAuthVo.getName(),emailAuthVo.getId(),emailAuthVo.getEmail()
+                emailAuthVo.getName(), emailAuthVo.getId(), emailAuthVo.getEmail()
         );
         if (existingUser == null) {
             return CommonResult.FAILURE;
@@ -217,10 +218,9 @@ public class MemberService {
     }
 
 
-
-    public Enum<? extends IResult> recoverPasswordCheck(EmailAuthEntity emailAuth){
+    public Enum<? extends IResult> recoverPasswordCheck(EmailAuthEntity emailAuth) {
         EmailAuthEntity existingEmailAuth = this.memberMapper.selectEmailAuthByIndex(emailAuth.getIndex());
-        if(existingEmailAuth==null || !existingEmailAuth.isExpired()){
+        if (existingEmailAuth == null || !existingEmailAuth.isExpired()) {
 
             return CommonResult.FAILURE;
         }
@@ -232,44 +232,40 @@ public class MemberService {
 
 
     @Transactional
-    public Enum<? extends IResult> recoverPasswordAuth(EmailAuthEntity emailAuth){
+    public Enum<? extends IResult> recoverPasswordAuth(EmailAuthEntity emailAuth) {
 //        int existingEmailAuth =  this.memberMapper.updateRecoverPasswordAuth(emailAuth.getEmail(),emailAuth.getCode(),emailAuth.getSalt());
-        EmailAuthEntity existingEmailAuth = this.memberMapper.selectEmailAuthByEmailCodeSalt(emailAuth.getEmail(),emailAuth.getCode(),emailAuth.getSalt());
+        EmailAuthEntity existingEmailAuth = this.memberMapper.selectEmailAuthByEmailCodeSalt(emailAuth.getEmail(), emailAuth.getCode(), emailAuth.getSalt());
 
 
-        if(existingEmailAuth ==null ||existingEmailAuth.getExpiresOn().compareTo(new Date()) < 0){
+        if (existingEmailAuth == null || existingEmailAuth.getExpiresOn().compareTo(new Date()) < 0) {
             //new Date().compareTo(~~~.get~)와 같음 순서가 다름
             return CommonResult.FAILURE;
         }
-        if (this.memberMapper.updateEmailAuth(existingEmailAuth)==0){
-            return  CommonResult.FAILURE;
+        if (this.memberMapper.updateEmailAuth(existingEmailAuth) == 0) {
+            return CommonResult.FAILURE;
         }
 //        emailAuth.setExpired(true);
-        this.memberMapper.updateRecoverPasswordAuth(emailAuth.getEmail(),emailAuth.getCode(),emailAuth.getSalt());
+        this.memberMapper.updateRecoverPasswordAuth(emailAuth.getEmail(), emailAuth.getCode(), emailAuth.getSalt());
         return CommonResult.SUCCESS;
 
 
     }
 
     @Transactional
-    public Enum<? extends IResult> recoverPassword (EmailAuthEntity emailAuth, UserEntity user){
+    public Enum<? extends IResult> recoverPassword(EmailAuthEntity emailAuth, UserEntity user) {
 
-        EmailAuthEntity existingEmailAuth = this.memberMapper.selectEmailAuthByEmailCodeSalt(emailAuth.getEmail(),emailAuth.getCode(),emailAuth.getSalt());
+        EmailAuthEntity existingEmailAuth = this.memberMapper.selectEmailAuthByEmailCodeSalt(emailAuth.getEmail(), emailAuth.getCode(), emailAuth.getSalt());
 
-        if(existingEmailAuth == null || !existingEmailAuth.isExpired() ){
+        if (existingEmailAuth == null || !existingEmailAuth.isExpired()) {
             return CommonResult.FAILURE;
         }
 //
         UserEntity existingUser = this.memberMapper.selectUserByEmail(existingEmailAuth.getEmail());
 
 
+        existingUser.setPassword(CryptoUtils.hashSha512(user.getPassword()));
 
-
-
-
-        existingUser.setPassword( CryptoUtils.hashSha512(user.getPassword()));
-
-        if(this.memberMapper.updateUser(existingUser)==0){//user는 페스워드와 이메일만갖고잇음
+        if (this.memberMapper.updateUser(existingUser) == 0) {//user는 페스워드와 이메일만갖고잇음
             return CommonResult.FAILURE;
         }
 
@@ -277,5 +273,22 @@ public class MemberService {
     }
 
 
+    @Transactional
+    public Enum<? extends IResult> deleteUser(UserEntity user) {
 
+        if (user == null) {
+            return DeleteUserResult.NOT_SIGNED;
+        }
+
+        UserEntity existingUser = this.memberMapper.selectUserByEmail(user.getEmail());
+
+        if (existingUser == null) {
+            return DeleteUserResult.NO_SUCH_USER;
+        }
+
+
+        return this.memberMapper.deleteUserById(existingUser.getId()) > 0 ? CommonResult.SUCCESS : CommonResult.FAILURE;
+
+
+    }
 }

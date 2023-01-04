@@ -106,7 +106,7 @@ main > .products-view > .products > .products-container > .products-form > .butt
     padding: 2rem 3rem;
 }
 
-main > .products-view > .products > .products-container > .products-form > .button-container > .buy-button > .buy {
+main > .products-view > .products > .products-container > .products-form > .button-container > .buy {
     background-color: red;
     color : white;
     border : 0.0125rem solid rgb(213, 216, 220);

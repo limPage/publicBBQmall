@@ -1,290 +1,598 @@
-@charset "UTF-8";
+/*@charset "UTF-8";*/
 
-body > .main > .content {
-    align-items : center;
-    display : flex;
-    flex-direction : column;
-    justify-content : center;
-    margin-top : 5rem;
-    margin-bottom : 5rem;
+
+body > main > .content{
+    padding-bottom: 50px;
 }
 
-body > .main > .content > .form {
-    width : 100%;
-    max-width : 35rem;
-    align-items : stretch;
-    display : flex;
-    flex-direction : column;
-    justify-content : flex-start;
-}
 
-body > .main > .content > .form > .title-container {
-    align-items : center;
-    display : flex;
-    flex-direction : row;
-    justify-content : flex-start;
-    margin-bottom : 2.5rem;
-}
 
-body > .main > .content > .form > .title-container > .title {
-    flex : 1;
-    font-size : 2rem;
-    font-weight : 500;
-}
 
-body > .main > .content > .form > .title-container > .step-container {
+body > main > .content> .form{
     align-items: center;
-    display : flex;
-    flex-direction : row;
-    justify-content: flex-start;
+    display: flex;
+    flex-direction: column ;
+    justify-content: center;
+
+    width: 100%;
+    /*background-color: ivory;*/
 }
 
-body > .main > .content > .form > .title-container > .step-container > .step {
-    width : 2rem;
-    height : 2rem;
-    align-items : center; /* 숫자 중앙정렬 */
-    border : 0.125rem solid rgb(213, 216, 220);
-    border-radius : 50%;
-    box-sizing : border-box;
-    color : rgb(128, 139, 150);
-    display : flex;
-    flex-direction : row;
-    font-size : 0.95rem;
-    font-weight : 600;
-    justify-content : center;
+td,input{
+    margin: unset;
+    padding: unset;
+    box-sizing: border-box;
+
 }
 
-body > .main > .content > .form.step1 > .title-container > .step-container > .step.step0,
-body > .main > .content > .form.step1 > .title-container > .step-container > .step.step1,
-body > .main > .content > .form.step2 > .title-container > .step-container > .step.step2,
-body > .main > .content > .form.step3 > .title-container > .step-container > .step.step3 { /* 다음 버튼 누를때마다 색칠된 원 이동 */
-    background-color: rgb(26, 188, 156);
-    border : 0.125rem solid rgb(26, 188, 156);
-    color : rgb(255, 255, 255);
+table{
+    /*border-collapse: separate;*/
+    /*border-spacing: 0 0px;*/
+
+    border-collapse: collapse;
 }
-body > .main > .content > .form.step2 > .title-container > .step-container > .step.step0,
-body > .main > .content > .form.step2 > .title-container > .step-container > .step.step1,
-body > .main > .content > .form.step3 > .title-container > .step-container > .step.step1,
-body > .main > .content > .form.step3 > .title-container > .step-container > .step.step2 {
-    background-color: rgb(213, 216, 220);
-    border : 0.125rem solid rgb(213, 216, 220);
-    color : rgb(171, 178, 185);
+body > main > .content> .form >div> .title{
+
+    text-align: center;
+    font-size: 32px;
+    font-weight: 700;
+    color: #333333;
+    padding:  65px 0 32px 0;
+    /*background-color: red;*/
+    letter-spacing: -1px;
+}
+body > main > .content> .form >div> .title2{
+ font-size: 16px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+body > main > .content> .form >div> .title2>.icon{
+    color: #ee3400;
+    border: #FFCC00 3px solid;
+    border-radius: 999rem;
 }
 
-body > .main > .content > .form.step2 > .title-container > .step-container > .step.step0 + .line
-body > .main > .content > .form.step2 > .title-container > .step-container > .step.step1 + .line,
-body > .main > .content > .form.step3 > .title-container > .step-container > .step.step1 + .line,
-body > .main > .content > .form.step3 > .title-container > .step-container > .step.step2 + .line{ /* 숫자 사이의 선 색도 변경을 원할 경우 */
-    background-color: rgb(213, 216, 220);
+
+
+body > main > .content> .form >.email-check-page{
+    align-items: center;
+    display: flex;
+    flex-direction: column ;
+    justify-content: center;
+    width: 360px;
+    /*background-color: moccasin;*/
+
 }
 
-body > .main > .content > .form > .title-container > .step-container > .line {
-    width : 0.375rem;
-    height : 0.125rem;
-    background-color: rgb(171, 178, 185);
+body > main > .content> .form >.email-check-page> table >tbody{
+
+
+    align-items: center;
+    display: flex;
+    flex-direction:  column;
+    justify-content: center;
+
+
+
+    font-size: 15px;
+}
+body > main > .content> .form >.email-check-page> table>tbody>.head {
+
+   width: 358px;
+    height: 40px;
+    border-top: black solid 1px;
+    border-left: black solid 1px;
+    border-right: black solid 1px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-body > .main > .content > .form > .title-container > .step-container > .text {
-    color : rgb(86, 101, 115);
-    font-size : 0.95rem;
-    margin-right : 0.5rem;
+body > main > .content> .form >.email-check-page> table >tbody>tr>.icon-container{
+    width: 360px;
+    height: 190px;
+    padding-top: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+body > main > .content> .form >.email-check-page> table >tbody>tr>.icon-container >.icon{
+
+    font-size: 60px;
+}body > main > .content> .form >.email-check-page> table >tbody>tr>.icon-container > span {
+
+    padding-top: 40px;
+     /*   font-size: 13px;*/
+     /*   margin: 25px 0 50px 0;*/
+     /*display: block;*/
+ }
+
+body > main > .content> .form >.email-check-page> table> tbody> .check-start> td>label>.email-button,
+body > main > .content> .form > label>.next
+{
+
+    height: 48px;
+        width: 360px;
+        background-color: #E31134;
+        border: unset;
+
+        color: white;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 450;
+}
+body > main > .content> .form >.email-check-page> table> tbody> .check-start> td>label>.email-button:hover,
+body > main > .content> .form > label>.next:hover{
+    transition-duration: 500ms;
+    background-color: #FFCC00;
 }
 
-body > .main > .content > .form > .step {
-    align-items : stretch;
-    display : none;
-    flex-direction : column;
-    justify-content : flex-start;
-}
-body > .main > .content > .form.step1 > .step.step0,
-body > .main > .content > .form.step1 > .step.step1,
-body > .main > .content > .form.step2 > .step.step2,
-body > .main > .content > .form.step3 > .step.step3{
-    display : flex;
-}
 
-body > .main > .content > .form > .step1 > .label {
-    /*align-items: stretch;*/
-    /*display : flex;*/
-    /*flex-direction : column;*/
-    /*justify-content: flex-start;*/
-    margin-bottom : 1.5rem;
-}
+body > main > .content> .form >.email-check-page> table> tbody> .code-send-row>td>label,
+body > main > .content> .form >.email-check-page> table> tbody> .code-check-row>td>label{
 
-body > .main > .content > .form > .step1 > .label > .title {
-    font-size : 1.375rem;
+
+    align-items: center;
+    display: flex;
+    flex-direction: row ;
+    justify-content: stretch;
+
+
+
+}
+body > main > .content> .form >.email-check-page> table> tbody> .code-send-row>td>label>.email-text,
+body > main > .content> .form >.email-check-page> table> tbody> .code-check-row>td>label>.email-Auth-Code
+
+{
+    width: 240px;
+    height: 48px;
+
+    border: unset;
+
+
+    font-size: 14px;
     font-weight: 500;
-    margin-bottom : 0.75rem;
+    text-align: center;
+background-color: rgba(0,0,0,0.05);
+}
+body > main > .content> .form >.email-check-page> table> tbody> .code-send-row>td>label>.code-send-button,
+body > main > .content> .form >.email-check-page> table> tbody> .code-check-row>td>label>.code-check-button
+
+{
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+
+    width: 120px;
+    height: 48px;
+
+    border: unset;
+    cursor: pointer;
+
+}
+body > main > .content> .form > .text {
+    width: 360px;
+    padding: unset;
+
 }
 
-body > .main > .content > .form > .step1 > .label > .title::before {
-    top : 0.0625rem;
-    width : 1rem;
-    height : 1rem;
-    background-color: rgb(171, 178, 185);
-    border-radius : 50%;
-    content : '';
-    display : inline-block;
-    margin-right : 0.625rem;
-    position : relative;
+
+body > main > .content> .form > .text > li{
+    list-style-type: disc;
+
+    font-size: 13px;
+    margin-top: 4px;
+    color: #999999;
+}
+body> main > .content>.form>.email-check-page>table>tbody>.check-start>td>label>.email-button.visible{
+    display: none;
+}
+/*이메일 인증버튼이 생깁니다.*/
+body> main > .content>.form>.email-check-page>table>tbody>.code-send-row,
+body> main > .content>.form>.email-check-page>table>tbody>.code-check-row{
+    display: none;
 }
 
-body > .main > .content > .form > .step.step1 > .label > .term {
-    height : 15rem;
-    resize : none;
+body> main > .content>.form>.email-check-page>table>tbody>.code-send-row.visible,
+body> main > .content>.form>.email-check-page>table>tbody>.code-check-row.visible{
+    display: block;
+}
+body> main > .content>.form>.email-check-page>table>tbody>.code-send-row.disabled>td>label>input{
+    background-color: #545454;
+    color: white;
+    cursor: not-allowed;
+    margin-bottom: 10px;
+
+
+}
+body> main > .content>.form>.email-check-page>table>tbody>.code-check-row.disabled>td>label>input{
+    background-color: #0000000D;
+    /*color: #FFCC00;*/
+    color: black;
+    cursor: not-allowed;
+
 }
 
-body > .main > .content > .form > .step.step2 > .table {
-    max-width: 35rem;
-    align-self : center;
+
+
+
+body> main > .content>.form>label>.next{
+    margin: 10px 0 20px 0;
+    display: none;
+}
+body> main > .content>.form>label>.next.visible{
+    display: block;
 }
 
-body > .main > .content > .form > .step.step2 > .table > tbody > tr > th {
-    padding-right : 1rem;
-    text-align : right;
-    white-space : nowrap;
+
+/*
+step
+0이메일
+1약관동의
+2인서트정보
+3컴플리트
+*/
+
+body>main>.content>.form.step0 >.terms-page,
+body>main>.content>.form.step0 >.insert-userinfo-page,
+body>main>.content>.form.step0 >.complete-page,
+
+body>main>.content>.form.step1 >.email-check-page,
+body>main>.content>.form.step1 >.insert-userinfo-page,
+body>main>.content>.form.step1 >.complete-page,
+body>main>.content>.form.step1 > .text,
+
+
+
+body>main>.content>.form.step2>.email-check-page,
+body>main>.content>.form.step2>.terms-page,
+body>main>.content>.form.step2>.complete-page,
+body>main>.content>.form.step2 > .text,
+
+body>main>.content>.form.step3>.email-check-page,
+body>main>.content>.form.step3>.terms-page,
+body>main>.content>.form.step3>.insert-userinfo-page,
+body>main>.content>.form.step3 > .text
+{
+    display: none;
+}
+/*약관동의 페이지*/
+
+body>main>.content>.form>.terms-page{
+    width: 360px;
+
+    /*background-color: #FFCC00;*/
+
+
 }
 
-body > .main > .content > .form > .step.step2 > .table > tbody > tr:not(:last-child) > th,
-body > .main > .content > .form > .step.step2 > .table > tbody > tr:not(:last-child) > td {
-    padding-bottom : 0.75rem;
+
+body>main>.content>.form>.terms-page>table>tbody>tr{
+
+    border: gray solid 1px;
+    color: gray;
+
+}
+body>main>.content>.form>.terms-page>table>tbody>tr>td>h5{
+    color: #E31134;
+}
+body>main>.content>.form>.terms-page>table>tbody>tr>td>label{
+    padding-right: 5px;
 }
 
-body > .main > .content > .form > .step.step2 > .table > tbody > tr > td > .label.email,
-body > .main > .content > .form > .step.step2 > .table > tbody > tr > td > .label.address{
-    align-items : stretch;
-    display : flex;
-    flex-direction : row;
-    justify-content : flex-start;
+
+body >main>.content>.form>.terms-page> table>tbody>tr>td>label>input{
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+
+    appearance: none;
+    cursor: pointer;
+    /*background-image: url("/resources/images/images/checkbox_icon.png");*/
+
+    /*background-size: 100%;*/
+    box-shadow: 0 0  0 1px  rgba(0,0,0,0.2);
+
+    border: solid rgba(0,0,0,0.4) 0.0625rem;
+}
+body >main>.content>.form>.terms-page> table>tbody>tr>td>label>input:checked{
+
+    background-color: rgba(0,0,0,0.2);
+
+    background-image: url("/resources/images/checkbox.jpg");
+    background-size: 100%;
+    box-shadow: 0 0  0 2px  #0ea31a;
+    border-radius: 5px;
+
+
 }
 
-body > .main > .content > .form > .step.step2 > .table > tbody > tr > td > .label {
-    display : block;
+body >main>.content>.form>.terms-page> table>tbody>tr>td>.terms-text-button-shop,
+body >main>.content>.form>.terms-page> table>tbody>tr>td>.terms-text-button-user
+
+{
+    cursor: pointer;
 }
 
-body > .main > .content > .form > .step.step2 > .table > tbody > tr > td > .label.email + .label.email, /* 각 input 칸 사이 거리 */
-body > .main > .content > .form > .step.step2 > .table > tbody > tr > td > .label.password + .label.password,
-body > .main > .content > .form > .step.step2 > .table > tbody > tr > td > .label.address + .label.address {
-    margin-top : 0.375rem;
+
+
+
+
+
+body>main>.content>.form>.terms-page>table>tbody>.all-check-row{
+    border: none;
+    font-size: 18px;
+    font-weight: 600;
+    color: #333333;
 }
 
-body > .main > .content > .form > .step.step2 > .table > tbody > tr > td > .label > input + input {  /* 버튼 사이 간격 */
-    margin-left : 0.5rem;
+body>main>.content>.form>.terms-page>table>tbody>.marketing-check-row{
+
+    border-bottom: none;
+
 }
 
-body > .main > .content > .form > .step.step2 > .table > tbody > tr > td > .warning {
-    color : rgb(231, 76, 60);
-    display : none;
-    font-size : 90%;
-    margin-top : 0.5rem;
+
+body>main>.content>.form>.terms-page>table>tbody>.receive-check-row{
+    border-top: none;
+}
+body>main>.content>.form>.terms-page>table>tbody>.receive-check-row>td{
+    padding-left: 20px;
 }
 
-body > .main > .content > .form > .step.step2 > .table > tbody > tr > td > .warning.visible {
-    display : block;
+
+
+body>main>.content>.form>.terms-page>table>tbody>tr>td{
+    width:360px;
+
+    align-items: center;
+    display: flex;
+    flex-direction: row ;
+    justify-content: flex-start;
+
+    padding: 10px;
 }
 
-body > .main > .content > .form > .step.step2 > .table > tbody > tr > td > .panel.address {
-    top : 0;
-    left : 0;
-    width : 100%;
-    height : 100%;
-    background-color: rgba(0, 0, 0, 70%);
-    display : none;
-    position : fixed;
+body>main>.content>.form>.terms-page>table>tbody>tr>td>label{
+    align-items: center;
+    display: flex;
+    flex-direction: row ;
+    justify-content: flex-start;
+
 }
 
-body > .main > .content > .form > .step.step2 > .table > tbody > tr > td > .panel.address.visible {
-    display : block;
+
+/*이용약관 창*/
+body>main> .terms-content.visible{
+   position: fixed;
+    background-color: rgba(0,0,0,70%);
+    width: 100%;
+    height: 100%;
+    z-index: 200;
+    top:0;
+    left:0;
+    display: block;
+
 }
 
-body > .main > .content > .form > .step.step2 > .table > tbody > tr > td > .panel.address > .dialog {
-    top : 50%;
-    left : 50%;
-    width : 100%;
-    height : 100%;
-    max-width : 27.5rem;
-    max-height : 30rem;
-    background-color: rgb(255, 255, 255);
-    position : absolute;
-    transform : translate(-50%, -50%);
+
+
+body>main>.terms-content>.terms-text-container{
+
+    z-index: 15;
+
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
 }
 
-body > .main > .content > .form > .step.step3 {
-    align-items : center;
-    display : none;
-    flex-direction : column;
-    justify-content : flex-start;
+
+body>main>.terms-content>.terms-text-container>.terms-text{
+    width: 680px;
+    height: 700px;
+    overflow: auto ;
+
+    padding-left: 20px;
+    background-color: white;
+
+    font-size: 14px;
+    color: rgba(0,0,0,0.7);
+    display: block;
+}
+body>main>.terms-content>.terms-text-container>.terms-text>span{
+    display: block;
 }
 
-body > .main > .content > .form.step3 > .step.step3 {
-    display : flex;
+body>main>.terms-content,
+body>main>.terms-content>.terms-text-container>.terms-text {
+    display: none;
 }
 
-body > .main > .content > .form > .step.step3 > .title {
-    font-size : 2.5rem;
-    font-weight : 500;
-    margin-bottom : 5rem;
+body>main>.terms-content>.terms-text-container>.terms-text.visible {
+    display: block;
 }
 
-body > .main > .content > .form > .step.step3 > .message {
-    line-height : 150%;
-    text-align : center;
+
+body>main>.terms-content>.terms-text-container>.title-row{
+    /*background-color: red;*/
+
+    font-size: 20px;
+
+
+    align-items: center;
+    display: flex;
+    flex-direction: row ;
+    justify-content: center;
+
+    padding:20px 20px 20px 20px;
+
+    background-color: white;
+
+}
+body>main>.terms-content>.terms-text-container>div>.exiting-button
+{
+    cursor: pointer;
 }
 
-body > .main > .content > .form > .warning {
-    align-items : center;
-    background-color : rgb(231, 76, 60);
-    border-radius: 0.5rem;
-    color :rgb(255, 255, 255);
-    display : none;
-    flex-direction : row;
-    justify-content : center;
-    margin-top : 2.5rem;
-    padding : 1rem 1.25rem;
+
+body>main>.terms-content>.terms-text-container>.title-row>.spring{
+    flex: 1;
 }
 
-body > .main > .content > .form > .warning > .text {
-    flex : 1;
-    margin-left : 1rem;
+
+
+body>main>.terms-content>.terms-text-container>.button-row>span{
+    background-color: gray;
+    font-size: 20px;
+    font-weight: 600;
+    display: block;
+    text-align: center;
+    border: white 11px solid;
+    padding: 1rem;
+    color: white;
 }
 
-body > .main > .content > .form > .warning.visible {
-    display : flex;
+
+
+
+
+
+
+
+/*회원가입 페이지*/
+body > main > .content> .form.step > label>.next{
+    width: 640px;
 }
 
-body > .main > .content > .form > .button-container {
-    align-items : center;
-    display : flex;
-    flex-direction : row;
-    justify-content : center;
+body>main>.content>form>.insert-userinfo-page{
+
+
+    align-items: center;
+    display: flex;
+    flex-direction: column ;
+    justify-content: center;
+    width: 640px;
+}
+body>main>.content>form>.insert-userinfo-page>table>tbody>tr{
+    border-top: rgba(0,0,0,0.2) solid 1px;
+    border-bottom: rgba(0,0,0,0.2) solid 1px;
+    padding: 1rem;
+
+
 }
 
-body > .main > .content > .form > .button-container > .button {
-    background-color : rgb(128, 139, 150);
-    border-radius : 0.5rem;
-    color : rgb(255, 255, 255);
-    cursor : pointer;
-    padding : 1rem 6rem;
-    user-select: none;
-    margin-top : 1rem;
+body>main>.content>form>.insert-userinfo-page>table>tbody>tr>th{
+    width: 140px;
+    background-color: #f8f8f8;
+    font-weight: 400;
+
+}
+body>main>.content>form>.insert-userinfo-page>table>tbody>tr>td{
+
+    padding: 8px;
+    width: 500px;
+}
+body>main>.content>form>.insert-userinfo-page>table>tbody>tr>td> label > input{
+    height: 40px;
+    width: 252px;
+    padding: 9px;
+    /*display: block;*/
+    border:  rgba(0,0,0,0.2) solid 1px;
+    border-radius: 5px;
+}
+body>main>.content>form>.insert-userinfo-page>table>tbody>.address-row >td{
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column ;
+    justify-content: stretch;
+
+
 }
 
-body > .main > .content > .form > .button-container > .button:hover {
-    background-color: rgb(86, 101, 115);
+body>main>.content>form>.insert-userinfo-page>table>tbody>.address-row >td>.address-first{
+align-items: center;
+display: flex;
+flex-direction: row ;
+justify-content: flex-start;
+
+}
+body>main>.content>form>.insert-userinfo-page>table>tbody>.address-row >td>label:not(:first-of-type){
+    margin-top: 5px;
+
+    width: 100%;
+    
+}
+body>main>.content>form>.insert-userinfo-page>table>tbody>.address-row >td>label:not(:first-of-type)>input{
+    width: 100%;
 }
 
-body > .main > .content > .form > .button-container > .button:active {
-    background-color: rgb(86, 101, 115);
+
+
+body>main>.content>form>.insert-userinfo-page>table>tbody>.address-row >td> .address-first>input{
+
+    width: 76px;
+    margin-right: 5px;
+    display: inline-block;
+
+}
+body>main>.content>form>.insert-userinfo-page>table>tbody>.birth-row>td>label>input{
+    width: 130px;
 }
 
-body > .main > .content > .form > .button-container > .button.green {
-    background-color: rgb(26, 188, 156);
+body>main>.content>form>.insert-userinfo-page>table>tbody>.id-row>td>label>input::placeholder {
+    font-weight: 550;
+    font-size: 15px;
+    color: rgb(0,0,0,0.3);
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
 
-body > .main > .content > .form > .button-container > .button.green:hover {
-    background-color: rgb(23, 165, 137);
+body>main>.content>form>.insert-userinfo-page>table>tbody>.password-row>td>label>input::placeholder {
+    /*font-weight: 40;*/
+    font-size: 11px;
+    color: rgb(0,0,0,0.7);
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
 
-body > .main > .content > .form > .button-container > .button.green:active {
-    background-color: rgb(20, 143, 119);
+
+
+
+
+/*주소 입력창*/
+body > main > .content > .form.step2>.insert-userinfo-page> table > tbody>tr>td>.panel.address{
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,70%);
+    position: fixed;
+    display: none;
+    z-index: 10;
 }
+body > main > .content > .form.step2>.insert-userinfo-page> table > tbody>tr>td>.panel.address.visible{
+
+    display: block;
+}
+
+
+body > main > .content > .form.step2>.insert-userinfo-page> table > tbody>tr>td>.panel.address>.dialog{
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    max-width: 27.5rem;
+    max-height: 30rem;
+    background-color: rgb(255,255,255);
+    position: absolute;
+    transform: translate(-50% ,-50%);
+}
+
+
+/*회원가입 완료*/
+
