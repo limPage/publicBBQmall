@@ -3,6 +3,7 @@ package com.hiponya.bbqmall.mappers;
 
 import com.hiponya.bbqmall.entities.member.EmailAuthEntity;
 import com.hiponya.bbqmall.entities.member.UserEntity;
+import com.hiponya.bbqmall.entities.member.WithdrawalEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -43,4 +44,6 @@ public interface IMemberMapper {
     int updateUser(UserEntity user);
 
     int deleteUserById(@Param(value = "id") String id);
+
+    int insertReason(WithdrawalEntity withdrawal);
 }

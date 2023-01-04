@@ -1,0 +1,155 @@
+body>main{
+    align-items: flex-start;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+
+    font-family: inherit;
+}
+
+body>main>.content{
+    width: 100%;
+
+
+    display: block;
+    padding-top: 4.0625rem;
+    padding-bottom: 6.25rem;
+
+}
+
+body> main> .content>.title-container{
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: -2px;
+    border-bottom: 0.0625rem solid rgba(0,0,0,0.6);
+    padding-bottom: 2rem;
+
+}
+body> main> .content>form > table{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+body> main> .content>form > table>thead{
+    padding-top: 10rem;
+   /*display: none;*/
+}
+body> main> .content > form > table>thead>tr>th>h1{
+    text-shadow: 0 0  0.5rem #767676 ;
+
+
+
+}
+
+
+body> main> .content>form > table>tbody{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    /*align-items: flex-start;*/
+    border-collapse: collapse;
+}
+body> main> .content>form > table>tbody>tr,
+body> main> .content>form > table>tbody>td{
+
+    width: 100%;
+}
+
+
+body> main> .content>form > table>tbody>.password-check-row{
+    width: 17rem;
+    padding-top: 2rem;
+    padding-bottom: 10rem;
+
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    /*display: flex;*/
+
+}
+body> main> .content>form > table>tbody>.password-check-row{
+    /*display: flex;*/
+}
+
+
+body> main> .content>form > table>tbody>.password-check-row>td{
+
+    display: flex;
+}
+body> main> .content>form > table>tbody>.password-check-row>td>input{
+    padding: 0.5rem 2rem;
+    border-radius: 0.2rem;
+    border: none;
+    background-color: #E31134;
+    color: white;
+    font-family: inherit;
+    cursor: pointer;
+
+}
+body> main> .content>form > table>tbody>.password-check-row>td>input:hover{
+    background-color: rgba(0,0,0,0.5);
+
+}
+
+
+body> main> .content>form > table>tbody>.password-check-row>td>label>input{
+
+    padding: 0.5rem;
+    margin-right: 0.2rem;
+    border-radius: 0.2rem;
+    border: rgba(0,0,0,0.4) solid 0.0625rem;
+
+}
+body> main> .content>form > table>tbody>.password-check-row>td>label>input:focus{
+    outline: none;
+}
+
+/*수정 페이지*/
+
+body> main> .content>form > table>tbody>.modify-row.title-row>td>h1{
+    font-size: 2rem;
+    font-weight: 100;
+    padding: 0.5rem 0;
+}
+
+
+body> main> .content>form > table>tbody>.modify-row{
+    /*width: 100%;*/
+
+    border-bottom: 0.0625rem solid rgba(0,0,0,0.2);
+
+}
+
+body> main> .content>form > table>tbody>.modify-row>th{
+    padding: 1rem 2rem;
+    width: 3rem;
+    background-color: rgba(0,0,0,0.05);
+    font-weight: 450;
+    color: rgba(0,0,0,0.8);
+
+
+}
+
+body> main> .content>form > table>tbody>.modify-row>td{
+
+    /*display: flex;*/
+
+}
+body> main> .content>form > table>tbody>.modify-row>td>label{
+    /*display: flex;*/
+    /*justify-content: center;*/
+    /*align-items: center;*/
+    /*!*height: 100%;*!*/
+    /*padding-left: 0.5rem;*/
+}
+
+body> main> .content>form > table>tbody>.modify-row>td>label>input{
+    padding: 0.5rem;
+
+}
+body> main> .content>form > table>tbody>.modify-row.address-row>td{
+    display: flex;
+    flex-direction: column;
+
+}

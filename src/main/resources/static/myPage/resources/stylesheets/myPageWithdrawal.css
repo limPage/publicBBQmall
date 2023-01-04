@@ -87,6 +87,7 @@ body> main> .my-page-content>form>table>tbody>.reason-text-row>td>label>textarea
    width: 99%;
     resize: none;
     font-family: inherit;
+    padding: 0.5rem;
 }
 body> main> .my-page-content>form>p{
     padding-top: 1.25rem;
@@ -135,4 +136,5 @@ body> main> .my-page-content>form>input[type="submit"]{
     color: white;
     font-family: inherit;
     font-size: 1rem;
+    cursor: pointer;
 }

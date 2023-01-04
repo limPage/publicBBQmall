@@ -33,6 +33,15 @@
 
     </insert>
 
+    <insert id="insertReason" useGeneratedKeys="true" keyProperty="index"
+            keyColumn="index" parameterType="com.hiponya.bbqmall.entities.member.WithdrawalEntity">
+
+        INSERT INTO `bbqmall`.`withdrawal` (`index`, `id`,`reason_value`, `reason_category`, `reason_text`, `deleted_on`)
+        VALUES (#{index}, #{id},#{reasonValue},  #{reasonCategory}, #{reasonText}, IFNULL(#{deletedOn}, DEFAULT(`deleted_on`)))
+
+
+    </insert>
+
     <select id="selectEmailAuthByEmailCodeSalt" resultType="com.hiponya.bbqmall.entities.member.EmailAuthEntity">
 
         SELECT `index`        AS `index`,
@@ -206,5 +215,8 @@
 
 
     </delete>
+
+
+
 
 </mapper>

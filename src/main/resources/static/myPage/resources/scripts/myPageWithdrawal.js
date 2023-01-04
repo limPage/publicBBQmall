@@ -1,4 +1,3 @@
-const radio = form['radio'].value;
 window.document.onsubmit=(e)=>{
     e.preventDefault();
 
@@ -30,12 +29,12 @@ window.document.onsubmit=(e)=>{
 
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
-    // formData.append('reasonCategory', form['radio'].value);
-    // formData.append('reasonText', form['reasonText'].value);
+    formData.append('reasonValue', form['radio'].value);
+    formData.append('reasonText', form['reasonText'].value);
 
 
     //주소로 보내게 되면 폼데이터가 필요없다.
-    xhr.open('DELETE', "/myPage/withdrawal");//  window.location.href 를쓰면 boardid bid를 안보내도댐
+    xhr.open('DELETE', "/member/withdrawal");//  window.location.href 를쓰면 boardid bid를 안보내도댐
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {//4 성공인게 아니고 작업의끝
             Cover.hide();
