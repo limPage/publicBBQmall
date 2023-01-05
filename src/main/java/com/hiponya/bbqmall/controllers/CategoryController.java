@@ -63,6 +63,17 @@ public class CategoryController {
         return modelAndView;
     }
 
+    @RequestMapping(value="wishlist", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getWishlist() {
+        ModelAndView modelAndView = new ModelAndView("home/wishlist");
+
+
+
+
+
+        return modelAndView;
+    }
+
     @RequestMapping(value = "cart", method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public String postWishlist() {
         return null;
@@ -132,6 +143,9 @@ public class CategoryController {
 
         return modelAndView;
     }
+
+
+
 
     @RequestMapping(value = "view", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public String postCategoryQuantity(@RequestParam(value = "cid") int cid, @RequestParam(value = "sid") int sid, CategoryEntity category, SortEntity sort) {

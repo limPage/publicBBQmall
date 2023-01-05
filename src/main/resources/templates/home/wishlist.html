@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title th:text = "${'BBQ몰 - '}"></title>
+    <link rel="stylesheet" th:href="@{/bbq/resources/stylesheets/index.css}">
+    <link rel="stylesheet" th:href="@{/wishlist/resources/stylesheets/wishlist.css}">
+    <th:block th:replace="~{fragments/head :: common}"></th:block>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script defer th:src="@{/wishlist/resources/scripts/wishlist.js}"></script>
+</head>
+<body>
+<th:block th:replace="~{fragments/body :: header}"></th:block>
+<main>
+<!--    <input type="hidden" name = "pid" id="pid" th:value="${product.getProductIndex()}">-->
+    <div class="wishlist-wrap">
+        <div class="wishlist-container">
+            <div class="title-container">
+                <h2>
+                    <span class="title">장바구니</span>
+                </h2>
+            </div>
+
+            <form class="cart-form" name="cartForm" id="cartForm">
+                <ul class="wishlist-wrap">
+                    <li class="cart-left">
+                        <div class="cart-contents">
+                            <ul class="cart-contents-top">
+                                <li class="aa">
+                                    <div class="select-btn-container">
+                                        <label class="checkbox-all-select">
+                                            <input type="checkbox" class="select-btn" checked="checked">
+                                            <span class="selected">전체선택</span>
+                                        </label>
+                                        <span class="button-container">
+                                            <button type="button" class="order-button">선택상품 주문하기</button>
+                                            <button type="button" class="wishlist-button">선택상품 찜</button>
+                                            <button type="button" class="delete-button">선택상품 삭제</button>
+                                        </span>
+                                    </div>
+                                </li>
+
+                               <li class="shipping-modify" hidden>
+                                   <input type="button" class="shipping-modify-btn" value="배송변경">
+                               </li>
+                            </ul>
+
+                            <div class="cart-list">
+                                <ul class="shipping-container">
+                                    <li class="delivery-info" id="shippingInfo">
+                                        <ul class="detail">
+                                            <li class="shipping-title">배송 :
+                                                <span class="title">택배</span>
+                                                <span class="price">무료</span>
+                                                <span class="btn-area">
+                                                    <button type="button" class="resp-btn1" title="새창">묶음배송 상품보기</button>
+                                                    <input type="button" class="resp-btn2" value="배송 변경">
+                                                </span>
+                                            </li>
+
+                                        </ul>
+                                    </li>
+                                    <li class="cart-products" id="cartProducts">
+                                        <div class="cart-products-detail">
+                                            <div class="products-top">
+                                                <label>
+                                                    <input type="checkbox" name="cart-option" checked="checked">
+                                                    <span class="products-name">/th:text=${product.getProductName} 넣을곳</span>
+                                                </label>
+                                                <button type="button" class="delete-button" title="상품 삭제">삭제</button>
+                                            </div>
+                                            <div class="product-contents">
+                                                <div class="block">
+                                                    <ul>
+                                                        <li class="image-area">
+                                                            <a href="#">
+                                                                <img src = "/resources/images/new1.png" width="100">
+                                                            </a>
+                                                        </li>
+
+                                                        <li class="option-area">
+                                                            <div class="cart-quantity">
+                                                                <span class="quantity-title">수량</span>
+                                                                <span class="quantity-count">"th:text=${quantity} 넣을곳"</span>
+                                                                <span class="price-quantity">(
+                                                                    <span>"th:text=${product.getPrice()*quantity} 넣을곳"</span>
+                                                                    )</span>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+
+                                                <ul class="block2">
+                                                    <li class="base-price">
+                                                        <span class="price-title">상품금액</span>
+                                                        <span class="price">"th:text=${product.getPrice * quantity}"넣을곳</span>
+                                                    </li>
+                                                    <li class="sale-price">
+                                                        <span class="sale-price-title"> 할인금액 </span>
+                                                        <span class="sale-price">"th:text=${product.getPrice() / 100 * product.getSaleQuantity * quantity} 넣을곳</span>
+                                                    </li>
+                                                    <li class="total-price">
+                                                        <span class="total-price-title">할인적용금액</span>
+                                                        <span class="total-price">"th:text=${(product.getPrice() - (product.getPrice() / 100 * product.getSaleQuantity)) * quantity} 넣을곳</span>
+                                                    </li>
+                                                </ul>
+
+                                                <ul class="block3">
+                                                    <li class="option-modify-btn-container">
+                                                        <button type="button" class="option-modify-btn">옵션/수량 변경</button>
+                                                    </li>
+                                                    <li>
+                                                        <button type="button" class="direct-buy-btn">바로구매</button>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="selected-btn-group">
+                            <label class="checkbox-all-selected">
+                                <input type="checkbox" class="select-all-btn" checked="checked">
+                                <span class="all-select">전체선택</span>
+                            </label>
+
+                            <div class="button-container">
+                                <button type="button" class="selected-order-button">선택상품 주문하기</button>
+                                <button type="button" class="selected-wishlist-btn">선택상품 찜</button>
+                                <button type="button" class="selected-del-btn">선택상품 삭제</button>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="cart-right">
+                        <h3 class="total-title">전체 주문시 금액</h3>
+                        <div class="total-sum-price">
+                            <ul class="list1">
+                                <li class="th">총 상품금액</li>
+                                <li class="td">
+                                    <span class="product-price">
+                                        <span>"th:text=${product.getPrice() * quantity} 넣을곳"</span>
+                                    </span>
+                                </li>
+                            </ul>
+
+                            <ul class="list2">
+                                <li class="th">총 배송비</li>
+                                <li class="td">
+                                    <span class="shipping-price">
+                                        <span>3000원</span>
+                                    </span>
+                                </li>
+                            </ul>
+
+                            <ul class="list3">
+                                <li class="th">총 할인</li>
+                                <li class="td">
+                                    <span class="total-sale-price">
+                                        <span>th:text="${(product.getPrice() / product.getSaleQuantity()) * quantity}" 넣을곳</span>
+                                    </span>
+                                </li>
+                            </ul>
+
+                            <ul class="list4">
+                                <li class="th">총 결제금액</li>
+                                <li class="td">
+                                    <span class="total-price">
+                                        <span>th:text="${(product.getPrice - (product.getPrice() / product.getSaleQuantity())) * quantity} + 3000" 넣을곳</span>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <ul class="cart-order-btn-area">
+                            <li>
+                                <input type="button" class="all-order-btn" value="전체 주문하기">
+                            </li>
+                        </ul>
+
+                        <div class="naver-pay" hidden>
+
+                        </div>
+                    </li>
+                </ul>
+                <div class="total-price-btn">
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+</main>
+<th:block th:replace="~{fragments/body :: footer}"></th:block>
+</body>
+</html>
