@@ -4,7 +4,7 @@ import com.hiponya.bbqmall.entities.bbs.*;
 import com.hiponya.bbqmall.entities.member.UserEntity;
 import com.hiponya.bbqmall.enums.CommonResult;
 import com.hiponya.bbqmall.enums.bbs.DeleteResult;
-import com.hiponya.bbqmall.enums.bbs.ModifyArticleResult;
+import com.hiponya.bbqmall.enums.bbs.ModifyResult;
 import com.hiponya.bbqmall.enums.bbs.WriteCommentResult;
 import com.hiponya.bbqmall.enums.bbs.WriteResult;
 import com.hiponya.bbqmall.interfaces.IResult;
@@ -154,7 +154,7 @@ public NoticeReadVo[] getAnnounceNotice(){
 
         //로그인 안했다면 실패
         if (user == null) {
-            return ModifyArticleResult.NOT_SIGNED;
+            return ModifyResult.NOT_SIGNED;
         }
     //    공지로 등록하려고 왔을 경우
         if(notice.isImportant()!=null){
@@ -163,7 +163,7 @@ public NoticeReadVo[] getAnnounceNotice(){
 
 
             if( !user.isAdmin()) {
-                return  ModifyArticleResult.NOT_ALLOWED;
+                return  ModifyResult.NOT_ALLOWED;
             }
 
         }
@@ -171,7 +171,7 @@ public NoticeReadVo[] getAnnounceNotice(){
 
         if (existingArticle == null) { //게시글이 없으면 실패
 
-            return ModifyArticleResult.NO_SUCH_ARTICLE;
+            return ModifyResult.NO_SUCH_ARTICLE;
 
                 //수정 시작
         } else {
@@ -199,16 +199,16 @@ public NoticeReadVo[] getAnnounceNotice(){
 
         //로그인 안했다면 실패
         if (user == null) {
-            return ModifyArticleResult.NOT_SIGNED;
+            return ModifyResult.NOT_SIGNED;
         }
 
         if (existingBpArticle == null) { //게시글이 없으면 실패
 
-            return ModifyArticleResult.NO_SUCH_ARTICLE;
+            return ModifyResult.NO_SUCH_ARTICLE;
 
             //수정 시작
         }   if( !user.getId().equals(existingBpArticle.getId())) {
-            return  ModifyArticleResult.NOT_ALLOWED;
+            return  ModifyResult.NOT_ALLOWED;
         }
 
         else {
@@ -229,16 +229,16 @@ public NoticeReadVo[] getAnnounceNotice(){
         NoticeReadVo existingNotice = this.bbsMapper.selectNoticeByIndex(nid);
 
         if (user == null) {
-            return ModifyArticleResult.NOT_SIGNED;  //로그인이 안되어있거나, 관리자가 아닐경우
+            return ModifyResult.NOT_SIGNED;  //로그인이 안되어있거나, 관리자가 아닐경우
         }
 
         if (existingNotice == null) { //게시글이 없으면
 
-            return ModifyArticleResult.NO_SUCH_ARTICLE;
+            return ModifyResult.NO_SUCH_ARTICLE;
         }
         if (!user.isAdmin()) {   //권한이 없으면
 
-            return ModifyArticleResult.NOT_ALLOWED;       //리턴 값을 줍니다
+            return ModifyResult.NOT_ALLOWED;       //리턴 값을 줍니다
         }
 
 
@@ -249,16 +249,16 @@ public NoticeReadVo[] getAnnounceNotice(){
         BpReadVo existingBpArticle = this.bbsMapper.selectBpArticleByBoardIdJustOne(bbid);
 
         if (user == null) {
-            return ModifyArticleResult.NOT_SIGNED;  //로그인이 안되어있거나, 관리자가 아닐경우
+            return ModifyResult.NOT_SIGNED;  //로그인이 안되어있거나, 관리자가 아닐경우
         }
 
         if (existingBpArticle == null) { //게시글이 없으면
 
-            return ModifyArticleResult.NO_SUCH_ARTICLE;
+            return ModifyResult.NO_SUCH_ARTICLE;
         }
         if (!user.getId().equals(existingBpArticle.getId())) {   //권한이 없으면
 
-            return ModifyArticleResult.NOT_ALLOWED;       //리턴 값을 줍니다
+            return ModifyResult.NOT_ALLOWED;       //리턴 값을 줍니다
         }
 
 
@@ -393,12 +393,12 @@ public NoticeReadVo[] getAnnounceNotice(){
 
         //로그인 안했다면 실패
         if (user == null && !user.isAdmin()) {
-            return ModifyArticleResult.NOT_SIGNED;
+            return ModifyResult.NOT_SIGNED;
         }
 
         if (existingBpArticle == null || existingAdminComment==null) { //게시글이 없으면 실패
 
-            return ModifyArticleResult.NO_SUCH_ARTICLE;
+            return ModifyResult.NO_SUCH_ARTICLE;
 
             //수정 시작
         }

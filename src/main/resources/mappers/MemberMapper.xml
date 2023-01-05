@@ -198,7 +198,7 @@
             `address_postal`  = #{addressPostal},
             `address_primary` = #{addressPrimary},
             address_secondary = #{addressSecondary},
-            `registered_on`   = #{ registeredOn}
+            `registered_on`   = #{registeredOn}
         WHERE BINARY `email` = #{email}
         LIMIT 1
 #프라이머리키를 제외하고 업데이트

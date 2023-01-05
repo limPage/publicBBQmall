@@ -4,7 +4,6 @@ package com.hiponya.bbqmall.controllers;
 import com.hiponya.bbqmall.entities.bbs.*;
 import com.hiponya.bbqmall.entities.member.UserEntity;
 import com.hiponya.bbqmall.enums.CommonResult;
-import com.hiponya.bbqmall.enums.bbs.ModifyArticleResult;
 import com.hiponya.bbqmall.enums.bbs.WriteResult;
 import com.hiponya.bbqmall.interfaces.IResult;
 import com.hiponya.bbqmall.models.PagingModel;

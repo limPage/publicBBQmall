@@ -8,7 +8,16 @@
     <title>BBQ몰 - 로그인</title>
     <th:block th:replace="~{fragments/head :: common}"></th:block>
     <link rel="stylesheet" th:href="@{/myPage/resources/stylesheets/modifyMyInfo.css}">
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
     <script defer th:src="@{/myPage/resources/scripts/modifyMyInfo.js}"></script>
+
+    <script th:if="${session.user==null}">
+
+       alert("로그인 해주세요.");
+       window.location.href='../member/login';
+
+    </script>
 
 </head>
 <body>
@@ -21,7 +30,7 @@
     <th:block th:replace="~{fragments/body ::myPageSideBar}"></th:block>
 
 
-    <div class="content ">
+    <div class="content " th:if="${session.user}">
         <div class="title-container">
             <h1>회원정보 수정</h1>
         </div>
@@ -58,17 +67,37 @@
                     </th>
                     <td>
                         <label>
-                            <input type="text" maxlength="16" th:value="아이디">
+                            <input type="text" maxlength="16" name="id" th:value="${session.user.getId()}" disabled>
                         </label>
                     </td>
                 </tr>
                 <tr class="modify-row">
                     <th>
+                        이름
+                    </th>
+                    <td>
+                        <label>
+                            <input type="text" name="name" maxlength="15" th:value="${session.user.getName()}" placeholder="이름을 입력해주세요.">
+                        </label>
+                    </td>
+                </tr>
+                <tr class="modify-row password-row">
+                    <th>
                         비밀번호
                     </th>
                     <td>
                         <label>
-                            <input type="password" maxlength="16" placeholder="전화번호">
+                            <input type="password" name="password" maxlength="16" placeholder="비밀번호" disabled>
+                            <input class="password-button" id="passwordButton" type="button" value="비밀번호 변경">
+                        </label>
+                    </td>
+                    <th>
+                        비밀번호확인
+                    </th>
+                    <td>
+                        <label>
+                            <input type="password" name="password2" maxlength="16" placeholder="비밀번호">
+                            <input class="password-button" id="passwordCancel" type="button" value="변경취소">
                         </label>
                     </td>
                 </tr>
@@ -79,7 +108,7 @@
                     </th>
                     <td>
                         <label>
-                            <input type="text" maxlength="16" value="xkzns234!@nadv34">
+                            <input type="text" maxlength="16" th:value="${session.user.getEmail()}" disabled>
                         </label>
                     </td>
                 </tr>
@@ -89,7 +118,7 @@
                     </th>
                     <td>
                         <label>
-                           <input type="text" maxlength="16" placeholder="전화번호">
+                           <input type="text" name="contact" maxlength="16" placeholder="' - ' 없이 입력해주세요." th:value="${session.user.getContact()}" >
                        </label>
                     </td>
                 </tr>
@@ -99,27 +128,45 @@
                     </th>
                     <td>
                         <label>
-                            <input type="date">
+                            <input type="date" name="birth" th:value="${session.user.getBirth()}">
                         </label>
                     </td>
                 </tr>
                 <tr class="modify-row address-row">
-                    <th rowspan="3">
-                        주소1
-                    </th>
+                    <th>주소</th>
                     <td>
-                        <label>
+                        <label >
+                            <span hidden>우편번호</span>
 
-                            <input type="text" maxlength="16" readonly>
-                        </label>
-                        <label>
+                            <input autofocus maxlength="6" name="addressPostal"
+                                   placeholder="우편번호"  type="text" disabled th:value="${session.user.getAddressPostal()}">
 
-                            <input type="text" maxlength="16" readonly>
-                        </label>
-                        <label>
+                            <input  name="addressFind" value="주소 변경" type="button">
 
-                            <input type="text" maxlength="16" readonly>
                         </label>
+
+                        <label >
+                            <span hidden>기본주소</span>
+                            <input autofocus  maxlength="100" name="addressPrimary"
+                                   placeholder="주소찾기를 통해 주소를 입력해 주세요." disabled type="text"
+                                   th:value="${session.user.getAddressPrimary()}">
+
+                        </label>
+
+
+
+                        <label >
+                            <span hidden>상세주소</span>
+                            <input autofocus  maxlength="100" name="addressSecondary"
+                                   placeholder="상세주소를 입력해주세요." disabled type="text"
+                            th:value="${session.user.getAddressSecondary()}">
+
+                        </label>
+                        <div class="panel address" rel="addressFindPanel">
+                            <div class="dialog" rel="addressFindPanelDialog"></div>
+                        </div>
+
+
                     </td>
                 </tr>
 
@@ -128,7 +175,7 @@
                 </tbody>
             </table>
 
-                    <input type="submit" value="수정하기">
+                    <input type="submit" value="정보수정">
         </form>
 
 

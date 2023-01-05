@@ -5,6 +5,7 @@ import com.hiponya.bbqmall.entities.member.EmailAuthEntity;
 import com.hiponya.bbqmall.entities.member.UserEntity;
 import com.hiponya.bbqmall.entities.member.WithdrawalEntity;
 import com.hiponya.bbqmall.enums.CommonResult;
+import com.hiponya.bbqmall.enums.bbs.ModifyResult;
 import com.hiponya.bbqmall.interfaces.IResult;
 import com.hiponya.bbqmall.services.MemberService;
 import com.hiponya.bbqmall.vos.member.EmailAuthVo;
@@ -117,6 +118,12 @@ public class MemberController {
             System.out.println("어드민이에요?"+isAdminMode.isAdmin());
             user.setAdmin(isAdminMode.isAdmin());
             user.setEmail(isAdminMode.getEmail());
+            user.setName(isAdminMode.getName());
+            user.setBirth(isAdminMode.getBirth());
+            user.setContact(isAdminMode.getContact());
+            user.setAddressPostal(isAdminMode.getAddressPostal());
+            user.setAddressPrimary(isAdminMode.getAddressPrimary());
+            user.setAddressSecondary(isAdminMode.getAddressSecondary());
 
             session.setAttribute("user",user);
             System.out.println("로그인 성공");
@@ -266,7 +273,7 @@ public class MemberController {
                                     UserEntity userInfo){
         JSONObject responseObject = new JSONObject();
         if (user==null){
-            responseObject.put("result",CommonResult.FAILURE.name().toLowerCase()) ;
+            responseObject.put("result", ModifyResult.NOT_SIGNED.name().toLowerCase()) ;
         }else {
             Enum<?> result=this.memberService.login(userInfo);
             responseObject.put("result",result.name().toLowerCase()) ;
@@ -275,6 +282,20 @@ public class MemberController {
 
     }
 
+    @ResponseBody
+    @RequestMapping(value = "modifyMyInfo", method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
+    public String patchMyInfo(@SessionAttribute (value = "user",required = false)UserEntity user,
+                                    UserEntity userInfo){
+        JSONObject responseObject = new JSONObject();
+        if (user==null){
+            responseObject.put("result",ModifyResult.NOT_SIGNED.name().toLowerCase()) ;
+        }else {
+            Enum<?> result=this.memberService.updateUserInfo(user,userInfo);
+            responseObject.put("result",result.name().toLowerCase()) ;
+        }
+        return responseObject.toString();
+
+    }
 }
 
 

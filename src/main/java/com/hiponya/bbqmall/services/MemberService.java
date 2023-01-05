@@ -3,6 +3,7 @@ package com.hiponya.bbqmall.services;
 import com.hiponya.bbqmall.entities.member.EmailAuthEntity;
 import com.hiponya.bbqmall.entities.member.WithdrawalEntity;
 import com.hiponya.bbqmall.enums.bbs.DeleteResult;
+import com.hiponya.bbqmall.enums.bbs.ModifyResult;
 import com.hiponya.bbqmall.enums.member.DeleteUserResult;
 import com.hiponya.bbqmall.enums.member.RegisterResult;
 import com.hiponya.bbqmall.entities.member.UserEntity;
@@ -324,4 +325,34 @@ public class MemberService {
 
 
     }
-}
+
+    @Transactional
+    public Enum<? extends IResult> updateUserInfo(UserEntity user, UserEntity userInfo) {
+
+        if(user==null){
+            return ModifyResult.NOT_SIGNED;
+        }
+        if(!user.getId().equals(userInfo.getId())){
+            return ModifyResult.NOT_ALLOWED;
+        }
+
+        UserEntity existingUser = this.memberMapper.selectUserByEmail(userInfo.getEmail());
+        if(existingUser==null){
+            return DeleteResult.NO_SUCH_ARTICLE;
+        }
+
+        existingUser.setName(userInfo.getName());
+        existingUser.setPassword(CryptoUtils.hashSha512(userInfo.getPassword()));
+        existingUser.setContact(userInfo.getContact());
+        existingUser.setBirth(userInfo.getBirth());
+        existingUser.setAddressPostal(userInfo.getAddressPostal());
+        existingUser.setAddressPrimary(userInfo.getAddressPrimary());
+        existingUser.setAddressSecondary(userInfo.getAddressSecondary());
+
+
+        return this.memberMapper.updateUser(existingUser)>0?CommonResult.SUCCESS:CommonResult.FAILURE;
+    }
+
+
+
+    }
