@@ -201,7 +201,7 @@
         </table>
 
 
-        <div class="write-notice-button">
+        <div class="write-notice-button" th:if="${session.user!=null && session.user.isAdmin()}">
             <a th:href="@{/board/writeNotice}">공지작성</a>
         </div>
     </div>
@@ -498,7 +498,7 @@
 
 
         <div class="write-notice-button">
-            <a th:href="@{/board/writeNotice}">공지작성</a>
+            <a th:href="@{/board/writeNotice (bid= ${bid})}">공지작성</a>
         </div>
     </div>
 
@@ -650,7 +650,7 @@
 
 
         <div class="write-notice-button">
-            <a th:href="@{/board/writeNotice}">공지작성</a>
+            <a th:href="@{/board/writeNotice (bid= ${bid})}">공지작성</a>
         </div>
     </div>
 

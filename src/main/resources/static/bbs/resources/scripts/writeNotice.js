@@ -1,4 +1,4 @@
-
+let bidValue=form['bid'].value;
 // const form = window.document.getElementById('form');
 
 // ClassicEditor.create(form['content']);
@@ -25,7 +25,11 @@ window.addEventListener('load', () =>{
 
 })
 
+if(window.document.getElementById('bid').value==='pr'|| window.document.getElementById('bid').value==='pi'){
 
+    form['bid'].setAttribute('disabled', true);
+    bidValue=window.document.getElementById('bid').value;
+}
 
 
 let editor;
@@ -64,7 +68,7 @@ form.onsubmit = e =>{
     // formData.append('content', form['content'].value);
     formData.append('content', editor.getData());
 
-    formData.append('bid', form['bid'].value);
+    formData.append('bid',bidValue );
 
 
     // bid= "${bid}";

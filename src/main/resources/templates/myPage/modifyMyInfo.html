@@ -36,7 +36,7 @@
         </div>
         <form id="form">
             <table>
-                <thead>
+                <thead class="password-check-row">
                         <tr>
                             <th>
                                 <h1>본인 확인을 위해서 비밀번호를 입력해주세요.</h1>
@@ -57,7 +57,7 @@
                 </tr>
                 <tr class="modify-row title-row">
                     <td>
-                        <h1> 회원정보</h1>
+                        <h1>회원정보</h1>
                     </td>
 
                 </tr>
@@ -67,7 +67,7 @@
                     </th>
                     <td>
                         <label>
-                            <input type="text" maxlength="16" name="id" th:value="${session.user.getId()}" disabled>
+                            <input type="text" maxlength="16" name="userId" th:value="${session.user.getId()}" disabled>
                         </label>
                     </td>
                 </tr>
@@ -108,7 +108,7 @@
                     </th>
                     <td>
                         <label>
-                            <input type="text" maxlength="16" th:value="${session.user.getEmail()}" disabled>
+                            <input type="text" maxlength="16" name="email" th:value="${session.user.getEmail()}" disabled>
                         </label>
                     </td>
                 </tr>

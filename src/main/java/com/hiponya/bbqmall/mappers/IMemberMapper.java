@@ -29,6 +29,7 @@ public interface IMemberMapper {
 
     UserEntity selectUserByNameContact(@Param(value = "name") String name,
                                        @Param(value = "email") String email);
+    UserEntity selectUserByContact(@Param(value = "contact") String contact);
 
     UserEntity selectUserByNameIdEmail(@Param(value = "name") String name,
                                        @Param(value = "id") String id,

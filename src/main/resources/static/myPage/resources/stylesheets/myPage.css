@@ -31,6 +31,11 @@ body>main>.my-page-content>table>tbody>tr>.user-menu-title{
     display: flex;
     flex-direction: column;
 }
+body>main>.my-page-content>table>tbody>tr>.user-menu-title>a{
+    color: rgba(0,0,0,0.9);
+}
+
+
 body>main>.my-page-content>table>tbody>.user-tr>td>h1{
     font-size: 2rem;
     font-weight: 400;
@@ -64,14 +69,13 @@ body>main>.my-page-content>table>tbody>.user-order-tr{
     align-items: center;
 
 }
+
+
 body>main>.my-page-content>table>tbody>.user-order-tr>td>a{
     font-size: 1.3125rem;
     margin-top:  0.5rem;
     display: inline-block;
 }
-
-
-
 
 
 body>main>.my-page-content>table>tbody>tr>.spring{

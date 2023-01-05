@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.method.annotation.SessionAttributesHandler;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.mail.MessagingException;
@@ -253,10 +254,13 @@ public class MemberController {
 //        System.out.println("id="+user.getId());
 
         JSONObject responseObject = new JSONObject();
-        Enum<? extends IResult> result = this.memberService.deleteUser(user, withdrawal,session);
+        Enum<? extends IResult> result = this.memberService.deleteUser(user, withdrawal);
 
         responseObject.put("result", result.name().toLowerCase());
 
+        if (result==CommonResult.SUCCESS){
+            session.setAttribute("user",null);
+        }
         return responseObject.toString();
     }
 
@@ -284,17 +288,18 @@ public class MemberController {
 
     @ResponseBody
     @RequestMapping(value = "modifyMyInfo", method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
-    public String patchMyInfo(@SessionAttribute (value = "user",required = false)UserEntity user,
-                                    UserEntity userInfo){
+    public String patchMyInfo(@SessionAttribute (value = "user",required = false)UserEntity user,HttpSession session, UserEntity userInfo){
         JSONObject responseObject = new JSONObject();
         if (user==null){
             responseObject.put("result",ModifyResult.NOT_SIGNED.name().toLowerCase()) ;
         }else {
             Enum<?> result=this.memberService.updateUserInfo(user,userInfo);
             responseObject.put("result",result.name().toLowerCase()) ;
+            if (result==CommonResult.SUCCESS){
+                session.setAttribute("user",null);
+            }
         }
         return responseObject.toString();
-
     }
 }
 

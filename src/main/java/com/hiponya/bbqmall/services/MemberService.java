@@ -277,7 +277,7 @@ public class MemberService {
 
 
     @Transactional
-    public Enum<? extends IResult> deleteUser(UserEntity user, WithdrawalEntity withdrawal , HttpSession session) {
+    public Enum<? extends IResult> deleteUser(UserEntity user, WithdrawalEntity withdrawal ) {
 
         if (user == null) {
             return DeleteUserResult.NOT_SIGNED;
@@ -315,7 +315,6 @@ public class MemberService {
             }
 
             if(this.memberMapper.insertReason(withdrawal)>0){
-                session.setAttribute("user", null);
 
            return CommonResult.SUCCESS;}
         }
@@ -341,8 +340,18 @@ public class MemberService {
             return DeleteResult.NO_SUCH_ARTICLE;
         }
 
+        if(!userInfo.getPassword().equals("")){
+            existingUser.setPassword(CryptoUtils.hashSha512(userInfo.getPassword()));
+        }
+        UserEntity existingContact = this.memberMapper.selectUserByContact(userInfo.getContact());
+
+        System.out.println(existingContact+"번호");
+        if(existingContact!=null){
+            if(!existingContact.getId().equals(userInfo.getId())){
+                return ModifyResult.CONTACT_DUPLICATED;
+            }
+        }
         existingUser.setName(userInfo.getName());
-        existingUser.setPassword(CryptoUtils.hashSha512(userInfo.getPassword()));
         existingUser.setContact(userInfo.getContact());
         existingUser.setBirth(userInfo.getBirth());
         existingUser.setAddressPostal(userInfo.getAddressPostal());

@@ -113,7 +113,6 @@ public class BbsController {
 
                     modelAndView.addObject("announceNotice", announceNotice);
                     modelAndView.addObject("notice", notice);
-                    System.out.println("bid는" + bid);
                     modelAndView.addObject("bid", bid);
 
 
@@ -189,14 +188,16 @@ public class BbsController {
 
 
     @RequestMapping(value = "/writeNotice", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getWrite(@SessionAttribute(value = "user", required = false) UserEntity user) { //컨트로롤러에서 셋아트리뷰트 한 user값을 가져온다. 세션에서 가져온 값이다. required false가 있어야 null일때 userEntity값을 안요구하게된다. 400예방 false일때 null이 드감
+    public ModelAndView getWrite(@SessionAttribute(value = "user", required = false) UserEntity user,
+                                 @RequestParam(value = "bid", required = false) String bid) { //컨트로롤러에서 셋아트리뷰트 한 user값을 가져온다. 세션에서 가져온 값이다. required false가 있어야 null일때 userEntity값을 안요구하게된다. 400예방 false일때 null이 드감
         //비드를 문자열로 전달
         ModelAndView modelAndView;
         if (user == null) {//로그인확인
             modelAndView = new ModelAndView("redirect:/member/login");
         } else {
             modelAndView = new ModelAndView("board/writeNotice");
-
+            modelAndView.addObject("bid",bid);
+            System.out.println("bid는????"+bid);
 
         }
         return modelAndView;
@@ -302,6 +303,7 @@ public class BbsController {
             BpReadVo existingBpArticle = this.bbsService.readBpArticle(bbid);
             Enum<?> result = this.bbsService.prepareModifyBpArticle(user,bbid);
             modelAndView.addObject("result", result.name());
+
             if (result == CommonResult.SUCCESS) {
                 modelAndView.addObject("BpArticle", existingBpArticle);
             }
@@ -319,7 +321,7 @@ public class BbsController {
         JSONObject responseObject = new JSONObject();
 
 
-
+        System.out.println(notice.getBoardId()+"보드아이디에요");
         Enum<?> result = this.bbsService.modifyNotice(notice, user);
 
 

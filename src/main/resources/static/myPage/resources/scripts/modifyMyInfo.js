@@ -143,10 +143,10 @@ form.onsubmit=(e)=>{
 
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
-    formData.append('id',form['id'].value);
-
+    formData.append('id',form['userId'].value);
     formData.append('name',form['name'].value);
     formData.append('password',form['password'].value);
+    formData.append('email',form['email'].value);
     formData.append('contact',form['contact'].value);
     formData.append('birth',form['birth'].value);
     formData.append('addressPostal',form['addressPostal'].value);
@@ -163,7 +163,7 @@ form.onsubmit=(e)=>{
                 switch (responseObject['result']) {
                     case 'success':
 
-                        alert('회원 정보가 수정되었습니다.');
+                        alert('회원 정보가 수정되었습니다.\n다시 로그인해주세요.');
                         window.location.href='/'
                         break;
                     case 'not_signed':
@@ -179,6 +179,12 @@ form.onsubmit=(e)=>{
                     case 'no_such_article':
 
                         alert('없는 회원입니다.');
+
+                        break;
+
+                    case 'contact_duplicated':
+
+                        alert('이미 등록된 연락처입니다.');
 
                         break;
 

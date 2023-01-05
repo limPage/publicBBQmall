@@ -49,6 +49,8 @@
 
         <if test='boardId == null and keyword != null'>
             AND `board_id` != 'qna'
+            AND `board_id` != 'pi'
+            AND `board_id` != 'pr'
         </if>
         <if test='qid!=null'>
             AND `qna_board_id` = 'qna'
@@ -132,6 +134,8 @@
 
         <if test='boardId == null'>
             AND `board_id` != 'qna'
+            AND `board_id` != 'pi'
+            AND `board_id` != 'pr'
 
         </if>
 
@@ -351,7 +355,9 @@ VALUES (#{articleIndex}, #{content},IFNULL(#{writtenOn}, DEFAULT(`written_on`)),
     <update id="updateNotice" parameterType="com.hiponya.bbqmall.entities.bbs.NoticeEntity">
 
         UPDATE `bbq_bbs`.`notice`
-        SET `board_id`    = #{boardId},
+        SET
+
+                `board_id`    = #{boardId},
             `title`       = #{title},
             `content`     = #{content},
             `view`        = IFNULL(#{view}, DEFAULT(`view`)),

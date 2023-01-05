@@ -10,6 +10,16 @@
     <link rel="stylesheet" th:href="@{/myPage/resources/stylesheets/myPageWithdrawal.css}">
         <script defer th:src="@{/myPage/resources/scripts/myPageWithdrawal.js}"></script>
 
+    <script th:if="${session.user==null}">
+
+        alert("로그인 해주세요.");
+        window.location.href='/member/login';
+
+    </script>
+
+
+
+
 </head>
 <body>
 <th:block th:replace="~{fragments/body :: header}"></th:block> <!-- block 자리에 body.html 파일의 replace 태그와 치환한다. -->

@@ -180,6 +180,10 @@ public NoticeReadVo[] getAnnounceNotice(){
 
                 existingArticle.setContent(notice.getContent());
                 existingArticle.setTitle(notice.getTitle());
+                System.out.println("@@@@@@@@@@@@"+notice.getBoardId());
+                if(!notice.getBoardId().equals("null")) {
+                    existingArticle.setBoardId(notice.getBoardId());
+                }
 
 
             }
@@ -289,7 +293,7 @@ public NoticeReadVo[] getAnnounceNotice(){
         if (bpArticle == null) {
             return DeleteResult.NO_SUCH_ARTICLE; //게시물이 없다
         }
-        if (user == null || !user.getId().equals(bpArticle.getId())) {
+        if (user == null || !user.isAdmin() && !user.getId().equals(bpArticle.getId())) {
             return DeleteResult.NOT_ALLOWED; //권한이 없다
         }
         return this.bbsMapper.deleteBpArticleByIndex(bpArticle.getIndex()) > 0 ? CommonResult.SUCCESS : CommonResult.FAILURE;

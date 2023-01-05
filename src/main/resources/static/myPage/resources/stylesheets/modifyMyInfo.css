@@ -39,9 +39,11 @@ body> main> .content>form > table>thead{
 body> main> .content > form > table>thead>tr>th>h1{
     text-shadow: 0 0  0.5rem #767676 ;
 
-
-
 }
+body> main> .content>form > table .password-check-row{
+    display: none;
+}
+
 
 
 body> main> .content>form > table>tbody{

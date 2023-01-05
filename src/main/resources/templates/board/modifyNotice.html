@@ -42,9 +42,9 @@
 <th:block th:replace="~{fragments/body :: cover}"></th:block>
 
 <main class="cs-center">
-  <input hidden name="bidValue" th:value="${bid}" id="bidValue">
+  <input hidden th:value="${bid}" id="bidValue">
   <th:block th:replace="~{fragments/body ::sideBar}"></th:block>
-  <div class="content" th:if="${session.user!=null && bid=='notice'}">
+  <div class="content" th:if="${session.user!=null && bid!='bp'}">
 
     <div class="title-container">
       <h1>공지사항 수정</h1>

@@ -333,7 +333,7 @@
 
                     <!--                                <a class="announce-button"-->
                     <!--                                   th:if="${session.user != null && session.user.isAdmin()==true && notice.isImportant()}">공지해제</a>-->
-                    <a th:if="${session.user!=null && (session.user.isAdmin()|| session.user.getId==bpArticle.getId())}"
+                    <a th:if="${session.user!=null &&  session.user.getId==bpArticle.getId()}"
                        th:href="@{./modifyNotice (bid='bp',bbid=${bpArticle.getIndex()})}"> 수정</a>
                     <a href="#"
                        th:if="${session.user!=null && (session.user.isAdmin()|| session.user.getId==bpArticle.getId())}"
