@@ -85,15 +85,12 @@ form.onsubmit = e =>{
 
 
                         alert('작성 성공');
-                        // const index = responseObject['index'];
-                        // window.location.href=`read?aid=${index}`;//자바스크립트문법
-                        window.location.href=`http://localhost:8080/board/`;//자바스크립트문법
+                        if (bidValue==='pi'|| bidValue==='pr'){
 
-
-                        // window.location.href='http://localhost:8080/bbs/write?bid='+form['bid'].value;
-
-                        // window.location.href='http://localhost:8080/bbs/read?aid='+responseObject['index'];
-
+                            window.location.href = `http://localhost:8080/board/?bid=`+bidValue;
+                        }else {
+                            window.location.href = `http://localhost:8080/board/`;//자바스크립트문법
+                        }
 
                         break;
 

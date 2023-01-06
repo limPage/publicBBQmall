@@ -39,11 +39,22 @@ public interface IBbsMapper {
                                             @Param(value = "limit") int limit,
                                             @Param(value = "offset") int offset,
                                             @Param(value = "qid") String qid);
+    NoticeReadVo[] selectMyNoticeById(@Param(value = "id") String id,
+
+                                         @Param(value = "boardId") String boardId,
+                                         @Param(value = "limit") int limit,
+                                         @Param(value = "offset") int offset);
+
     BpReadVo[] selectBpArticleByBoardId(@Param(value = "bpBoardId") String bpBoardId,
                                         @Param(value = "keyword") String keyword,
                                         @Param(value = "limit") int limit,
                                         @Param(value = "offset") int offset
                                          );
+    BpReadVo[] selectBpArticleById(@Param(value = "id") String id,
+
+                                        @Param(value = "limit") int limit,
+                                        @Param(value = "offset") int offset
+    );
     BpReadVo selectBpArticleByBoardIdJustOne(@Param(value = "bpBoardId") int bpBoardId);
     NoticeReadVo selectNoticeByIndex(@Param(value = "index") int index);
 

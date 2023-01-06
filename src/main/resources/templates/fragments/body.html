@@ -146,32 +146,32 @@
 <article class="my-page-side" th:fragment="myPageSideBar" >
     <h1 class="title"><a th:href="@{/member/myPage/}">MY SHOPPING</a></h1>
     <ul>
-        <li class="title-li"><a >나의 쇼핑</a></li>
+        <li class="title-li"><a th:href="@{/member/myShopping?bid=1}">나의 쇼핑</a></li>
 
-        <li><a >주문/배송</a></li>
-        <li><a >반품/교환</a></li>
-        <li><a >취소/환불</a></li>
-        <li><a >찜한 상품</a></li>
-        <li><a >최근 본 상품</a></li>
-        <li><a >개인결제</a></li>
-
-    </ul>
-    <ul>
-        <li class="title-li"><a >나의 혜택</a></li>
-        <li><a >적립금</a></li>
-        <li><a >쿠폰</a></li>
+        <li><a th:href="@{/member/myShopping?bid=1}">주문/배송</a></li>
+        <li><a th:href="@{/member/myShopping?bid=2}">반품/교환</a></li>
+        <li><a th:href="@{/member/myShopping?bid=3}">취소/환불</a></li>
+        <li><a th:href="@{/member/myShopping?bid=4}">찜한 상품</a></li>
+        <li><a th:href="@{/member/myShopping?bid=5}">최근 본 상품</a></li>
+        <li><a th:href="@{/member/myShopping?bid=6}">개인결제</a></li>
 
     </ul>
     <ul>
-        <li class="title-li"><a >나의 활동</a></li>
-        <li><a >나의 1:1문의</a></li>
-        <li><a >나의 상품문의</a></li>
-        <li><a >나의 상품후기</a></li>
+        <li class="title-li"><a th:href="@{/member/myShopping?bid=7}">나의 혜택</a></li>
+        <li><a th:href="@{/member/myShopping?bid=7}">적립금</a></li>
+        <li><a th:href="@{/member/myShopping?bid=8}">쿠폰</a></li>
+
+    </ul>
+    <ul>
+        <li class="title-li"><a th:href="@{/member/myArticle (bid=bp)}">나의 활동</a></li>
+        <li><a th:href="@{/member/myArticle (bid=bp)}">나의 1:1문의</a></li>
+        <li><a th:href="@{/member/myArticle (bid=pi)}">나의 상품문의</a></li>
+        <li><a th:href="@{/member/myArticle (bid=pr)}">나의 상품후기</a></li>
 
     </ul>
 
     <ul class="title-li">
-        <li class="title-li"><a >나의 정보</a></li>
+        <li class="title-li"><a th:href="@{/member/modifyMyInfo}">나의 정보</a></li>
         <li><a th:href="@{/member/modifyMyInfo}">회원정보 수정</a></li>
         <li><a th:href="@{/member/withdrawal/}">회원 탈퇴</a></li>
 

@@ -98,7 +98,7 @@
     `notice`.`modified_on` AS `modifiedOn`,
     `notice`.`new_flag` AS `isNew`
     FROM `bbq_bbs`.`notice` AS `notice`
-    LEFT JOIN `bbq_bbs`.`notice_boards` AS `notice_board` on `id` = `notice`.`board_id`
+    LEFT JOIN `bbq_bbs`.`notice_boards` AS `notice_board` on `notice_board`.`id` = `notice`.`board_id`
     WHERE important_flag =1;
 
 
@@ -118,7 +118,7 @@
         `notice`.`new_flag` AS `isNew`,
         `notice`.`qna_board_id` AS `qnaBoardId`
         FROM `bbq_bbs`.`notice` AS `notice`
-        LEFT JOIN `bbq_bbs`.`notice_boards` AS `notice_board` on `id` = `notice`.`board_id`
+        LEFT JOIN `bbq_bbs`.`notice_boards` AS `notice_board` on `notice_board`.`id` = `notice`.`board_id`
         WHERE
             (REPLACE(`title`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%')
             OR REPLACE(`content`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%'))
@@ -153,6 +153,32 @@
         OFFSET ${offset}
 
     </select>
+
+    <select id="selectMyNoticeById" resultType="com.hiponya.bbqmall.vos.bbs.NoticeReadVo">
+        SELECT `notice`.`index` AS `index`,
+               `notice`.`id` AS `id`,
+        `notice`.`board_id` AS `boardId`,
+        `notice`.`title` AS `title`,
+        `notice_board`.`text` AS `text`,
+        `notice`.`content`     AS `content`,
+        `notice`.`board_id`    AS `boardId`,
+        `notice`.`view` AS `view`,
+        `notice`.`important_flag` AS `isImportant`,
+        `notice`.`written_on` AS `writtenOn`,
+        `notice`.`modified_on` AS `modifiedOn`,
+        `notice`.`new_flag` AS `isNew`,
+        `notice`.`qna_board_id` AS `qnaBoardId`
+        FROM `bbq_bbs`.`notice` AS `notice`
+        LEFT JOIN `bbq_bbs`.`notice_boards` AS `notice_board` on  `notice_board`.`id` = `notice`.`board_id`
+        WHERE  `board_id` = #{boardId} AND `notice`.`id` = #{id}
+
+        GROUP BY `notice`.`index`
+        ORDER BY `notice`.`index` DESC
+        LIMIT ${limit}
+        OFFSET ${offset}
+
+    </select>
+
 
     <select id="selectBpArticleByBoardId" resultType="com.hiponya.bbqmall.vos.bbs.BpReadVo">
         SELECT
@@ -235,7 +261,41 @@
     </select>
 
 
+    <select id="selectBpArticleById" resultType="com.hiponya.bbqmall.vos.bbs.BpReadVo">
+        SELECT
+        `bp_article`.`index` AS `index`,
+        `bp_article`.`id` AS `id`,
+        `bp_article`.`bp_board_id` AS `bpBoardId`,
+        `bp_article`.`name` AS `name`,
+        `bp_article`.`email` AS `email`,
+        `bp_article`.`contact` AS `contact`,
+        `bp_article`.`company` AS `company`,
+        `bp_article`.`request_date` AS `requestDate`,
+        `bp_article`.`product_info` AS `productInfo`,
 
+        `bp_article`.`request_price` AS `requestPrice`,
+        `bp_article`.`pay` AS `pay`,
+        `bp_article`.`request_evidence` AS `requestEvidence`,
+        `bp_article`.`reply_sms` AS `replySms`,
+        `bp_article`.`reply_email` AS `replyEmaiil`,
+        `bp_article`.`title` AS `title`,
+        `bp_article`.`content` AS `content`,
+        `bp_article`.`written_on` AS `writtenOn`,
+        `bp_article`.`modified_on` AS `modifiedOn`,
+        `bp_article`.`comment_count` AS `commentCount`,
+        `bp_board`.`text` AS `text`
+
+
+
+        FROM `bbq_bbs`.`bp_articles` AS `bp_article`
+        LEFT JOIN `bbq_bbs`.`bp_boards` AS `bp_board` on `bp_board_id` = `bp_board`.`id`
+        WHERE `bp_article`.`id` = #{id}
+        GROUP BY `bp_article`.`index`
+        ORDER BY `bp_article`.`index` DESC
+        LIMIT ${limit}
+        OFFSET ${offset}
+
+    </select>
 
 
     <select id="selectNoticeByIndex" resultType="com.hiponya.bbqmall.vos.bbs.NoticeReadVo">
@@ -250,7 +310,7 @@
                `notice`.`modified_on` AS `modifiedOn`,
                 `notice`.`new_flag` AS `isNew`
         FROM `bbq_bbs`.`notice` AS `notice`
-                 LEFT JOIN `bbq_bbs`.`notice_boards` AS `notice_board` on `id` = `notice`.`board_id`
+                 LEFT JOIN `bbq_bbs`.`notice_boards` AS `notice_board` on `notice_board`. `id` = `notice`.`board_id`
         WHERE `index` = #{index}
 
         LIMIT 1;
@@ -288,9 +348,9 @@
             useGeneratedKeys="true" keyProperty="index"
             keyColumn="index"
             parameterType="com.hiponya.bbqmall.entities.bbs.NoticeEntity">
-        INSERT INTO `bbq_bbs`.`notice` ( `board_id`, `title`, `content`, `view`, `important_flag`
+        INSERT INTO `bbq_bbs`.`notice` ( `board_id`,`id`,  `title`, `content`, `view`, `important_flag`
                                        , `written_on`, `modified_on`,`expiration_date`)
-        VALUES ( #{boardId}, #{title}, #{content}, #{view}, IFNULL(#{isImportant}, DEFAULT(`important_flag`))
+        VALUES ( #{boardId},#{id}, #{title}, #{content}, #{view}, IFNULL(#{isImportant}, DEFAULT(`important_flag`))
                , IFNULL(#{writtenOn}, DEFAULT(`written_on`)), IFNULL(NOW(), DEFAULT(`modified_on`)), #{expirationDate})
 
 

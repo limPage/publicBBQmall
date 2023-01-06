@@ -377,10 +377,10 @@
             <span class="spring"></span>
 
             <label>
-                <input type="text" placeholder="제목, 내용, 상품평, 상품설명, 작성자" th:value="${#request.getParameter('keyword')}" name="keyword" disabled>
+                <input type="text" placeholder="제목, 내용, 상품평, 상품설명, 작성자" th:value="${#request.getParameter('keyword')}" name="keyword" >
             </label>
 
-            <input type="submit" value="검색" disabled>
+            <input type="submit" value="검색" >
             <!--            </div>-->
         </form>
 
@@ -498,7 +498,7 @@
 
 
         <div class="write-notice-button">
-            <a th:href="@{/board/writeNotice (bid= ${bid})}">공지작성</a>
+            <a th:href="@{/board/writeNotice (bid= ${bid})}">문의작성</a>
         </div>
     </div>
 
@@ -529,10 +529,10 @@
             <span class="spring"></span>
 
             <label>
-                <input type="text" placeholder="제목, 내용, 상품평, 상품설명, 작성자" th:value="${#request.getParameter('keyword')}" name="keyword" disabled>
+                <input type="text" placeholder="제목, 내용, 상품평, 상품설명, 작성자" th:value="${#request.getParameter('keyword')}" name="keyword" >
             </label>
 
-            <input type="submit" value="검색" disabled>
+            <input type="submit" value="검색" >
             <!--            </div>-->
         </form>
 
@@ -650,7 +650,7 @@
 
 
         <div class="write-notice-button">
-            <a th:href="@{/board/writeNotice (bid= ${bid})}">공지작성</a>
+            <a th:href="@{/board/writeNotice (bid= ${bid})}">후기작성</a>
         </div>
     </div>
 

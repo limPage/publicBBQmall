@@ -1,13 +1,19 @@
 package com.hiponya.bbqmall.controllers;
 
 
+import com.hiponya.bbqmall.entities.bbs.NoticeBoardEntity;
+import com.hiponya.bbqmall.entities.bbs.NoticeEntity;
 import com.hiponya.bbqmall.entities.member.EmailAuthEntity;
 import com.hiponya.bbqmall.entities.member.UserEntity;
 import com.hiponya.bbqmall.entities.member.WithdrawalEntity;
 import com.hiponya.bbqmall.enums.CommonResult;
 import com.hiponya.bbqmall.enums.bbs.ModifyResult;
 import com.hiponya.bbqmall.interfaces.IResult;
+import com.hiponya.bbqmall.models.PagingModel;
+import com.hiponya.bbqmall.services.BbsService;
 import com.hiponya.bbqmall.services.MemberService;
+import com.hiponya.bbqmall.vos.bbs.BpReadVo;
+import com.hiponya.bbqmall.vos.bbs.NoticeReadVo;
 import com.hiponya.bbqmall.vos.member.EmailAuthVo;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +32,14 @@ import java.security.NoSuchAlgorithmException;
 public class MemberController {
 
     private final MemberService memberService;
+    private final BbsService bbsService;
 
     @Autowired
-    public MemberController(MemberService memberService) {
+    public MemberController(MemberService memberService, BbsService bbsService) {
+
         this.memberService = memberService;
+        this.bbsService = bbsService;
+
     }
 
 
@@ -301,6 +311,95 @@ public class MemberController {
         }
         return responseObject.toString();
     }
+
+    @GetMapping(value = "myArticle", produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getMyArticle(@SessionAttribute(value = "user", required = false) UserEntity user,
+                                     @RequestParam(value = "bid", required = false) String bid,
+                                     @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+                                     @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword){
+        ModelAndView modelAndView = new ModelAndView("myPage/myArticle");
+        page=Math.max(1,page);
+        String bbid=null;
+        String qid = null;
+        String board =null;
+
+        if (user!=null && bid!=null && !bid.equals("bp") ) {
+            NoticeBoardEntity notice = new NoticeBoardEntity();
+            notice.setId(bid);
+            int totalCount = this.bbsService.getNoticeCount(notice,keyword,qid); //총 게시물 개수
+            PagingModel paging = new PagingModel(totalCount, page);
+
+            NoticeReadVo[] articles = this.bbsService.getMyNotice(user.getId(),bid, paging );//내 게시물검색
+
+            modelAndView.addObject("bid", bid);
+            modelAndView.addObject("articles", articles);
+
+            modelAndView.addObject("paging", paging); //게시글개수
+
+        }
+
+
+
+
+        if (user!=null && bid!=null && bid.equals("bp") ) {
+//                    int totalCount = this.bbsService.getBpArticleCount(bbid, keyword);
+            int totalCount = this.bbsService.getBpArticleCount(bbid,keyword); //총 게시물 개수
+            PagingModel paging = new PagingModel(totalCount, page);
+//
+            BpReadVo[] bpArticles = this.bbsService.getMyBpArticles(user.getId(), paging);//내 게시물검색
+
+            modelAndView.addObject("bid", bid);
+            modelAndView.addObject("bpArticles", bpArticles);
+
+            modelAndView.addObject("paging", paging); //게시글개수
+
+        }
+
+        return modelAndView;
+    }
+
+
+    @GetMapping(value = "myShopping", produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getMyShopping(@RequestParam (value = "bid" , required = false) Integer bid){
+        ModelAndView modelAndView = new ModelAndView("myPage/myShopping");
+        String board;
+        if (bid !=null) {
+            switch (bid) {
+                case (1):
+                    board = "주문/배송 내역";
+                    break;
+                case (2):
+                    board = "반품/교환 내역";
+                    break;
+                case (3):
+                    board = "취소/환불 내역";
+                    break;
+                case (4):
+                    board = "위시리스트";
+                    break;
+                case (5):
+                    board = "최근 본 상품";
+                    break;
+                case (6):
+                    board = "개인결제 내역";
+                    break;
+                case (7):
+                    board = "적립금";
+                    break;
+                case (8):
+                    board = "쿠폰";
+                    break;
+                default:
+                    board = "주문/배송 내역";
+            }
+        }else {
+            board = "주문/배송 내역";
+        }
+
+            modelAndView.addObject("board", board);
+        return modelAndView;
+    }
+
 }
 
 

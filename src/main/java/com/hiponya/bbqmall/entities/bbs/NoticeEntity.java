@@ -7,6 +7,8 @@ public class NoticeEntity {
 
 
   private int  index;
+
+  private String id;
     private String boardId;
     private String title;
     private Date writtenOn;
@@ -37,6 +39,14 @@ public class NoticeEntity {
     public NoticeEntity setNew(Boolean isNew) {
         this.isNew = isNew;
         return this;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public Date getExpirationDate() {

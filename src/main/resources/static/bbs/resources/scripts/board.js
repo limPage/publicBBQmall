@@ -122,10 +122,36 @@ else if (form['isNoticeBoard'].value === "qna"){
     font-weight: 700;`;
 }
 else if (form['isNoticeBoard'].value==="pi") {
+
+
+    form.onsubmit=(e)=>{
+        e.preventDefault();
+        const text= form['keyword'].value;
+
+        // http://localhost:8080/board/
+        alert(text);
+        window.location.href='/board/?bid=pi&keyword='+text;
+
+    }
+
+
+
+
     window.document.getElementById('sideBarPI').style.cssText = `  color: rgba(0,0,0,0.9);
     font-weight: 700;`;
 }
 else if (form['isNoticeBoard'].value==="pr"){
+
+    form.onsubmit=(e)=>{
+        e.preventDefault();
+        const text= form['keyword'].value;
+
+        // http://localhost:8080/board/
+        alert(text);
+        window.location.href='/board/?bid=pr&keyword='+text;
+
+    }
+
     window.document.getElementById('sideBarPR').style.cssText = `  color: rgba(0,0,0,0.9);
     font-weight: 700;`;
 }

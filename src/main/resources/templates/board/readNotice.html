@@ -106,19 +106,19 @@
 
             <tr class="management-row">
                 <td>
-                    <a href="./">목록</a>
+                    <a th:href="@{/board/ (bid=${bid})}">목록</a>
 
                     <span class="spring"></span>
                     <input id="important" class="important" hidden th:value="${!notice.isImportant()}" type="text">
                     <a class="announce-button"
-                       th:if="${session.user != null && session.user.isAdmin()==true}">공지등록</a>
+                       th:if="${session.user != null && session.user.isAdmin()==true && bid=='notice'}">공지등록</a>
                     <!--                                <a class="announce-button"-->
                     <!--                                   th:if="${session.user != null && session.user.isAdmin()==true && notice.isImportant()}">공지해제</a>-->
                     <a th:href="@{./modifyNotice (bid=${bid}, nid=${notice.getIndex()})}"
                        th:if="${session.user!=null && session.user.isAdmin()}">
                         수정</a>
                     <a id="deleteButton" href="#"
-                       th:if="${session.user!=null && session.user.isAdmin()}">
+                       th:if="${session.user!=null && (session.user.isAdmin() || session.user.getId()==notice.getId())}">
                         삭제</a>
 
                 </td>

@@ -41,7 +41,7 @@ body> main> .content > form > table>thead>tr>th>h1{
 
 }
 body> main> .content>form > table .password-check-row{
-    display: none;
+    /*display: none;*/
 }
 
 
@@ -118,11 +118,12 @@ body> main> .content>form > table>tbody>.modify-row.title-row>td>h1{
 }
 
 
+
 body> main> .content>form > table>tbody>.modify-row{
     width: 100%;
 
     border-bottom: 0.0625rem solid rgba(0,0,0,0.2);
-    display: block;
+    display: none;
 }
 
 body> main> .content>form > table>tbody>.modify-row>th{
@@ -153,7 +154,7 @@ body> main> .content>form > table>tbody>.modify-row>td>label>input{
     font-family: inherit;
 }
 body> main> .content>form > table>tbody>.modify-row.address-row{
-    display: flex;
+    display: none;
     flex-direction: row;
 }
 
@@ -224,7 +225,7 @@ body> main> .content>form >input[type="submit"]{
     position: relative;
     left: 50%;
     transform: translateX(-50%);
-    display: block;
+    display: none;
 }
 
 /*주소 입력창*/

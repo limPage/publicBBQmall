@@ -29,6 +29,16 @@ window.document.getElementById('passwordCheckButton').addEventListener("click",(
                     case 'success':
 
                         alert('비밀번호 인증 성공');
+
+                        let modifyRow= window.document.querySelectorAll('.modify-row');
+
+                        for (let i=0; i<modifyRow.length-1; i++){
+                            modifyRow.item(i).style.display="block";
+                        }
+                        window.document.querySelector('.address-row').style.display="flex";
+                        form['submit'].style.display="block";
+                        window.document.querySelectorAll('.password-check-row').item(0).style.display="none";
+                        window.document.querySelectorAll('.password-check-row').item(1).style.display="none";
                         break;
 
                     default:

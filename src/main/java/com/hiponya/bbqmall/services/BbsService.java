@@ -113,13 +113,14 @@ public NoticeReadVo[] getAnnounceNotice(){
                 qid);
 
     }
-    //공지게시판을 불러온다 항목을 선택하지 않았을때 전체
+    public NoticeReadVo[] getMyNotice(String id, String bid,  PagingModel paging) {
+        System.out.println("id:"+id);
+        System.out.println("bid:"+bid);
 
-//    public NoticeReadVo[] getNoticeAll(PagingModel paging,  String keyword) {
-//
-//        return this.bbsMapper.selectNoticeAll( keyword, paging.countPerPage,(paging.requestPage - 1) * (paging.countPerPage) );
-//
-//    }
+
+        return this.bbsMapper.selectMyNoticeById(id,bid, paging.countPerPage, (paging.requestPage - 1) * (paging.countPerPage));
+
+    }
 
 
     public BpReadVo[] getBpArticles(PagingModel paging, String keyword, String bbid) {
@@ -127,6 +128,13 @@ public NoticeReadVo[] getAnnounceNotice(){
         //만들어진지 1일이 지난 게시물의 새게시물 여부를 새로고침 한다.
 
         return this.bbsMapper.selectBpArticleByBoardId(bbid, keyword, paging.countPerPage, (paging.requestPage - 1) * (paging.countPerPage));
+
+    }
+
+    public BpReadVo[] getMyBpArticles(String id, PagingModel paging) {
+
+
+        return this.bbsMapper.selectBpArticleById(id,  paging.countPerPage, (paging.requestPage - 1) * (paging.countPerPage));
 
     }
 

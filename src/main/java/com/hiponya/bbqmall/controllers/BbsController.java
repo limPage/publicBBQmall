@@ -224,6 +224,7 @@ public class BbsController {
             result = WriteResult.NO_SUCH_BOARD;
         } else {
             notice.setBoardId(bid);
+            notice.setId(user.getId());
             System.out.println(notice.getBoardId());
 //            notice.setUserEmail(user.getEmail());
             result = this.bbsService.writeNotice(notice);
