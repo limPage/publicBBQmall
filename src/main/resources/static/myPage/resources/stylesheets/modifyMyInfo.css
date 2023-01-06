@@ -256,3 +256,7 @@ body > main > .content > form> table > tbody>tr>td>.panel.address>.dialog{
     position: absolute;
     transform: translate(-50% ,-50%);
 }
+body #MSideBarM{
+    color: rgba(0,0,0,0.9);
+    font-weight: 700;
+}

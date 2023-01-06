@@ -5,12 +5,12 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>BBQ몰 - 로그인</title>
+    <title>BBQ몰-마이페이지</title>
     <th:block th:replace="~{fragments/head :: common}"></th:block>
     <link rel="stylesheet" th:href="@{/bbs/resources/stylesheets/board.css}">
 
     <link rel="stylesheet" th:href="@{/myPage/resources/stylesheets/myShopping.css}">
-<!--    <script defer th:src="@{/member/resources/scripts/login.js}"></script>-->
+    <script defer th:src="@{/myPage/resources/scripts/myArticle.js}"></script>
 
     <script th:if="${session.user==null}">
 
@@ -30,7 +30,7 @@
 
 <main >
     <th:block th:replace="~{fragments/body ::myPageSideBar}"></th:block>
-
+    <input hidden id="bid" th:value="${bid}">
     <div class="content notice" th:if="${session.user!=null && bid!='bp'}">
         <div class="title-container">
             <h1 th:text="${bid=='pi'? '상품문의':'상품후기' }">상품문의</h1>

@@ -138,3 +138,8 @@ body> main> .my-page-content>form>input[type="submit"]{
     font-size: 1rem;
     cursor: pointer;
 }
+
+body #MSideBarW{
+    color: rgba(0,0,0,0.9);
+    font-weight: 700;
+}

@@ -37,26 +37,26 @@
         <tbody>
         <tr class="user-tr">
            <td class="user-menu-title">
-            <h1>임철홍님 반갑습니다.</h1>
-            <a th:href="@{/member/modifyMyInfo}">회원정보 수정</a>
+            <h1 th:text="${session.user.getName()+'님 반갑습니다.'}">임철홍님 반갑습니다.</h1>
+            <a class="modify-info" th:href="@{/member/modifyMyInfo}">회원정보 수정</a>
            </td>
             <td class="spring"></td>
             <td class="user-menu">
-                <span>   적립금 &nbsp; > </span>
-                <p><span>3,000</span><span>원</span></p>
+                <a th:href="@{/member/myShopping?bid=7}">   적립금 &nbsp; > </a>
+                <p><span>0</span><span>원</span></p>
             </td>
             <td class="user-menu">
-               <span>  쿠폰 &nbsp; > </span>
+               <a th:href="@{/member/myShopping?bid=8}">  쿠폰 &nbsp; > </a>
                 <p><span>0</span><span>장</span></p>
 
             </td>
             <td class="user-menu">
-           <span>      찜한 상품 &nbsp; > </span>
+           <a th:href="@{/member/myShopping?bid=4}">      찜한 상품 &nbsp; > </a>
                 <p><span>0</span><span>개</span></p>
 
             </td>
             <td class="user-menu">
-              <span>   최근 본 상품 &nbsp; > </span>
+              <a th:href="@{/member/myShopping?bid=5}">   최근 본 상품 &nbsp; > </a>
                 <p><span>0</span><span>개</span></p>
 
             </td>
@@ -66,7 +66,7 @@
         <tr class="user-order-tr">
             <td>
                 <h1>최근 주문 내역</h1>
-                <a>더보기&nbsp; ></a>
+                <a th:href="@{/member/myShopping?bid=1}">더보기&nbsp; ></a>
             </td>
 
             <td class="spring"></td>
@@ -125,11 +125,11 @@
         <tr class="service-row">
 
             <td class="service">
-                <h1>반품 교환</h1>
+                <h1><a th:href="@{/member/myShopping?bid=2}">반품 교환</a></h1>
                 <span>최근 1개월 내 내역이 없습니다.</span>
             </td>
             <td class="service">
-                 <h1>취소 환불</h1>
+                <h1><a th:href="@{/member/myShopping?bid=3}">취소 환불</a></h1>
                 <span>최근 1개월 내 내역이 없습니다.</span>
 
             </td>

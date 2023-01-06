@@ -31,7 +31,8 @@ body>main>.my-page-content>table>tbody>tr>.user-menu-title{
     display: flex;
     flex-direction: column;
 }
-body>main>.my-page-content>table>tbody>tr>.user-menu-title>a{
+body>main>.my-page-content>table>tbody>tr>.user-menu-title>a,
+body>main>.my-page-content>table>tbody>tr>td a{
     color: rgba(0,0,0,0.9);
 }
 
@@ -42,7 +43,7 @@ body>main>.my-page-content>table>tbody>.user-tr>td>h1{
     padding-top: 0.5rem;
     letter-spacing: -0.1rem;
 }
-body>main>.my-page-content>table>tbody>.user-tr>td>a{
+body>main>.my-page-content>table>tbody>.user-tr>td>.modify-info{
     width: unset;
     padding: 0.4rem;
     border: 0.0625rem solid rgba(0,0,0,0.2);

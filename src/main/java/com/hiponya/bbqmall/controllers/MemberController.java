@@ -395,7 +395,7 @@ public class MemberController {
         }else {
             board = "주문/배송 내역";
         }
-
+            modelAndView.addObject("bid", bid);
             modelAndView.addObject("board", board);
         return modelAndView;
     }
