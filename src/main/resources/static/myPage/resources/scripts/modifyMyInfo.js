@@ -93,6 +93,11 @@ form['addressFind'].addEventListener('click', () => {
 form.querySelector('[rel="addressFindPanel"]').addEventListener('click', () => {
     form.querySelector('[rel="addressFindPanel"]').classList.remove('visible');
 });
+form.addEventListener("keydown",e =>{
+    if(e.code==="Enter"){
+        e.preventDefault();
+    }
+})
 
 
 form.onsubmit=(e)=>{

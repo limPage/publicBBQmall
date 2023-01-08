@@ -1,0 +1,131 @@
+
+
+body>main>.content{
+    width: 100%;
+
+
+    display: block;
+    padding-top: 8rem;
+    padding-bottom: 6.25rem;
+
+}
+body>main>.content>ul{
+    align-items: center;
+    display: flex;
+    flex-direction: row ;
+    justify-content: flex-start;
+
+
+    /*padding: 0  0  5rem 0;*/
+
+
+
+}
+body>main>.content>ul>li{
+    width: 100%;
+    border-collapse:collapse;
+
+    border: rgba(0,0,0,0.05) solid 0.06rem;
+    border-right: none;
+    display: table-cell;
+
+}
+body>main>.content>ul>li:last-of-type{
+
+    border-right: rgba(0,0,0,0.05) solid 0.06rem;
+
+}
+body>main>.content>ul>li>a>i{
+    font-size: 3rem;
+    opacity: 80%;
+    max-width: 55px;
+    max-height:55px;
+    padding: 2rem 0;
+}
+
+
+body>main>.content>ul>li>a{
+width: 100%;
+height: calc(10rem - 0.125rem);
+
+
+    align-items: center;
+    display: flex;
+    flex-direction: column ;
+    justify-content: flex-start;
+
+    font-size: 15px;
+    color: rgba(0,0,0,0.8);
+
+
+}
+
+
+
+
+body>main>.content>.lookup>.title-row{
+
+    margin-top: 62px;
+    padding-bottom: 14px;
+    align-items: flex-end;
+    display: flex;
+    flex-direction: row ;
+    justify-content: flex-start;
+
+}
+body>main>.content>.lookup>.title-row>.more{
+    font-size: 1rem;
+    color: rgba(0,0,0,0.8);
+    font-weight: 600;
+    padding-left: 0.5rem;
+}
+
+
+body>main>.content>.lookup>.title-row>.spring{
+    flex: 1;
+}
+
+
+body>main>.content>.lookup>.title-row>.title{
+    font-size: 22px;
+
+    font-weight: 350;
+}
+
+body>main>.content>.lookup>.bar{
+    height: 2px;
+    width: 100%;
+    background-color: black;
+}
+body>main>.content>.lookup>.status-ul>li{
+    border-bottom: rgba(0,0,0,0.1) solid 1px;
+
+
+}
+
+body>main>.content>.lookup>.status-ul>li>div{
+    display: flex;
+    align-items: center;
+}
+
+
+body>main>.content>.lookup>.status-ul>li>div>.button{
+    cursor: pointer;
+    padding: 25px 9px 28px 13px;
+    font-size: 14px;
+  
+}
+
+
+body>main>.content>.lookup>.status-ul>li>div>span{
+    font-size: 28px;
+    font-weight: 700;
+    display: inline-block;
+    width: 35px;
+    text-align: center;
+    top: 3px;
+    left: 0.465rem;
+    position: relative;
+    color: rgba(0,0,0,0.8);
+}
+

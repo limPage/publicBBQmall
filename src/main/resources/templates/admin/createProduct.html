@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>BBQ몰 상품등록</title>
+
+
+    <th:block th:replace="~{fragments/head :: common}"></th:block>
+
+    <link rel="stylesheet" th:href="@{/admin/resources/stylesheets/admin.css}">
+    <!--    <script defer th:src="@{/member/resources/scripts/csCenter.js}"></script>-->
+
+
+</head>
+<body>
+<th:block th:replace="~{fragments/body :: header}"></th:block> <!-- block 자리에 body.html 파일의 replace 태그와 치환한다. -->
+<th:block th:replace="~{fragments/body :: cover}"></th:block>
+<th:block th:replace="~{fragments/body :: floatingBanner}"></th:block>
+
+<main class="cs-center">
+
+    <th:block th:replace="~{fragments/body ::adminSideBar}"></th:block>
+    <div class="content">
+        <div class="title-container">
+            <h1>공지사항 수정</h1>
+        </div>
+
+        <form>
+            <table>
+                <tbody>
+                <tr>
+                    <th>
+                        상품종류
+                    </th>
+
+                    <td>
+                        <label>
+                            <select>
+                            <option>
+                                선택
+                            </option>
+                            <option>
+                                치킨
+                            </option>
+                            <option>
+                                닭가슴살
+                            </option>
+                            <option>
+                                간편식
+                            </option>
+                            <option>
+                                기획전
+                            </option>
+
+                        </select>
+                        </label>
+
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        상품이름
+                    </th>
+                    <td>
+                        <label>
+
+                        <input type="text" name="name" placeholder="상품이름">
+                            </label>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        상품이미지
+                    </th>
+                    <td>
+                        <label>
+                        <input type="file">
+                        </label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        상품가격
+                    </th>
+                    <td>
+                        <label>
+                    <input type="number" name="price" placeholder="상품가격">
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        상품설명
+                    </th>
+                    <td>
+                        <label>
+
+                        <input type="text" name="name" placeholder="상품이름">
+                            </label>
+
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        상품상세이미지
+                    </th>
+                    <td>
+                        <label>
+                        <input type="file">
+                        </label>
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <th>
+                        상품재고
+                    </th>
+                    <td>
+                        <label>
+
+                        <input type="number" name="price" placeholder="상품재고">
+                            </label>
+                    </td>
+
+                </tr>
+                <tr>
+                    <th>
+                        판매개시
+                    </th>
+                    <td>
+                        <label>
+
+                        <input type="checkbox"  >
+                            </label>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        할인율
+                    </th>
+                    <td>
+                        <label>
+                        <input type="number" name="price" placeholder="할인율" value="0">
+                        </label>
+
+                    </td>
+                </tr>
+
+
+                </tbody>
+            </table>
+
+                <input type="button" value="등록하기">
+        </form>
+
+
+    </div>
+
+
+</main>
+
+<th:block th:replace="~{fragments/body :: footer}"></th:block>
+
+</body>
+
+</html>

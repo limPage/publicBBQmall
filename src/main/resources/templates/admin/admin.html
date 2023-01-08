@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>BBQ몰 상품관리</title>
+
+
+    <th:block th:replace="~{fragments/head :: common}"></th:block>
+
+    <link rel="stylesheet" th:href="@{/admin/resources/stylesheets/admin.css}">
+<!--    <script defer th:src="@{/member/resources/scripts/csCenter.js}"></script>-->
+
+
+</head>
+<body>
+<th:block th:replace="~{fragments/body :: header}"></th:block> <!-- block 자리에 body.html 파일의 replace 태그와 치환한다. -->
+<th:block th:replace="~{fragments/body :: cover}"></th:block>
+<th:block th:replace="~{fragments/body :: floatingBanner}"></th:block>
+
+<main class="cs-center">
+
+    <th:block th:replace="~{fragments/body ::adminSideBar}"></th:block>
+    <div class="content">
+
+
+        <ul>
+            <li>
+
+                <a th:href="@{/admin/create}">
+                    <i class="fa-solid fa-plus"></i>
+                    상품등록
+                </a>
+
+            </li>
+            <li>
+
+
+                <a th:href="@{/admin/read}">
+                    <i class="fa-solid fa-drumstick-bite"></i>
+                    상품조회
+                </a>
+
+            </li>
+            <li>
+
+
+                <a th:href="@{/admin/update}">
+                    <i class="fa-solid fa-file-pen"></i>
+                    상품수정
+                </a>
+
+            </li>
+            <li>
+
+
+                <a th:href="@{/admin/delete}">
+                    <i class="fa-solid fa-trash-can"></i>
+                    상품삭제
+                </a>
+
+            </li>
+
+
+
+
+        </ul>
+
+        <div class="lookup">
+            <div class="title-row">
+                <h1 class="title">상품현황</h1>
+                <span class="spring"></span>
+                <a  class="more">등록내역</a>/
+                <a  class="more">수정내역</a>/
+                <a  class="more">삭제내역</a>
+            </div>
+            <div class="bar"></div>
+            <ul class="status-ul">
+
+                <li class="status">
+                    <div>
+                        <span>C</span>
+                        <a class="button">[상품등록] "비비큐 세트" 11232원 1232-12-21-12:12:12</a>
+                    </div>
+                </li>
+
+                <li class="status">
+                    <div>
+                        <span>U</span>
+                        <a class="button">[상품수정] "비비큐 세트" 11232원 1232-12-21-12:12:12 </a>
+                    </div>
+                </li>
+
+
+
+                <li class="status">
+                    <div>
+
+                        <span>D</span>
+                        <a class="button">[상품수정] "비비큐 세트" 11232원 1232-12-21-12:12:12</a>
+                    </div>
+                </li>
+
+
+
+            </ul>
+        </div>
+
+
+    </div>
+
+
+</main>
+
+<th:block th:replace="~{fragments/body :: footer}"></th:block>
+
+</body>
+
+</html>
