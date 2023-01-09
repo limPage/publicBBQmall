@@ -1,10 +1,7 @@
 package com.hiponya.bbqmall.controllers;
 
 import com.hiponya.bbqmall.entities.member.UserEntity;
-import com.hiponya.bbqmall.entities.product.CartEntity;
-import com.hiponya.bbqmall.entities.product.CategoryEntity;
-import com.hiponya.bbqmall.entities.product.ProductEntity;
-import com.hiponya.bbqmall.entities.product.SortEntity;
+import com.hiponya.bbqmall.entities.product.*;
 import com.hiponya.bbqmall.enums.CommonResult;
 import com.hiponya.bbqmall.enums.member.CategoryResult;
 import com.hiponya.bbqmall.interfaces.IResult;
@@ -64,19 +61,43 @@ public class CategoryController {
     }
 
     @RequestMapping(value="wishlist", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getWishlist() {
+    public ModelAndView getWishlist(@SessionAttribute(value = "user", required = false) UserEntity user,
+                                    @RequestParam(value = "pid") int pid,
+                                    @RequestParam(value="quantity") int quantity) {
         ModelAndView modelAndView = new ModelAndView("home/wishlist");
+        ProductEntity product = this.categoryService.getProductByIndex(pid);
 
+        WishlistEntity wishlist = this.categoryService.getWishlist(user.getId());
+        WishlistEntity[] wishlists = this.categoryService.getWishlists(user.getId());
+        Integer sumPrice =  this.categoryService.getWishlistSumPrice(user.getId());
+        Integer salePrice = this.categoryService.getWishlistSumSalePrice(user.getId());
 
+        modelAndView.addObject("wishlists", wishlists);
+        modelAndView.addObject("sumPrice", sumPrice);
+        modelAndView.addObject("salePrice", salePrice);
+        modelAndView.addObject("wishlist", wishlist);
 
-
+        modelAndView.addObject("product", product);
+        modelAndView.addObject("quantity", quantity);
+        modelAndView.addObject("pid", pid);
 
         return modelAndView;
     }
 
-    @RequestMapping(value = "cart", method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public String postWishlist() {
-        return null;
+    @RequestMapping(value = "wishlist", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String postWishlist(@SessionAttribute(value = "user", required = false) UserEntity user,
+                               WishlistEntity wishlist) {
+        JSONObject responseObject = new JSONObject();
+        if (user == null) {
+            responseObject.put("result", CommonResult.FAILURE.name().toLowerCase());
+        } else {
+            wishlist.setId(user.getId());
+
+            Enum<?> result = this.categoryService.insertWishlist(user.getId(), wishlist);
+            responseObject.put("result", result.name().toLowerCase());
+        }
+        return responseObject.toString();
     }
 
     @RequestMapping(value = "cart", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)

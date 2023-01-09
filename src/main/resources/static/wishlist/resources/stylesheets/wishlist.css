@@ -35,6 +35,13 @@ body > header {
     box-shadow: 0 0 0.3rem rgba(0, 0, 0, 15%);
 }
 
+#cartForm > .wishlist-wrap {
+    align-items : stretch;
+    display : flex;
+    flex-direction : column;
+    justify-content : stretch;
+}
+
 .title-container > h2 {
     font-size : 2rem;
     margin-top : 3rem;
@@ -78,7 +85,7 @@ body > header {
 }
 
 .shipping-container > .delivery-info > .detail > .shipping-title > .btn-area {
-    margin-left : 27.5rem;
+    margin-left : 17.5rem;
 }
 
 .shipping-container > .delivery-info > .detail > .shipping-title > .btn-area > .resp-btn1,
@@ -90,4 +97,40 @@ body > header {
 .cart-products > .cart-products-detail {
     margin-top : 2rem;
     margin-left : 2rem;
+}
+
+.cart-products {
+    border-bottom : 0.0125rem solid rgb(128, 140, 152);
+    padding-bottom : 1rem;
+}
+
+.selected-btn-group {
+    padding-top : 1rem;
+}
+
+.cart-left {
+    padding-right : 1rem;
+}
+
+.total-sum-price {
+    border : 0.0125rem solid rgb(128, 140, 152);
+    padding : 1rem;
+}
+
+.total-sum-price > .cart-right > .total-title {
+    padding-bottom : 1rem;
+}
+
+.total-sum-price> .list3 {
+    border-bottom : 0.0125rem dotted rgb(128, 140, 152);
+    padding-bottom : 1rem;
+}
+
+.total-sum-price > .list4 {
+    padding-top : 1rem;
+}
+
+.cart-order-btn-area > li > .all-order-btn {
+
+    width : 30rem;
 }

@@ -1,10 +1,8 @@
 package com.hiponya.bbqmall.services;
 
 import com.hiponya.bbqmall.entities.member.EmailAuthEntity;
-import com.hiponya.bbqmall.entities.product.CartEntity;
-import com.hiponya.bbqmall.entities.product.CategoryEntity;
-import com.hiponya.bbqmall.entities.product.ProductEntity;
-import com.hiponya.bbqmall.entities.product.SortEntity;
+import com.hiponya.bbqmall.entities.member.UserEntity;
+import com.hiponya.bbqmall.entities.product.*;
 import com.hiponya.bbqmall.enums.CommonResult;
 import com.hiponya.bbqmall.enums.member.CategoryResult;
 import com.hiponya.bbqmall.enums.member.VerifyEmailAuthResult;
@@ -56,6 +54,23 @@ public class CategoryService {
         return CommonResult.SUCCESS;
     }
 
+    public Enum<? extends IResult> insertWishlist(String userId, WishlistEntity wishlist) {
+
+        ProductEntity product = this.categoryMapper.selectProductByIndex(wishlist.getProductIndex());
+        if(product == null) {
+            return CommonResult.FAILURE; // 게시글이 없다면 FAILURE
+        }
+        return this.categoryMapper.insertWishlistByIndex(userId, wishlist.getProductIndex(), wishlist.getQuantity()) > 0 ? CommonResult.SUCCESS : CommonResult.FAILURE;
+    }
+
+    public Integer getWishlistSumPrice(String id) {
+        return this.categoryMapper.selectWishlistSumPriceByUserId(id);
+    }
+
+    public Integer getWishlistSumSalePrice(String id) {
+        return this.categoryMapper.selectWishlistSumSalePriceByUserId(id);
+    }
+
     public ProductEntity getProductByIndex(int pid) {
 
         return this.categoryMapper.selectProductByIndex(pid);
@@ -79,6 +94,13 @@ public class CategoryService {
 
     public SortEntity[] getSorts() {
         return this.categoryMapper.selectSorts();
+    }
+
+    public WishlistEntity getWishlist(String id) {
+        return this.categoryMapper.selectWishlist(id);
+    }
+    public WishlistEntity[] getWishlists(String id) {
+        return this.categoryMapper.selectWishlists(id);
     }
 
 

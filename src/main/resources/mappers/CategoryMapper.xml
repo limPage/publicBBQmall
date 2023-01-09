@@ -43,6 +43,27 @@
         from bbqmall.sort
     </select>
 
+    <select id="selectWishlist" resultType = "com.hiponya.bbqmall.entities.product.WishlistEntity">
+        select `index` as `index`,
+               `id` as `id`,
+               `product_index` as `productIndex`,
+               `quantity` as `quantity`
+        from bbqmall.wishlist where id=#{id}
+    </select>
+
+    <select id="selectWishlists" resultType="com.hiponya.bbqmall.vos.product.WishlistVo">
+        select `index` as `index`,
+               `id` as `id`,
+               `product`.`product_index` as `productIndex`,
+               `quantity` as `quantity`,
+               `product`.`price` as `price`,
+               `product`.`product_name` as `productName`,
+                `product`.`sale_quantity` as `saleQuantity`
+        from bbqmall.wishlist
+                 LEFT JOIN `bbqmall`.`products` AS `product` on `wishlist`.`product_index` = `product`.`product_index`
+        where binary `id` = #{id}
+    </select>
+
     <select id="selectSaleQuantityByIndex" resultType="com.hiponya.bbqmall.entities.product.ProductEntity">
         select `product_index` as `productIndex`,
                `detail_index` as `detailIndex`,
@@ -86,6 +107,23 @@
                `modified_on` as `modifiedOn`
             from bbqmall.cart where index=#{cid}
     </select>
+
+    <select id = "selectWishlistSumPriceByUserId" resultType="int">
+        select sum(`price` * `quantity` - (`price` * `quantity` * (sale_quantity / 100))) from bbqmall.wishlist
+            LEFT JOIN `bbqmall`.`products` AS `product` on `wishlist`.`product_index` = `product`.`product_index`
+            where id = #{id}
+    </select>
+
+    <select id="selectWishlistSumSalePriceByUserId" resultType = "int">
+        select sum((`price` * `quantity` * (sale_quantity / 100))) from bbqmall.wishlist
+             LEFT JOIN `bbqmall`.`products` AS `product` on `wishlist`.`product_index` = `product`.`product_index`
+        where id = #{id}
+    </select>
+
+    <insert id="insertWishlistByIndex" parameterType="com.hiponya.bbqmall.entities.product.WishlistEntity"
+    useGeneratedKeys="true" keyColumn="index" keyProperty="index">
+        insert into bbqmall.wishlist ( `id`, `product_index`, `quantity`) values (#{id}, #{productIndex}, #{quantity})
+    </insert>
 
 <!--    <insert id="insertArticle" parameterType="com.khj.studymemberbbs.entities.bbs.ArticleEntity"-->
 <!--            useGeneratedKeys="true" keyColumn="index" keyProperty="index">-->

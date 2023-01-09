@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title th:text = "${'BBQ몰 - '}"></title>
+    <title th:text = "${'BBQ몰 - 장바구니'}"></title>
     <link rel="stylesheet" th:href="@{/bbq/resources/stylesheets/index.css}">
     <link rel="stylesheet" th:href="@{/wishlist/resources/stylesheets/wishlist.css}">
     <th:block th:replace="~{fragments/head :: common}"></th:block>
@@ -16,6 +16,7 @@
 <th:block th:replace="~{fragments/body :: header}"></th:block>
 <main>
 <!--    <input type="hidden" name = "pid" id="pid" th:value="${product.getProductIndex()}">-->
+    <input type="hidden" name="wid" id="wid" th:value="${wishlist.getIndex()}">
     <div class="wishlist-wrap">
         <div class="wishlist-container">
             <div class="title-container">
@@ -24,22 +25,15 @@
                 </h2>
             </div>
 
-            <form class="cart-form" name="cartForm" id="cartForm">
+            <form class="cart-form" name="cartForm" id="cartForm" >
                 <ul class="wishlist-wrap">
-                    <li class="cart-left">
+                    <li class="cart-left" th:each="wishlist : ${wishlists}">
                         <div class="cart-contents">
                             <ul class="cart-contents-top">
                                 <li class="aa">
                                     <div class="select-btn-container">
-                                        <label class="checkbox-all-select">
-                                            <input type="checkbox" class="select-btn" checked="checked">
-                                            <span class="selected">전체선택</span>
-                                        </label>
-                                        <span class="button-container">
-                                            <button type="button" class="order-button">선택상품 주문하기</button>
-                                            <button type="button" class="wishlist-button">선택상품 찜</button>
-                                            <button type="button" class="delete-button">선택상품 삭제</button>
-                                        </span>
+
+
                                     </div>
                                 </li>
 
@@ -68,15 +62,15 @@
                                             <div class="products-top">
                                                 <label>
                                                     <input type="checkbox" name="cart-option" checked="checked">
-                                                    <span class="products-name">/th:text=${product.getProductName} 넣을곳</span>
+<!--                                                    <span class="products-name" th:text="${product.getProductName}">/th:text="${product.getProductName}" 넣을곳</span>-->
                                                 </label>
-                                                <button type="button" class="delete-button" title="상품 삭제">삭제</button>
+                                                <button type="button" class="delete-button" title="상품 삭제" id="deleteButton">삭제</button>
                                             </div>
                                             <div class="product-contents">
                                                 <div class="block">
                                                     <ul>
                                                         <li class="image-area">
-                                                            <a href="#">
+                                                            <a th:href = "@{/view (pid = ${wishlist.getProductIndex()})}">
                                                                 <img src = "/resources/images/new1.png" width="100">
                                                             </a>
                                                         </li>
@@ -84,9 +78,9 @@
                                                         <li class="option-area">
                                                             <div class="cart-quantity">
                                                                 <span class="quantity-title">수량</span>
-                                                                <span class="quantity-count">"th:text=${quantity} 넣을곳"</span>
+                                                                <span class="quantity-count" th:text="${wishlist.getQuantity()}">"th:text=${quantity} 넣을곳"</span>
                                                                 <span class="price-quantity">(
-                                                                    <span>"th:text=${product.getPrice()*quantity} 넣을곳"</span>
+                                                                    <span th:text="${wishlist.getPrice() * wishlist.getQuantity() + '원'}">"th:text="${wishlist.getPrice()*quantity}" 넣을곳"</span>
                                                                     )</span>
                                                             </div>
                                                         </li>
@@ -96,15 +90,15 @@
                                                 <ul class="block2">
                                                     <li class="base-price">
                                                         <span class="price-title">상품금액</span>
-                                                        <span class="price">"th:text=${product.getPrice * quantity}"넣을곳</span>
+                                                        <span class="price" th:text="${wishlist.getPrice() * wishlist.getQuantity()} + '원'">"th:text="${product.getPrice * quantity}"넣을곳"</span>
                                                     </li>
                                                     <li class="sale-price">
                                                         <span class="sale-price-title"> 할인금액 </span>
-                                                        <span class="sale-price">"th:text=${product.getPrice() / 100 * product.getSaleQuantity * quantity} 넣을곳</span>
+                                                        <span class="sale-price" th:text="${wishlist.getPrice() / 100 * wishlist.getSaleQuantity() * wishlist.getQuantity()} + '원'">"th:text="${product.getPrice() / 100 * product.getSaleQuantity * quantity}" 넣을곳</span>
                                                     </li>
                                                     <li class="total-price">
                                                         <span class="total-price-title">할인적용금액</span>
-                                                        <span class="total-price">"th:text=${(product.getPrice() - (product.getPrice() / 100 * product.getSaleQuantity)) * quantity} 넣을곳</span>
+                                                        <span class="total-price" th:text="${(wishlist.getPrice() - (wishlist.getPrice() / 100 * wishlist.getSaleQuantity())) * wishlist.getQuantity()} + '원'">"th:text="${(product.getPrice() - (product.getPrice() / 100 * product.getSaleQuantity)) * quantity}" 넣을곳</span>
                                                     </li>
                                                 </ul>
 
@@ -123,18 +117,7 @@
                             </div>
                         </div>
 
-                        <div class="selected-btn-group">
-                            <label class="checkbox-all-selected">
-                                <input type="checkbox" class="select-all-btn" checked="checked">
-                                <span class="all-select">전체선택</span>
-                            </label>
 
-                            <div class="button-container">
-                                <button type="button" class="selected-order-button">선택상품 주문하기</button>
-                                <button type="button" class="selected-wishlist-btn">선택상품 찜</button>
-                                <button type="button" class="selected-del-btn">선택상품 삭제</button>
-                            </div>
-                        </div>
                     </li>
 
                     <li class="cart-right">
@@ -144,7 +127,7 @@
                                 <li class="th">총 상품금액</li>
                                 <li class="td">
                                     <span class="product-price">
-                                        <span>"th:text=${product.getPrice() * quantity} 넣을곳"</span>
+                                        <span th:text="${sumPrice} + '원'">"th:text=${product.getPrice() * quantity} 넣을곳"</span>
                                     </span>
                                 </li>
                             </ul>
@@ -162,7 +145,7 @@
                                 <li class="th">총 할인</li>
                                 <li class="td">
                                     <span class="total-sale-price">
-                                        <span>th:text="${(product.getPrice() / product.getSaleQuantity()) * quantity}" 넣을곳</span>
+                                        <span th:text="${salePrice} + '원'">th:text="${(product.getPrice() / product.getSaleQuantity()) * quantity}" 넣을곳</span>
                                     </span>
                                 </li>
                             </ul>
@@ -171,7 +154,7 @@
                                 <li class="th">총 결제금액</li>
                                 <li class="td">
                                     <span class="total-price">
-                                        <span>th:text="${(product.getPrice - (product.getPrice() / product.getSaleQuantity())) * quantity} + 3000" 넣을곳</span>
+                                        <span th:text="${sumPrice - salePrice} + 3000 + '원'">th:text="${(product.getPrice - (product.getPrice() / product.getSaleQuantity())) * quantity} + 3000" 넣을곳</span>
                                     </span>
                                 </li>
                             </ul>
@@ -187,6 +170,7 @@
 
                         </div>
                     </li>
+
                 </ul>
                 <div class="total-price-btn">
 
