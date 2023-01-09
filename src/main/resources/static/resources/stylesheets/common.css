@@ -879,8 +879,74 @@ body>main>.my-page-side>ul{
 
 
 
+body>main>.content>.lookup>.title-row{
+
+    margin-top: 62px;
+    padding-bottom: 14px;
+    align-items: flex-end;
+    display: flex;
+    flex-direction: row ;
+    justify-content: flex-start;
+
+}
+body>main>.content>.lookup>.title-row>.more{
+    font-size: 1rem;
+    color: rgba(0,0,0,0.8);
+    font-weight: 600;
+    padding-left: 0.5rem;
+}
 
 
+body>main>.content>.lookup>.title-row>.spring{
+    flex: 1;
+}
+
+
+body>main>.content>.lookup>.title-row>.title{
+    font-size: 22px;
+
+    font-weight: 350;
+}
+
+body>main>.content>.lookup>.bar{
+    height: 2px;
+    width: 100%;
+    background-color: black;
+}
+body>main>.content>.lookup>.status-ul>li{
+    border-bottom: rgba(0,0,0,0.1) solid 1px;
+
+
+}
+
+body>main>.content>.lookup>.status-ul>li>div{
+    display: flex;
+    align-items: center;
+}
+
+
+body>main>.content>.lookup>.status-ul>li>div>.button{
+    cursor: pointer;
+    padding: 25px 9px 28px 13px;
+    font-size: 14px;
+
+}
+
+
+body>main>.content>.lookup>.status-ul>li>div>span{
+    font-size: 28px;
+    font-weight: 700;
+    display: inline-block;
+    width: 35px;
+    text-align: center;
+    top: 3px;
+    left: 0.465rem;
+    position: relative;
+    color: rgba(0,0,0,0.8);
+}
+
+
+/*어드민 사이드바*/
 
 
 .--cover{

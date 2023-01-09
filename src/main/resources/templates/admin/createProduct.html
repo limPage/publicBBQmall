@@ -7,8 +7,8 @@
 
     <th:block th:replace="~{fragments/head :: common}"></th:block>
 
-    <link rel="stylesheet" th:href="@{/admin/resources/stylesheets/admin.css}">
-    <!--    <script defer th:src="@{/member/resources/scripts/csCenter.js}"></script>-->
+    <link rel="stylesheet" th:href="@{/admin/resources/stylesheets/createProduct.css}">
+        <script defer th:src="@{/admin/resources/scripts/createProduct.js}"></script>
 
 
 </head>
@@ -17,15 +17,15 @@
 <th:block th:replace="~{fragments/body :: cover}"></th:block>
 <th:block th:replace="~{fragments/body :: floatingBanner}"></th:block>
 
-<main class="cs-center">
+<main >
 
     <th:block th:replace="~{fragments/body ::adminSideBar}"></th:block>
     <div class="content">
         <div class="title-container">
-            <h1>공지사항 수정</h1>
+            <h1>상품등록</h1>
         </div>
 
-        <form>
+        <form id="form">
             <table>
                 <tbody>
                 <tr>
@@ -35,24 +35,99 @@
 
                     <td>
                         <label>
-                            <select>
-                            <option>
-                                선택
-                            </option>
-                            <option>
-                                치킨
-                            </option>
-                            <option>
-                                닭가슴살
-                            </option>
-                            <option>
-                                간편식
-                            </option>
-                            <option>
-                                기획전
-                            </option>
+                            <select name="menuIndex">
+                                <option value="0" selected>
+                                    선택
+                                </option>
+                                <option value=1>
+                                    치킨
+                                </option>
+                                <option value=2>
+                                    닭가슴살
+                                </option>
+                                <option value=3>
+                                    간편식
+                                </option>
 
-                        </select>
+                            </select>
+                        </label>
+
+                        <label>
+                            <select name="detailIndex1" class="detail-index">
+                                <option value="0">
+                                    선택
+                                </option>
+                                <option value="1">
+                                    튀김류
+                                </option>
+                                <option value="2">
+                                    구이류
+                                </option>
+                                <option value="3">
+                                    순살
+                                </option>
+                                <option value="4">
+                                    봉
+                                </option>
+                                <option value="5">
+                                    닭갈비
+                                </option>
+
+
+
+
+
+
+                            </select>
+                        </label>
+
+                        <label>
+                            <select name="detailIndex2" class="detail-index">
+                                <option value="0">
+                                    선택
+                                </option>
+                                <option value="6">
+                                    패키지
+                                </option>
+                                <option value="7">
+                                    수비드
+                                </option>
+                                <option value="8">
+                                    소세지&핫바
+                                </option>
+                                <option value="9">
+                                    만두&육포
+                                </option>
+                                <option value="10">
+                                    닭가슴살
+                                </option>
+                                <option value="11">
+                                    스테이크&큐브
+                                </option>
+                            </select>
+                        </label>
+
+                        <label>
+                            <select name="detailIndex3" class="detail-index">
+                                <option value="0">
+                                    선택
+                                </option>
+                                <option value="12">
+                                    즉석간편식
+                                </option>
+                                <option value="13">
+                                    안주
+                                </option>
+                                <option value="14">
+                                    탕찜
+                                </option>
+                                <option value="15">
+                                    혼합세트
+                                </option>
+                                <option value="16">
+                                    간식류
+                                </option>
+                            </select>
                         </label>
 
                     </td>
@@ -64,8 +139,8 @@
                     <td>
                         <label>
 
-                        <input type="text" name="name" placeholder="상품이름">
-                            </label>
+                            <input type="text" name="productName" placeholder="상품이름">
+                        </label>
 
                     </td>
                 </tr>
@@ -76,8 +151,20 @@
                     </th>
                     <td>
                         <label>
-                        <input type="file">
+
+                            <input hidden multiple class="images" name="images" type="file" accept="image/*">
+
+
+
+                            <a class="image-select-button" rel="imageSelectButton" href="#">이미지선택...</a>
+
                         </label>
+                        <label class="image-container" rel="imageContainer">
+                            <span class="no-image" rel="noImage"> 선택된 이미지가 없습니다.</span>
+
+
+                        </label>
+
                     </td>
                 </tr>
 
@@ -87,7 +174,8 @@
                     </th>
                     <td>
                         <label>
-                    <input type="number" name="price" placeholder="상품가격">
+                            <input type="number" name="price" placeholder="상품가격">
+                            <span>원</span>
                         </label>
                     </td>
                 </tr>
@@ -98,19 +186,31 @@
                     <td>
                         <label>
 
-                        <input type="text" name="name" placeholder="상품이름">
-                            </label>
+                            <textarea  name="text" placeholder="상품설명"></textarea>
+                        </label>
 
                     </td>
                 </tr>
                 <tr>
                     <th>
-                        상품상세이미지
+                        상품상세<br>이미지
                     </th>
                     <td>
                         <label>
-                        <input type="file">
+
+                            <input hidden multiple class="images" name="images" type="file" accept="image/*">
+
+
+
+                            <a class="image-select-button" rel="imageSelectButton" href="#">이미지선택...</a>
+
                         </label>
+                        <label class="image-container"  rel="imageContainer">
+                            <span class="no-image" rel="noImage"> 선택된 이미지가 없습니다.</span>
+
+
+                        </label>
+
                     </td>
 
                 </tr>
@@ -122,20 +222,21 @@
                     <td>
                         <label>
 
-                        <input type="number" name="price" placeholder="상품재고">
-                            </label>
+                            <input type="number" name="amount" placeholder="상품재고">
+                            <span>개</span>
+                        </label>
                     </td>
 
                 </tr>
-                <tr>
+                <tr class="onSale-tr">
                     <th>
                         판매개시
                     </th>
-                    <td>
+                    <td >
                         <label>
-
-                        <input type="checkbox"  >
-                            </label>
+                            <span> 등록과 동시에 판매 유무</span>
+                            <input type="checkbox">
+                        </label>
                     </td>
                 </tr>
                 <tr>
@@ -144,7 +245,8 @@
                     </th>
                     <td>
                         <label>
-                        <input type="number" name="price" placeholder="할인율" value="0">
+                            <input type="number" name="saleQuantity" placeholder="할인율" value="0">
+                            <span>%</span>
                         </label>
 
                     </td>
@@ -154,7 +256,7 @@
                 </tbody>
             </table>
 
-                <input type="button" value="등록하기">
+            <input type="button" value="등록하기">
         </form>
 
 
