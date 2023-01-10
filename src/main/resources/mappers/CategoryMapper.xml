@@ -32,7 +32,7 @@
                `created_on` as `createdOn`,
                `modified_on` as `modifiedOn`,
                `amount` as `amount`,
-               `onsale` as `onsale`,
+               `on_sale` as `onSale`,
                `sale_quantity` as `saleQuantity`
         from bbqmall.products
         <if test="cid != null">where `detail_index` = #{cid}</if>
@@ -46,15 +46,20 @@
     <select id="selectWishlist" resultType = "com.hiponya.bbqmall.entities.product.WishlistEntity">
         select `index` as `index`,
                `id` as `id`,
-               `product_index` as `productIndex`,
-               `quantity` as `quantity`
-        from bbqmall.wishlist where id=#{id}
+               `wishlist`.`product_index` as `productIndex`,
+               `quantity` as `quantity`,
+               `product`.`price` as `price`,
+               `product`.`product_name` as `productName`,
+               `product`.`sale_quantity` as `saleQuantity`
+        from bbqmall.wishlist
+                 LEFT JOIN `bbqmall`.`products` AS `product` on `wishlist`.`product_index` = `product`.`product_index`
+        where `index`=#{index}
     </select>
 
     <select id="selectWishlists" resultType="com.hiponya.bbqmall.vos.product.WishlistVo">
         select `index` as `index`,
                `id` as `id`,
-               `product`.`product_index` as `productIndex`,
+               `wishlist`.`product_index` as `productIndex`,
                `quantity` as `quantity`,
                `product`.`price` as `price`,
                `product`.`product_name` as `productName`,
@@ -74,7 +79,7 @@
                `created_on` as `createdOn`,
                `modified_on` as `modifiedOn`,
                `amount` as `amount`,
-               `onsale` as `onsale`,
+               `on_sale` as `onSale`,
                `sale_quantity` as `saleQuantity`
         from bbqmall.products
         where binary product_index = #{productIndex}
@@ -91,7 +96,7 @@
                `created_on` as `createdOn`,
                `modified_on` as `modifiedOn`,
                `amount` as `amount`,
-               `onsale` as `onsale`,
+               `on_sale` as `onSale`,
                `sale_quantity` as `saleQuantity`
         from bbqmall.products
         where binary product_index = #{pid}
@@ -124,6 +129,15 @@
     useGeneratedKeys="true" keyColumn="index" keyProperty="index">
         insert into bbqmall.wishlist ( `id`, `product_index`, `quantity`) values (#{id}, #{productIndex}, #{quantity})
     </insert>
+
+    <delete id="deleteWishlistByIndex">
+        delete
+        from bbqmall.wishlist
+        where `index` = #{index}
+            limit 1
+    </delete>
+
+
 
 <!--    <insert id="insertArticle" parameterType="com.khj.studymemberbbs.entities.bbs.ArticleEntity"-->
 <!--            useGeneratedKeys="true" keyColumn="index" keyProperty="index">-->

@@ -27,7 +27,6 @@ cartButton.addEventListener('click', ()=> {
                 const responseObject = JSON.parse(xhr.responseText); // responseObject에 controller에서 받아온 값을 넣고
                 switch(responseObject['result']) { // responseObject의 값을 switch할 때
                     case 'success':
-                        const pid = responseObject['pid'];
                         window.location.href='./wishlist?pid='+pid.value+'&quantity='+quantityNumber.value;
                         alert('작성 성공');
                         break;

@@ -15,8 +15,7 @@
 <body>
 <th:block th:replace="~{fragments/body :: header}"></th:block>
 <main>
-<!--    <input type="hidden" name = "pid" id="pid" th:value="${product.getProductIndex()}">-->
-    <input type="hidden" name="wid" id="wid" th:value="${wishlist.getIndex()}">
+    <input type="hidden" name = "pid" id="pid" th:value="${product.getProductIndex()}">
     <div class="wishlist-wrap">
         <div class="wishlist-container">
             <div class="title-container">
@@ -26,13 +25,13 @@
             </div>
 
             <form class="cart-form" name="cartForm" id="cartForm" >
+
                 <ul class="wishlist-wrap">
-                    <li class="cart-left" th:each="wishlist : ${wishlists}">
+                    <li class="cart-left">
                         <div class="cart-contents">
                             <ul class="cart-contents-top">
                                 <li class="aa">
                                     <div class="select-btn-container">
-
 
                                     </div>
                                 </li>
@@ -57,12 +56,13 @@
 
                                         </ul>
                                     </li>
-                                    <li class="cart-products" id="cartProducts">
+                                    <li class="cart-products" id="cartProducts"  th:each="wishlist : ${wishlists}">
                                         <div class="cart-products-detail">
                                             <div class="products-top">
+                                                <input type="hidden" name = "wishlistIndex" id="wishlistIndex" class="wishlist-index" th:value="${wishlist.getIndex()}">
                                                 <label>
                                                     <input type="checkbox" name="cart-option" checked="checked">
-<!--                                                    <span class="products-name" th:text="${product.getProductName}">/th:text="${product.getProductName}" 넣을곳</span>-->
+                                                    <span class="products-name" th:text="${product.getProductName}">/th:text="${product.getProductName}" 넣을곳</span>
                                                 </label>
                                                 <button type="button" class="delete-button" title="상품 삭제" id="deleteButton">삭제</button>
                                             </div>

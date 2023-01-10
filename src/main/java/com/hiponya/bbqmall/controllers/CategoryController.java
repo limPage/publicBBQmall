@@ -67,7 +67,6 @@ public class CategoryController {
         ModelAndView modelAndView = new ModelAndView("home/wishlist");
         ProductEntity product = this.categoryService.getProductByIndex(pid);
 
-        WishlistEntity wishlist = this.categoryService.getWishlist(user.getId());
         WishlistEntity[] wishlists = this.categoryService.getWishlists(user.getId());
         Integer sumPrice =  this.categoryService.getWishlistSumPrice(user.getId());
         Integer salePrice = this.categoryService.getWishlistSumSalePrice(user.getId());
@@ -75,7 +74,6 @@ public class CategoryController {
         modelAndView.addObject("wishlists", wishlists);
         modelAndView.addObject("sumPrice", sumPrice);
         modelAndView.addObject("salePrice", salePrice);
-        modelAndView.addObject("wishlist", wishlist);
 
         modelAndView.addObject("product", product);
         modelAndView.addObject("quantity", quantity);
@@ -93,12 +91,32 @@ public class CategoryController {
             responseObject.put("result", CommonResult.FAILURE.name().toLowerCase());
         } else {
             wishlist.setId(user.getId());
-
-            Enum<?> result = this.categoryService.insertWishlist(user.getId(), wishlist);
+            Enum<?> result = this.categoryService.insertWishlist(wishlist);
             responseObject.put("result", result.name().toLowerCase());
+            System.out.println(wishlist.getProductIndex());
         }
         return responseObject.toString();
     }
+
+    @RequestMapping(value = "wishlist", method= RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public String deleteWishlist(@SessionAttribute(value = "user", required = false) UserEntity user,
+                                 @RequestParam(value = "wishlistIndex") int wishlistIndex) {
+        // CommentEntity를 받아오는 이유 : formData.append('index', commentObject['index']); <- 에 index를 전달하기 위해
+        // index를 전달하는 이유 : 지워야할 comment를 완벽하게 특정할 수 있는 키이기 때문에(기본 키여서 겹치지 않기때문에)
+
+        WishlistEntity wishlist = new WishlistEntity();
+        wishlist.setIndex(wishlistIndex);
+        System.out.println(wishlist.getIndex());
+        wishlist.setId(user.getId());
+        Enum<? extends IResult> result = this.categoryService.deleteWishlist(wishlist, user);
+        System.out.println(wishlist.getIndex());
+
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("result", result.name().toLowerCase());
+
+        return responseObject.toString();
+    }
+
 
     @RequestMapping(value = "cart", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getCart(@SessionAttribute(value = "user",required = false) UserEntity user,

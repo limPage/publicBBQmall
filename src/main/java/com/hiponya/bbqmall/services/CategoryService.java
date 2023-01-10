@@ -4,6 +4,7 @@ import com.hiponya.bbqmall.entities.member.EmailAuthEntity;
 import com.hiponya.bbqmall.entities.member.UserEntity;
 import com.hiponya.bbqmall.entities.product.*;
 import com.hiponya.bbqmall.enums.CommonResult;
+import com.hiponya.bbqmall.enums.category.WishlistDeleteResult;
 import com.hiponya.bbqmall.enums.member.CategoryResult;
 import com.hiponya.bbqmall.enums.member.VerifyEmailAuthResult;
 import com.hiponya.bbqmall.interfaces.IResult;
@@ -54,13 +55,14 @@ public class CategoryService {
         return CommonResult.SUCCESS;
     }
 
-    public Enum<? extends IResult> insertWishlist(String userId, WishlistEntity wishlist) {
+    public Enum<? extends IResult> insertWishlist(WishlistEntity wishlist) {
 
         ProductEntity product = this.categoryMapper.selectProductByIndex(wishlist.getProductIndex());
+
         if(product == null) {
             return CommonResult.FAILURE; // 게시글이 없다면 FAILURE
         }
-        return this.categoryMapper.insertWishlistByIndex(userId, wishlist.getProductIndex(), wishlist.getQuantity()) > 0 ? CommonResult.SUCCESS : CommonResult.FAILURE;
+        return this.categoryMapper.insertWishlistByIndex(wishlist) > 0 ? CommonResult.SUCCESS : CommonResult.FAILURE;
     }
 
     public Integer getWishlistSumPrice(String id) {
@@ -74,6 +76,16 @@ public class CategoryService {
     public ProductEntity getProductByIndex(int pid) {
 
         return this.categoryMapper.selectProductByIndex(pid);
+    }
+
+    public Enum<? extends IResult> deleteWishlist(WishlistEntity wishlist, UserEntity user) {
+        // 성공, 실패, 로그인이 안되었고 삭제하려는 댓글이 니 댓글이 아닌경우(너 = 세션으로 확인), 댓글이 존재하지 않음(null이 반환될 경우)
+        WishlistEntity existingWishlist = this.categoryMapper.selectWishlist(wishlist.getIndex()); // wishlist.getIndex() = 자바스크립트에서 넘어온 index 값
+        if(existingWishlist == null) {
+            return WishlistDeleteResult.NO_SUCH_WISHLIST;
+        }
+
+        return this.categoryMapper.deleteWishlistByIndex(wishlist.getIndex()) > 0 ? CommonResult.SUCCESS : CommonResult.FAILURE;
     }
 
     public CartEntity getCartByIndex(int cid) {
@@ -96,9 +108,6 @@ public class CategoryService {
         return this.categoryMapper.selectSorts();
     }
 
-    public WishlistEntity getWishlist(String id) {
-        return this.categoryMapper.selectWishlist(id);
-    }
     public WishlistEntity[] getWishlists(String id) {
         return this.categoryMapper.selectWishlists(id);
     }

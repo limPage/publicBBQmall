@@ -21,7 +21,7 @@ public interface ICategoryMapper {
 
     SortEntity[] selectSorts();
 
-    WishlistEntity selectWishlist(@Param(value = "id") String id);
+    WishlistEntity selectWishlist(@Param(value = "index") int index);
 
     WishlistVo[] selectWishlists(@Param(value = "id") String id);
 
@@ -34,10 +34,8 @@ public interface ICategoryMapper {
     Integer selectWishlistSumSalePriceByUserId(@Param(value = "id") String id);
 
 
-    int insertWishlistByIndex(@Param(value="id") String id,
-                              @Param(value="productIndex") int productIndex,
-                              @Param(value = "quantity") int quantity);
+    int insertWishlistByIndex(WishlistEntity wishlist);
 
-
+    int deleteWishlistByIndex(@Param(value = "index") int index);
 
 }
