@@ -29,25 +29,50 @@
         VALUES (#{status}, #{text}, IFNULL(#{occurredTime}, default(`occurred_time`)))
     </insert>
 
-    <select id="selectProductsByDetailIndex" resultType="com.hiponya.bbqmall.entities.product.ProductEntity">
+    <select id="selectProductsByDetailIndex" resultType="com.hiponya.bbqmall.vos.product.ProductReadVo">
 
-        SELECT `product_index`,
-               `detail_index`,
-               `product_name`,
-               `price`,
-               `content`,
-               `view`,
-               `created_on`,
-               `modified_on`,
-               `amount`,
-               `on_sale`,
-               sale_quantity
+        SELECT `product_index` AS `productIndex`,
+               `detail_index` AS `detailIndex`,
+               `product_name` AS `productName`,
+               `price` AS `price`,
+               `content` AS `content`,
+               `view` AS `view`,
+               `created_on` AS `createdOn`,
+               `modified_on` AS `modifiedOn`,
+               `amount` AS `amount`,
+               `on_sale` AS onSale,
+               `sale_quantity` AS `saleQuantity`
 
         FROM `bbqmall`.`products`
-        WHERE `detail_index` = #{detail_index}
+        WHERE `detail_index` = #{detailIndex}
         ORDER BY `product_index` DESC
 
     </select>
+
+
+    <select id="selectProductImagesByProductIndexExceptData" resultType="com.hiponya.bbqmall.entities.product.ProductImageEntity">
+        SELECT `index`      AS `index`,
+               `product_index` AS `productIndex`
+
+        FROM `bbqmall`.`product_images`
+        WHERE `product_index` = #{productIndex}
+        ORDER BY `index`
+
+    </select>
+
+
+
+    <select id="selectProductImageByIndex" resultType="com.hiponya.bbqmall.entities.product.ProductImageEntity">
+        SELECT `index` AS `index`,
+               `product_index` AS `productIndex`,
+               `data` AS `data`,
+               `type` AS `type`
+        FROM bbqmall.`product_images`
+        WHERE `index` = #{index} LIMIT 1;
+
+
+    </select>
+
 
 
 </mapper>

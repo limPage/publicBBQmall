@@ -29,6 +29,134 @@
 
         <form id="form">
             <table>
+                <thead class="thead">
+                <tr>
+                    <th>
+                    상품 종류
+                </th>
+                    <th>
+                        <label>
+                            <select name="menuIndex123">
+                                <option value="0" selected>
+                                    선택
+                                </option>
+                                <option value=1>
+                                    치킨
+                                </option>
+                                <option value=2>
+                                    닭가슴살
+                                </option>
+                                <option value=3>
+                                    간편식
+                                </option>
+
+                            </select>
+
+                        </label>
+
+                        <label>
+                            <select name="detailIndex1f" class="detail-index">
+                                <option value="0">
+                                    선택
+                                </option>
+                                <option value="1">
+                                    튀김류
+                                </option>
+                                <option value="2">
+                                    구이류
+                                </option>
+                                <option value="3">
+                                    순살
+                                </option>
+                                <option value="4">
+                                    봉
+                                </option>
+                                <option value="5">
+                                    닭갈비
+                                </option>
+
+
+
+
+
+
+                            </select>
+                        </label>
+
+
+                        <label>
+                            <select name="detailIndex1232" class="detail-index">
+                                <option value="0">
+                                    선택
+                                </option>
+                                <option value="6">
+                                    패키지
+                                </option>
+                                <option value="7">
+                                    수비드
+                                </option>
+                                <option value="8">
+                                    소세지&핫바
+                                </option>
+                                <option value="9">
+                                    만두&육포
+                                </option>
+                                <option value="10">
+                                    닭가슴살
+                                </option>
+                                <option value="11">
+                                    스테이크&큐브
+                                </option>
+                            </select>
+                        </label>
+
+
+                        <label>
+                            <select name="detailIndex3123" class="detail-index">
+                                <option value="0">
+                                    선택
+                                </option>
+                                <option value="12">
+                                    즉석간편식
+                                </option>
+                                <option value="13">
+                                    안주
+                                </option>
+                                <option value="14">
+                                    탕찜
+                                </option>
+                                <option value="15">
+                                    혼합세트
+                                </option>
+                                <option value="16">
+                                    간식류
+                                </option>
+                            </select>
+                        </label>
+
+                    </th>
+
+
+                </tr>
+                <tr>
+                    <th>
+
+                    </th>
+                    <th>
+                        이미지
+                    </th>
+
+                    <th>
+                        상품명
+                    </th>
+                    <th>
+                        가격
+                    </th>
+                    <th>
+                        등록날짜
+                    </th>
+                </tr>
+                </thead>
                 <tbody>
                     <tr>
                         <th>
@@ -142,149 +270,19 @@
                     <th>상품</th>
                     <td>
                         <ul>
-                        <li>
+                        <li th:each="product :${products}">
+                            <span class="image-container" >
 
-                            <a href="#"><img src="/resources/images/my_order_p1.png"> <span>비비큐</span><span>5000원</span> </a> <a href="#">수정</a><a href="#">삭제</a>
+                                <img th:each="d : ${product.getImageIndexes()}"  th:src="@{/admin/productImage (index=${d}) }" alt="" >
+
+                            </span>
+
+<!--                            <img th:src="@{/admin/productImage?index= (${product.getProductIndex()})}">-->
+                            <a href="#"> <span th:text="${product.getProductName()}">비비큐</span><span th:text="${product.getPrice()}+' 원'">5000원</span> </a>
+                            <span class="spring"></span>
+                            <a href="#">수정</a><a href="#">삭제</a>
                         </li>
-                            <li>
 
-                                <a><img src="/resources/images/my_order_p1.png"><span>비비큐</span><span>5000원</span> </a> <a href="#">수정</a><a href="#">삭제</a>
-
-                            </li>
-
-                            <li>
-
-                                <a><img src="/resources/images/my_order_p1.png"><span>비비큐</span><span>5000원</span> </a> <a href="#">수정</a><a href="#">삭제</a>
-
-                            </li>
-                            <li>
-
-                                <a><img src="/resources/images/my_order_p1.png"><span>비비큐</span><span>5000원</span> </a> <a href="#">수정</a><a href="#">삭제</a>
-
-                            </li>
-                            <li>
-
-                                <a><img src="/resources/images/my_order_p1.png"><span>비비큐</span><span>5000원</span> </a> <a href="#">수정</a><a href="#">삭제</a>
-
-                            </li>
-                            <li>
-
-                                <a><img src="/resources/images/my_order_p1.png"><span>비비큐</span><span>5000원</span> </a> <a href="#">수정</a><a href="#">삭제</a>
-
-                            </li>
-                            <li>
-
-                                <a><img src="/resources/images/my_order_p1.png"><span>비비큐</span><span>5000원</span> </a> <a href="#">수정</a><a href="#">삭제</a>
-
-                            </li>
-                            <li>
-
-                                <a><img src="/resources/images/my_order_p1.png"><span>비비큐</span><span>5000원</span> </a> <a href="#">수정</a><a href="#">삭제</a>
-
-                            </li>
-                            <li>
-
-                                <a><img src="/resources/images/my_order_p1.png"><span>비비큐</span><span>5000원</span> </a> <a href="#">수정</a><a href="#">삭제</a>
-
-                            </li>
-                            <li>
-
-                                <a><img src="/resources/images/my_order_p1.png"><span>비비큐</span><span>5000원</span> </a> <a href="#">수정</a><a href="#">삭제</a>
-
-                            </li>
-                            <li>
-
-                                <a><img src="/resources/images/my_order_p1.png"><span>비비큐</span><span>5000원</span> </a> <a href="#">수정</a><a href="#">삭제</a>
-
-                            </li>
-                            <li>
-
-                                <a><img src="/resources/images/my_order_p1.png"><span>비비큐</span><span>5000원</span> </a> <a href="#">수정</a><a href="#">삭제</a>
-
-                            </li>
-                            <li>
-
-                                <a><img src="/resources/images/my_order_p1.png"><span>비비큐</span><span>5000원</span> </a> <a href="#">수정</a><a href="#">삭제</a>
-
-                            </li>
-                            <li>
-
-                                <a><img src="/resources/images/my_order_p1.png"><span>비비큐</span><span>5000원</span> </a> <a href="#">수정</a><a href="#">삭제</a>
-
-                            </li>
-                            <li>
-
-                                <a><img src="/resources/images/my_order_p1.png"><span>비비큐</span><span>5000원</span> </a> <a href="#">수정</a><a href="#">삭제</a>
-
-                            </li>
-                            <li>
-
-                                <a><img src="/resources/images/my_order_p1.png"><span>비비큐</span><span>5000원</span> </a> <a href="#">수정</a><a href="#">삭제</a>
-
-                            </li>
-                            <li>
-
-                                <a><img src="/resources/images/my_order_p1.png"><span>비비큐</span><span>5000원</span> </a> <a href="#">수정</a><a href="#">삭제</a>
-
-                            </li>
-                            <li>
-
-                                <a><img src="/resources/images/my_order_p1.png"><span>비비큐</span><span>5000원</span> </a> <a href="#">수정</a><a href="#">삭제</a>
-
-                            </li>
-                            <li>
-
-                                <a><img src="/resources/images/my_order_p1.png"><span>비비큐</span><span>5000원</span> </a> <a href="#">수정</a><a href="#">삭제</a>
-
-                            </li>
-                            <li>
-
-                                <a><img src="/resources/images/my_order_p1.png"><span>비비큐</span><span>5000원</span> </a> <a href="#">수정</a><a href="#">삭제</a>
-
-                            </li>
-                            <li>
-
-                                <a><img src="/resources/images/my_order_p1.png"><span>비비큐</span><span>5000원</span> </a> <a href="#">수정</a><a href="#">삭제</a>
-
-                            </li>
-                            <li>
-
-                                <a><img src="/resources/images/my_order_p1.png"><span>비비큐</span><span>5000원</span> </a> <a href="#">수정</a><a href="#">삭제</a>
-
-                            </li>   <li>
-
-                            <a><img src="/resources/images/my_order_p1.png"><span>비비큐</span><span>5000원</span> </a> <a href="#">수정</a><a href="#">삭제</a>
-
-                        </li>
-                            <li>
-
-                                <a><img src="/resources/images/my_order_p1.png"><span>비비큐</span><span>5000원</span> </a> <a href="#">수정</a><a href="#">삭제</a>
-
-                            </li>
-                            <li>
-
-                                <a><img src="/resources/images/my_order_p1.png"><span>비비큐</span><span>5000원</span> </a> <a href="#">수정</a><a href="#">삭제</a>
-
-                            </li>
-                            <li>
-
-                                <a><img src="/resources/images/my_order_p1.png"><span>비비큐</span><span>5000원</span> </a> <a href="#">수정</a><a href="#">삭제</a>
-
-                            </li>
-                            <li>
-
-                                <a><img src="/resources/images/my_order_p1.png"><span>비비큐</span><span>5000원</span> </a> <a href="#">수정</a><a href="#">삭제</a>
-
-                            </li>
-                            <li>
-
-                                <a><img src="/resources/images/my_order_p1.png"><span>비비큐</span><span>5000원</span> </a> <a href="#">수정</a><a href="#">삭제</a>
-
-                            </li>   <li>
-
-                            <a><img src="/resources/images/my_order_p1.png"><span>비비큐</span><span>5000원</span> </a> <a href="#">수정</a><a href="#">삭제</a>
-
-                        </li>
 
 
 

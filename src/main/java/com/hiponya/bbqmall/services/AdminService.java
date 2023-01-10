@@ -10,12 +10,15 @@ import com.hiponya.bbqmall.enums.admin.AdminResult;
 import com.hiponya.bbqmall.exception.RollbackException;
 import com.hiponya.bbqmall.interfaces.IResult;
 import com.hiponya.bbqmall.mappers.IAdminMapper;
+import com.hiponya.bbqmall.vos.product.ProductReadVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Arrays;
+
 import static java.util.Arrays.stream;
 
 @Service(value = "com.hiponya.bbqmall.services.AdminService")
@@ -95,16 +98,17 @@ public class AdminService {
 
         ProductReadVo[] products =this.adminMapper.selectProductsByDetailIndex(detailIndex);
         for (ProductReadVo product :products){
-            ProductReadVo[] productImage = this.adminMapper.selectReviewImagesByReviewIndexExceptData(product.getProductIndex());
-            int[] reviewImageIndexes = stream(productImage).mapToInt(ProductImageEntity::getIndex).toArray();
-            product.setImageIndexes(reviewImageIndexes);
+            ProductImageEntity[] productImages = this.adminMapper.selectProductImagesByProductIndexExceptData(product.getProductIndex());
+            int[] productImageIndexes = stream(productImages).mapToInt(ProductImageEntity::getIndex).toArray();
+            product.setImageIndexes(productImageIndexes);
+
 
         }
-        return product;
+        return products;
     }
-//
-//public ReviewImageEntity getReviewImage (int index){
-//
-//        return this.dataMapper.selectReviewImageByIndex(index);
-//}
+
+    public ProductImageEntity getProductImage (int index){
+
+        return this.adminMapper.selectProductImageByIndex(index);
+    }
 }
