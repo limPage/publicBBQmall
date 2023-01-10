@@ -1,0 +1,149 @@
+
+body>main{
+
+    display: flex;
+    flex-direction: row;
+    /*justify-content: flex-start;*/
+    align-items: flex-start;
+}
+
+
+
+body>main>.content {
+    width: 100%;
+
+
+    display: block;
+    padding-top: 8rem;
+    padding-bottom: 6.25rem;
+
+}
+
+
+body> main> .content>.title-container{
+    padding-top: 0;
+    padding-bottom: 2rem;
+    font-size: 2rem;
+    text-align: center;
+    letter-spacing: -2px;
+    font-weight: 700;
+    border-bottom: rgba(0,0,0,0.4) solid 0.0625rem;
+}
+
+
+
+
+
+body>main>.content>ul{
+    align-items: center;
+    display: flex;
+    flex-direction: row ;
+    justify-content: flex-start;
+
+
+    /*padding: 0  0  5rem 0;*/
+
+
+
+}
+body>main>.content>ul>li{
+    width: 100%;
+    border-collapse:collapse;
+
+    border: rgba(0,0,0,0.05) solid 0.06rem;
+    border-right: none;
+    display: table-cell;
+
+}
+body>main>.content>ul>li:last-of-type{
+
+    border-right: rgba(0,0,0,0.05) solid 0.06rem;
+
+}
+body>main>.content>ul>li>a>i{
+    font-size: 3rem;
+    opacity: 80%;
+    max-width: 55px;
+    max-height:55px;
+    padding: 2rem 0;
+}
+
+
+body>main>.content>ul>li>a{
+width: 100%;
+height: 10rem;
+
+
+    align-items: center;
+    display: flex;
+    flex-direction: column ;
+    justify-content: flex-start;
+
+    font-size: 15px;
+    color: rgba(0,0,0,0.8);
+
+
+}
+
+
+body> main> .content > form>table{
+    border-collapse: collapse;
+}
+
+
+body> main> .content > form>table> tbody> tr> th{
+
+    background-color: rgba(0,0,0,0.05);
+    padding: 1rem;
+    min-width: 5rem;
+    font-weight: 500;
+    color: rgba(0,0,0,0.6);
+}
+body> main> .content > form>table> tbody> tr> td{
+    background-color: rgba(0,0,0,0.01);
+    width: 100%;
+    padding: 0.5rem;
+}
+
+body> main> .content > form>table> tbody> tr> td>label>select{
+
+    padding: 0.5rem;
+    border-radius: 0.2rem;
+    font-family: inherit;
+    font-weight: 600;
+    outline: none;
+
+}
+body> main> .content > form>table> tbody> tr> td>label>.detail-index{
+    display: none;
+}
+
+body> main> .content > form>table> tbody> .data-row>td>ul{
+    max-height: 70rem;
+    overflow: auto;
+    /*color: #CF152D;*/
+    /*background: #CF152D;*/
+    display: block;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

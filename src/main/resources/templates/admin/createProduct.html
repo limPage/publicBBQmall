@@ -145,7 +145,7 @@
                     </td>
                 </tr>
 
-                <tr>
+                <tr class="image-row">
                     <th>
                         상품이미지
                     </th>
@@ -174,7 +174,7 @@
                     </th>
                     <td>
                         <label>
-                            <input type="number" name="price" placeholder="상품가격">
+                            <input type="number" name="price" min="0" value="0" placeholder="상품가격">
                             <span>원</span>
                         </label>
                     </td>
@@ -186,19 +186,19 @@
                     <td>
                         <label>
 
-                            <textarea  name="text" placeholder="상품설명"></textarea>
+                            <textarea  name="content" placeholder="상품설명"></textarea>
                         </label>
 
                     </td>
                 </tr>
-                <tr>
+                <tr class="image-row">
                     <th>
                         상품상세<br>이미지
                     </th>
                     <td>
                         <label>
 
-                            <input hidden multiple class="images" name="images" type="file" accept="image/*">
+                            <input hidden multiple class="images" name="detailImages" type="file" accept="image/*">
 
 
 
@@ -222,7 +222,7 @@
                     <td>
                         <label>
 
-                            <input type="number" name="amount" placeholder="상품재고">
+                            <input type="number" name="amount" placeholder="상품재고" min="0" value="0">
                             <span>개</span>
                         </label>
                     </td>
@@ -235,7 +235,7 @@
                     <td >
                         <label>
                             <span> 등록과 동시에 판매 유무</span>
-                            <input type="checkbox">
+                            <input type="checkbox" name="onSale">
                         </label>
                     </td>
                 </tr>
@@ -245,7 +245,7 @@
                     </th>
                     <td>
                         <label>
-                            <input type="number" name="saleQuantity" placeholder="할인율" value="0">
+                            <input type="number" name="saleQuantity" min="0" max="100" placeholder="할인율" value="0">
                             <span>%</span>
                         </label>
 
@@ -256,7 +256,7 @@
                 </tbody>
             </table>
 
-            <input type="button" value="등록하기">
+            <input type="button" name="submit" value="등록하기">
         </form>
 
 

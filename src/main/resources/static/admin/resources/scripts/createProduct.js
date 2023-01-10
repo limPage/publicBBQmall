@@ -4,7 +4,7 @@ let imageButton= window.document.querySelectorAll('.image-select-button');
 let images= window.document.querySelectorAll('.images');
 let imageContainer=window.document.querySelectorAll('.image-container');
 let noImage= window.document.querySelectorAll('.no-image');
-
+let detailIndex;
 form['menuIndex'].addEventListener('change', ()=>{
 //     const menu = ["튀김류","구이류","순살","윙&봉","닭갈비","패키지",
 //     "훈제&수비드","소세지&핫바","만두&육포","닭가슴살","스테이크&큐브","즉석간편식",
@@ -75,7 +75,7 @@ form['menuIndex'].addEventListener('change', ()=>{
 
 
 })
-
+//상세 메뉴를 골랐을때
 
 
     for (let i=0; i< imageButton.length; i++){
@@ -107,7 +107,106 @@ form['menuIndex'].addEventListener('change', ()=>{
         });
 
 }
+//사진첨부를 눌렀을때
 
+
+form['submit'].addEventListener("click",()=>{
+
+    if(form['menuIndex'].value==='0'){
+        alert("상품 카테고리를 선택해주세요.");
+        return;
+
+    }
+    if(form['menuIndex'].value!=='0'){
+        if(form['detailIndex1'].value==='0'&&
+            form['detailIndex2'].value==='0'&&
+            form['detailIndex3'].value==='0'){
+            alert("상품 상세 메뉴를 선택해주세요.");
+            return;
+
+        }
+
+    }
+
+    if(form['productName'].value===''){
+        alert("상품 이름을 입력해주세요.");
+        return;
+
+    }
+    if(form['price'].value===''||  parseInt(form['price'].value)===0){
+        alert("상품 가격을 입력해주세요.");
+        return;
+
+    }
+    if(form['amount'].value === '' ||  parseInt(form['amount'].value)===0){
+        alert("상품 재고가 없습니다.");
+        return;
+
+    }
+    if(form['detailIndex1'].value!=='0'){detailIndex=form['detailIndex1'].value};
+    if(form['detailIndex2'].value!=='0'){detailIndex=form['detailIndex2'].value};
+    if(form['detailIndex3'].value!=='0'){detailIndex=form['detailIndex3'].value};
+
+
+    const xhr = new XMLHttpRequest();
+    const formData = new FormData();
+    formData.append('detailIndex',  detailIndex );
+    formData.append('productName',form['productName'].value);
+    formData.append('price',form['price'].value);
+    formData.append('content',form['content'].value);
+    formData.append('amount',form['amount'].value);
+    formData.append('onSale',form['onSale'].checked?1:0);
+    formData.append('saleQuantity',form['saleQuantity'].value);
+    for (let file of form['images'].files) {
+        formData.append('images', file);
+    }
+    for (let file of form['detailImages'].files) {
+        formData.append('detailImages', file);
+    }
+
+    xhr.open('POST', './create');//  window.location.href 를쓰면 boardid bid를 안보내도댐
+
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {//4 성공인게 아니고 작업의끝
+            Cover.hide();
+            if (xhr.status >= 200 && xhr.status < 300) {
+                const responseObject = JSON.parse(xhr.responseText);//{resutl:suceess로 가져온것을 { \n result \t 식으로 만듬}
+
+                switch (responseObject['result']) {
+                    case 'success':
+
+                        alert('상품 등록 성공');
+
+                        window.location.href=`./`
+
+
+                        break;
+
+                    case 'not_login':
+                        alert('로그인이 되었는지 확인후 다시 시도해 주세요.');
+                        break;
+
+                    case 'not_allowed':
+                        alert('게시글을 수정할 수 있는 권한이 없습니다.');
+                        break;
+
+
+
+                    default:
+                        alert('알 수 없는 이유로 게시글을 수정하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
+                }
+            } else {
+                alert('서버와 통신하지 못하였습니다. 잠시 후 다시 시도해 주세요.')
+            }
+        }
+    }
+    xhr.send(formData);
+
+
+
+
+
+})
 
 
 
