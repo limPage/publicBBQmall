@@ -5,7 +5,6 @@ let button = window.document.querySelectorAll('.delete-button');
 
 for (let i = 0; i < button.length; i++) {
     button.item(i).addEventListener('click', () => {
-        alert(i + '번째 삭제버튼');
         const xhr = new XMLHttpRequest();
         const formData = new FormData();
         formData.append('wishlistIndex', wishlistIndex.item(i).value);
@@ -18,6 +17,7 @@ for (let i = 0; i < button.length; i++) {
                     switch (responseObject['result']) {
                         case 'success':
                             alert('삭제 성공');
+                            location.reload()
                             break;
                             default:
                                 alert("알 수 없는 이유로 상품을 삭제하지 못하였습니다\n\n잠시 후 다시 시도해 주세요.");

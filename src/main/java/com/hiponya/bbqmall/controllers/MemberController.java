@@ -116,6 +116,13 @@ public class MemberController {
             System.out.println("어드민이에요?"+isAdminMode.isAdmin());
             user.setAdmin(isAdminMode.isAdmin());
             user.setEmail(isAdminMode.getEmail());
+            user.setId(isAdminMode.getId());
+            user.setName(isAdminMode.getName());
+            user.setContact(isAdminMode.getContact());
+            user.setBirth(isAdminMode.getBirth());
+            user.setAddressPostal(isAdminMode.getAddressPostal());
+            user.setAddressPrimary(isAdminMode.getAddressPrimary());
+            user.setAddressSecondary(isAdminMode.getAddressSecondary());
 
             session.setAttribute("user",user);
             System.out.println("로그인 성공");

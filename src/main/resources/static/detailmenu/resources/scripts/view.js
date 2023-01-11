@@ -28,7 +28,6 @@ cartButton.addEventListener('click', ()=> {
                 switch(responseObject['result']) { // responseObject의 값을 switch할 때
                     case 'success':
                         window.location.href='./wishlist?pid='+pid.value+'&quantity='+quantityNumber.value;
-                        alert('작성 성공');
                         break;
                     default:
 

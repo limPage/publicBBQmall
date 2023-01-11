@@ -727,8 +727,8 @@ body>main{
     padding: 0 40px;
     align-items: center;
     display: flex;
-    flex-direction: column ;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
 
 
 }

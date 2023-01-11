@@ -201,16 +201,16 @@
 
                                 <ul class="list1" id="orderInfo" hidden>
                                     <li>
-                                        <span class="user-name">th:users name넣을곳</span>
+                                        <span class="user-name" th:text="${user.getName()}" th:value="${user.getName()}" id="userName">th:users name넣을곳</span>
                                         &nbsp
                                     </li>
                                     <li>
-                                        <span class="phone">th:users contact넣을곳</span>
+                                        <span class="phone" th:text="${user.getContact()}" th:value="${user.getContact()}" id="contact">th:users contact넣을곳</span>
                                         <span>&nbsp&nbsp</span>
                                         <span class="phone2">--</span>
                                     </li>
                                     <li class="hide">
-                                        <span class="email">th:users email넣을곳</span>
+                                        <span class="email" th:text="${user.getEmail()}" th:value="${user.getEmail()}" id="email">th:users email넣을곳</span>
                                     </li>
                                 </ul>
 
@@ -222,9 +222,10 @@
 
                                 <div class="order-info-member">
                                     <ul class="list1">
-                                        <li class="order-user-name">"th:value=user.getName 넣을곳"</li>
-                                        <li class="order-user-contact">"th:value=user.getContact 넣을곳"</li>
-                                        <li class="order-user-email">"th:value=user.getEmail 넣을곳"</li>
+                                        <input type="hidden" class="id" id="id" th:value="${user.getId()}">
+                                        <li class="order-user-name" th:value="${user.getName()}" th:text="${user.getName()}">"th:value=user.getName 넣을곳"</li>
+                                        <li class="order-user-contact" th:value="${user.getContact()}" th:text="${user.getContact()}">"th:value=user.getContact 넣을곳"</li>
+                                        <li class="order-user-email" th:value="${user.getEmail()}" th:text="${user.getEmail()}">"th:value=user.getEmail 넣을곳"</li>
                                     </ul>
                                     <button type="button" class="modify-btn">수정</button>
                                 </div>
@@ -235,6 +236,7 @@
                                             <dl>
                                                 <dt>보내는 분</dt>
                                                 <dd>
+
                                                     <input type="text" class="order-name" value="0"><!-- th:value=users.getName -->
                                                 </dd>
                                             </dl>
@@ -279,20 +281,20 @@
                                     <ul class ="list">
                                         <li class="user-name">
                                             <span>배송 받는 사람</span>
-                                            <span class="user-name">"th:text=users.getName 받을곳"</span>
+                                            <span class="user-name" th:text="${user.getName()}" th:value="${user.getName()}">"th:text=users.getName 받을곳"</span>
 
                                         </li>
                                         <br>
                                         <li>
                                             <span class="address-postal-container">
-                                                [<span class="address-postal">th:text=users.getAddressPostal 넣을곳</span>]
+                                                [<span class="address-postal" th:text="${user.getAddressPostal()}" th:value="${user.getAddressPostal()}">th:text=users.getAddressPostal 넣을곳</span>]
                                             </span>
-                                            <span class="address-primary">th:text=users.getAddressPrimary 넣을곳</span>
-                                            <span class="address-secondary">th:text=users.getAddressSecondary 넣을곳</span>
+                                            <span class="address-primary" th:text="${user.getAddressPrimary()}" th:value="${user.getAddressPrimary()}">th:text=users.getAddressPrimary 넣을곳</span>
+                                            <span class="address-secondary" th:text="${user.getAddressSecondary()}" th:value="${user.getAddressSecondary()}">th:text=users.getAddressSecondary 넣을곳</span>
                                         </li>
                                         <br>
                                         <li>
-                                            <span class="contact">th:text=users.getContact 넣을곳 /</span>
+                                            <span class="contact" id="name">th:text=users.getContact 넣을곳 /</span>
                                             <span class="gray">&nbsp</span>
                                             <span class="phone">추가연락처 없음</span>
                                         </li>
@@ -336,6 +338,14 @@
 
                             </div>
 
+                        </li>
+
+                        <li class="order-button-container">
+                            <div class="button-container">
+                                <div class="buy-button-container">
+                                    <button type="button" class="buy-button">결제하기</button>
+                                </div>
+                            </div>
                         </li>
                     </ul>
                 </div>

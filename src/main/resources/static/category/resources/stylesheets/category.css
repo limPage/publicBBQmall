@@ -26,14 +26,14 @@ body {
     justify-content: stretch;
 }
 
-body > header {
-    align-items: stretch;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-
-    box-shadow: 0 0 0.3rem rgba(0, 0, 0, 15%);
+.search-filter-wrap > .search-filter > .search-list {
+    align-items : stretch;
+    display : flex;
+    flex-direction : row;
+    justify-content : flex-end;
 }
+
+
 
 main > .swiper > div > .catalog-page > .goods-search-form > .search-filter-wrap > .search-filter > .search-list {
     align-items : stretch;
@@ -42,7 +42,6 @@ main > .swiper > div > .catalog-page > .goods-search-form > .search-filter-wrap 
     justify-content : flex-end;
 
     line-height : normal;
-    margin-right : 20rem;
     position : relative;
 }
 

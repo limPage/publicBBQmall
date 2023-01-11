@@ -293,3 +293,21 @@ main > #cartForm > .order-layout > .cartPage-container > .cart-content > .cart-l
     padding-top : 1rem;
     font-weight : 400;
 }
+
+.order-button-container {
+    align-items : flex-end;
+    display : flex;
+    flex-direction : row;
+    justify-content : flex-end;
+    margin-top : 2rem;
+}
+
+.order-button-container > .button-container > .buy-button-container > .buy-button {
+    background-color: #E31134;
+    border : none;
+    height : 46px;
+    font-size : 16px;
+    line-height : 1.5rem;
+    color : #FFFFFF;
+    width : 100%;
+}
