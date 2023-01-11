@@ -33,6 +33,7 @@
 
         SELECT `product_index` AS `productIndex`,
                `detail_index` AS `detailIndex`,
+                `menu`.`index`AS `menuIndex`,
                `product_name` AS `productName`,
                `price` AS `price`,
                `content` AS `content`,
@@ -44,8 +45,27 @@
                `sale_quantity` AS `saleQuantity`
 
         FROM `bbqmall`.`products`
-        WHERE `detail_index` = #{detailIndex}
-        ORDER BY `product_index` DESC
+        LEFT JOIN `bbqmall`.`detail_menu` on `products`.`detail_index` = `detail_menu`.`index`
+        LEFT JOIN `bbqmall`.`menus` AS `menu` on `detail_menu`.`menu_index` = `menu`.`index`
+        <if test='detailIndex!=null and detailIndex!=101 and detailIndex!=102 and detailIndex!=103'>
+            WHERE `detail_index` = #{detailIndex}
+        </if>
+
+        <if test='detailIndex!=null and detailIndex==101 '>
+            WHERE `menu`.`index` = 1
+
+        </if>
+        <if test='detailIndex!=null and detailIndex==102 '>
+            WHERE `menu`.`index` = 2
+
+        </if>
+        <if test='detailIndex!=null and detailIndex==103 '>
+            WHERE `menu`.`index` = 3
+
+        </if>
+
+
+        ORDER BY `modified_on` DESC
 
     </select>
 
@@ -74,5 +94,25 @@
     </select>
 
 
+    <select id="selectProductByProductIndex" resultType="com.hiponya.bbqmall.vos.product.ProductReadVo">
+
+        SELECT `product_index` AS `productIndex`,
+        `detail_index` AS `detailIndex`,
+        `product_name` AS `productName`,
+        `price` AS `price`,
+        `content` AS `content`,
+        `view` AS `view`,
+        `created_on` AS `createdOn`,
+        `modified_on` AS `modifiedOn`,
+        `amount` AS `amount`,
+        `on_sale` AS onSale,
+        `sale_quantity` AS `saleQuantity`
+
+        FROM `bbqmall`.`products`
+
+        WHERE `product_index` = #{productIndex}
+        LIMIT 1;
+
+    </select>
 
 </mapper>

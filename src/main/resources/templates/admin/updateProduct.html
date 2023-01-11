@@ -2,13 +2,13 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>BBQ몰 상품수정</title>
+    <title>BBQ몰 상품등록</title>
 
 
     <th:block th:replace="~{fragments/head :: common}"></th:block>
 
-    <link rel="stylesheet" th:href="@{/admin/resources/stylesheets/admin.css}">
-<!--    <script defer th:src="@{/member/resources/scripts/csCenter.js}"></script>-->
+    <link rel="stylesheet" th:href="@{/admin/resources/stylesheets/createProduct.css}">
+    <script defer th:src="@{/admin/resources/scripts/updateProduct.js}"></script>
 
 
 </head>
@@ -17,93 +17,249 @@
 <th:block th:replace="~{fragments/body :: cover}"></th:block>
 <th:block th:replace="~{fragments/body :: floatingBanner}"></th:block>
 
-<main class="cs-center">
+<main >
 
     <th:block th:replace="~{fragments/body ::adminSideBar}"></th:block>
     <div class="content">
-
-
-        <ul>
-            <li>
-
-                <a th:href="@{/admin/create}">
-                    <i class="fa-solid fa-plus"></i>
-                    상품등록
-                </a>
-
-            </li>
-            <li>
-
-
-                <a th:href="@{/admin/read}">
-                    <i class="fa-solid fa-drumstick-bite"></i>
-                    상품조회
-                </a>
-
-            </li>
-            <li>
-
-
-                <a th:href="@{/admin/update}">
-                    <i class="fa-solid fa-file-pen"></i>
-                    상품수정
-                </a>
-
-            </li>
-            <li>
-
-
-                <a th:href="@{/admin/delete}">
-                    <i class="fa-solid fa-trash-can"></i>
-                    상품삭제
-                </a>
-
-            </li>
-
-
-
-
-        </ul>
-
-        <div class="lookup">
-            <div class="title-row">
-                <h1 class="title">상품현황</h1>
-                <span class="spring"></span>
-                <a  class="more">등록내역</a>/
-                <a  class="more">수정내역</a>/
-                <a  class="more">삭제내역</a>
-            </div>
-            <div class="bar"></div>
-            <ul class="status-ul">
-
-                <li class="status">
-                    <div>
-                        <span>C</span>
-                        <a class="button">[상품등록] "비비큐 세트" 11232원 1232-12-21-12:12:12</a>
-                    </div>
-                </li>
-
-                <li class="status">
-                    <div>
-                        <span>U</span>
-                        <a class="button">[상품수정] "비비큐 세트" 11232원 1232-12-21-12:12:12 </a>
-                    </div>
-                </li>
-
-
-
-                <li class="status">
-                    <div>
-
-                        <span>D</span>
-                        <a class="button">[상품수정] "비비큐 세트" 11232원 1232-12-21-12:12:12</a>
-                    </div>
-                </li>
-
-
-
-            </ul>
+        <div class="title-container">
+            <h1>상품수정</h1>
         </div>
+
+        <form id="form" th:if="${product!=null}">
+            <input hidden name="nowDetailIndex" th:value="${product.getDetailIndex()}">
+            <table>
+                <tbody>
+                <tr>
+                    <th>
+                        상품종류
+                    </th>
+
+                    <td>
+                        <label>
+                            <select name="menuIndex">
+                                <option value="0" selected>
+                                    선택
+                                </option>
+                                <option value=1>
+                                    치킨
+                                </option>
+                                <option value=2>
+                                    닭가슴살
+                                </option>
+                                <option value=3>
+                                    간편식
+                                </option>
+
+                            </select>
+                        </label>
+
+                        <label>
+                            <select name="detailIndex1" class="detail-index">
+                                <option value="0">
+                                    선택
+                                </option>
+                                <option value="1">
+                                    튀김류
+                                </option>
+                                <option value="2">
+                                    구이류
+                                </option>
+                                <option value="3">
+                                    순살
+                                </option>
+                                <option value="4">
+                                    봉
+                                </option>
+                                <option value="5">
+                                    닭갈비
+                                </option>
+
+
+
+
+
+
+                            </select>
+                        </label>
+
+                        <label>
+                            <select name="detailIndex2" class="detail-index">
+                                <option value="0">
+                                    선택
+                                </option>
+                                <option value="6">
+                                    패키지
+                                </option>
+                                <option value="7">
+                                    수비드
+                                </option>
+                                <option value="8">
+                                    소세지&핫바
+                                </option>
+                                <option value="9">
+                                    만두&육포
+                                </option>
+                                <option value="10">
+                                    닭가슴살
+                                </option>
+                                <option value="11">
+                                    스테이크&큐브
+                                </option>
+                            </select>
+                        </label>
+
+                        <label>
+                            <select name="detailIndex3" class="detail-index">
+                                <option value="0">
+                                    선택
+                                </option>
+                                <option value="12">
+                                    즉석간편식
+                                </option>
+                                <option value="13">
+                                    안주
+                                </option>
+                                <option value="14">
+                                    탕찜
+                                </option>
+                                <option value="15">
+                                    혼합세트
+                                </option>
+                                <option value="16">
+                                    간식류
+                                </option>
+                            </select>
+                        </label>
+
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        상품이름
+                    </th>
+                    <td>
+                        <label>
+
+                            <input type="text" name="productName" placeholder="상품이름" th:value="${product.getProductName()}">
+                        </label>
+
+                    </td>
+                </tr>
+
+                <tr class="image-row">
+                    <th>
+                        상품이미지
+                    </th>
+                    <td>
+                        <label>
+
+                            <input hidden multiple class="images" name="images" type="file" accept="image/*">
+
+
+
+                            <a class="image-select-button" rel="imageSelectButton" href="#">이미지선택...</a>
+
+                        </label>
+                        <label class="image-container" rel="imageContainer">
+                            <span class="no-image" rel="noImage"> 선택된 이미지가 없습니다.</span>
+
+                            <img class="image" th:each="d : ${product.getImageIndexes()}"
+                                 th:src="@{/admin/productImage (index=${d}) }" alt="이미지" title="이미지">
+                        </label>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        상품가격
+                    </th>
+                    <td>
+                        <label>
+                            <input type="number" name="price" min="0" value="0" placeholder="상품가격"  th:value="${product.getPrice()}">
+                            <span>원</span>
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        상품설명
+                    </th>
+                    <td>
+                        <label>
+
+                            <textarea  name="content" placeholder="상품설명"  th:value="${product.getCreatedOn()}"></textarea>
+                        </label>
+
+                    </td>
+                </tr>
+                <tr class="image-row">
+                    <th>
+                        상품상세<br>이미지
+                    </th>
+                    <td>
+                        <label>
+
+                            <input hidden multiple class="images" name="detailImages" type="file" accept="image/*">
+
+
+
+                            <a class="image-select-button" rel="imageSelectButton" href="#">이미지선택...</a>
+
+                        </label>
+                        <label class="image-container"  rel="imageContainer">
+                            <span class="no-image" rel="noImage"> 선택된 이미지가 없습니다.</span>
+
+
+                        </label>
+
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <th>
+                        상품재고
+                    </th>
+                    <td>
+                        <label>
+
+                            <input type="number" name="amount" placeholder="상품재고" min="0" value="0"  th:value="${product.getAmount()}">
+                            <span>개</span>
+                        </label>
+                    </td>
+
+                </tr>
+                <tr class="onSale-tr">
+                    <th>
+                        판매개시
+                    </th>
+                    <td >
+                        <label>
+                            <span> 등록과 동시에 판매 유무</span>
+                            <input type="checkbox" name="onSale">
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        할인율
+                    </th>
+                    <td>
+                        <label>
+                            <input type="number" name="saleQuantity" min="0" max="100" placeholder="할인율"  th:value="${product.getSaleQuantity()}">
+                            <span>%</span>
+                        </label>
+
+                    </td>
+                </tr>
+
+
+                </tbody>
+            </table>
+
+            <input type="button" name="submit" value="등록하기">
+        </form>
 
 
     </div>

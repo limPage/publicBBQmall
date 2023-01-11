@@ -94,7 +94,7 @@ public class AdminService {
 
 
 
-    public ProductReadVo[] getProducts(int detailIndex){
+    public ProductReadVo[] getProducts(String detailIndex){
 
         ProductReadVo[] products =this.adminMapper.selectProductsByDetailIndex(detailIndex);
         for (ProductReadVo product :products){
@@ -111,4 +111,19 @@ public class AdminService {
 
         return this.adminMapper.selectProductImageByIndex(index);
     }
+
+    public ProductReadVo getProduct(int pid){
+        ProductReadVo product =this.adminMapper.selectProductByProductIndex(pid);
+
+
+
+            ProductImageEntity[] productImages = this.adminMapper.selectProductImagesByProductIndexExceptData(product.getProductIndex());
+            int[] productImageIndexes = stream(productImages).mapToInt(ProductImageEntity::getIndex).toArray();
+            product.setImageIndexes(productImageIndexes);
+
+
+
+        return product;
+    }
+
 }

@@ -50,23 +50,48 @@ public class AdminController {
 
     @GetMapping(value = "/read" ,produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getReadProduct(@RequestParam (value = "keyword" ,required = false) String keyword,
+                                       @RequestParam(value = "menuIndex" , required = false)Integer menuIndex,
                                        @RequestParam (value = "detailIndex" ,required = false) Integer detailIndex){
         ModelAndView modelAndView = new ModelAndView("admin/readProduct");
+       ProductEntity product = new ProductEntity();
 
+        if(menuIndex!=null && menuIndex==99){
+            ProductReadVo[] products = this.adminService.getProducts(product.getProductName());
+            modelAndView.addObject("products", products);
 
-        if (detailIndex!=null){
-            ProductReadVo[] products= this.adminService.getProducts(detailIndex);
-         modelAndView.addObject("products", products);
         }
+        if (menuIndex!=null && menuIndex!=99&& detailIndex==99 ) {
+            product.setProductName(String.valueOf(menuIndex+100));
+            System.out.println(product.getProductName());
+            ProductReadVo[] products = this.adminService.getProducts(product.getProductName());
+            modelAndView.addObject("detailIndex",detailIndex);
+
+            modelAndView.addObject("products", products);
+
+        }
+
+
+        if (menuIndex!=null && menuIndex!=99&& detailIndex!=99 ){
+            ProductReadVo[] products= this.adminService.getProducts(detailIndex.toString());
+         modelAndView.addObject("products", products);
+         modelAndView.addObject("detailIndex",detailIndex);
+        }
+
+        modelAndView.addObject("menuIndex",menuIndex);
 
         return modelAndView;
     }
 
 
     @GetMapping(value = "/update" ,produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getUpdateProduct(){
+    public ModelAndView getUpdateProduct(@RequestParam (value = "pid" ,required = false) Integer pid){
         ModelAndView modelAndView = new ModelAndView("admin/updateProduct");
+        if (pid!=null) {
+            ProductReadVo product = this.adminService.getProduct(pid);
+            modelAndView.addObject("pid", pid);
+            modelAndView.addObject("product", product);
 
+        }
         return modelAndView;
     }
     @GetMapping(value = "/delete" ,produces = MediaType.TEXT_HTML_VALUE)
@@ -80,7 +105,7 @@ public class AdminController {
 
     @PostMapping(value = "create")
     @ResponseBody
-    public String postReview(@SessionAttribute(value = "user" ,required = false) UserEntity user,
+    public String postProduct(@SessionAttribute(value = "user" ,required = false) UserEntity user,
                              @RequestParam(value = "images", required = false) MultipartFile[] images,
                              @RequestParam(value = "detailImages", required = false) MultipartFile[] detailImages,
                              ProductEntity product )throws IOException {
@@ -98,20 +123,20 @@ public class AdminController {
     }
 
     @GetMapping(value = "productImage")
-    public ResponseEntity<byte[]> getReviewImage(@RequestParam(value = "index") int index){
+    public ResponseEntity<byte[]> getProductImage(@RequestParam(value = "index") int index){
 
         ResponseEntity<byte[]> responseEntity ;
 
 
-        ProductImageEntity reviewImage = this.adminService.getProductImage(index);
+        ProductImageEntity productImage = this.adminService.getProductImage(index);
 
-        if(reviewImage==null){
+        if(productImage==null){
             responseEntity = new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }else {
             HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.valueOf(reviewImage.getType()));
-            headers.setContentLength(reviewImage.getData().length);
-            responseEntity = new ResponseEntity<>(reviewImage.getData(),headers, HttpStatus.OK);
+            headers.setContentType(MediaType.valueOf(productImage.getType()));
+            headers.setContentLength(productImage.getData().length);
+            responseEntity = new ResponseEntity<>(productImage.getData(),headers, HttpStatus.OK);
         }
         return responseEntity;
     }

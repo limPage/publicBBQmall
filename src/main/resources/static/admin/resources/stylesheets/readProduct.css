@@ -99,7 +99,8 @@ body>main>.content>form>table>.thead>tr>th{
     color: rgba(0,0,0,0.6);
 
 }
-body>main>.content>form>table>.thead>tr>th:first-of-type{
+body>main>.content>form>table>.thead
+{
     background-color: rgba(0,0,0,0.05);
 
 
@@ -113,16 +114,46 @@ body>main>.content>form>table>.thead>tr>th:not(:first-of-type){
     /*width: 100%;*/
 
 }
+body>main>.content>form>table .image-column{
+    width: 10rem;
+    display: inline-block;
+    padding: 0.5rem;
 
+}
+body>main>.content>form>table .name-column{
+    width: 20rem;
+    display: inline-block;
+    padding: 0.5rem;
+    /*overflow: auto;*/
+
+}
+body>main>.content>form>table .price-column{
+    width: 6rem;
+    display: inline-block;
+    padding: 0.5rem;
+
+
+}
+body>main>.content>form>table .date-column{
+    display: inline-block;
+    padding: 0.5rem;
+    /*width: 10%;*/
+    width: 9rem;
+
+}
+
+body>main>.content>form>table>.thead>tr>th>label>.detail-index{
+    display: none;
+}
 
 body>main>.content>form>table>.thead>tr>th>label>select{
 
     padding: 0.5rem;
     border-radius: 0.2rem;
     font-family: inherit;
-    font-weight: 600;
+    font-weight: 700;
     outline: none;
-
+    color: rgba(0,0,0,0.8);
     margin-right: 0.5rem;
 
 }
@@ -136,6 +167,7 @@ body> main> .content > form>table> tbody> tr> th{
     min-width: 5rem;
     font-weight: 500;
     color: rgba(0,0,0,0.6);
+
 }
 body> main> .content > form>table> tbody> tr> td{
     background-color: rgba(0,0,0,0.01);
@@ -143,18 +175,8 @@ body> main> .content > form>table> tbody> tr> td{
     padding: 0.5rem;
 }
 
-body> main> .content > form>table> tbody> tr> td>label>select{
 
-    padding: 0.5rem;
-    border-radius: 0.2rem;
-    font-family: inherit;
-    font-weight: 600;
-    outline: none;
 
-}
-body> main> .content > form>table> tbody> tr> td>label>.detail-index{
-    display: none;
-}
 
 body> main> .content > form>table> tbody> .data-row>td>ul{
     max-height: 70rem;
@@ -167,16 +189,25 @@ body> main> .content > form>table> tbody> .data-row>td>ul>li{
     display: flex;
     flex-direction: row;
     align-items: center;
+    font-family: inherit;
+    font-weight: 500;
+    color: rgba(0,0,0,0.6);
+    border-bottom: rgba(0,0,0,0.2) solid 0.0625rem;
+    padding: 0.5rem 0;
+
 }
 body> main> .content > form>table> tbody> .data-row>td>ul>li>.image-container{
-    max-width: 15rem;
+    max-width: 10rem;
     white-space: nowrap;
-
+    display: inline-block;
+    padding: unset;
+    /*padding: 0.5rem 0.5rem 0 0;*/
+    /*padding-bottom: 0.5rem;*/
     overflow: auto;
 }
 body> main> .content > form>table> tbody> .data-row>td>ul>li>.image-container::-webkit-scrollbar{
     height: 0.5rem;
-
+    padding-bottom: 0.5rem;
 
 }
 body> main> .content > form>table> tbody> .data-row>td>ul>li>.image-container::-webkit-scrollbar-track{
@@ -198,11 +229,16 @@ body> main> .content > form>table> tbody> .data-row>td>ul>li>span>img{
 }
 
 
-body> main> .content > form>table> tbody> .data-row>td>ul>li>span>img{
-
+body> main> .content > form>table> tbody> .data-row>td>ul>li>a{
+    color: rgba(0,0,0,0.6);
 }
 
-
+body> main> .content > form>table> tbody> .data-row>td>ul>li>a>.price-column{
+    text-align: end;
+}
+body> main> .content > form>table> tbody> .data-row>td>ul>li>.date-column{
+    text-align: center;
+}
 
 
 
