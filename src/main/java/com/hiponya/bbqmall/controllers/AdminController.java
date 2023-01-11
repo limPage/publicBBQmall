@@ -1,9 +1,11 @@
 package com.hiponya.bbqmall.controllers;
 
+import com.hiponya.bbqmall.entities.bbs.BpArticleEntity;
 import com.hiponya.bbqmall.entities.bbs.ImageEntity;
 import com.hiponya.bbqmall.entities.member.UserEntity;
 import com.hiponya.bbqmall.entities.product.ProductEntity;
 import com.hiponya.bbqmall.entities.product.ProductImageEntity;
+import com.hiponya.bbqmall.enums.CommonResult;
 import com.hiponya.bbqmall.enums.admin.AdminResult;
 import com.hiponya.bbqmall.exception.RollbackException;
 import com.hiponya.bbqmall.services.AdminService;
@@ -94,6 +96,31 @@ public class AdminController {
         }
         return modelAndView;
     }
+
+
+    @RequestMapping(value = "/update", method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String patchUpdateProduct(@SessionAttribute(value = "user", required = false) UserEntity user ,
+                                     @RequestParam(value = "images", required = false) MultipartFile[] images,
+                                     @RequestParam(value = "detailImages", required = false) MultipartFile[] detailImages,
+                                     ProductEntity product, int imageChange ) throws IOException {
+        JSONObject responseObject = new JSONObject();
+
+        Enum<?> result;
+
+        try{
+            result = this.adminService.modifyProduct(product, user, images, detailImages ,imageChange);
+        }catch (RollbackException ignored){
+            result = AdminResult.FAILURE;
+        }
+        responseObject.put("result", result.name().toLowerCase());
+        return responseObject.toString();
+
+    }
+
+
+
+
     @GetMapping(value = "/delete" ,produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getDeleteProduct(){
         ModelAndView modelAndView = new ModelAndView("admin/deleteProduct");

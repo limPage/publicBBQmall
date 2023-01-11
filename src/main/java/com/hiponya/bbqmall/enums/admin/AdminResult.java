@@ -7,5 +7,6 @@ public enum AdminResult implements IResult {
     SUCCESS,
     FAILURE,
     NOT_SIGNED,
-    NOT_ALLOWED
+    NOT_ALLOWED,
+    NO_SUCH_ARTICLE
 }

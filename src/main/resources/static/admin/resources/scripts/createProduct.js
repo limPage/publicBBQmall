@@ -5,42 +5,9 @@ let images= window.document.querySelectorAll('.images');
 let imageContainer=window.document.querySelectorAll('.image-container');
 let noImage= window.document.querySelectorAll('.no-image');
 let detailIndex;
+
+
 form['menuIndex'].addEventListener('change', ()=>{
-//     const menu = ["튀김류","구이류","순살","윙&봉","닭갈비","패키지",
-//     "훈제&수비드","소세지&핫바","만두&육포","닭가슴살","스테이크&큐브","즉석간편식",
-//     "안주","탕찜","혼합세트","간식류"]
-//
-//     const value= [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16];
-//
-//     let optionElement1=document.createElement('option');
-//     let optionElement2=document.createElement('option');
-//     let optionElement3=document.createElement('option');
-//     let optionElement4=document.createElement('option');
-//     let optionElement5=document.createElement('option');
-//     let optionElement6=document.createElement('option');
-//     let optionElement7=document.createElement('option');
-//     let optionElement8=document.createElement('option');
-//     let optionElement9=document.createElement('option');
-//     let optionElement10=document.createElement('option');
-//     let optionElement11=document.createElement('option');
-//     let optionElement12=document.createElement('option');
-//     let optionElement13=document.createElement('option');
-//     let optionElement14=document.createElement('option');
-//     let optionElement15=document.createElement('option');
-//     let optionElement16=document.createElement('option');
-//
-//     const array= [optionElement1,optionElement2,optionElement3,optionElement4,
-//         optionElement5,optionElement6,optionElement7,optionElement8,optionElement9,
-//         optionElement10,optionElement11,optionElement12,optionElement13,optionElement14,
-//         optionElement15,optionElement16]
-//
-//
-//     for (let i = 0; i < menu.length ; i++) {
-//         // array[i].createElement('option');
-//         array[i].setAttribute("value",value[i]);
-//         array[i].classList.add("detail"+i);
-//         array[i].innerText=menu[i];
-//     }
 
 
 
@@ -109,6 +76,10 @@ form['menuIndex'].addEventListener('change', ()=>{
 }
 //사진첨부를 눌렀을때
 
+form['back'].addEventListener("click",()=>{
+    history.back();
+
+});
 
 form['submit'].addEventListener("click",()=>{
 
@@ -138,7 +109,7 @@ form['submit'].addEventListener("click",()=>{
         return;
 
     }
-    if(form['amount'].value === '' ||  parseInt(form['amount'].value)===0){
+    if(form['onSale'].checked &&(form['amount'].value === '' ||  parseInt(form['amount'].value)===0)){
         alert("상품 재고가 없습니다.");
         return;
 
@@ -154,7 +125,7 @@ form['submit'].addEventListener("click",()=>{
     formData.append('productName',form['productName'].value);
     formData.append('price',form['price'].value);
     formData.append('content',form['content'].value);
-    formData.append('amount',form['amount'].value);
+    formData.append('amount', form['amount'].value?form['amount'].value:0);
     formData.append('onSale',form['onSale'].checked?1:0);
     formData.append('saleQuantity',form['saleQuantity'].value);
     for (let file of form['images'].files) {

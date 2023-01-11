@@ -1,12 +1,15 @@
 package com.hiponya.bbqmall.services;
 
 
+import com.hiponya.bbqmall.entities.bbs.BpArticleEntity;
 import com.hiponya.bbqmall.entities.member.UserEntity;
 import com.hiponya.bbqmall.entities.product.DetailImageEntity;
 import com.hiponya.bbqmall.entities.product.ProductEntity;
 import com.hiponya.bbqmall.entities.product.ProductImageEntity;
 import com.hiponya.bbqmall.entities.product.StatusLookupEntity;
+import com.hiponya.bbqmall.enums.CommonResult;
 import com.hiponya.bbqmall.enums.admin.AdminResult;
+import com.hiponya.bbqmall.enums.bbs.ModifyResult;
 import com.hiponya.bbqmall.exception.RollbackException;
 import com.hiponya.bbqmall.interfaces.IResult;
 import com.hiponya.bbqmall.mappers.IAdminMapper;
@@ -18,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Date;
 
 import static java.util.Arrays.stream;
 
@@ -51,7 +55,7 @@ public class AdminService {
         }
 //        review.setUserId(user.getId());
         if(this.adminMapper.insertProduct(product)==0){
-            return AdminResult.FAILURE;
+            return CommonResult.FAILURE;
         }
         if(!user.isAdmin()){
             return AdminResult.NOT_ALLOWED;
@@ -89,7 +93,7 @@ public class AdminService {
             throw new RollbackException();
         }
 
-        return AdminResult.SUCCESS;
+        return CommonResult.SUCCESS;
     }
 
 
@@ -125,5 +129,74 @@ public class AdminService {
 
         return product;
     }
+
+    public Enum<? extends IResult> modifyProduct(ProductEntity product, UserEntity user, MultipartFile[] images, MultipartFile[] detailImages ,int imageChange )throws IOException, RollbackException  {
+        ProductEntity existingProduct = this.adminMapper.selectProductByProductIndex(product.getProductIndex());
+
+//        review.setUserId(user.getId());
+
+        //로그인 안했다면 실패
+        if (user == null) {
+            return AdminResult.NOT_SIGNED;
+        }
+
+        if (existingProduct == null) { //게시글이 없으면 실패
+            return AdminResult.NO_SUCH_ARTICLE;
+
+            //수정 시작
+        }
+        if( !user.isAdmin()) {
+            return  ModifyResult.NOT_ALLOWED;
+        }
+        product.setModifiedOn(new Date());
+        product.setCreatedOn(existingProduct.getCreatedOn());
+        product.setView(existingProduct.getView());
+
+        if(this.adminMapper.updateProduct(product)==0){
+            return CommonResult.FAILURE;
+        }
+
+
+      //이미지가 새로 삽입되었을 경우
+        if(imageChange==1){//이미지 선택버튼을 눌러 삭제에 동의하였다.
+            System.out.println("수정시 이미지 삭제 수:"+this.adminMapper.deleteProductImageByProductIndex(product.getProductIndex()));
+            if (images !=null && images.length>0){
+                for(MultipartFile image : images){
+                    ProductImageEntity productImage = new ProductImageEntity();
+                    productImage.setReviewIndex(product.getProductIndex());
+                    productImage.setData(image.getBytes());
+                    productImage.setType(image.getContentType());
+                    if(this.adminMapper.insertProductImage(productImage)==0){
+                        throw new RollbackException();
+                    }
+                }
+            }
+
+            if (detailImages !=null && detailImages.length>0){
+                for(MultipartFile image : detailImages){
+                    DetailImageEntity detailImage = new DetailImageEntity();
+                    detailImage.setReviewIndex(product.getProductIndex());
+                    detailImage.setData(image.getBytes());
+                    detailImage.setType(image.getContentType());
+                    if(this.adminMapper.insertDetailImage(detailImage)==0){
+                        throw new RollbackException();
+                    }
+
+                }
+            }
+
+        }
+
+        StatusLookupEntity statusLookup = new StatusLookupEntity();
+        statusLookup.setStatus("MODIFY");
+        statusLookup.setText(product.getProductName());
+        if (this.adminMapper.insertStatusLookup(statusLookup)==0){
+            throw new RollbackException();
+        }
+
+        return CommonResult.SUCCESS;
+
+    }
+
 
 }

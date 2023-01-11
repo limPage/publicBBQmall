@@ -26,6 +26,8 @@
         </div>
 
         <form id="form" th:if="${product!=null}">
+            <input hidden name="productIndex" th:value="${pid}">
+
             <input hidden name="nowDetailIndex" th:value="${product.getDetailIndex()}">
             <table>
                 <tbody>
@@ -161,10 +163,11 @@
 
                         </label>
                         <label class="image-container" rel="imageContainer">
-                            <span class="no-image" rel="noImage"> 선택된 이미지가 없습니다.</span>
+                            <span class="now-no-image"  th:text="${product.getImageIndexes().length==0?'선택된 이미지가 없습니다.':''}"></span>
+                            <span class="no-image" rel="noImage" hidden > 선택된 이미지가 없습니다.</span>
 
-                            <img class="image" th:each="d : ${product.getImageIndexes()}"
-                                 th:src="@{/admin/productImage (index=${d}) }" alt="이미지" title="이미지">
+                            <img class="image" th:each="image : ${product.getImageIndexes()}"
+                                 th:src="@{/admin/productImage (index=${image}) }" alt="이미지" title="이미지">
                         </label>
 
                     </td>
@@ -237,7 +240,7 @@
                     <td >
                         <label>
                             <span> 등록과 동시에 판매 유무</span>
-                            <input type="checkbox" name="onSale">
+                            <input type="checkbox" name="onSale" checked>
                         </label>
                     </td>
                 </tr>
@@ -258,7 +261,15 @@
                 </tbody>
             </table>
 
-            <input type="button" name="submit" value="등록하기">
+            <div class="button-row">
+                <label>
+            <input class="back" type="button" name="back" value="취소">
+                </label>
+
+                <label>
+            <input class="submit" type="button" name="submit" value="등록">
+                </label>
+            </div>
         </form>
 
 

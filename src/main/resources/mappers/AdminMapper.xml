@@ -6,7 +6,16 @@
 
     <insert id="insertProduct" parameterType="com.hiponya.bbqmall.entities.product.ProductEntity" keyProperty="productIndex"
             useGeneratedKeys="true" keyColumn="productIndex">
-        INSERT INTO `bbqmall`.`products` ( `detail_index`,`product_name`,`price`,`content`,`view`,`created_on`,`modified_on`,`amount`,`on_sale`,`sale_quantity`
+        INSERT INTO `bbqmall`.`products` ( `detail_index`,
+                                          `product_name`,
+                                          `price`,
+                                          `content`,
+                                          `view`,
+                                          `created_on`,
+                                          `modified_on`,
+                                          `amount`,
+                                          `on_sale`,
+                                          `sale_quantity`
                                             )
         VALUES (#{detailIndex}, #{productName}, #{price} , #{content},#{view},IFNULL(#{createdOn}, default(`created_on`)),IFNULL(#{modifiedOn}, default(`modified_on`)), #{amount},#{onSale},#{saleQuantity} )
 
@@ -28,6 +37,31 @@
         INSERT INTO `bbqmall`.`status_lookup` (`status`, `text`, `occurred_time`)
         VALUES (#{status}, #{text}, IFNULL(#{occurredTime}, default(`occurred_time`)))
     </insert>
+
+    <update id="updateProduct" parameterType="com.hiponya.bbqmall.entities.product.ProductEntity">
+
+        UPDATE `bbqmall`.`products` SET   `detail_index` = #{detailIndex},
+                                           `product_name`= #{productName},
+                                           `price` = #{price} ,
+                                           `content` = #{content},
+                                           `view` =  #{view},
+                                           `created_on` = #{createdOn},
+                                           `modified_on` =#{modifiedOn},
+                                           `amount` = #{amount},
+                                           `on_sale` =#{onSale},
+                                           `sale_quantity` = #{saleQuantity}
+        WHERE product_index = #{productIndex}
+        LIMIT 1;
+
+
+
+    </update>
+
+    <delete id="deleteProductImageByProductIndex" parameterType="com.hiponya.bbqmall.entities.product.ProductImageEntity" >
+
+            DELETE FROM `bbqmall`.`product_images` WHERE product_index = #{productIndex}
+
+    </delete>
 
     <select id="selectProductsByDetailIndex" resultType="com.hiponya.bbqmall.vos.product.ProductReadVo">
 
@@ -114,5 +148,7 @@
         LIMIT 1;
 
     </select>
+
+
 
 </mapper>

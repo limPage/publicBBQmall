@@ -20,6 +20,9 @@ public interface IAdminMapper {
    int insertProductImage(ProductImageEntity productImage);
    int insertDetailImage(DetailImageEntity detailImage);
    int insertStatusLookup(StatusLookupEntity statusLookup);
+   int updateProduct(ProductEntity product);
+
+   int deleteProductImageByProductIndex(@RequestParam (value = "productIndex") int productIndex);
    ProductReadVo[] selectProductsByDetailIndex(@RequestParam (value = "detailIndex") String detailIndex);
    ProductReadVo selectProductByProductIndex(@RequestParam (value = "productIndex") int pid);
 
@@ -27,5 +30,7 @@ public interface IAdminMapper {
 
 
    ProductImageEntity selectProductImageByIndex(@Param(value = "index") int index);
+
+
 
 }

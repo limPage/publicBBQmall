@@ -97,6 +97,8 @@ body>main>.content>form>table>.thead>tr{
 body>main>.content>form>table>.thead>tr>th{
     font-weight: 500;
     color: rgba(0,0,0,0.6);
+    padding: 0.5rem;
+
 
 }
 body>main>.content>form>table>.thead
@@ -109,7 +111,7 @@ body>main>.content>form>table>.thead
 body>main>.content>form>table>.thead>tr>th:not(:first-of-type){
     display: inline-block;
     padding: 0.5rem;
-    min-width: 5rem;
+    min-width: 2rem;
     /*display: flex;*/
     /*width: 100%;*/
 
@@ -120,8 +122,15 @@ body>main>.content>form>table .image-column{
     padding: 0.5rem;
 
 }
+
+body>main>.content>form>table .number-column{
+    width: 2rem;
+    display: inline-block;
+    /*padding: 0.5rem;*/
+}
+
 body>main>.content>form>table .name-column{
-    width: 20rem;
+    width: 17rem;
     display: inline-block;
     padding: 0.5rem;
     /*overflow: auto;*/
@@ -199,8 +208,9 @@ body> main> .content > form>table> tbody> .data-row>td>ul>li{
 body> main> .content > form>table> tbody> .data-row>td>ul>li>.image-container{
     max-width: 10rem;
     white-space: nowrap;
-    display: inline-block;
-    padding: unset;
+    display: flex;
+    justify-content: center;
+    padding: 0 0.5rem ;
     /*padding: 0.5rem 0.5rem 0 0;*/
     /*padding-bottom: 0.5rem;*/
     overflow: auto;
@@ -216,7 +226,7 @@ body> main> .content > form>table> tbody> .data-row>td>ul>li>.image-container::-
 
 }
 body> main> .content > form>table> tbody> .data-row>td>ul>li>.image-container::-webkit-scrollbar-thumb{
-    background-color: #CF152D;
+    background-color: rgba(0,0,0,0.5);
     border-radius: 999rem;
 
 }
@@ -231,6 +241,7 @@ body> main> .content > form>table> tbody> .data-row>td>ul>li>span>img{
 
 body> main> .content > form>table> tbody> .data-row>td>ul>li>a{
     color: rgba(0,0,0,0.6);
+
 }
 
 body> main> .content > form>table> tbody> .data-row>td>ul>li>a>.price-column{
@@ -240,6 +251,10 @@ body> main> .content > form>table> tbody> .data-row>td>ul>li>.date-column{
     text-align: center;
 }
 
+body> main> .content > form>table> tbody> .data-row>td>ul>li>.number-column{
+    text-align: center;
+    padding-right: 0.5rem;
+}
 
 
 

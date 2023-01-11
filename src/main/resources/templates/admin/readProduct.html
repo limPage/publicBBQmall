@@ -22,7 +22,7 @@
     <th:block th:replace="~{fragments/body ::adminSideBar}"></th:block>
     <div class="content">
         <div class="title-container">
-            <h1>상품조회</h1>
+            <h1>상품조회 / 수정 / 삭제</h1>
         </div>
 
 
@@ -150,10 +150,13 @@
 
                 </tr>
                 <tr class="name-row">
-
-                    <th class="image-column">
-                        이미지
+                    <th class="number-column">
+                        넘버
                     </th>
+                    <th class="image-column">
+                        타이틀 이미지
+                    </th>
+
 
                     <th class="name-column">
                         상품명
@@ -175,6 +178,7 @@
                     <td>
                         <ul>
                             <li th:each="product :${products}">
+                                <span class="number-column" th:text="${product.getProductIndex()}">00</span>
                             <span class="image-container image-column">
 
                                 <img th:each="d : ${product.getImageIndexes()}"
@@ -184,6 +188,7 @@
 
                                 <!--                            <img th:src="@{/admin/productImage?index= (${product.getProductIndex()})}">-->
                                 <a href="#">
+
                                     <span class="name-column"
                                                    th:text="${product.getProductName()}">비비큐</span>
 
@@ -191,7 +196,7 @@
                                     <span class="date-column"
                                         th:text="${#dates.format(product.getCreatedOn(),'yyyy.MM.dd hh:mm')}">2022-22-28-10:20:20</span>
                                     <span class="spring"></span>
-                                <a href="#">수정</a>/ <a href="#">삭제</a>
+                                <a th:href="@{/admin/update (pid= ${product.getProductIndex()})}">수 정</a>/<a href="#">삭 제</a>
                             </li>
 
 

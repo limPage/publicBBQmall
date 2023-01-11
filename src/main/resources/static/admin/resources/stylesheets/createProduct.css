@@ -186,7 +186,7 @@ body> main> .content > form>table> tbody> tr> td>.image-container>img{
     background-color: #ee3400;
     border-radius: 0.5rem ;
     margin-right: 0.1rem;
-
+    margin-top: 0.1rem;
 }
 
 
@@ -231,13 +231,20 @@ body> main> .content > form>table> tbody> tr> td>label>textarea{
     border-radius: 0.2rem;
 }
 
+body> main> .content > form >.button-row{
+    display: flex;
+    flex-direction: row;
 
-body> main> .content > form > input[type="button"]{
-    margin-top: 2rem;
+    justify-content: space-between;
+    padding-top: 1rem;
+
+}
+
+
+body> main> .content > form >.button-row>label> input[type="button"]{
     padding: 0.5rem 2rem;
     border-radius: 0.2rem;
     border: none;
-    background-color: #E31134;
     color: white;
     font-family: inherit;
     cursor: pointer;
@@ -245,12 +252,28 @@ body> main> .content > form > input[type="button"]{
 
 
 
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
+    /*left: 40%;*/
+    /*transform: translateX(-50%);*/
     /*display: none;*/
 }
+body> main> .content > form > .button-row>label>.back{
+    background-color: #333333;
 
+}
+body> main> .content > form > .button-row>label>.back:hover{
+    background-color: rgba(0,0,0,0.9);
+}
+
+
+body> main> .content > form >.button-row>label> .submit{
+    background-color: #E31134;
+
+}
+body> main> .content > form >.button-row>label> .submit:hover{
+    background-color: #ee3400;
+
+
+}
 
 
 
