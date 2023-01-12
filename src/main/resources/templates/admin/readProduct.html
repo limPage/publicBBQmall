@@ -181,8 +181,8 @@
                                 <span class="number-column" th:text="${product.getProductIndex()}">00</span>
                             <span class="image-container image-column">
 
-                                <img th:each="d : ${product.getImageIndexes()}"
-                                     th:src="@{/admin/productImage (index=${d}) }" alt="이미지" title="이미지">
+                                <img th:each="image : ${product.getImageIndexes()}"
+                                     th:src="@{/admin/productImage (index=${image}) }" alt="이미지" title="이미지">
 
                             </span>
 
@@ -196,7 +196,8 @@
                                     <span class="date-column"
                                         th:text="${#dates.format(product.getCreatedOn(),'yyyy.MM.dd hh:mm')}">2022-22-28-10:20:20</span>
                                     <span class="spring"></span>
-                                <a th:href="@{/admin/update (pid= ${product.getProductIndex()})}">수 정</a>/<a href="#">삭 제</a>
+                                <a class="button" th:href="@{/admin/update (pid= ${product.getProductIndex()})}">수 정</a><a class="button delete" href="#">삭 제</a>
+                                <input hidden class="pid" th:value="${product.getProductIndex()}">
                             </li>
 
 

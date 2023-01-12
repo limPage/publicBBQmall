@@ -5,10 +5,21 @@ import java.util.Date;
 public class StatusLookupEntity {
 
     private int index;
+    private String productIndex;
     private String status;
+    private String statusText;
     private String text;
 
     private Date occurredTime;
+
+
+    public String getProductIndex() {
+        return productIndex;
+    }
+
+    public void setProductIndex(String productIndex) {
+        this.productIndex = productIndex;
+    }
 
     public int getIndex() {
         return index;
@@ -40,6 +51,14 @@ public class StatusLookupEntity {
 
     public void setOccurredTime(Date occurredTime) {
         this.occurredTime = occurredTime;
+    }
+
+    public String getStatusText() {
+        return statusText;
+    }
+
+    public void setStatusText(String statusText) {
+        this.statusText = statusText;
     }
 
     @Override

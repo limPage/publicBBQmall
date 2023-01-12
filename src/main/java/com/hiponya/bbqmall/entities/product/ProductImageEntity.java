@@ -2,7 +2,7 @@ package com.hiponya.bbqmall.entities.product;
 
 public class ProductImageEntity {
     private int index;
-    private int reviewIndex;
+    private int productIndex;
     private byte[] data;
     private String type;
 
@@ -14,12 +14,12 @@ public class ProductImageEntity {
         this.index = index;
     }
 
-    public int getReviewIndex() {
-        return reviewIndex;
+    public int getProductIndex() {
+        return productIndex;
     }
 
-    public void setReviewIndex(int reviewIndex) {
-        this.reviewIndex = reviewIndex;
+    public void setProductIndex(int productIndex) {
+        this.productIndex = productIndex;
     }
 
     public byte[] getData() {

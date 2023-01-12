@@ -1,7 +1,7 @@
 package com.hiponya.bbqmall.services;
 
 
-import com.hiponya.bbqmall.entities.bbs.BpArticleEntity;
+import com.hiponya.bbqmall.entities.bbs.NoticeEntity;
 import com.hiponya.bbqmall.entities.member.UserEntity;
 import com.hiponya.bbqmall.entities.product.DetailImageEntity;
 import com.hiponya.bbqmall.entities.product.ProductEntity;
@@ -10,6 +10,7 @@ import com.hiponya.bbqmall.entities.product.StatusLookupEntity;
 import com.hiponya.bbqmall.enums.CommonResult;
 import com.hiponya.bbqmall.enums.admin.AdminResult;
 import com.hiponya.bbqmall.enums.bbs.ModifyResult;
+import com.hiponya.bbqmall.enums.bbs.WriteResult;
 import com.hiponya.bbqmall.exception.RollbackException;
 import com.hiponya.bbqmall.interfaces.IResult;
 import com.hiponya.bbqmall.mappers.IAdminMapper;
@@ -20,7 +21,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Date;
 
 import static java.util.Arrays.stream;
@@ -53,10 +53,13 @@ public class AdminService {
         if (user ==null){
             return  AdminResult.NOT_SIGNED;
         }
-//        review.setUserId(user.getId());
+        StatusLookupEntity statusLookup = new StatusLookupEntity();
+        product.setProductIndex(0);
+
         if(this.adminMapper.insertProduct(product)==0){
             return CommonResult.FAILURE;
         }
+
         if(!user.isAdmin()){
             return AdminResult.NOT_ALLOWED;
         }
@@ -64,7 +67,7 @@ public class AdminService {
         if (images !=null && images.length>0){
             for(MultipartFile image : images){
                 ProductImageEntity productImage = new ProductImageEntity();
-                productImage.setReviewIndex(product.getProductIndex());
+                productImage.setProductIndex(product.getProductIndex());
                 productImage.setData(image.getBytes());
                 productImage.setType(image.getContentType());
                 if(this.adminMapper.insertProductImage(productImage)==0){
@@ -75,20 +78,22 @@ public class AdminService {
         }
 
         if (detailImages !=null && detailImages.length>0){
+
             for(MultipartFile image : detailImages){
                 DetailImageEntity detailImage = new DetailImageEntity();
-                detailImage.setReviewIndex(product.getProductIndex());
+                detailImage.setProductIndex(product.getProductIndex());
                 detailImage.setData(image.getBytes());
                 detailImage.setType(image.getContentType());
                 if(this.adminMapper.insertDetailImage(detailImage)==0){
                     throw new RollbackException();
                 }
-
             }
         }
-        StatusLookupEntity statusLookup = new StatusLookupEntity();
         statusLookup.setStatus("CREAT");
+        statusLookup.setStatusText("[상품등록]");
+        statusLookup.setProductIndex(String.valueOf(product.getProductIndex()));
         statusLookup.setText(product.getProductName());
+
         if (this.adminMapper.insertStatusLookup(statusLookup)==0){
             throw new RollbackException();
         }
@@ -106,6 +111,9 @@ public class AdminService {
             int[] productImageIndexes = stream(productImages).mapToInt(ProductImageEntity::getIndex).toArray();
             product.setImageIndexes(productImageIndexes);
 
+            DetailImageEntity[] detailImages = this.adminMapper.selectDetailImagesByProductIndexExceptData(product.getProductIndex());
+            int[] detailImageIndexes = stream(detailImages).mapToInt(DetailImageEntity::getIndex).toArray();
+            product.setDetailImageIndexes(detailImageIndexes);
 
         }
         return products;
@@ -114,6 +122,10 @@ public class AdminService {
     public ProductImageEntity getProductImage (int index){
 
         return this.adminMapper.selectProductImageByIndex(index);
+    }
+    public DetailImageEntity getDetailImage (int index){
+
+        return this.adminMapper.selectDetailImageByIndex(index);
     }
 
     public ProductReadVo getProduct(int pid){
@@ -125,12 +137,14 @@ public class AdminService {
             int[] productImageIndexes = stream(productImages).mapToInt(ProductImageEntity::getIndex).toArray();
             product.setImageIndexes(productImageIndexes);
 
-
+        DetailImageEntity[] detailImages = this.adminMapper.selectDetailImagesByProductIndexExceptData(product.getProductIndex());
+        int[] detailImageIndexes = stream(detailImages).mapToInt(DetailImageEntity::getIndex).toArray();
+        product.setDetailImageIndexes(detailImageIndexes);
 
         return product;
     }
 
-    public Enum<? extends IResult> modifyProduct(ProductEntity product, UserEntity user, MultipartFile[] images, MultipartFile[] detailImages ,int imageChange )throws IOException, RollbackException  {
+    public Enum<? extends IResult> modifyProduct(ProductEntity product, UserEntity user, MultipartFile[] images, MultipartFile[] detailImages ,int imageChange, int detailImageChange )throws IOException, RollbackException  {
         ProductEntity existingProduct = this.adminMapper.selectProductByProductIndex(product.getProductIndex());
 
 //        review.setUserId(user.getId());
@@ -146,7 +160,7 @@ public class AdminService {
             //수정 시작
         }
         if( !user.isAdmin()) {
-            return  ModifyResult.NOT_ALLOWED;
+            return  AdminResult.NOT_ALLOWED;
         }
         product.setModifiedOn(new Date());
         product.setCreatedOn(existingProduct.getCreatedOn());
@@ -157,13 +171,13 @@ public class AdminService {
         }
 
 
-      //이미지가 새로 삽입되었을 경우
+        //이미지가 새로 삽입되었을 경우
         if(imageChange==1){//이미지 선택버튼을 눌러 삭제에 동의하였다.
             System.out.println("수정시 이미지 삭제 수:"+this.adminMapper.deleteProductImageByProductIndex(product.getProductIndex()));
             if (images !=null && images.length>0){
                 for(MultipartFile image : images){
                     ProductImageEntity productImage = new ProductImageEntity();
-                    productImage.setReviewIndex(product.getProductIndex());
+                    productImage.setProductIndex(product.getProductIndex());
                     productImage.setData(image.getBytes());
                     productImage.setType(image.getContentType());
                     if(this.adminMapper.insertProductImage(productImage)==0){
@@ -171,11 +185,14 @@ public class AdminService {
                     }
                 }
             }
-
+        }
+        //이미지가 새로 삽입되었을 경우
+        if(detailImageChange==1){//이미지 선택버튼을 눌러 삭제에 동의하였다.
+            System.out.println("수정시 상세 이미지 삭제 수"+this.adminMapper.deleteDetailImageByProductIndex(product.getProductIndex()));
             if (detailImages !=null && detailImages.length>0){
                 for(MultipartFile image : detailImages){
                     DetailImageEntity detailImage = new DetailImageEntity();
-                    detailImage.setReviewIndex(product.getProductIndex());
+                    detailImage.setProductIndex(product.getProductIndex());
                     detailImage.setData(image.getBytes());
                     detailImage.setType(image.getContentType());
                     if(this.adminMapper.insertDetailImage(detailImage)==0){
@@ -189,6 +206,8 @@ public class AdminService {
 
         StatusLookupEntity statusLookup = new StatusLookupEntity();
         statusLookup.setStatus("MODIFY");
+        statusLookup.setStatusText("[상품수정]");
+        statusLookup.setProductIndex(String.valueOf(existingProduct.getProductIndex()));
         statusLookup.setText(product.getProductName());
         if (this.adminMapper.insertStatusLookup(statusLookup)==0){
             throw new RollbackException();
@@ -198,5 +217,39 @@ public class AdminService {
 
     }
 
+
+    public Enum<? extends IResult> deleteProduct(UserEntity user, int pid) throws RollbackException {
+        ProductEntity existingProduct = this.adminMapper.selectProductByProductIndex(pid);
+
+        if (existingProduct == null) {
+            return AdminResult.NO_SUCH_ARTICLE; //상품이 없다
+        }
+
+        if (user == null || !user.isAdmin()) {
+            return WriteResult.NOT_ALLOWED; //권한이 없다
+        }
+
+
+        StatusLookupEntity statusLookup = new StatusLookupEntity();
+        statusLookup.setStatus("DELETE");
+        statusLookup.setStatusText("[상품삭제]");
+        statusLookup.setProductIndex(String.valueOf(existingProduct.getProductIndex()));
+        statusLookup.setText(existingProduct.getProductName());
+        if(this.adminMapper.deleteProductByProductIndex(pid) > 0){
+
+            if (this.adminMapper.insertStatusLookup(statusLookup)==0){
+                throw new RollbackException();
+            }
+            return CommonResult.SUCCESS;
+        }
+
+        return CommonResult.FAILURE;
+    }
+
+
+    public StatusLookupEntity[] getStatusLookup(){
+
+        return this.adminMapper.selectStatusLookupAll();
+    }
 
 }

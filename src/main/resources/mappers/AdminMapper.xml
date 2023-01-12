@@ -5,7 +5,7 @@
 <mapper namespace="com.hiponya.bbqmall.mappers.IAdminMapper">
 
     <insert id="insertProduct" parameterType="com.hiponya.bbqmall.entities.product.ProductEntity" keyProperty="productIndex"
-            useGeneratedKeys="true" keyColumn="productIndex">
+            useGeneratedKeys="true" keyColumn="product_index">
         INSERT INTO `bbqmall`.`products` ( `detail_index`,
                                           `product_name`,
                                           `price`,
@@ -24,18 +24,18 @@
     <insert id="insertProductImage" parameterType="com.hiponya.bbqmall.entities.product.ProductImageEntity" keyColumn="index"
             useGeneratedKeys="true" keyProperty="index">
         INSERT INTO `bbqmall`.`product_images` (`product_index`, `data`, `type`)
-        VALUES (#{reviewIndex}, #{data}, #{type})
+        VALUES (#{productIndex}, #{data}, #{type})
     </insert>
     <insert id="insertDetailImage" parameterType="com.hiponya.bbqmall.entities.product.DetailImageEntity" keyColumn="index"
             useGeneratedKeys="true" keyProperty="index">
-        INSERT INTO `bbqmall`.`product_images` (`product_index`, `data`, `type`)
-        VALUES (#{reviewIndex}, #{data}, #{type})
+        INSERT INTO `bbqmall`.`detail_images` (`product_index`, `data`, `type`)
+        VALUES (#{productIndex}, #{data}, #{type})
     </insert>
 
     <insert id="insertStatusLookup" parameterType="com.hiponya.bbqmall.entities.product.StatusLookupEntity" keyColumn="index"
             useGeneratedKeys="true" keyProperty="index">
-        INSERT INTO `bbqmall`.`status_lookup` (`status`, `text`, `occurred_time`)
-        VALUES (#{status}, #{text}, IFNULL(#{occurredTime}, default(`occurred_time`)))
+        INSERT INTO `bbqmall`.`status_lookup` (`status`,`product_index`, `status_text`, `text`, `occurred_time`)
+        VALUES (#{status},#{productIndex},  #{statusText}, #{text}, IFNULL(#{occurredTime}, default(`occurred_time`)))
     </insert>
 
     <update id="updateProduct" parameterType="com.hiponya.bbqmall.entities.product.ProductEntity">
@@ -57,11 +57,7 @@
 
     </update>
 
-    <delete id="deleteProductImageByProductIndex" parameterType="com.hiponya.bbqmall.entities.product.ProductImageEntity" >
 
-            DELETE FROM `bbqmall`.`product_images` WHERE product_index = #{productIndex}
-
-    </delete>
 
     <select id="selectProductsByDetailIndex" resultType="com.hiponya.bbqmall.vos.product.ProductReadVo">
 
@@ -114,6 +110,15 @@
 
     </select>
 
+    <select id="selectDetailImagesByProductIndexExceptData" resultType="com.hiponya.bbqmall.entities.product.DetailImageEntity">
+        SELECT `index`      AS `index`,
+               `product_index` AS `productIndex`
+
+        FROM `bbqmall`.`detail_images`
+        WHERE `product_index` = #{productIndex}
+        ORDER BY `index`
+
+    </select>
 
 
     <select id="selectProductImageByIndex" resultType="com.hiponya.bbqmall.entities.product.ProductImageEntity">
@@ -124,9 +129,16 @@
         FROM bbqmall.`product_images`
         WHERE `index` = #{index} LIMIT 1;
 
+    </select>
+    <select id="selectDetailImageByIndex" resultType="com.hiponya.bbqmall.entities.product.DetailImageEntity">
+        SELECT `index` AS `index`,
+               `product_index` AS `productIndex`,
+               `data` AS `data`,
+               `type` AS `type`
+        FROM bbqmall.`detail_images`
+        WHERE `index` = #{index} LIMIT 1;
 
     </select>
-
 
     <select id="selectProductByProductIndex" resultType="com.hiponya.bbqmall.vos.product.ProductReadVo">
 
@@ -149,6 +161,40 @@
 
     </select>
 
+    <select id="selectStatusLookupAll" resultType="com.hiponya.bbqmall.entities.product.StatusLookupEntity">
 
+        SELECT `index` AS  `index`,
+               `product_index` AS `productIndex`,
+               `status` AS `status`,
+               `status_text` AS `statusText`,
+               `text` AS `text`,
+               `occurred_time` `occurredTime`
+        FROM `bbqmall`.`status_lookup`
+        ORDER BY `index`
+        DESC
+        LIMIT 100
+
+
+
+    </select>
+
+    <delete id="deleteProductImageByProductIndex" parameterType="com.hiponya.bbqmall.entities.product.ProductImageEntity" >
+
+        DELETE FROM `bbqmall`.`product_images` WHERE product_index = #{productIndex}
+
+    </delete>
+
+    <delete id="deleteDetailImageByProductIndex" parameterType="com.hiponya.bbqmall.entities.product.DetailImageEntity" >
+
+        DELETE FROM `bbqmall`.`detail_images` WHERE product_index = #{productIndex}
+
+    </delete>
+
+    <delete id="deleteProductByProductIndex" parameterType="com.hiponya.bbqmall.entities.product.ProductEntity">
+
+        DELETE FROM `bbqmall`.`products` WHERE  product_index = #{productIndex}
+
+
+    </delete>
 
 </mapper>

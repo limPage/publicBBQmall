@@ -244,6 +244,21 @@ body> main> .content > form>table> tbody> .data-row>td>ul>li>a{
 
 }
 
+body> main> .content > form>table> tbody> .data-row>td>ul>li>a.button{
+
+    color: white;
+    margin-right: 0.5rem;
+    /*border: rgba() solid 0.3rem;*/
+    background-color: #CF152D;
+    border-radius: 0.2rem;
+    padding: 0.5rem;
+}
+body> main> .content > form>table> tbody> .data-row>td>ul>li>a.button:hover{
+    background-color: black;
+}
+
+
+
 body> main> .content > form>table> tbody> .data-row>td>ul>li>a>.price-column{
     text-align: end;
 }

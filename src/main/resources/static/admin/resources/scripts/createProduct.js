@@ -150,15 +150,14 @@ form['submit'].addEventListener("click",()=>{
 
                         window.location.href=`./`
 
-
                         break;
 
-                    case 'not_login':
+                    case 'not_signed':
                         alert('로그인이 되었는지 확인후 다시 시도해 주세요.');
                         break;
 
                     case 'not_allowed':
-                        alert('게시글을 수정할 수 있는 권한이 없습니다.');
+                        alert('권한이 없습니다.');
                         break;
 
 

@@ -2,9 +2,12 @@ package com.hiponya.bbqmall.controllers;
 
 import com.hiponya.bbqmall.entities.bbs.BpArticleEntity;
 import com.hiponya.bbqmall.entities.bbs.ImageEntity;
+import com.hiponya.bbqmall.entities.bbs.NoticeEntity;
 import com.hiponya.bbqmall.entities.member.UserEntity;
+import com.hiponya.bbqmall.entities.product.DetailImageEntity;
 import com.hiponya.bbqmall.entities.product.ProductEntity;
 import com.hiponya.bbqmall.entities.product.ProductImageEntity;
+import com.hiponya.bbqmall.entities.product.StatusLookupEntity;
 import com.hiponya.bbqmall.enums.CommonResult;
 import com.hiponya.bbqmall.enums.admin.AdminResult;
 import com.hiponya.bbqmall.exception.RollbackException;
@@ -39,6 +42,14 @@ public class AdminController {
     @GetMapping(value = "/" ,produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getAdmin(){
         ModelAndView modelAndView = new ModelAndView("admin/admin");
+
+        StatusLookupEntity[] statusLookup = this.adminService.getStatusLookup();
+        modelAndView.addObject("statusLookup",statusLookup);
+        for (int i=0; i< statusLookup.length;i++){
+            System.out.println("text=:"+statusLookup[i].getText());
+            System.out.println("status"+statusLookup[i].getStatusText());
+
+        }
 
         return modelAndView;
     }
@@ -103,13 +114,13 @@ public class AdminController {
     public String patchUpdateProduct(@SessionAttribute(value = "user", required = false) UserEntity user ,
                                      @RequestParam(value = "images", required = false) MultipartFile[] images,
                                      @RequestParam(value = "detailImages", required = false) MultipartFile[] detailImages,
-                                     ProductEntity product, int imageChange ) throws IOException {
+                                     ProductEntity product, int imageChange, int detailImageChange ) throws IOException {
         JSONObject responseObject = new JSONObject();
 
         Enum<?> result;
 
         try{
-            result = this.adminService.modifyProduct(product, user, images, detailImages ,imageChange);
+            result = this.adminService.modifyProduct(product, user, images, detailImages ,imageChange, detailImageChange);
         }catch (RollbackException ignored){
             result = AdminResult.FAILURE;
         }
@@ -120,13 +131,18 @@ public class AdminController {
 
 
 
+    @ResponseBody
+    @RequestMapping(value = "/delete" ,method =RequestMethod.DELETE, produces = MediaType.TEXT_HTML_VALUE)
+    public String getDeleteProduct(@SessionAttribute (value = "user",required = false) UserEntity user,
+                                         @RequestParam (value = "pid") int pid ) throws RollbackException {
 
-    @GetMapping(value = "/delete" ,produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getDeleteProduct(){
-        ModelAndView modelAndView = new ModelAndView("admin/deleteProduct");
+        JSONObject responseObject = new JSONObject();
+            Enum<?> result = this.adminService.deleteProduct(user, pid);
+            responseObject.put("result", result.name().toLowerCase());
+        return responseObject.toString();
 
-        return modelAndView;
     }
+
 
 
 
@@ -164,6 +180,25 @@ public class AdminController {
             headers.setContentType(MediaType.valueOf(productImage.getType()));
             headers.setContentLength(productImage.getData().length);
             responseEntity = new ResponseEntity<>(productImage.getData(),headers, HttpStatus.OK);
+        }
+        return responseEntity;
+    }
+
+    @GetMapping(value = "detailImage")
+    public ResponseEntity<byte[]> getDetailImage(@RequestParam(value = "index") int index){
+
+        ResponseEntity<byte[]> responseEntity ;
+
+
+        DetailImageEntity detailImage = this.adminService.getDetailImage(index);
+
+        if(detailImage==null){
+            responseEntity = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }else {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.valueOf(detailImage.getType()));
+            headers.setContentLength(detailImage.getData().length);
+            responseEntity = new ResponseEntity<>(detailImage.getData(),headers, HttpStatus.OK);
         }
         return responseEntity;
     }

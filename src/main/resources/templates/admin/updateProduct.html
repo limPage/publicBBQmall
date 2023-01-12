@@ -166,8 +166,7 @@
                             <span class="now-no-image"  th:text="${product.getImageIndexes().length==0?'선택된 이미지가 없습니다.':''}"></span>
                             <span class="no-image" rel="noImage" hidden > 선택된 이미지가 없습니다.</span>
 
-                            <img class="image" th:each="image : ${product.getImageIndexes()}"
-                                 th:src="@{/admin/productImage (index=${image}) }" alt="이미지" title="이미지">
+                            <img class="image" th:each="image : ${product.getImageIndexes()}" th:src="@{/admin/productImage (index=${image}) }" alt="이미지" title="이미지">
                         </label>
 
                     </td>
@@ -211,8 +210,12 @@
 
                         </label>
                         <label class="image-container"  rel="imageContainer">
-                            <span class="no-image" rel="noImage"> 선택된 이미지가 없습니다.</span>
 
+                            <span class="no-image" rel="noImage" hidden > 선택된 이미지가 없습니다.</span>
+                            <span class="now-no-image"  th:text="${product.getDetailImageIndexes().length==0?'선택된 이미지가 없습니다.':''}"></span>
+
+
+                            <img class="image" th:each="detailImage : ${product.getDetailImageIndexes()}" th:src="@{/admin/detailImage (index=${detailImage}) }" alt="이미지" title="이미지">
 
                         </label>
 

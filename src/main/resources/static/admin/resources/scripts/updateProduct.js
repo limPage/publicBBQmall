@@ -8,6 +8,7 @@ let nowNoImage= window.document.querySelectorAll('.now-no-image');
 let detailIndex;
 let nowDetailIndex = form['nowDetailIndex'].value;
 let imageChange=0; //이미지를 새로 넣었는가? 0:변경없음 1:새로 넣음 2:모두 지움
+let detailImageChange=0; //이미지를 새로 넣었는가? 0:변경없음 1:새로 넣음 2:모두 지움
 if (nowDetailIndex<6){
     form['menuIndex'].value=1;
     form['detailIndex1'].style.display="inline-block"
@@ -86,16 +87,18 @@ form['menuIndex'].addEventListener('change', ()=>{
                 return ;
             }
             e.preventDefault();
+            if (i===0){imageChange=1;}
+            if (i===1){detailImageChange=1;}
+            const imageContainerElement = imageContainer.item(i);
+            imageContainerElement.querySelectorAll('img.image').forEach(x => x.remove());
             images.item(i).click();
         })
 
 
 
         images.item(i).addEventListener('input', () => {
-
-            imageChange=1;
             const imageContainerElement = imageContainer.item(i);
-            imageContainerElement.querySelectorAll('img.image').forEach(x => x.remove());
+
             if (images.item(i).files.length > 0) {
                 nowNoImage.item(i).setAttribute("hidden",1);
                 noImage.item(i).setAttribute("hidden",1);
@@ -175,6 +178,7 @@ form['submit'].addEventListener("click",()=>{
     formData.append('onSale',form['onSale'].checked?1:0);
     formData.append('saleQuantity',form['saleQuantity'].value);
     formData.append('imageChange',imageChange);
+    formData.append('detailImageChange',detailImageChange);
 
     for (let file of form['images'].files) {
         formData.append('images', file);
@@ -200,7 +204,7 @@ form['submit'].addEventListener("click",()=>{
 
                         break;
 
-                    case 'not_login':
+                    case 'not_signed':
                         alert('로그인이 되었는지 확인후 다시 시도해 주세요.');
                         break;
 
