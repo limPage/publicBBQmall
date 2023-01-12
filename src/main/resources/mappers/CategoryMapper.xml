@@ -9,6 +9,18 @@
         where binary `index` = #{index}
     </select>
 
+    <select id="selectUserById" resultType="com.hiponya.bbqmall.entities.member.UserEntity">
+        select `email` as `email`,
+               `id` as `id`,
+               `name` as `name`,
+               `contact` as `contact`,
+               `address_postal` as `addressPostal`,
+               `address_primary` as `addressPrimary`,
+               `address_secondary` as `addressSecondary`
+               from bbqmall.users
+               where binary `id` = #{id}
+    </select>
+
     <select id="selectCategories" resultType="com.hiponya.bbqmall.entities.product.CategoryEntity">
         select `index` as `index`,
                `title` as `title`
@@ -128,6 +140,13 @@
     <insert id="insertWishlistByIndex" parameterType="com.hiponya.bbqmall.entities.product.WishlistEntity"
     useGeneratedKeys="true" keyColumn="index" keyProperty="index">
         insert into bbqmall.wishlist ( `id`, `product_index`, `quantity`) values (#{id}, #{productIndex}, #{quantity})
+    </insert>
+
+    <insert id="insertOrder" parameterType="com.hiponya.bbqmall.entities.product.OrderEntity" useGeneratedKeys="true" keyColumn="index" keyProperty="index">
+        insert into bbqmall.order (`id`, `name`, `contact`, `address_postal`, `address_primary`, `address_secondary`,
+                                   `product_index`, `product_name`, `price`, `order_amount`) values
+                                                                                                 (#{id}, #{name}, #{contact}, #{addressPostal}, #{addressPrimary}, #{addressSecondary},
+                                                                                                  #{productIndex}, #{productName}, #{price}, #{orderAmount})
     </insert>
 
     <delete id="deleteWishlistByIndex">

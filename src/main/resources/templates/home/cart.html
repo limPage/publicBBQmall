@@ -63,13 +63,13 @@
                                                 <ul class="cart-option">
                                                     <li>
                                                         <span class="product-title">상품</span>
-                                                        <span class="product" th:text="${product.getProductName()}">/상품 이름 2개와 가격 th적을곳/</span>
+                                                        <span class="product" id="productName"th:text="${product.getProductName()}" th:value="${product.getProductName()}">/상품 이름 2개와 가격 th적을곳/</span>
                                                     </li>
                                                 </ul>
                                                 <input type="hidden" name="coupon">
                                                 <div class="cart-quantity">
                                                     <span class="quantity">수량</span>
-                                                    <span th:text="${quantity}"></span>
+                                                    <span th:text="${quantity}" th:value="${quantity}" id="quantity"></span>
                                                     <span class="price-container">
                                                         (
                                                         <span class="price" th:text="${(product.getPrice() * quantity) - (product.getPrice() / product.getSaleQuantity()) * quantity}">/th로 productPrice 받을곳/</span>
@@ -101,7 +101,8 @@
 
                                             <li class="sale-apply">
                                                 <span class="title">할인적용금액</span>
-                                                <span class="sale-price" th:text="${(product.getPrice - (product.getPrice() / product.getSaleQuantity())) * quantity}">th:price 할인적용금액 적을곳</span>
+                                                <span class="sale-price" th:value="${(product.getPrice - (product.getPrice() / product.getSaleQuantity())) * quantity}"
+                                                      th:text="${(product.getPrice - (product.getPrice() / product.getSaleQuantity())) * quantity}" id="price">th:price 할인적용금액 적을곳</span>
                                                 원
                                             </li>
                                         </ul>
@@ -287,14 +288,14 @@
                                         <br>
                                         <li>
                                             <span class="address-postal-container">
-                                                [<span class="address-postal" th:text="${user.getAddressPostal()}" th:value="${user.getAddressPostal()}">th:text=users.getAddressPostal 넣을곳</span>]
+                                                [<span class="address-postal" id = "addressPostal" th:text="${user.getAddressPostal()}" th:value="${user.getAddressPostal()}">th:text=users.getAddressPostal 넣을곳</span>]
                                             </span>
-                                            <span class="address-primary" th:text="${user.getAddressPrimary()}" th:value="${user.getAddressPrimary()}">th:text=users.getAddressPrimary 넣을곳</span>
-                                            <span class="address-secondary" th:text="${user.getAddressSecondary()}" th:value="${user.getAddressSecondary()}">th:text=users.getAddressSecondary 넣을곳</span>
+                                            <span class="address-primary" id = "addressPrimary" th:text="${user.getAddressPrimary()}" th:value="${user.getAddressPrimary()}">th:text=users.getAddressPrimary 넣을곳</span>
+                                            <span class="address-secondary" id = "addressSecondary" th:text="${user.getAddressSecondary()}" th:value="${user.getAddressSecondary()}">th:text=users.getAddressSecondary 넣을곳</span>
                                         </li>
                                         <br>
                                         <li>
-                                            <span class="contact" id="name">th:text=users.getContact 넣을곳 /</span>
+                                            <span class="contact" th:text="${user.getContact()}">th:text=users.getContact 넣을곳 /</span>
                                             <span class="gray">&nbsp</span>
                                             <span class="phone">추가연락처 없음</span>
                                         </li>

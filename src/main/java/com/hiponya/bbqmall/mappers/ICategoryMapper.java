@@ -1,5 +1,6 @@
 package com.hiponya.bbqmall.mappers;
 
+import com.hiponya.bbqmall.entities.member.UserEntity;
 import com.hiponya.bbqmall.entities.product.*;
 import com.hiponya.bbqmall.vos.product.WishlistVo;
 import org.apache.ibatis.annotations.Mapper;
@@ -27,6 +28,8 @@ public interface ICategoryMapper {
 
     CartEntity selectCartByIndex(@Param(value = "cid") int cid);
 
+    UserEntity selectUserById(@Param(value = "id") String id);
+
     ProductEntity selectSaleQuantityByIndex(@Param(value = "index") int index);
 
     Integer selectWishlistSumPriceByUserId(@Param(value = "id") String id);
@@ -35,6 +38,7 @@ public interface ICategoryMapper {
 
 
     int insertWishlistByIndex(WishlistEntity wishlist);
+    int insertOrder(OrderEntity order);
 
     int deleteWishlistByIndex(@Param(value = "index") int index);
 

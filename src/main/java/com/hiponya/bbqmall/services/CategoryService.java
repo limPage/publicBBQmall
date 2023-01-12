@@ -55,6 +55,22 @@ public class CategoryService {
         return CommonResult.SUCCESS;
     }
 
+    public Enum<? extends IResult> insertOrder(UserEntity user, OrderEntity order) {
+        UserEntity existingUser = this.categoryMapper.selectUserById(user.getId());
+        if(existingUser == null) {
+            return CommonResult.FAILURE;
+        }
+        return this.categoryMapper.insertOrder(order) > 0 ? CommonResult.SUCCESS : CommonResult.FAILURE;
+    }
+
+    public Enum<? extends IResult> insertWishlistOrder(UserEntity user, OrderEntity order) {
+        UserEntity existingUser = this.categoryMapper.selectUserById(user.getId());
+        if(existingUser == null) {
+            return CommonResult.FAILURE;
+        }
+        return this.categoryMapper.insertOrder(order) > 0 ? CommonResult.SUCCESS : CommonResult.FAILURE;
+    }
+
     public Enum<? extends IResult> insertWishlist(WishlistEntity wishlist) {
 
         ProductEntity product = this.categoryMapper.selectProductByIndex(wishlist.getProductIndex());

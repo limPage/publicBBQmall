@@ -62,7 +62,7 @@
                                                 <input type="hidden" name = "wishlistIndex" id="wishlistIndex" class="wishlist-index" th:value="${wishlist.getIndex()}">
                                                 <label>
                                                     <input type="checkbox" name="cart-option" checked="checked">
-                                                    <span class="products-name" th:text="${product.getProductName}">/th:text="${product.getProductName}" 넣을곳</span>
+                                                    <span class="products-name" th:text="${product.getProductName}" id="productName">/th:text="${product.getProductName}" 넣을곳</span>
                                                 </label>
                                                 <button type="button" class="delete-button" title="상품 삭제" id="deleteButton">삭제</button>
                                             </div>
@@ -78,7 +78,7 @@
                                                         <li class="option-area">
                                                             <div class="cart-quantity">
                                                                 <span class="quantity-title">수량</span>
-                                                                <span class="quantity-count" th:text="${wishlist.getQuantity()}">"th:text=${quantity} 넣을곳"</span>
+                                                                <span class="quantity-count" th:text="${wishlist.getQuantity()}" id="quantity">"th:text=${quantity} 넣을곳"</span>
                                                                 <span class="price-quantity">(
                                                                     <span th:text="${wishlist.getPrice() * wishlist.getQuantity() + '원'}">"th:text="${wishlist.getPrice()*quantity}" 넣을곳"</span>
                                                                     )</span>
@@ -98,7 +98,7 @@
                                                     </li>
                                                     <li class="total-price">
                                                         <span class="total-price-title">할인적용금액</span>
-                                                        <span class="total-price" th:text="${(wishlist.getPrice() - (wishlist.getPrice() / 100 * wishlist.getSaleQuantity())) * wishlist.getQuantity()} + '원'">"th:text="${(product.getPrice() - (product.getPrice() / 100 * product.getSaleQuantity)) * quantity}" 넣을곳</span>
+                                                        <span class="total-price" th:text="${(wishlist.getPrice() - (wishlist.getPrice() / 100 * wishlist.getSaleQuantity())) * wishlist.getQuantity()} + '원'" id="price">"th:text="${(product.getPrice() - (product.getPrice() / 100 * product.getSaleQuantity)) * quantity}" 넣을곳</span>
                                                     </li>
                                                 </ul>
 
@@ -118,9 +118,157 @@
                         </div>
 
 
+
+
                     </li>
 
                     <li class="cart-right">
+
+                        <div class="user-info-container">
+                            <h3 class="title3">
+                                <span>주문자 정보</span>
+                                <button type="button" id="orderModify" class="modify-button">수정</button>
+                            </h3>
+
+                            <ul class="list1" id="orderInfo" hidden>
+                                <li>
+                                    <span class="user-name" th:text="${user.getName()}" th:value="${user.getName()}" id="userName">th:users name넣을곳</span>
+                                    &nbsp
+                                </li>
+                                <li>
+                                    <span class="phone" th:text="${user.getContact()}" th:value="${user.getContact()}" id="contact">th:users contact넣을곳</span>
+                                    <span>&nbsp&nbsp</span>
+                                    <span class="phone2">--</span>
+                                </li>
+                                <li class="hide">
+                                    <span class="email" th:text="${user.getEmail()}" th:value="${user.getEmail()}" id="email">th:users email넣을곳</span>
+                                </li>
+                            </ul>
+
+                            <div class="order-info">
+                                <input type="hidden" name="order-address-postal" value="0"><!--th:value=users.getAddressPostal -->
+                                <input type="hidden" name="order-address-primary" value="0"><!-- th:value=users.getAddressPrimary -->
+                                <input type="hidden" name="order-address-secondary" value="0"><!-- th:value=users.getAddressSecondary -->
+                            </div>
+
+                            <div class="order-info-member">
+                                <ul class="list1">
+                                    <input type="hidden" class="id" id="id" th:value="${user.getId()}">
+                                    <li class="order-user-name" th:value="${user.getName()}" th:text="${user.getName()}">"th:value=user.getName 넣을곳"</li>
+                                    <li class="order-user-contact" th:value="${user.getContact()}" th:text="${user.getContact()}">"th:value=user.getContact 넣을곳"</li>
+                                    <li class="order-user-email" th:value="${user.getEmail()}" th:text="${user.getEmail()}">"th:value=user.getEmail 넣을곳"</li>
+                                </ul>
+                                <button type="button" class="modify-btn">수정</button>
+                            </div>
+
+                            <div class="order-info-input">
+                                <ul class="list1">
+                                    <li>
+                                        <dl>
+                                            <dt>보내는 분</dt>
+                                            <dd>
+
+                                                <input type="text" class="order-name" value="0"><!-- th:value=users.getName -->
+                                            </dd>
+                                        </dl>
+                                    </li>
+
+                                    <li>
+                                        <dl>
+                                            <dt>휴대폰</dt>
+                                            <dd>
+                                                <input type="tel" name="user-contact" value="0"><!-- th:value=users.getContact -->
+                                            </dd>
+                                        </dl>
+                                    </li>
+
+                                    <li>
+                                        <dl>
+                                            <dt>이메일</dt>
+                                            <dd>
+                                                <input type="email" name="userEmail" class="user-email" title="이메일" required placeholder="이메일" value="0"> <!-- th:value=users.getEmail -->
+                                            </dd>
+                                        </dl>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="shipping-container">
+                            <h3 class="title">
+                                <span class="shipping-area">배송지</span>
+                                <div>
+                                    &nbsp
+                                    <button type="button" class="change-address-btn">다른배송지 선택</button>
+                                    <button type="button" class="modify-btn">수정</button>
+                                </div>
+                            </h3>
+
+                            <div class="delivery-area-container">
+
+                            </div>
+
+                            <div class="delivery-info-container">
+                                <ul class ="list">
+                                    <li class="user-name">
+                                        <span>배송 받는 사람</span>
+                                        <span class="user-name" th:text="${user.getName()}" th:value="${user.getName()}">"th:text=users.getName 받을곳"</span>
+
+                                    </li>
+                                    <br>
+                                    <li>
+                                            <span class="address-postal-container">
+                                                [<span class="address-postal" id = "addressPostal" th:text="${user.getAddressPostal()}" th:value="${user.getAddressPostal()}">th:text=users.getAddressPostal 넣을곳</span>]
+                                            </span>
+                                        <span class="address-primary" id = "addressPrimary" th:text="${user.getAddressPrimary()}" th:value="${user.getAddressPrimary()}">th:text=users.getAddressPrimary 넣을곳</span>
+                                        <span class="address-secondary" id = "addressSecondary" th:text="${user.getAddressSecondary()}" th:value="${user.getAddressSecondary()}">th:text=users.getAddressSecondary 넣을곳</span>
+                                    </li>
+                                    <br>
+                                    <li>
+                                        <span class="contact" th:text="${user.getContact()}">th:text=users.getContact 넣을곳 /</span>
+                                        <span class="gray">&nbsp</span>
+                                        <span class="phone">추가연락처 없음</span>
+                                    </li>
+                                    <li class="hide" hidden>th:text=users.getEmail 넣을곳</li>
+                                    <br>
+                                    <li class="nation-container">
+                                        배송국가 :
+                                        <span class="nation">대한민국</span>
+                                        <input type="hidden" id="address-nation" name=addressNation value="korea">
+                                        <input type="hidden" id="address-nation-key" name="addressNationKey" value="kor">
+                                    </li>
+
+                                    <li class="desc"> ※ 매장수령상품은 매장에서 상품을 수령하세요. </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- 받는분 정보 입력 -->
+
+                        <div class="delivery-selector" hidden>
+                            <ul class="delivery-choice clearbox">
+                                <li>
+                                    <a href="#">선택</a>
+                                </li>
+                                <li class="input">
+                                    <a href="#">신규/수정</a>
+                                </li>
+                            </ul>
+
+                            <div class="other-delivery-area">
+                                <!-- 다른 배송지 목록 -->
+                            </div>
+
+                            <div class="ship-possible" hidden>
+                                <input type="hidden" id="shipPossible" name="shipPossible" value="y">
+                                아래의 국가(<span class="kr">대한민국</span>)로 배송이 불가능한 상품이 있습니다.
+                                <br>
+                                장바구니에서 주문 상품을 변경해주세요.
+                                <button type="button" class="btn">장바구니로 돌아가기</button>
+                            </div>
+
+                        </div>
+
                         <h3 class="total-title">전체 주문시 금액</h3>
                         <div class="total-sum-price">
                             <ul class="list1">
@@ -161,7 +309,7 @@
                         </div>
 
                         <ul class="cart-order-btn-area">
-                            <li>
+                            <li class="button-container">
                                 <input type="button" class="all-order-btn" value="전체 주문하기">
                             </li>
                         </ul>
@@ -169,7 +317,10 @@
                         <div class="naver-pay" hidden>
 
                         </div>
+
+
                     </li>
+
 
                 </ul>
                 <div class="total-price-btn">

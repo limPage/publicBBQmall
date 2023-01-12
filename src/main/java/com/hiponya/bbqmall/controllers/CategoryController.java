@@ -74,6 +74,7 @@ public class CategoryController {
         modelAndView.addObject("wishlists", wishlists);
         modelAndView.addObject("sumPrice", sumPrice);
         modelAndView.addObject("salePrice", salePrice);
+        modelAndView.addObject("user", user);
 
         modelAndView.addObject("product", product);
         modelAndView.addObject("quantity", quantity);
@@ -95,6 +96,36 @@ public class CategoryController {
             responseObject.put("result", result.name().toLowerCase());
             System.out.println(wishlist.getProductIndex());
         }
+        return responseObject.toString();
+    }
+
+    @RequestMapping(value="wishlist", method=RequestMethod.PATCH, produces=MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String patchWishlist(@SessionAttribute(value = "user",required = false) UserEntity user,
+                            OrderEntity order) {
+        JSONObject responseObject = new JSONObject();
+        Enum<?> result = this.categoryService.insertWishlistOrder(user, order);
+        responseObject.put("result", result.name().toLowerCase());
+        if(result == CommonResult.SUCCESS) {
+
+            System.out.println(order.getId());
+        }
+
+        return responseObject.toString();
+    }
+
+    @RequestMapping(value="order", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String postOrder(@SessionAttribute(value = "user",required = false) UserEntity user,
+                            OrderEntity order) {
+        JSONObject responseObject = new JSONObject();
+        Enum<?> result = this.categoryService.insertOrder(user, order);
+        responseObject.put("result", result.name().toLowerCase());
+        if(result == CommonResult.SUCCESS) {
+
+            System.out.println(order.getId());
+        }
+
         return responseObject.toString();
     }
 
@@ -182,8 +213,6 @@ public class CategoryController {
 
         return modelAndView;
     }
-
-
 
 
     @RequestMapping(value = "view", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)

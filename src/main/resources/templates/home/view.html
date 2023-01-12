@@ -47,7 +47,7 @@
                             <input type="hidden" th:text="${product.getPrice()}" th:value="${product.getPrice()}" id="price">
 
                             <span class="won">원</span>
-                            <span class="basic-price" th:text="${(product.getPrice() / product.getSaleQuantity()) + product.getPrice()}">20,000원</span>
+                            <span class="basic-price" th:text="${(product.getPrice() / (product.getSaleQuantity()==0?1:product.getSaleQuantity())) + product.getPrice()}">20,000원</span>
                         </div>
                     </div>
 
