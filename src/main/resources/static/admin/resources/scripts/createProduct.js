@@ -5,7 +5,8 @@ let images= window.document.querySelectorAll('.images');
 let imageContainer=window.document.querySelectorAll('.image-container');
 let noImage= window.document.querySelectorAll('.no-image');
 let detailIndex;
-
+window.document.getElementById('sideBarC').style.cssText=`color: rgba(0,0,0,0.9);
+    font-weight: 700;`;
 
 form['menuIndex'].addEventListener('change', ()=>{
 

@@ -1,14 +1,10 @@
 package com.hiponya.bbqmall.controllers;
 
-import com.hiponya.bbqmall.entities.bbs.BpArticleEntity;
-import com.hiponya.bbqmall.entities.bbs.ImageEntity;
-import com.hiponya.bbqmall.entities.bbs.NoticeEntity;
 import com.hiponya.bbqmall.entities.member.UserEntity;
 import com.hiponya.bbqmall.entities.product.DetailImageEntity;
 import com.hiponya.bbqmall.entities.product.ProductEntity;
 import com.hiponya.bbqmall.entities.product.ProductImageEntity;
 import com.hiponya.bbqmall.entities.product.StatusLookupEntity;
-import com.hiponya.bbqmall.enums.CommonResult;
 import com.hiponya.bbqmall.enums.admin.AdminResult;
 import com.hiponya.bbqmall.exception.RollbackException;
 import com.hiponya.bbqmall.services.AdminService;
@@ -40,16 +36,15 @@ public class AdminController {
 
 
     @GetMapping(value = "/" ,produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getAdmin(){
+    public ModelAndView getAdmin(@RequestParam (value = "status" , required = false) String status ){
         ModelAndView modelAndView = new ModelAndView("admin/admin");
 
-        StatusLookupEntity[] statusLookup = this.adminService.getStatusLookup();
-        modelAndView.addObject("statusLookup",statusLookup);
-        for (int i=0; i< statusLookup.length;i++){
-            System.out.println("text=:"+statusLookup[i].getText());
-            System.out.println("status"+statusLookup[i].getStatusText());
+        System.out.println("staye"+status);
+        StatusLookupEntity[]  statusLookup = this.adminService.getStatusLookup(status);
 
-        }
+
+        modelAndView.addObject("statusLookup",statusLookup);
+
 
         return modelAndView;
     }
@@ -133,7 +128,7 @@ public class AdminController {
 
     @ResponseBody
     @RequestMapping(value = "/delete" ,method =RequestMethod.DELETE, produces = MediaType.TEXT_HTML_VALUE)
-    public String getDeleteProduct(@SessionAttribute (value = "user",required = false) UserEntity user,
+    public String deleteProduct(@SessionAttribute (value = "user",required = false) UserEntity user,
                                          @RequestParam (value = "pid") int pid ) throws RollbackException {
 
         JSONObject responseObject = new JSONObject();
@@ -157,7 +152,7 @@ public class AdminController {
 
         try{
 
-            result = this.adminService.CreatProduct(user,product,images,detailImages);
+            result = this.adminService.CreateProduct(user,product,images,detailImages);
         }catch (RollbackException ignored){
             result = AdminResult.FAILURE;
         }

@@ -1,7 +1,6 @@
 package com.hiponya.bbqmall.services;
 
 
-import com.hiponya.bbqmall.entities.bbs.NoticeEntity;
 import com.hiponya.bbqmall.entities.member.UserEntity;
 import com.hiponya.bbqmall.entities.product.DetailImageEntity;
 import com.hiponya.bbqmall.entities.product.ProductEntity;
@@ -9,7 +8,6 @@ import com.hiponya.bbqmall.entities.product.ProductImageEntity;
 import com.hiponya.bbqmall.entities.product.StatusLookupEntity;
 import com.hiponya.bbqmall.enums.CommonResult;
 import com.hiponya.bbqmall.enums.admin.AdminResult;
-import com.hiponya.bbqmall.enums.bbs.ModifyResult;
 import com.hiponya.bbqmall.enums.bbs.WriteResult;
 import com.hiponya.bbqmall.exception.RollbackException;
 import com.hiponya.bbqmall.interfaces.IResult;
@@ -49,7 +47,7 @@ public class AdminService {
 //    }
 
     @Transactional
-    public Enum<? extends IResult> CreatProduct(UserEntity user, ProductEntity product, MultipartFile[] images, MultipartFile[] detailImages) throws IOException, RollbackException {
+    public Enum<? extends IResult> CreateProduct(UserEntity user, ProductEntity product, MultipartFile[] images, MultipartFile[] detailImages) throws IOException, RollbackException {
         if (user ==null){
             return  AdminResult.NOT_SIGNED;
         }
@@ -89,7 +87,7 @@ public class AdminService {
                 }
             }
         }
-        statusLookup.setStatus("CREAT");
+        statusLookup.setStatus("CREATE");
         statusLookup.setStatusText("[상품등록]");
         statusLookup.setProductIndex(String.valueOf(product.getProductIndex()));
         statusLookup.setText(product.getProductName());
@@ -205,7 +203,7 @@ public class AdminService {
         }
 
         StatusLookupEntity statusLookup = new StatusLookupEntity();
-        statusLookup.setStatus("MODIFY");
+        statusLookup.setStatus("UPDATE");
         statusLookup.setStatusText("[상품수정]");
         statusLookup.setProductIndex(String.valueOf(existingProduct.getProductIndex()));
         statusLookup.setText(product.getProductName());
@@ -247,9 +245,9 @@ public class AdminService {
     }
 
 
-    public StatusLookupEntity[] getStatusLookup(){
+    public StatusLookupEntity[] getStatusLookup(String status){
 
-        return this.adminMapper.selectStatusLookupAll();
+        return this.adminMapper.selectStatusLookupByStatus(status);
     }
 
 }

@@ -2,7 +2,7 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>BBQ몰 상품관리</title>
+    <title th:text="${'BBQ몰 상품관리('+statusLookup.length+')'}"> </title>
 
 
     <th:block th:replace="~{fragments/head :: common}"></th:block>
@@ -10,6 +10,10 @@
     <link rel="stylesheet" th:href="@{/admin/resources/stylesheets/admin.css}">
 <!--    <script defer th:src="@{/member/resources/scripts/csCenter.js}"></script>-->
 
+    <script th:if="${session.user==null || !session.user.isAdmin()}">
+        alert("없는 페이지입니다.");//일반인에게 어드민 페이지를 숨긴다.
+        window.location.href=`/`;
+    </script>
 
 </head>
 <body>
@@ -67,11 +71,12 @@
 
         <div class="lookup">
             <div class="title-row">
-                <h1 class="title">상품현황</h1>
+                <h1 class="title">상품관리 HISTORY</h1> <span th:text="${'(최근 3일 : '+statusLookup.length+'건)'}"></span><i></i>
                 <span class="spring"></span>
-                <a  class="more">등록내역</a>/
-                <a  class="more">수정내역</a>/
-                <a  class="more">삭제내역</a>
+                <a th:href="@{/admin/}" class="more">전체내역</a>/
+                <a th:href="@{/admin/ (status=create)}" class="more">등록내역</a>/
+                <a th:href="@{/admin/ (status=update)}" class="more">수정내역</a>/
+                <a th:href="@{/admin/ (status=delete)}" class="more">삭제내역</a>
             </div>
             <div class="bar"></div>
             <ul class="status-ul">
@@ -79,14 +84,18 @@
                 <li class="status" th:each="status : ${statusLookup}">
                     <div>
                         <span th:text="${status.getStatus().charAt(0)}">C</span>
-                        <span th:text="${status.getProductIndex()}"></span>
-                        <span th:text="${status.getStatusText()}">상태</span>
-                        <a class="button">
 
-                            <span th:text="${status.getText()}">234</span>
-                            <span th:text="${#dates.format(status.getOccurredTime(),'yyyy.MM.dd hh:mm')}">2022-22-28-10:20:20</span>
 
-                        </a>
+<!--                        <a class="button">-->
+                           <i class="small-text" th:text="${status.getStatusText()}">상태</i>
+                            <span class="small-text" th:text="${status.getProductIndex()}">-</span>
+                            <span class="small-text" th:text="${status.getText()}">234</span>
+
+                        <span class="spring"></span>
+
+                            <span class="small-text" th:text="${#dates.format(status.getOccurredTime(),'yyyy.MM.dd hh:mm')}">2022-22-28-10:20:20</span>
+
+<!--                        </a>-->
 
 
                     </div>

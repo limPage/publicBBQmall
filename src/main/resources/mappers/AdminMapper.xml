@@ -161,18 +161,33 @@
 
     </select>
 
-    <select id="selectStatusLookupAll" resultType="com.hiponya.bbqmall.entities.product.StatusLookupEntity">
+    <select id="selectStatusLookupByStatus" resultType="com.hiponya.bbqmall.entities.product.StatusLookupEntity">
 
         SELECT `index` AS  `index`,
                `product_index` AS `productIndex`,
                `status` AS `status`,
                `status_text` AS `statusText`,
                `text` AS `text`,
-               `occurred_time` `occurredTime`
+               `occurred_time` AS `occurredTime`
+
         FROM `bbqmall`.`status_lookup`
+        WHERE `occurred_time` > DATE_ADD(NOW(), INTERVAL -3 DAY )
+
+        <if test="status!=null and status eq 'create'">
+            AND `status` = 'CREATE'
+        </if>
+
+        <if test="status!=null and status eq 'update'">
+            AND `status` = 'UPDATE'
+        </if>
+
+        <if test="status!=null and status eq 'delete'">
+            AND `status` = 'DELETE'
+        </if>
+
         ORDER BY `index`
         DESC
-        LIMIT 100
+
 
 
 

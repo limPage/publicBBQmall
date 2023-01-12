@@ -32,7 +32,7 @@ public interface IAdminMapper {
    ProductImageEntity[] selectProductImagesByProductIndexExceptData(@Param(value = "productIndex") int productIndex);
    DetailImageEntity[] selectDetailImagesByProductIndexExceptData(@Param(value = "productIndex") int productIndex);
 
-   StatusLookupEntity[] selectStatusLookupAll();
+   StatusLookupEntity[] selectStatusLookupByStatus(String status);
 
    ProductImageEntity selectProductImageByIndex(@Param(value = "index") int index);
    DetailImageEntity selectDetailImageByIndex(@Param(value = "index") int index);

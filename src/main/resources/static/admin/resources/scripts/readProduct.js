@@ -1,5 +1,3 @@
-
-
 let imageButton= window.document.querySelectorAll('.image-select-button');
 let images= window.document.querySelectorAll('.images');
 let imageContainer=window.document.querySelectorAll('.image-container');
@@ -7,6 +5,10 @@ let noImage= window.document.querySelectorAll('.no-image');
 let detailIndex;
 let deleteButton = window.document.querySelectorAll('.delete');
 let pid = window.document.querySelectorAll('.pid');
+
+window.document.getElementById('sideBarRUD').style.cssText=`color: rgba(0,0,0,0.9);
+    font-weight: 700;`;
+
 form['menuIndex'].addEventListener('change', ()=>{
     if(form['menuIndex'].value==='99') {
         form['detailIndex1'].style.display = "none"

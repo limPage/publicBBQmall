@@ -101,6 +101,14 @@ body>main>.content>.lookup>.bar{
     width: 100%;
     background-color: black;
 }
+body>main>.content>.lookup>.status-ul{
+    max-height: 100rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+}
+
+
 body>main>.content>.lookup>.status-ul>li{
     border-bottom: rgba(0,0,0,0.1) solid 1px;
 
@@ -113,12 +121,12 @@ body>main>.content>.lookup>.status-ul>li>div{
 }
 
 
-body>main>.content>.lookup>.status-ul>li>div>.button{
-    cursor: pointer;
-    padding: 25px 9px 28px 13px;
-    font-size: 14px;
+/*body>main>.content>.lookup>.status-ul>li>div>.button{*/
+/*    cursor: pointer;*/
+/*    padding: 25px 9px 28px 13px;*/
+/*    font-size: 14px;*/
 
-}
+/*}*/
 
 
 body>main>.content>.lookup>.status-ul>li>div>span{
@@ -136,6 +144,12 @@ body>main>.content>.lookup>.status-ul>li>div>span{
     /*display: block;*/
 }
 
+body>main>.content>.lookup>.status-ul>li>div>.small-text{
+        cursor: pointer;
+        padding: 25px 2rem 28px 1rem;
+        font-size: 14px;
+
+}
 
 
 

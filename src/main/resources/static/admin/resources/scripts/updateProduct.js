@@ -1,5 +1,3 @@
-
-
 let imageButton= window.document.querySelectorAll('.image-select-button');
 let images= window.document.querySelectorAll('.images');
 let imageContainer=window.document.querySelectorAll('.image-container');
@@ -9,6 +7,10 @@ let detailIndex;
 let nowDetailIndex = form['nowDetailIndex'].value;
 let imageChange=0; //이미지를 새로 넣었는가? 0:변경없음 1:새로 넣음 2:모두 지움
 let detailImageChange=0; //이미지를 새로 넣었는가? 0:변경없음 1:새로 넣음 2:모두 지움
+
+window.document.getElementById('sideBarRUD').style.cssText=`color: rgba(0,0,0,0.9);
+    font-weight: 700;`;
+
 if (nowDetailIndex<6){
     form['menuIndex'].value=1;
     form['detailIndex1'].style.display="inline-block"
