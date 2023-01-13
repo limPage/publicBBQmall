@@ -1,6 +1,7 @@
 package com.hiponya.bbqmall.controllers;
 
 import com.hiponya.bbqmall.entities.product.ProductEntity;
+import com.hiponya.bbqmall.entities.product.ProductImageEntity;
 import com.hiponya.bbqmall.services.CategoryService;
 import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
@@ -29,6 +30,7 @@ public class HomeController {
         ProductEntity[] eightProducts = this.categoryService.getEightProducts();
         ProductEntity[] secondEightProducts = this.categoryService.getSecondEightProducts();
         ProductEntity[] thirdEightProducts = this.categoryService.getThirdEightProducts();
+
 
         modelAndView.addObject("eightProducts", eightProducts);
         modelAndView.addObject("secondEightProducts", secondEightProducts);

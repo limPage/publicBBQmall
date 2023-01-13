@@ -27,7 +27,7 @@ public class CategoryController {
     }
 
     @RequestMapping(value = "category", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getCategory(@RequestParam(value = "cid") int cid,
+    public ModelAndView getCategory(@RequestParam(value = "cid") Integer cid,
                                     CategoryEntity category,
                                     ProductEntity product,
                                     SortEntity sort) {
@@ -183,7 +183,7 @@ public class CategoryController {
 
     @RequestMapping(value = "view", method=RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getView(@RequestParam(value = "pid", required = false) int pid,
-                                @RequestParam(value = "cid", required = false) int cid,
+                                @RequestParam(value = "cid", required = false) Integer cid,
                                 CategoryEntity category,
                                 CartEntity cart) {
         ModelAndView modelAndView = new ModelAndView("home/view");
