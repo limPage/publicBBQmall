@@ -174,10 +174,7 @@ public class BbsController {
             NoticeReadVo notice = this.bbsService.readNotice(nid);
             modelAndView.addObject("notice", notice);
 
-//        if (notice != null) { //공지가 있다면 어떤 보드 공지인지
-//
-//            modelAndView.addObject("board", this.bbsService.getNoticeBoard(notice.getBoardId()));
-//        }
+
     }
         return modelAndView;
     }
@@ -442,11 +439,7 @@ public class BbsController {
         System.out.println(bbid);
             result = this.bbsService.writeAdminComment(user, bbid, adminComment);
 
-            if (result == CommonResult.SUCCESS) {
 
-//                responseObject.put("index", adminComment.getIndex());//인트의 기본값은 0이다.
-
-            }
 
         responseObject.put("result", result.name().toLowerCase());
 

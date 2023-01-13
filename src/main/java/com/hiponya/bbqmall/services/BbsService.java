@@ -188,7 +188,7 @@ public NoticeReadVo[] getAnnounceNotice(){
 
                 existingArticle.setContent(notice.getContent());
                 existingArticle.setTitle(notice.getTitle());
-                System.out.println("@@@@@@@@@@@@"+notice.getBoardId());
+//                System.out.println("@@@@@@@@@@@@"+notice.getBoardId());
                 if(!notice.getBoardId().equals("null")) {
                     existingArticle.setBoardId(notice.getBoardId());
                 }
@@ -227,7 +227,7 @@ public NoticeReadVo[] getAnnounceNotice(){
             //게시물 수정인경우->(단순 공지 등록이아님) 타이틀과 컨텐츠가 있음
 
 
-
+            bpArticle.setCommentCount(existingBpArticle.getCommentCount());
             bpArticle.setModifiedOn(new Date());
 
 

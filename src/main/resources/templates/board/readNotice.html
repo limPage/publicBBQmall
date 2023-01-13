@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>글읽기</title>
+    <title>BBQ몰 글읽기</title>
 
     <th:block th:replace="~{fragments/head :: common}"></th:block>
 
@@ -10,11 +10,11 @@
     <link rel="stylesheet" th:href="@{/bbs/resources/stylesheets/readNotice.css}">
     <script defer th:src="@{/bbs/resources/scripts/readNotice.js}"></script>
 
-    <!--    <script th:if="${notice==null}">-->
-    <!--        alert('존재하지 않는 게시물입니다.');-->
+        <script th:if="${notice==null && bpArticle==null}">
+            alert('존재하지 않는 게시물입니다.');
 
-    <!--        window.location.href='/board/'-->
-    <!--    </script>-->
+            window.location.href='/board/'
+        </script>
 
 
 </head>
@@ -27,13 +27,13 @@
 
 
 <main class="cs-center">
-    <input id="bid" th:value="${session.user!=null && session.user.isAdmin()==true}? ${bid}:''" hidden>
+    <input id="bid" th:value=" ${bid}" hidden>
     <th:block th:replace="~{fragments/body ::sideBar}"></th:block>
 
     <div class="content" th:if="${notice!=null}">
 
         <div class="title-container">
-            <h1>공지사항</h1>
+            <h1 th:text="${!bid.equals('notice') ?'상품':'공지사항'}">공지사항</h1>
         </div>
 
 
@@ -62,7 +62,8 @@
                     작성자
                 </th>
                 <td>
-                    <img src="/resources/images/icon_admin.gif" alt="관리자" title="관리자" height="15px">
+                    <img th:if="${notice.getBoardId().equals('notice')||notice.getBoardId().equals('urgent')||notice.getBoardId().equals('event') }" src="/resources/images/icon_admin.gif" alt="관리자" title="관리자" height="15">
+                    <span th:if="${notice.getBoardId().equals('pi')||notice.getBoardId().equals('pr') }" th:text="${notice.getId()}"></span>
                 </td>
 
             </tr>
@@ -73,7 +74,6 @@
                 </th>
                 <td th:text="${#dates.format(notice.getWrittenOn(),'yyyy-MM-dd HH:mm:ss')}">
                     2022-22-22
-
                 </td>
 
                 <th>
@@ -120,7 +120,9 @@
                     <a id="deleteButton" href="#"
                        th:if="${session.user!=null && (session.user.isAdmin() || session.user.getId()==notice.getId())}">
                         삭제</a>
-
+                    <input hidden id="isMine" th:value="${session.user!=null && (session.user.isAdmin() || notice.getId().equals(session.user.getId())) ? 1:0
+                    }">
+                    <input hidden id="isAdmin" th:value="${session.user!=null && session.user.isAdmin()?1:0}">
                 </td>
             </tr>
 

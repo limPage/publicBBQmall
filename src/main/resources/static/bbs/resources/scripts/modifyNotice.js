@@ -28,6 +28,8 @@ if(form['bidValue'].value==="notice") {
     form['bid'].value=form['bidLoad'].value;
     if(bidValue.value==='pi'|| bidValue.value==='pr'){
         form['bid'].setAttribute('disabled',true);
+        form['bid'].style.display="none";
+
 
     }
     form.onsubmit = e => {

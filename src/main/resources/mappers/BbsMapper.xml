@@ -301,6 +301,7 @@
     <select id="selectNoticeByIndex" resultType="com.hiponya.bbqmall.vos.bbs.NoticeReadVo">
         SELECT `index`                AS `index`,
                `notice_board`.`text`  AS `text`,
+               `notice`.`id` AS `id`,
                `notice`.`board_id`    AS `boardId`,
                `notice`.`title`       AS `title`,
                `notice`.`important_flag` AS `isImportant`,

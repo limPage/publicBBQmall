@@ -806,6 +806,7 @@ body>.floating-banner{
     top: 20.3%;
     right: 9.45rem;
     box-shadow: 0 4px 5px 1px rgba(0,0,0,0.1);
+    background-color: white;
 }
 body>.floating-banner>.banner-image{
     height: 184px;

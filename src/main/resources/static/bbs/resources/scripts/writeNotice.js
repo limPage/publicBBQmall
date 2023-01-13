@@ -25,9 +25,25 @@ window.addEventListener('load', () =>{
 
 })
 
+if(window.document.getElementById('bid').value===''){
+    window.document.getElementById('sideBarN').style.cssText=  `  color: rgba(0,0,0,0.9);
+    font-weight: 700;`;
+}
+
+if(window.document.getElementById('bid').value==='pi'){
+    window.document.getElementById('sideBarPI').style.cssText=  `  color: rgba(0,0,0,0.9);
+    font-weight: 700;`;
+}
+if(window.document.getElementById('bid').value==='pr'){
+    window.document.getElementById('sideBarPR').style.cssText=  `  color: rgba(0,0,0,0.9);
+    font-weight: 700;`;
+}
+
 if(window.document.getElementById('bid').value==='pr'|| window.document.getElementById('bid').value==='pi'){
 
     form['bid'].setAttribute('disabled', true);
+    form['bid'].style.display="none";
+
     bidValue=window.document.getElementById('bid').value;
 }
 
@@ -40,6 +56,9 @@ ClassicEditor
         }
     })
     .then( e => editor =e); // e가 e2 > editor > form content .focus;
+
+
+
 
 form['back'].addEventListener('click' , () => window.history.length <2 ? window.close() : window.history.back());
 

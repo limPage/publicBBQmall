@@ -8,7 +8,9 @@
   <th:block th:replace="~{fragments/head :: common}"></th:block>
 
 <!--  <link rel="stylesheet" th:href="@{/bbs/resources/stylesheets/writeNotice.css}">-->
-  <link rel="stylesheet" th:href="@{/bbs/resources/stylesheets/writeBulkPurchase.css}">
+<!--  <link rel="stylesheet" th:href="@{/bbs/resources/stylesheets/writeBulkPurchase.css}">-->
+  <link rel="stylesheet" th:href="@{/bbs/resources/stylesheets/writeNotice.css}">
+
   <script defer th:src="@{/resources/libraries/ckeditor/ckeditor.js}"></script>
   <script defer th:src="@{/bbs/resources/scripts/modifyNotice.js}"></script>
 
@@ -47,7 +49,7 @@
   <div class="content" th:if="${session.user!=null && bid!='bp'}">
 
     <div class="title-container">
-      <h1>공지사항 수정</h1>
+      <h1 th:text="${bid.equals('notice')?'공지사항 수정':'상품 글 수정'}">공지사항 수정</h1>
     </div>
 
     <form class="write-form" id="form">
@@ -58,8 +60,8 @@
           <th>분류</th>
           <td>
 
-
             <label class="label">
+              <b th:text="${!bid.equals('notice')?'상품':''}"></b>
 
               <span hidden>보드아이디</span>
               <input hidden id="bidLoad" th:value="${notice.getBoardId()}">
@@ -139,7 +141,7 @@
 
 
   </div>
-  <div class="content" th:if="${session.user!=null && bid=='bp'}">
+  <div class="content content-bp" th:if="${session.user!=null && bid=='bp'}">
 
       <div class="title-container">
         <h1>대량구매</h1>
