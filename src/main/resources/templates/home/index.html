@@ -124,24 +124,20 @@
     <section class="goods-row goods-row1">
         <span class="title">BBQ몰 추천상품</span>
         <div class="goods-container">
-            <div class="goods-container">
-                <div class="goods" th:each="thirdEightProduct : ${thirdEightProducts}">
-                    <a href="#"><img src="/resources/images/md1.png" alt="" width="308px"></a>
+            <div class="goods" th:each="thirdEightProduct : ${thirdEightProducts}">
+                <a href="#"><img src="/resources/images/md1.png" alt="" width="308px"></a>
 
-                    <div class="goods-info">
-                        <a href="#" th:text="${thirdEightProduct.getProductName()}">BBQ닭가슴살 골라담기(신제품)</a>
-                        <span class="price">
+                <div class="goods-info">
+                    <a href="#" th:text="${thirdEightProduct.getProductName()}">BBQ닭가슴살 골라담기(신제품)</a>
+                    <span class="price">
                         <span th:text="${thirdEightProduct.getSaleQuantity()}"> 12</span><span class="small-text">%</span>
 
                           <span th:text="${thirdEightProduct.getPrice() - (thirdEightProduct.getPrice() * thirdEightProduct.getSaleQuantity() / 100)}">6980</span><span class="small-text">원</span>
                         <span class="small-text" th:text="${thirdEightProduct.getPrice()}">7000</span>
                     </span>
-                    </div>
-
                 </div>
+
             </div>
-
-
         </div>
 
 
