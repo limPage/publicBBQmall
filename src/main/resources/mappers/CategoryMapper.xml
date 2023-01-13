@@ -6,7 +6,7 @@
     <select id="selectCategoryIndexByDetailIndex" resultType="com.hiponya.bbqmall.entities.product.CategoryEntity">
         select `index` as `index`, `title` as `title`
         from bbqmall.category
-        where binary `index` = #{index}
+        <if test="cid != 0">where `detail_index` = #{cid}</if>
     </select>
 
     <select id="selectUserById" resultType="com.hiponya.bbqmall.entities.member.UserEntity">
@@ -47,7 +47,55 @@
                `on_sale` as `onSale`,
                `sale_quantity` as `saleQuantity`
         from bbqmall.products
-        <if test="cid != null">where `detail_index` = #{cid}</if>
+        <if test="cid != 0">where `detail_index` = #{cid}</if>
+    </select>
+
+    <select id="selectEightProducts" resultType="com.hiponya.bbqmall.entities.product.ProductEntity">
+        select `product_index` as `productIndex`,
+        `detail_index` as `detailIndex`,
+        `product_name` as `productName`,
+        `price` as `price`,
+        `content` as `content`,
+        `view` as `view`,
+        `created_on` as `createdOn`,
+        `modified_on` as `modifiedOn`,
+        `amount` as `amount`,
+        `on_sale` as `onSale`,
+        `sale_quantity` as `saleQuantity`
+        from bbqmall.products
+        limit 8;
+    </select>
+
+    <select id="selectSecondEightProducts" resultType="com.hiponya.bbqmall.entities.product.ProductEntity">
+        select `product_index` as `productIndex`,
+               `detail_index` as `detailIndex`,
+               `product_name` as `productName`,
+               `price` as `price`,
+               `content` as `content`,
+               `view` as `view`,
+               `created_on` as `createdOn`,
+               `modified_on` as `modifiedOn`,
+               `amount` as `amount`,
+               `on_sale` as `onSale`,
+               `sale_quantity` as `saleQuantity`
+        from bbqmall.products
+                 limit 8, 8;
+    </select>
+
+    <select id="selectThirdEightProducts" resultType="com.hiponya.bbqmall.entities.product.ProductEntity">
+        select `product_index` as `productIndex`,
+               `detail_index` as `detailIndex`,
+               `product_name` as `productName`,
+               `price` as `price`,
+               `content` as `content`,
+               `view` as `view`,
+               `created_on` as `createdOn`,
+               `modified_on` as `modifiedOn`,
+               `amount` as `amount`,
+               `on_sale` as `onSale`,
+               `sale_quantity` as `saleQuantity`
+        from bbqmall.products
+                 limit 16, 8;
     </select>
 
     <select id="selectSorts" resultType="com.hiponya.bbqmall.entities.product.SortEntity">
@@ -126,14 +174,21 @@
     </select>
 
     <select id = "selectWishlistSumPriceByUserId" resultType="int">
-        select sum(`price` * `quantity` - (`price` * `quantity` * (sale_quantity / 100))) from bbqmall.wishlist
+        select sum(`price` * `quantity`)
+        from bbqmall.wishlist
             LEFT JOIN `bbqmall`.`products` AS `product` on `wishlist`.`product_index` = `product`.`product_index`
             where id = #{id}
     </select>
 
     <select id="selectWishlistSumSalePriceByUserId" resultType = "int">
-        select sum((`price` * `quantity` * (sale_quantity / 100))) from bbqmall.wishlist
+        select sum(`price` * `quantity`  / sale_quantity) from bbqmall.wishlist
              LEFT JOIN `bbqmall`.`products` AS `product` on `wishlist`.`product_index` = `product`.`product_index`
+        where id = #{id}
+    </select>
+
+    <select id="selectWishlistSumQuantityByUserId" resultType="int">
+        select sum(`quantity`) from bbqmall.wishlist
+              LEFT JOIN `bbqmall`.`products` AS `product` on `wishlist`.`product_index` = `product`.`product_index`
         where id = #{id}
     </select>
 
@@ -142,7 +197,16 @@
         insert into bbqmall.wishlist ( `id`, `product_index`, `quantity`) values (#{id}, #{productIndex}, #{quantity})
     </insert>
 
-    <insert id="insertOrder" parameterType="com.hiponya.bbqmall.entities.product.OrderEntity" useGeneratedKeys="true" keyColumn="index" keyProperty="index">
+    <insert id="insertWishlistOrder" parameterType="com.hiponya.bbqmall.entities.product.OrderEntity"
+    useGeneratedKeys="true" keyColumn="index" keyProperty="index">
+        insert into bbqmall.order (`id`, `name`, `contact`, `address_postal`, `address_primary`, `address_secondary`,
+                                   `product_index`, `product_name`, `price`, `order_amount`) values
+            (#{id}, #{name}, #{contact}, #{addressPostal}, #{addressPrimary}, #{addressSecondary},
+             #{productIndex}, #{productName}, #{price}, #{orderAmount})
+    </insert>
+
+    <insert id="insertOrder" parameterType="com.hiponya.bbqmall.entities.product.OrderEntity"
+            useGeneratedKeys="true" keyColumn="index" keyProperty="index">
         insert into bbqmall.order (`id`, `name`, `contact`, `address_postal`, `address_primary`, `address_secondary`,
                                    `product_index`, `product_name`, `price`, `order_amount`) values
                                                                                                  (#{id}, #{name}, #{contact}, #{addressPostal}, #{addressPrimary}, #{addressSecondary},
@@ -153,7 +217,7 @@
         delete
         from bbqmall.wishlist
         where `index` = #{index}
-            limit 1
+            limit 1;
     </delete>
 
 

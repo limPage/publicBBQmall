@@ -47,7 +47,7 @@ for (let i = 0; i < button.length; i++) {
 }
 
 buyButton.addEventListener('click', () => {
-    alert('결제버튼 클릭');
+    alert('전체주문버튼 클릭');
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
     formData.append('id', id.value);
@@ -59,7 +59,7 @@ buyButton.addEventListener('click', () => {
     formData.append('productIndex', pid.value);
     formData.append('productName', window.document.getElementById('productName').innerText);
     formData.append('price', window.document.getElementById('price').innerText);
-    formData.append('orderAmount', window.document.getElementById('quantity').innerText);
+    formData.append('orderAmount', window.document.getElementById('sumQuantity').value);
 
     xhr.open('PATCH', './wishlist');
     xhr.onreadystatechange = () => {
@@ -69,6 +69,7 @@ buyButton.addEventListener('click', () => {
                 switch (responseObject['result']) {
                     case 'success':
                         alert('order 테이블에 삽입성공');
+                        window.location.href='./';
                         break;
                     default:
                         alert("알 수 없는 이유로 상품을 삭제하지 못하였습니다\n\n잠시 후 다시 시도해 주세요.");
@@ -82,5 +83,3 @@ buyButton.addEventListener('click', () => {
     };
     xhr.send(formData);
 });
-
-

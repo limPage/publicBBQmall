@@ -25,116 +25,24 @@
     <section class="goods-row goods-row1">
         <span class="title">BBQ몰 추천상품</span>
         <div class="goods-container">
-            <div class="goods">
+            <div class="goods" th:each="eightProduct : ${eightProducts}">
                 <a href="#"><img src="/resources/images/md1.png" alt="" width="308px"></a>
 
                 <div class="goods-info">
-                    <a href="#">BBQ닭가슴살 골라담기(신제품)</a>
+                    <a href="#" th:text="${eightProduct.getProductName()}">BBQ닭가슴살 골라담기(신제품)</a>
                     <span class="price">
-                        <span> 12</span><span class="small-text">%</span>
+                        <span th:text="${eightProduct.getSaleQuantity()}"> 12</span><span class="small-text">%</span>
 
-                          <span>6980</span><span class="small-text">원</span>
-                        <span class="small-text">7000</span>
+                          <span th:text="${eightProduct.getPrice() - (eightProduct.getPrice() * eightProduct.getSaleQuantity() / 100)}">6980</span><span class="small-text">원</span>
+                        <span class="small-text" th:text="${eightProduct.getPrice()}">7000</span>
                     </span>
                 </div>
 
             </div>
 
-            <div class="goods">
-                <a href="#"><img src="/resources/images/md2.png" alt="" width="308px"></a>
-
-                <div class="goods-info">
-                    <a href="#">BBQ닭가슴살 골라담기(신제품)</a>
-                    <span class="price">
-                        <span> 12</span><span class="small-text">%</span>
-
-                          <span>6980</span><span class="small-text">원</span>
-                        <span class="small-text">7000</span>
-                    </span>
-                </div>
-
-            </div> <div class="goods">
-            <a href="#"><img src="/resources/images/md3.png" alt="" width="308px"></a>
-
-            <div class="goods-info">
-                <a href="#">BBQ닭가슴살 골라담기(신제품)</a>
-                <span class="price">
-                        <span> 12</span><span class="small-text">%</span>
-
-                          <span>6980</span><span class="small-text">원</span>
-                        <span class="small-text">7000</span>
-                    </span>
-            </div>
-
-        </div> <div class="goods">
-            <a href="#"><img src="/resources/images/md4.png" alt="" width="308px"></a>
-
-            <div class="goods-info">
-                <a href="#">BBQ닭가슴살 골라담기(신제품)</a>
-                <span class="price">
-                        <span> 12</span><span class="small-text">%</span>
-
-                          <span>6980</span><span class="small-text">원</span>
-                        <span class="small-text">7000</span>
-                    </span>
-            </div>
-
-        </div> <div class="goods">
-            <a href="#"><img src="/resources/images/md5.png" alt="" width="308px"></a>
-
-            <div class="goods-info">
-                <a href="#">BBQ닭가슴살 골라담기(신제품)</a>
-                <span class="price">
-                        <span> 12</span><span class="small-text">%</span>
-
-                          <span>6980</span><span class="small-text">원</span>
-                        <span class="small-text">7000</span>
-                    </span>
-            </div>
-
-        </div> <div class="goods">
-            <a href="#"><img src="/resources/images/md6.png" alt="" width="308px"></a>
-
-            <div class="goods-info">
-                <a href="#">BBQ닭가슴살 골라담기(신제품)</a>
-                <span class="price">
-                        <span> 12</span><span class="small-text">%</span>
-
-                          <span>6980</span><span class="small-text">원</span>
-                        <span class="small-text">7000</span>
-                    </span>
-            </div>
-
-        </div> <div class="goods">
-            <a href="#"><img src="/resources/images/md7.png" alt="" width="308px"></a>
-
-            <div class="goods-info">
-                <a href="#">BBQ닭가슴살 골라담기(신제품)</a>
-                <span class="price">
-                        <span> 12</span><span class="small-text">%</span>
-
-                          <span>6980</span><span class="small-text">원</span>
-                        <span class="small-text">7000</span>
-                    </span>
-            </div>
-
-        </div> <div class="goods">
-            <a href="#"><img src="/resources/images/md8.png" alt="" width="308px"></a>
-
-            <div class="goods-info">
-                <a href="#">BBQ닭가슴살 골라담기(신제품)</a>
-                <span class="price">
-                        <span> 12</span><span class="small-text">%</span>
-
-                          <span>6980</span><span class="small-text">원</span>
-                        <span class="small-text">7000</span>
-                    </span>
-            </div>
-
         </div>
 
 
-        </div>
 
 
     </section>
@@ -142,116 +50,22 @@
     <section class="goods-row goods-row2">
         <span class="title">BBQ몰 추천상품</span>
         <div class="goods-container">
-            <div class="goods">
+            <div class="goods" th:each="secondEightProduct : ${secondEightProducts}">
                 <a href="#"><img src="/resources/images/md1.png" alt="" width="308px"></a>
 
                 <div class="goods-info">
-                    <a href="#">BBQ닭가슴살 골라담기(신제품)</a>
+                    <a href="#" th:text="${secondEightProduct.getProductName()}">BBQ닭가슴살 골라담기(신제품)</a>
                     <span class="price">
-                        <span> 12</span><span class="small-text">%</span>
+                        <span th:text="${secondEightProduct.getSaleQuantity()}"> 12</span><span class="small-text">%</span>
 
-                          <span>6980</span><span class="small-text">원</span>
-                        <span class="small-text">7000</span>
+                          <span th:text="${secondEightProduct.getPrice() - (secondEightProduct.getPrice() * secondEightProduct.getSaleQuantity() / 100)}">6980</span><span class="small-text">원</span>
+                        <span class="small-text" th:text="${secondEightProduct.getPrice()}">7000</span>
                     </span>
                 </div>
 
             </div>
-
-            <div class="goods">
-                <a href="#"><img src="/resources/images/md2.png" alt="" width="308px"></a>
-
-                <div class="goods-info">
-                    <a href="#">BBQ닭가슴살 골라담기(신제품)</a>
-                    <span class="price">
-                        <span> 12</span><span class="small-text">%</span>
-
-                          <span>6980</span><span class="small-text">원</span>
-                        <span class="small-text">7000</span>
-                    </span>
-                </div>
-
-            </div> <div class="goods">
-            <a href="#"><img src="/resources/images/md3.png" alt="" width="308px"></a>
-
-            <div class="goods-info">
-                <a href="#">BBQ닭가슴살 골라담기(신제품)</a>
-                <span class="price">
-                        <span> 12</span><span class="small-text">%</span>
-
-                          <span>6980</span><span class="small-text">원</span>
-                        <span class="small-text">7000</span>
-                    </span>
-            </div>
-
-        </div> <div class="goods">
-            <a href="#"><img src="/resources/images/md4.png" alt="" width="308px"></a>
-
-            <div class="goods-info">
-                <a href="#">BBQ닭가슴살 골라담기(신제품)</a>
-                <span class="price">
-                        <span> 12</span><span class="small-text">%</span>
-
-                          <span>6980</span><span class="small-text">원</span>
-                        <span class="small-text">7000</span>
-                    </span>
-            </div>
-
-        </div> <div class="goods">
-            <a href="#"><img src="/resources/images/md5.png" alt="" width="308px"></a>
-
-            <div class="goods-info">
-                <a href="#">BBQ닭가슴살 골라담기(신제품)</a>
-                <span class="price">
-                        <span> 12</span><span class="small-text">%</span>
-
-                          <span>6980</span><span class="small-text">원</span>
-                        <span class="small-text">7000</span>
-                    </span>
-            </div>
-
-        </div> <div class="goods">
-            <a href="#"><img src="/resources/images/md6.png" alt="" width="308px"></a>
-
-            <div class="goods-info">
-                <a href="#">BBQ닭가슴살 골라담기(신제품)</a>
-                <span class="price">
-                        <span> 12</span><span class="small-text">%</span>
-
-                          <span>6980</span><span class="small-text">원</span>
-                        <span class="small-text">7000</span>
-                    </span>
-            </div>
-
-        </div> <div class="goods">
-            <a href="#"><img src="/resources/images/md7.png" alt="" width="308px"></a>
-
-            <div class="goods-info">
-                <a href="#">BBQ닭가슴살 골라담기(신제품)</a>
-                <span class="price">
-                        <span> 12</span><span class="small-text">%</span>
-
-                          <span>6980</span><span class="small-text">원</span>
-                        <span class="small-text">7000</span>
-                    </span>
-            </div>
-
-        </div> <div class="goods">
-            <a href="#"><img src="/resources/images/md8.png" alt="" width="308px"></a>
-
-            <div class="goods-info">
-                <a href="#">BBQ닭가슴살 골라담기(신제품)</a>
-                <span class="price">
-                        <span> 12</span><span class="small-text">%</span>
-
-                          <span>6980</span><span class="small-text">원</span>
-                        <span class="small-text">7000</span>
-                    </span>
-            </div>
-
         </div>
 
-
-        </div>
 
 
     </section>
@@ -310,113 +124,22 @@
     <section class="goods-row goods-row1">
         <span class="title">BBQ몰 추천상품</span>
         <div class="goods-container">
-            <div class="goods">
-                <a href="#"><img src="/resources/images/md1.png" alt="" width="308px"></a>
+            <div class="goods-container">
+                <div class="goods" th:each="thirdEightProduct : ${thirdEightProducts}">
+                    <a href="#"><img src="/resources/images/md1.png" alt="" width="308px"></a>
 
-                <div class="goods-info">
-                    <a href="#">BBQ닭가슴살 골라담기(신제품)</a>
-                    <span class="price">
-                        <span> 12</span><span class="small-text">%</span>
+                    <div class="goods-info">
+                        <a href="#" th:text="${thirdEightProduct.getProductName()}">BBQ닭가슴살 골라담기(신제품)</a>
+                        <span class="price">
+                        <span th:text="${thirdEightProduct.getSaleQuantity()}"> 12</span><span class="small-text">%</span>
 
-                          <span>6980</span><span class="small-text">원</span>
-                        <span class="small-text">7000</span>
+                          <span th:text="${thirdEightProduct.getPrice() - (thirdEightProduct.getPrice() * thirdEightProduct.getSaleQuantity() / 100)}">6980</span><span class="small-text">원</span>
+                        <span class="small-text" th:text="${thirdEightProduct.getPrice()}">7000</span>
                     </span>
+                    </div>
+
                 </div>
-
             </div>
-
-            <div class="goods">
-                <a href="#"><img src="/resources/images/md2.png" alt="" width="308px"></a>
-
-                <div class="goods-info">
-                    <a href="#">BBQ닭가슴살 골라담기(신제품)</a>
-                    <span class="price">
-                        <span> 12</span><span class="small-text">%</span>
-
-                          <span>6980</span><span class="small-text">원</span>
-                        <span class="small-text">7000</span>
-                    </span>
-                </div>
-
-            </div> <div class="goods">
-            <a href="#"><img src="/resources/images/md3.png" alt="" width="308px"></a>
-
-            <div class="goods-info">
-                <a href="#">BBQ닭가슴살 골라담기(신제품)</a>
-                <span class="price">
-                        <span> 12</span><span class="small-text">%</span>
-
-                          <span>6980</span><span class="small-text">원</span>
-                        <span class="small-text">7000</span>
-                    </span>
-            </div>
-
-        </div> <div class="goods">
-            <a href="#"><img src="/resources/images/md4.png" alt="" width="308px"></a>
-
-            <div class="goods-info">
-                <a href="#">BBQ닭가슴살 골라담기(신제품)</a>
-                <span class="price">
-                        <span> 12</span><span class="small-text">%</span>
-
-                          <span>6980</span><span class="small-text">원</span>
-                        <span class="small-text">7000</span>
-                    </span>
-            </div>
-
-        </div> <div class="goods">
-            <a href="#"><img src="/resources/images/md5.png" alt="" width="308px"></a>
-
-            <div class="goods-info">
-                <a href="#">BBQ닭가슴살 골라담기(신제품)</a>
-                <span class="price">
-                        <span> 12</span><span class="small-text">%</span>
-
-                          <span>6980</span><span class="small-text">원</span>
-                        <span class="small-text">7000</span>
-                    </span>
-            </div>
-
-        </div> <div class="goods">
-            <a href="#"><img src="/resources/images/md6.png" alt="" width="308px"></a>
-
-            <div class="goods-info">
-                <a href="#">BBQ닭가슴살 골라담기(신제품)</a>
-                <span class="price">
-                        <span> 12</span><span class="small-text">%</span>
-
-                          <span>6980</span><span class="small-text">원</span>
-                        <span class="small-text">7000</span>
-                    </span>
-            </div>
-
-        </div> <div class="goods">
-            <a href="#"><img src="/resources/images/md7.png" alt="" width="308px"></a>
-
-            <div class="goods-info">
-                <a href="#">BBQ닭가슴살 골라담기(신제품)</a>
-                <span class="price">
-                        <span> 12</span><span class="small-text">%</span>
-
-                          <span>6980</span><span class="small-text">원</span>
-                        <span class="small-text">7000</span>
-                    </span>
-            </div>
-
-        </div> <div class="goods">
-            <a href="#"><img src="/resources/images/md8.png" alt="" width="308px"></a>
-
-            <div class="goods-info">
-                <a href="#">BBQ닭가슴살 골라담기(신제품)</a>
-                <span class="price">
-                        <span> 12</span><span class="small-text">%</span>
-
-                          <span>6980</span><span class="small-text">원</span>
-                        <span class="small-text">7000</span>
-                    </span>
-            </div>
-
-        </div>
 
 
         </div>

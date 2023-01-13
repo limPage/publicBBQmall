@@ -68,7 +68,7 @@ public class CategoryService {
         if(existingUser == null) {
             return CommonResult.FAILURE;
         }
-        return this.categoryMapper.insertOrder(order) > 0 ? CommonResult.SUCCESS : CommonResult.FAILURE;
+        return this.categoryMapper.insertWishlistOrder(order) > 0 ? CommonResult.SUCCESS : CommonResult.FAILURE;
     }
 
     public Enum<? extends IResult> insertWishlist(WishlistEntity wishlist) {
@@ -87,6 +87,10 @@ public class CategoryService {
 
     public Integer getWishlistSumSalePrice(String id) {
         return this.categoryMapper.selectWishlistSumSalePriceByUserId(id);
+    }
+
+    public Integer getWishlistSumQuantity(String id) {
+        return this.categoryMapper.selectWishlistSumQuantityByUserId(id);
     }
 
     public ProductEntity getProductByIndex(int pid) {
@@ -126,6 +130,16 @@ public class CategoryService {
 
     public WishlistEntity[] getWishlists(String id) {
         return this.categoryMapper.selectWishlists(id);
+    }
+
+    public ProductEntity[] getEightProducts() {
+        return this.categoryMapper.selectEightProducts();
+    }
+    public ProductEntity[] getSecondEightProducts() {
+        return this.categoryMapper.selectSecondEightProducts();
+    }
+    public ProductEntity[] getThirdEightProducts() {
+        return this.categoryMapper.selectThirdEightProducts();
     }
 
 

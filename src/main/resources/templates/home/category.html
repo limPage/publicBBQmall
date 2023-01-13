@@ -21,14 +21,13 @@
         <div>
             <div class="catalog-page">
                 <form id="form" name="goods-search-form" class="goods-search-form" method="get">
-                    <input name = "cid" type = "hidden" th:value = "${category.getIndex()}" id="cid">
                     <div class="search-filter-wrap">
                         <div class="search-filter">
                             <ul class="search-list" rel="searchList">
                                 <li class = "li">
                                     <label class="active">
                                         <input type="button" name="ranking" value="랭킹순" class = "button" rel="sorting" id="ranking">&nbsp
-                                        <input type="hidden" name = "rankingSid" value="1" rel="sid" id="rankingSid">
+                                        <input type="hidden" name = "rankingSid" th:value="${sort.getIndex()}" rel="sid" id="rankingSid">
                                     </label>
                                 </li>
                                 <li class = "li">

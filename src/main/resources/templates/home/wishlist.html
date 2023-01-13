@@ -80,8 +80,9 @@
                                                                 <span class="quantity-title">수량</span>
                                                                 <span class="quantity-count" th:text="${wishlist.getQuantity()}" id="quantity">"th:text=${quantity} 넣을곳"</span>
                                                                 <span class="price-quantity">(
-                                                                    <span th:text="${wishlist.getPrice() * wishlist.getQuantity() + '원'}">"th:text="${wishlist.getPrice()*quantity}" 넣을곳"</span>
+                                                                    <span th:text="${wishlist.getPrice() * wishlist.getQuantity()}">"th:text="${wishlist.getPrice()*quantity}" 넣을곳"</span>
                                                                     )</span>
+                                                                <span>원</span>
                                                             </div>
                                                         </li>
                                                     </ul>
@@ -90,15 +91,18 @@
                                                 <ul class="block2">
                                                     <li class="base-price">
                                                         <span class="price-title">상품금액</span>
-                                                        <span class="price" th:text="${wishlist.getPrice() * wishlist.getQuantity()} + '원'">"th:text="${product.getPrice * quantity}"넣을곳"</span>
+                                                        <span class="price" th:text="${wishlist.getPrice() * wishlist.getQuantity()}">"th:text="${product.getPrice * quantity}"넣을곳"</span>
+                                                        <span>원</span>
                                                     </li>
                                                     <li class="sale-price">
                                                         <span class="sale-price-title"> 할인금액 </span>
-                                                        <span class="sale-price" th:text="${wishlist.getPrice() / 100 * wishlist.getSaleQuantity() * wishlist.getQuantity()} + '원'">"th:text="${product.getPrice() / 100 * product.getSaleQuantity * quantity}" 넣을곳</span>
+                                                        <span class="sale-price" th:text="${wishlist.getPrice() / 100 * wishlist.getSaleQuantity() * wishlist.getQuantity()}">"th:text="${product.getPrice() / 100 * product.getSaleQuantity * quantity}" 넣을곳</span>
+                                                        <span>원</span>
                                                     </li>
                                                     <li class="total-price">
                                                         <span class="total-price-title">할인적용금액</span>
-                                                        <span class="total-price" th:text="${(wishlist.getPrice() - (wishlist.getPrice() / 100 * wishlist.getSaleQuantity())) * wishlist.getQuantity()} + '원'" id="price">"th:text="${(product.getPrice() - (product.getPrice() / 100 * product.getSaleQuantity)) * quantity}" 넣을곳</span>
+                                                        <span class="total-price" th:text="${(wishlist.getPrice() - (wishlist.getPrice() / 100 * wishlist.getSaleQuantity())) * wishlist.getQuantity()}">"th:text="${(product.getPrice() - (product.getPrice() / 100 * product.getSaleQuantity)) * quantity}" 넣을곳</span>
+                                                        <span>원</span>
                                                     </li>
                                                 </ul>
 
@@ -271,6 +275,7 @@
 
                         <h3 class="total-title">전체 주문시 금액</h3>
                         <div class="total-sum-price">
+                            <input type="hidden" id="sumQuantity" th:value="${sumQuantity}">
                             <ul class="list1">
                                 <li class="th">총 상품금액</li>
                                 <li class="td">
@@ -302,7 +307,8 @@
                                 <li class="th">총 결제금액</li>
                                 <li class="td">
                                     <span class="total-price">
-                                        <span th:text="${sumPrice - salePrice} + 3000 + '원'">th:text="${(product.getPrice - (product.getPrice() / product.getSaleQuantity())) * quantity} + 3000" 넣을곳</span>
+                                        <span th:text="${sumPrice - salePrice} + 3000" id="price">th:text="${(product.getPrice - (product.getPrice() / product.getSaleQuantity())) * quantity} + 3000" 넣을곳</span>
+                                        <span>원</span>
                                     </span>
                                 </li>
                             </ul>

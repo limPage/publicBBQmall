@@ -20,6 +20,10 @@ public interface ICategoryMapper {
 
     ProductEntity[] selectProducts(@Param(value = "cid") int cid);
 
+    ProductEntity[] selectEightProducts();
+    ProductEntity[] selectSecondEightProducts();
+    ProductEntity[] selectThirdEightProducts();
+
     SortEntity[] selectSorts();
 
     WishlistEntity selectWishlist(@Param(value = "index") int index);
@@ -36,8 +40,13 @@ public interface ICategoryMapper {
 
     Integer selectWishlistSumSalePriceByUserId(@Param(value = "id") String id);
 
+    Integer selectWishlistSumQuantityByUserId(@Param(value = "id") String id);
+
 
     int insertWishlistByIndex(WishlistEntity wishlist);
+
+    int insertWishlistOrder(OrderEntity order);
+
     int insertOrder(OrderEntity order);
 
     int deleteWishlistByIndex(@Param(value = "index") int index);

@@ -34,8 +34,17 @@ public class CategoryController {
         ModelAndView modelAndView = new ModelAndView("home/category");
         CategoryEntity[] categories = this.categoryService.getCategories();
         ProductEntity[] products = this.categoryService.getProducts(cid);
-        CategoryEntity categories2 = this.categoryService.getCategories2(cid);
+        CategoryEntity categories2;
         SortEntity[] sorts = this.categoryService.getSorts();
+
+        if(cid != 0 && product!=null) {
+            categories2 = this.categoryService.getCategories2(cid);
+            modelAndView.addObject("title", categories2.getTitle());
+        }
+
+        if(cid == 0 && product != null) {
+            modelAndView.addObject("title", "전체상품");
+        }
 
         category.setIndex(category.getIndex());
 
@@ -51,11 +60,9 @@ public class CategoryController {
         modelAndView.addObject("index",category.getIndex());
         modelAndView.addObject("cid", cid);
 
-        if(product != null) {
-            modelAndView.addObject("title", categories2.getTitle());
-        }
 
-        System.out.println(categories2.getTitle());
+
+
 
         return modelAndView;
     }
@@ -70,10 +77,12 @@ public class CategoryController {
         WishlistEntity[] wishlists = this.categoryService.getWishlists(user.getId());
         Integer sumPrice =  this.categoryService.getWishlistSumPrice(user.getId());
         Integer salePrice = this.categoryService.getWishlistSumSalePrice(user.getId());
+        Integer sumQuantity =  this.categoryService.getWishlistSumQuantity(user.getId());
 
         modelAndView.addObject("wishlists", wishlists);
         modelAndView.addObject("sumPrice", sumPrice);
         modelAndView.addObject("salePrice", salePrice);
+        modelAndView.addObject("sumQuantity", sumQuantity);
         modelAndView.addObject("user", user);
 
         modelAndView.addObject("product", product);
@@ -174,6 +183,7 @@ public class CategoryController {
 
     @RequestMapping(value = "view", method=RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getView(@RequestParam(value = "pid", required = false) int pid,
+                                @RequestParam(value = "cid", required = false) int cid,
                                 CategoryEntity category,
                                 CartEntity cart) {
         ModelAndView modelAndView = new ModelAndView("home/view");
@@ -184,6 +194,10 @@ public class CategoryController {
         modelAndView.addObject("category", category);
         modelAndView.addObject("cid", category.getIndex());
         modelAndView.addObject("pid", pid);
+        if(cid == 0) {
+            ProductEntity[] products = this.categoryService.getProducts(cid);
+            modelAndView.addObject("products", products);
+        }
 
         ProductEntity product = this.categoryService.getProductByIndex(pid);
         modelAndView.addObject("product", product);
