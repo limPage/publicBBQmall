@@ -92,6 +92,89 @@
 
             </tr>
 
+            <tr class="comment-row" th:if="${bid!=null && bid.equals('pi')}" th:each="piComment : ${piComments}">
+                <td>
+                    <span>답변</span> <img src="/resources/images/icon_admin.gif">
+
+                </td>
+                <td>
+                    답변드립니다.
+                </td>
+
+                <td class="comment-content" th:text="${piComment.getContent()}">
+                    안녕하세요<br>
+                    bbq몰이에요
+                </td>
+
+
+                <td class="modify-comment-row">
+
+                    <form id="modifyForm-pi">
+                        <label>
+
+                            <textarea name="content" placeholder="답변을 입력해주세요." th:text="${piComment.getContent()}"
+                                       class="modify-comment-content"></textarea>
+                        </label>
+                        <span class="submit-row">
+                            <label>
+                                     <input type="button" value="작성" class="commentModifyComplete">
+                            </label>
+                            <label>
+                                <input type="button" value="취소" class="commentModifyCancel">
+                            </label>
+
+                         </span>
+
+                    </form>
+
+
+                </td>
+
+
+                <td class="delete-row visible">
+                    <label>
+                        <input type="button" class="modifyAdminComment" value="수정" th:if="${session.user!=null && session.user.isAdmin()}">
+                    </label>
+                    <label>
+                        <input type="button" class="deleteAdminComment" value="삭제" th:if="${session.user!=null && session.user.isAdmin()}">
+                    </label>
+
+
+
+                    <input hidden  class="picIndex" th:value="${piComment.getIndex()}">
+
+                </td>
+            </tr>
+
+            <tr class="comment-row write-comment-row">
+                <td>
+                    <span>답변작성하기</span> <img alt="답변" title="답변" src="/resources/images/icon_admin.gif">
+
+                </td>
+                <td>
+                    답변을 입력해주세요.
+                </td>
+
+                <td>
+                    <form id="pi-form">
+                        <label>
+                            <input  hidden id="noticeIndex" th:value="${notice.getIndex()}">
+
+                            <textarea id="content" placeholder="답변을 입력해주세요."></textarea>
+                        </label>
+                    </form>
+
+                </td>
+
+
+                <td class="submit-row">
+                    <input type="button" value="작성" id="piCommentWriteComplete">
+                    <input type="button" value="취소" id="piCommentCancel">
+
+                </td>
+
+            </tr>
+
             </tbody>
 
             <tfoot>
@@ -120,11 +203,17 @@
                     <a id="deleteButton" href="#"
                        th:if="${session.user!=null && (session.user.isAdmin() || session.user.getId()==notice.getId())}">
                         삭제</a>
+
+
+                    <input th:if="${session.user!=null && session.user.isAdmin()}" type="button" id="piCommentButton"
+                           value="답변남기기">
+
                     <input hidden id="isMine" th:value="${session.user!=null && (session.user.isAdmin() || notice.getId().equals(session.user.getId())) ? 1:0
                     }">
                     <input hidden id="isAdmin" th:value="${session.user!=null && session.user.isAdmin()?1:0}">
                 </td>
             </tr>
+
 
             </tfoot>
 
@@ -349,7 +438,7 @@
 
             </tfoot>
 
-            <input th:value="${session.user!=null &&(session.user.isAdmin()|| session.user.getId==bpArticle.getId())? 'true':'false'}"
+            <input th:value="${session.user!=null &&(session.user.isAdmin())? 'true':'false'}"
                    hidden id="authority">
             <input th:value="${bpArticle.getIndex()}" hidden id="bpIndex">
 

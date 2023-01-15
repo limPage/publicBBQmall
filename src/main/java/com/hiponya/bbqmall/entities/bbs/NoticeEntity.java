@@ -24,6 +24,7 @@ public class NoticeEntity {
 
     private String qnaBoardId;
 
+    private int commentCount;
     public String getQnaBoardId() {
         return qnaBoardId;
     }
@@ -129,6 +130,14 @@ public class NoticeEntity {
     public NoticeEntity setModifiedOn(Date modifiedOn) {
         this.modifiedOn = modifiedOn;
         return this;
+    }
+
+    public int getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(int commentCount) {
+        this.commentCount = commentCount;
     }
 
     @Override

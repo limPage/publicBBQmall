@@ -169,9 +169,20 @@ public class BbsController {
             return modelAndView;
 
         }else {
+            NoticeReadVo notice = this.bbsService.readNotice(nid);
+
+            if(bid.equals("pi")){
+
+                PiCommentEntity[] piComments = this.bbsService.getPiComments(notice.getIndex());
+                modelAndView.addObject("piComments",piComments);
+
+            }
+
             modelAndView.addObject("bid",bid);//이게 무슨 보드꺼를 읽느냐 알려줌
 
-            NoticeReadVo notice = this.bbsService.readNotice(nid);
+
+
+
             modelAndView.addObject("notice", notice);
 
 
@@ -432,12 +443,16 @@ public class BbsController {
     @RequestMapping(value = "writeAdminComment", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String postAdminComment(@SessionAttribute(value = "user", required = false) UserEntity user,
-                              @RequestParam(value = "bbid" ,required = false) Integer bbid, AdminCommentEntity adminComment){
+                              @RequestParam(value = "bbid" ,required = false) Integer bbid,
+                              @RequestParam(value = "nid" ,required = false) Integer nid,
+                                   String content){
         Enum<? extends IResult> result;
         JSONObject responseObject = new JSONObject();
 
-        System.out.println(bbid);
-            result = this.bbsService.writeAdminComment(user, bbid, adminComment);
+        if(bbid==null)bbid=0;
+        if(nid==null)nid=0;
+
+         result = this.bbsService.writeAdminComment(user, bbid, nid, content);
 
 
 
@@ -452,21 +467,19 @@ public class BbsController {
     @RequestMapping(value = "deleteAdminComment", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     public String deleteAdminComment(@SessionAttribute(value = "user", required = false) UserEntity user,
                                @RequestParam(value= "bid",required = false) String bid,
-                               @RequestParam(value = "bbid",required = false ) Integer bbid,
-                               @RequestParam(value = "acIndex",required = false) Integer acIndex) {
+                               @RequestParam(value = "index",required = false ) Integer index,
+                               @RequestParam(value = "articleIndex",required = false) Integer articleIndex) {
         JSONObject responseObject = new JSONObject();
 
-        System.out.println("bid"+bid);
-        System.out.println("acIndex"+acIndex);
-        System.out.println("bbid"+bbid);
 
-        if(bid.equals("bpArticle")){
 
-            Enum<?> result = this.bbsService.deleteAdminComment( user,bbid, acIndex);
+
+
+            Enum<?> result = this.bbsService.deleteAdminComment( user,bid, index, articleIndex);
             responseObject.put("result", result.name().toLowerCase());
             System.out.println(result);
 
-        }
+
         return responseObject.toString();
     }
 
@@ -474,20 +487,26 @@ public class BbsController {
     @ResponseBody
     public String patchAdminComment(@SessionAttribute(value = "user",required = false) UserEntity user,
                                     @RequestParam(value = "bid",required = false) String bid,
-                                    AdminCommentEntity adminComment) {
+                                    @RequestParam(value = "index", required = false)Integer index,
+                                    @RequestParam(value = "articleIndex" )Integer articleIndex,
+                                    String content) {
         JSONObject responseObject = new JSONObject();
 
 
-        if (bid.equals("bpArticle")) {
 
-            Enum<?> result = this.bbsService.modifyAdminComment(user, adminComment);
+
+
+            Enum<?> result = this.bbsService.modifyAdminComment(user, bid, index, articleIndex, content);
 
 
             responseObject.put("result", result.name().toLowerCase());
 
 
 
-        }
+
+
+
+
         return responseObject.toString();
     }
 

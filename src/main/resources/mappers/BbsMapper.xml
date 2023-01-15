@@ -106,6 +106,8 @@
 
     <select id="selectNoticeByBoardId" resultType="com.hiponya.bbqmall.vos.bbs.NoticeReadVo">
         SELECT `notice`.`index` AS `index`,
+        `notice`.`id` AS `id`,
+
         `notice`.`board_id` AS `boardId`,
         `notice`.`title` AS `title`,
         `notice_board`.`text` AS `text`,
@@ -116,7 +118,8 @@
         `notice`.`written_on` AS `writtenOn`,
         `notice`.`modified_on` AS `modifiedOn`,
         `notice`.`new_flag` AS `isNew`,
-        `notice`.`qna_board_id` AS `qnaBoardId`
+        `notice`.`qna_board_id` AS `qnaBoardId`,
+        `notice`.`comment_count` AS `commentCount`
         FROM `bbq_bbs`.`notice` AS `notice`
         LEFT JOIN `bbq_bbs`.`notice_boards` AS `notice_board` on `notice_board`.`id` = `notice`.`board_id`
         WHERE
@@ -309,7 +312,9 @@
                `notice`.`view`        AS `view`,
                `notice`.`written_on`  AS `writtenOn`,
                `notice`.`modified_on` AS `modifiedOn`,
-                `notice`.`new_flag` AS `isNew`
+                `notice`.`new_flag` AS `isNew`,
+                `notice`.`comment_count` AS `commentCount`
+
         FROM `bbq_bbs`.`notice` AS `notice`
                  LEFT JOIN `bbq_bbs`.`notice_boards` AS `notice_board` on `notice_board`. `id` = `notice`.`board_id`
         WHERE `index` = #{index}
@@ -331,6 +336,21 @@
         WHERE `article_index` = #{articleIndex}
 
     </select>
+
+    <select id="selectPiCommentByIndex" resultType="com.hiponya.bbqmall.entities.bbs.PiCommentEntity">
+        SELECT `index`  ,
+               `article_index`,
+               `content`  ,
+               `written_on`  ,
+               `modified_on`
+
+        FROM `bbq_bbs`.`pi_comments`
+        WHERE `article_index` = #{articleIndex}
+
+    </select>
+
+
+
     <select id="selectAdminCommentByIndexJustOne" resultType="com.hiponya.bbqmall.entities.bbs.AdminCommentEntity">
         SELECT `index`  ,
                `article_index`,
@@ -339,6 +359,20 @@
                `modified_on`
 
         FROM `bbq_bbs`.`admin_comments`
+        WHERE `index` = #{index}
+        LIMIT 1
+
+    </select>
+
+
+    <select id="selectPiCommentByIndexJustOne" resultType="com.hiponya.bbqmall.entities.bbs.PiCommentEntity">
+        SELECT `index`  ,
+               `article_index`,
+               `content`  ,
+               `written_on`  ,
+               `modified_on`
+
+        FROM `bbq_bbs`.`pi_comments`
         WHERE `index` = #{index}
         LIMIT 1
 
@@ -387,6 +421,14 @@
 VALUES (#{articleIndex}, #{content},IFNULL(#{writtenOn}, DEFAULT(`written_on`)), IFNULL(NOW(), DEFAULT(`modified_on`)))
 
     </insert>
+
+    <insert id="insertPiComment" keyColumn="index" useGeneratedKeys="true" keyProperty="index"
+            parameterType="com.hiponya.bbqmall.entities.bbs.PiCommentEntity">
+
+        INSERT INTO `bbq_bbs`.`pi_comments`( `article_index`, `content`, `written_on`, `modified_on`)
+        VALUES (#{articleIndex}, #{content},IFNULL(#{writtenOn}, DEFAULT(`written_on`)), IFNULL(NOW(), DEFAULT(`modified_on`)))
+
+    </insert>
     
     
     <select id="selectImageByIndex" resultType="com.hiponya.bbqmall.entities.bbs.ImageEntity">
@@ -419,12 +461,15 @@ VALUES (#{articleIndex}, #{content},IFNULL(#{writtenOn}, DEFAULT(`written_on`)),
         SET
 
                 `board_id`    = #{boardId},
+                `id` = #{id},
             `title`       = #{title},
             `content`     = #{content},
-            `view`        = IFNULL(#{view}, DEFAULT(`view`)),
+            `view`        = #{view},
             `important_flag`        = IFNULL(#{isImportant}, DEFAULT(`important_flag`)),
             `written_on`  = IFNULL(#{writtenOn}, DEFAULT(`written_on`)),
-            `modified_on` = IFNULL(#{modifiedOn}, DEFAULT(`modified_on`))
+            `modified_on` = IFNULL(#{modifiedOn}, DEFAULT(`modified_on`)),
+            `comment_count` = #{commentCount}
+
         WHERE `index` = #{index}
 
     </update>
@@ -475,10 +520,16 @@ VALUES (#{articleIndex}, #{content},IFNULL(#{writtenOn}, DEFAULT(`written_on`)),
 
         WHERE  `index`= #{index}
         LIMIT 1;
+    </update>
 
+    <update id="updatePiComment" parameterType="com.hiponya.bbqmall.entities.bbs.PiCommentEntity">
+        UPDATE `bbq_bbs`.`pi_comments`
 
+        SET `content` = #{content},
+            `modified_on` = #{modifiedOn}
 
-
+        WHERE  `index`= #{index}
+        LIMIT 1;
     </update>
 
 
@@ -508,5 +559,15 @@ VALUES (#{articleIndex}, #{content},IFNULL(#{writtenOn}, DEFAULT(`written_on`)),
         LIMIT 1;
 
     </delete>
+
+    <delete id="deletePiCommentByIndex" parameterType="com.hiponya.bbqmall.entities.bbs.PiCommentEntity">
+
+        DELETE
+        FROM `bbq_bbs`.`pi_comments`
+        WHERE `index` = #{index}
+        LIMIT 1;
+
+    </delete>
+
 
 </mapper>

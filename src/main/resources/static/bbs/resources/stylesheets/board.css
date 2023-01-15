@@ -299,7 +299,8 @@ body>main>.content>.write-notice-button>a:hover{
 
 }
 
-body>main>.bp>.content-table>thead>tr>td>.state{
+body>main>.bp>.content-table>thead>tr>td>.state,
+body>main>.pi>.content-table>thead>tr>td>.state{
     width: 2.8rem;
     /*color: rebeccapurple;*/
     text-align: center;

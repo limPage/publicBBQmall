@@ -350,12 +350,12 @@
         </div>
     </div>
 
-    <div class="content notice" th:if="${bid!=null &&  bid.equals('pi')}">
+    <div class="content pi" th:if="${bid!=null &&  bid.equals('pi')}">
         <div class="title-container">
             <h1>상품문의</h1>
         </div>
 
-        <form class="form" name="form">
+        <form class="form " name="form">
             <!--            <div class="search-row">-->
             <label>
                 <!--                    <select name="criterion" th:with="criterion = ${#request.getParameter('criterion')}">-->
@@ -388,8 +388,10 @@
             <thead>
             <tr>
                 <td><h3 class="number">번호</h3></td>
+                <td><h3 class="state">상태</h3></td>
                 <td><h3 class="board-id">분류</h3></td>
                 <td class="content-title"><h3>제목</h3></td>
+                <td><h3 class="id">문의자</h3></td>
                 <td><h3 class="written-on">등록일</h3></td>
                 <td><h3 class="view-count">조회</h3></td>
             </tr>
@@ -400,6 +402,9 @@
                 <!--공지의 특성상 10개가 넘어가지 않으므로 실사이트에선 게시물 번호가 아닌 10 내림차순으로 보여주는 듯 합니다.                    -->
                 <td>
                     <h3 class="number" th:text="${i.size - i.index}">-</h3>
+                </td>
+                <td>
+                    <h3 th:text="${article.getCommentCount()<=0? '답변대기':'답변완료'}">답변전</h3>
                 </td>
 
                 <td>
@@ -424,6 +429,9 @@
 
                 </a></td>
 
+                <td>
+                    <h3 class="id"  th:text="${article.getId()}" >성함</h3>
+                </td>
 
                 <td>
                     <h3 class="written-on" th:text="${#dates.format(article.getWrittenOn(),'yyyy.MM.dd')}">
@@ -542,6 +550,8 @@
                 <td><h3 class="number">번호</h3></td>
                 <td><h3 class="board-id">분류</h3></td>
                 <td class="content-title"><h3>제목</h3></td>
+                <td><h3 class="id">문의자</h3></td>
+
                 <td><h3 class="written-on">등록일</h3></td>
                 <td><h3 class="view-count">조회</h3></td>
             </tr>
@@ -576,6 +586,9 @@
 
                 </a></td>
 
+                <td>
+                    <h3 class="id"  th:text="${article.getId()}" >성함</h3>
+                </td>
 
                 <td>
                     <h3 class="written-on" th:text="${#dates.format(article.getWrittenOn(),'yyyy.MM.dd')}">
