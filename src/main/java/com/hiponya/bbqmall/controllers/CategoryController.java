@@ -6,9 +6,13 @@ import com.hiponya.bbqmall.enums.CommonResult;
 import com.hiponya.bbqmall.enums.member.CategoryResult;
 import com.hiponya.bbqmall.interfaces.IResult;
 import com.hiponya.bbqmall.services.CategoryService;
+import com.hiponya.bbqmall.vos.product.ProductReadVo;
 import jdk.jfr.Category;
 import org.json.JSONObject;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -33,7 +37,7 @@ public class CategoryController {
                                     SortEntity sort) {
         ModelAndView modelAndView = new ModelAndView("home/category");
         CategoryEntity[] categories = this.categoryService.getCategories();
-        ProductEntity[] products = this.categoryService.getProducts(cid);
+        ProductReadVo[] products = this.categoryService.getProducts(cid);
         CategoryEntity categories2;
         SortEntity[] sorts = this.categoryService.getSorts();
 
@@ -59,10 +63,6 @@ public class CategoryController {
         modelAndView.addObject("category", category);
         modelAndView.addObject("index",category.getIndex());
         modelAndView.addObject("cid", cid);
-
-
-
-
 
         return modelAndView;
     }
@@ -172,6 +172,10 @@ public class CategoryController {
             modelAndView.addObject("user", user);
         }
 
+//        ProductReadVo[] products = this.categoryService.getProducts(cid);
+//        modelAndView.addObject("products", products);
+
+
         modelAndView.addObject("quantity", quantity);
         modelAndView.addObject("pid", pid);
         modelAndView.addObject("product", product);
@@ -194,10 +198,10 @@ public class CategoryController {
         modelAndView.addObject("category", category);
         modelAndView.addObject("cid", category.getIndex());
         modelAndView.addObject("pid", pid);
-        if(cid == 0) {
-            ProductEntity[] products = this.categoryService.getProducts(cid);
-            modelAndView.addObject("products", products);
-        }
+//        if(cid == 0) {
+//            ProductEntity[] products = this.categoryService.getProducts(cid);
+//            modelAndView.addObject("products", products);
+//        }
 
         ProductEntity product = this.categoryService.getProductByIndex(pid);
         modelAndView.addObject("product", product);
@@ -218,7 +222,7 @@ public class CategoryController {
         modelAndView.addObject("category", category);
         modelAndView.addObject("product", product);
 
-        ProductEntity[] products = this.categoryService.getProducts(cid);
+        ProductReadVo[] products = this.categoryService.getProducts(cid);
         modelAndView.addObject("products", products);
 
         JSONObject commentObject = new JSONObject();
@@ -228,6 +232,44 @@ public class CategoryController {
         return modelAndView;
     }
 
+
+    @GetMapping(value = "productImage")
+    public ResponseEntity<byte[]> getProductImage(@RequestParam(value = "index") int index){
+
+        ResponseEntity<byte[]> responseEntity ;
+
+
+        ProductImageEntity productImage = this.categoryService.getProductImage(index);
+
+        if(productImage==null){
+            responseEntity = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }else {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.valueOf(productImage.getType()));
+            headers.setContentLength(productImage.getData().length);
+            responseEntity = new ResponseEntity<>(productImage.getData(),headers, HttpStatus.OK);
+        }
+        return responseEntity;
+    }
+
+    @GetMapping(value = "detailImage")
+    public ResponseEntity<byte[]> getDetailImage(@RequestParam(value = "index") int index){
+
+        ResponseEntity<byte[]> responseEntity ;
+
+
+        DetailImageEntity detailImage = this.categoryService.getDetailImage(index);
+
+        if(detailImage==null){
+            responseEntity = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }else {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.valueOf(detailImage.getType()));
+            headers.setContentLength(detailImage.getData().length);
+            responseEntity = new ResponseEntity<>(detailImage.getData(),headers, HttpStatus.OK);
+        }
+        return responseEntity;
+    }
 
     @RequestMapping(value = "view", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public String postCategoryQuantity(@RequestParam(value = "cid") int cid, @RequestParam(value = "sid") int sid, CategoryEntity category, SortEntity sort) {

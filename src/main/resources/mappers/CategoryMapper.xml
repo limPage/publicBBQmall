@@ -34,7 +34,7 @@
         where binary `index` = #{index};
     </select>
 
-    <select id="selectProducts" resultType="com.hiponya.bbqmall.entities.product.ProductEntity">
+    <select id="selectProducts" resultType="com.hiponya.bbqmall.vos.product.ProductReadVo">
         select `product_index` as `productIndex`,
                `detail_index` as `detailIndex`,
                `product_name` as `productName`,
@@ -191,6 +191,88 @@
               LEFT JOIN `bbqmall`.`products` AS `product` on `wishlist`.`product_index` = `product`.`product_index`
         where id = #{id}
     </select>
+
+    <select id="selectProductsByDetailIndex" resultType="com.hiponya.bbqmall.vos.product.ProductReadVo">
+
+        SELECT `product_index` AS `productIndex`,
+        `detail_index` AS `detailIndex`,
+        `menu`.`index`AS `menuIndex`,
+        `product_name` AS `productName`,
+        `price` AS `price`,
+        `content` AS `content`,
+        `view` AS `view`,
+        `created_on` AS `createdOn`,
+        `modified_on` AS `modifiedOn`,
+        `amount` AS `amount`,
+        `on_sale` AS onSale,
+        `sale_quantity` AS `saleQuantity`
+
+        FROM `bbqmall`.`products`
+        LEFT JOIN `bbqmall`.`detail_menu` on `products`.`detail_index` = `detail_menu`.`index`
+        LEFT JOIN `bbqmall`.`menus` AS `menu` on `detail_menu`.`menu_index` = `menu`.`index`
+        <if test='detailIndex!=0 and detailIndex!=101 and detailIndex!=102 and detailIndex!=103 and detailIndex!=null' >
+            WHERE `detail_index` = #{detailIndex}
+        </if>
+
+        <if test='detailIndex!=null and detailIndex==101 '>
+            WHERE `menu`.`index` = 1
+
+        </if>
+        <if test='detailIndex!=null and detailIndex==102 '>
+            WHERE `menu`.`index` = 2
+
+        </if>
+        <if test='detailIndex!=null and detailIndex==103 '>
+            WHERE `menu`.`index` = 3
+
+        </if>
+
+
+        ORDER BY `modified_on` DESC
+
+    </select>
+
+
+    <select id="selectProductImagesByProductIndexExceptData" resultType="com.hiponya.bbqmall.entities.product.ProductImageEntity">
+        SELECT `index`      AS `index`,
+               `product_index` AS `productIndex`
+
+        FROM `bbqmall`.`product_images`
+        WHERE `product_index` = #{productIndex}
+        ORDER BY `index`
+
+    </select>
+
+    <select id="selectDetailImagesByProductIndexExceptData" resultType="com.hiponya.bbqmall.entities.product.DetailImageEntity">
+        SELECT `index`      AS `index`,
+               `product_index` AS `productIndex`
+
+        FROM `bbqmall`.`detail_images`
+        WHERE `product_index` = #{productIndex}
+        ORDER BY `index`
+
+    </select>
+
+
+    <select id="selectProductImageByIndex" resultType="com.hiponya.bbqmall.entities.product.ProductImageEntity">
+        SELECT `index` AS `index`,
+               `product_index` AS `productIndex`,
+               `data` AS `data`,
+               `type` AS `type`
+        FROM bbqmall.`product_images`
+        WHERE `index` = #{index} LIMIT 1;
+
+    </select>
+    <select id="selectDetailImageByIndex" resultType="com.hiponya.bbqmall.entities.product.DetailImageEntity">
+        SELECT `index` AS `index`,
+               `product_index` AS `productIndex`,
+               `data` AS `data`,
+               `type` AS `type`
+        FROM bbqmall.`detail_images`
+        WHERE `index` = #{index} LIMIT 1;
+
+    </select>
+
 
     <insert id="insertWishlistByIndex" parameterType="com.hiponya.bbqmall.entities.product.WishlistEntity"
     useGeneratedKeys="true" keyColumn="index" keyProperty="index">

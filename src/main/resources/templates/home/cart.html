@@ -50,7 +50,7 @@
                             <div class="cart-detail">
                                 <div class="cart-content">
                                     <div class="block">
-                                        <ul>
+                                        <ul class="product-block">
                                             <li class="image-container">
                                                 <a href="#">
                                                     <img src="/resources/images/event1.jpg" width="100">
@@ -84,10 +84,10 @@
                                                 <span class="price" th:text="${product.getPrice() * quantity}">/th로 price * quantity 받을곳/</span>
                                             </li>
                                             <li class="sale-price-container" id="salePriceContainer">
-                                                <div class="sale-title">할인금액</div>
-                                                <div class="total-sale" th:text="${(product.getPrice() / product.getSaleQuantity()) * quantity}">-</div>
-                                                <div class="sale-option">
-                                                    <button type="button" class="layout">내역</button>
+                                                <span class="sale-title">할인금액</span>
+                                                <span class="total-sale" th:text="${(product.getPrice() / product.getSaleQuantity()) * quantity}">-</span>
+                                                <span class="sale-option">
+                                                    <input type="button" class="layout" value="내역"></input>
                                                     <!-- 할인내역 css로 내역버튼누를시 나오게할것 -->
                                                     <div class="detail-sale" hidden>
                                                         <h1>할인내역</h1>
@@ -96,7 +96,7 @@
                                                             <span class="percent">%</span>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </span>
                                             </li>
 
                                             <li class="sale-apply">
@@ -144,7 +144,7 @@
                                         <span>할인</span>
                                     </h3>
                                     <ul class="list1">
-                                        <li>
+                                        <li class="coupon-container">
                                             <span class="sale-title">쿠폰할인</span>
                                             <span class="on-sale-price">
                                                 <span class="save" id="totalSave">0</span>
@@ -180,9 +180,9 @@
                                                 <input type="text" name="money-view">
                                                 원
                                             </span>
-                                            <input type="hidden" name="emoney" value="0">
-                                            <button type="button" class="use-emoney-btn">사용</button>
-                                            <button type="button" class="use-all-emoney-btn">전액사용</button>
+                                            <input type="hidden" name="money" value="0">
+                                            <input type="button" class="use-money-btn" value="사용">
+                                            <input type="button" class="use-all-money-btn" value="전액사용">
                                             <button type="button" class="reset-btn">초기화</button>
                                             <span class="user-money">
                                                 (보유

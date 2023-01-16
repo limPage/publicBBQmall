@@ -94,20 +94,30 @@ main > #cartForm > .order-layout > .cartPage-container > .cart-content > .cart-l
     justify-content : stretch;
 }
 
-main > #cartForm > .order-layout > .cartPage-container > .cart-content > .cart-list >.cart-goods > .cart-detail > .cart-content > .block > ul {
+main > #cartForm > .order-layout > .cartPage-container > .cart-content > .cart-list >.cart-goods > .cart-detail > .cart-content > .block > .product-block {
     display : flex;
     flex-direction : row;
 
     padding : 1rem;
 }
 
-main > #cartForm > .order-layout > .cartPage-container > .cart-content > .cart-list > .cart-goods > .cart-detail > .cart-content > .block > ul > .option-container {
+main > #cartForm > .order-layout > .cartPage-container > .cart-content > .cart-list > .cart-goods > .cart-detail > .cart-content > .block > .product-block > .option-container {
     align-items : stretch;
     display : flex;
     flex-direction : column;
     justify-content : stretch;
 
     padding : 0.5rem;
+}
+
+.sale-price-container > .sale-option > .layout {
+    background-color : rgb(255, 255, 255);
+    border : 0.0125rem solid gray;
+    padding: 0.15rem 0.3rem;
+    font-size : 0.8rem;
+    color : gray;
+
+
 }
 
 main > #cartForm > .order-layout > .cartPage-container > .cart-content > .cart-list > .cart-goods > .cart-detail > .cart-content > .block > ul > .option-container > .product-name {
@@ -179,7 +189,9 @@ main > #cartForm > .order-layout > .cartPage-container > .cart-content > .cart-l
     display : flex;
     flex-direction : column;
     justify-content : stretch;
-    background-color: red;
+
+    border-left : 0.0125rem solid rgb(128, 140, 152);
+    padding-left : 1rem;
     padding-top : 1.5rem;
     padding-bottom : 1rem;
 }
@@ -197,6 +209,15 @@ main > #cartForm > .order-layout > .cartPage-container > .cart-content > .cart-l
 
 .sale-container > .sale-area > .list1 > .promotion-code.visible {
     display : flex;
+}
+
+.sale-container > .sale-area > .list1 > .save-money > .use-money-btn,
+.sale-container > .sale-area > .list1 > .save-money > .use-all-money-btn {
+    background-color : rgb(255, 255, 255);
+    border : 0.0125rem solid gray;
+    padding: 0.15rem 0.3rem;
+    font-size : 0.8rem;
+    color : gray;
 }
 
 .sale-container > .sale-area > .list1 > .save-money > .reset-btn {
@@ -219,6 +240,14 @@ main > #cartForm > .order-layout > .cartPage-container > .cart-content > .cart-l
 
 .sale-container2 > .sale-area > .title2 {
     display : none;
+}
+
+.sale-container2 > .sale-area > .list1 > .coupon-container > .coupon-btn {
+    background-color : rgb(255, 255, 255);
+    border : 0.0125rem solid gray;
+    padding: 0.15rem 0.3rem;
+    font-size : 0.8rem;
+    color : gray;
 }
 
 .sale-container2 > .sale-area > .list1 > .promotion-code {

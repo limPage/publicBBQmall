@@ -76,7 +76,31 @@ main > .swiper > div > .catalog-page > .goods-search-form > .border-line {
     justify-content : center;
 }
 
-/*.goods-search-form > .search-item-display > .ul > .goods-list {*/
+.product-container > .products > .product-image {
+    max-width : 300px;
+    min-width : 300px;
+}
+
+.product-container > .products > .product-box > .title > .comment {
+    font-size : 1.25rem;
+}
+
+.product-container > .products > .product-box > .title > .sale,
+.product-container > .products > .product-box > .title > .percent {
+    font-size : 1.25rem;
+    color : #CF152D;
+}
+
+.product-container > .products > .product-box > .title > .price {
+    font-size : 1.25rem;
+    font-style : inherit;
+}
+
+.product-container > .products > .product-box > .title > .base-price {
+    text-decoration : line-through;
+}
+
+    /*.goods-search-form > .search-item-display > .ul > .goods-list {*/
 /*    align-items : stretch;*/
 /*    display : flex;*/
 /*    flex-direction : row;*/

@@ -1,25 +1,10 @@
 package com.hiponya.bbqmall.entities.product;
 
-import java.util.Objects;
-
-public class ProductImageEntity {
+public class DetailImageEntity {
     private int index;
     private int productIndex;
     private byte[] data;
     private String type;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ProductImageEntity that = (ProductImageEntity) o;
-        return index == that.index;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(index);
-    }
 
     public int getIndex() {
         return index;
@@ -51,5 +36,15 @@ public class ProductImageEntity {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
     }
 }

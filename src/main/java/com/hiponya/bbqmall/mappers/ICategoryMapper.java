@@ -2,9 +2,11 @@ package com.hiponya.bbqmall.mappers;
 
 import com.hiponya.bbqmall.entities.member.UserEntity;
 import com.hiponya.bbqmall.entities.product.*;
+import com.hiponya.bbqmall.vos.product.ProductReadVo;
 import com.hiponya.bbqmall.vos.product.WishlistVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Mapper
 public interface ICategoryMapper {
@@ -18,7 +20,9 @@ public interface ICategoryMapper {
 
     CategoryEntity selectCategories2(@Param(value = "index") int index);
 
-    ProductEntity[] selectProducts(@Param(value = "cid") int cid);
+    ProductReadVo[] selectProducts(@Param(value = "cid") int cid);
+
+
 
     ProductEntity[] selectEightProducts();
     ProductEntity[] selectSecondEightProducts();
@@ -50,5 +54,14 @@ public interface ICategoryMapper {
     int insertOrder(OrderEntity order);
 
     int deleteWishlistByIndex(@Param(value = "index") int index);
+
+    ProductReadVo[] selectProductsByDetailIndex(@RequestParam(value = "detailIndex") int detailIndex);
+
+    ProductImageEntity[] selectProductImagesByProductIndexExceptData(@Param(value = "productIndex") int productIndex);
+
+    DetailImageEntity[] selectDetailImagesByProductIndexExceptData(@Param(value = "productIndex") int productIndex);
+
+    ProductImageEntity selectProductImageByIndex(@Param(value = "index") int index);
+    DetailImageEntity selectDetailImageByIndex(@Param(value = "index") int index);
 
 }

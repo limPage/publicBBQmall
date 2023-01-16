@@ -99,6 +99,25 @@ body > header {
     margin-left : 2rem;
 }
 
+.cart-products-detail > .products-top > .delete-button {
+    background-color : rgb(255, 255, 255);
+    border : 0.0125rem solid gray;
+    padding: 0.15rem 0.3rem;
+    font-size : 0.8rem;
+    color : gray;
+}
+
+.block3 > .option-modify-btn-container > .option-modify-btn,
+.block3 > .direct-buy-btn-container > .direct-buy-btn {
+    background-color : rgb(255, 255, 255);
+    border : 0.0125rem solid gray;
+    padding: 0.15rem 0.3rem;
+    font-size : 0.8rem;
+    color : gray;
+
+    margin-bottom : 0.25rem;
+}
+
 .cart-products {
     border-bottom : 0.0125rem solid rgb(128, 140, 152);
     padding-bottom : 1rem;
@@ -162,6 +181,14 @@ body > header {
     margin-top : 3rem;
 }
 
+.user-info-container > .title3 > .modify-button {
+    background-color : rgb(255, 255, 255);
+    border : 0.0125rem solid gray;
+    padding: 0.15rem 0.3rem;
+    font-size : 0.8rem;
+    color : gray;
+}
+
 .user-info-container > .order-info-input {
     display : none;
 }
@@ -191,7 +218,7 @@ body > header {
     margin-bottom : 5rem;
 }
 
-.cart-goods > .shipping-container > .title {
+.shipping-container > .title {
     align-items : stretch;
     display : flex;
     flex-direction : row;
@@ -201,7 +228,16 @@ body > header {
     padding-bottom : 0.8rem;
 }
 
-.cart-goods > .shipping-container > .delivery-info-container {
+.shipping-container > .title > .modify-shipping > .change-address-btn,
+.shipping-container > .title > .modify-shipping > .modify-btn {
+    background-color : rgb(255, 255, 255);
+    border : 0.0125rem solid gray;
+    padding: 0.15rem 0.3rem;
+    font-size : 0.8rem;
+    color : gray;
+}
+
+.shipping-container > .delivery-info-container {
     padding-top : 1rem;
     font-weight : 400;
 }

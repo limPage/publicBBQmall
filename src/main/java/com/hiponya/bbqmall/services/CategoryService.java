@@ -9,12 +9,15 @@ import com.hiponya.bbqmall.enums.member.CategoryResult;
 import com.hiponya.bbqmall.enums.member.VerifyEmailAuthResult;
 import com.hiponya.bbqmall.interfaces.IResult;
 import com.hiponya.bbqmall.mappers.ICategoryMapper;
+import com.hiponya.bbqmall.vos.product.ProductReadVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Date;
+
+import static java.util.Arrays.stream;
 
 @Service(value = "com.hiponya.bbqmall.services.CategoryService")
 public class CategoryService {
@@ -120,7 +123,7 @@ public class CategoryService {
         return this.categoryMapper.selectCategories2(cid);
     }
 
-    public ProductEntity[] getProducts(int cid) {
+    public ProductReadVo[] getProductsByCid(int cid) {
         return this.categoryMapper.selectProducts(cid);
     }
 
@@ -140,6 +143,31 @@ public class CategoryService {
     }
     public ProductEntity[] getThirdEightProducts() {
         return this.categoryMapper.selectThirdEightProducts();
+    }
+
+    public ProductReadVo[] getProducts(int cid){
+
+        ProductReadVo[] products =this.categoryMapper.selectProductsByDetailIndex(cid);
+        for (ProductReadVo product :products){
+            ProductImageEntity[] productImages = this.categoryMapper.selectProductImagesByProductIndexExceptData(product.getProductIndex());
+            int[] productImageIndexes = stream(productImages).mapToInt(ProductImageEntity::getIndex).toArray();
+            product.setImageIndexes(productImageIndexes);
+
+            DetailImageEntity[] detailImages = this.categoryMapper.selectDetailImagesByProductIndexExceptData(product.getProductIndex());
+            int[] detailImageIndexes = stream(detailImages).mapToInt(DetailImageEntity::getIndex).toArray();
+            product.setDetailImageIndexes(detailImageIndexes);
+
+        }
+        return products;
+    }
+
+    public ProductImageEntity getProductImage (int index){
+
+        return this.categoryMapper.selectProductImageByIndex(index);
+    }
+    public DetailImageEntity getDetailImage (int index){
+
+        return this.categoryMapper.selectDetailImageByIndex(index);
     }
 
 
