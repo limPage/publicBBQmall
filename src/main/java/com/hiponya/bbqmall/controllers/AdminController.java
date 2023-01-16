@@ -64,6 +64,7 @@ public class AdminController {
        ProductEntity product = new ProductEntity();
 
         if(menuIndex!=null && menuIndex==99){
+
             ProductReadVo[] products = this.adminService.getProducts(product.getProductName());
             modelAndView.addObject("products", products);
 

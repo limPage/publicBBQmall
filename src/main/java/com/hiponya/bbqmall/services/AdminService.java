@@ -103,6 +103,8 @@ public class AdminService {
 
     public ProductReadVo[] getProducts(String detailIndex){
 
+
+
         ProductReadVo[] products =this.adminMapper.selectProductsByDetailIndex(detailIndex);
         for (ProductReadVo product :products){
             ProductImageEntity[] productImages = this.adminMapper.selectProductImagesByProductIndexExceptData(product.getProductIndex());
