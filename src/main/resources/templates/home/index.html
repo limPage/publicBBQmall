@@ -24,237 +24,51 @@
 
     <section class="goods-row goods-row1">
         <span class="title">BBQ몰 추천상품</span>
-        <div class="goods-container">
-            <div class="goods">
+        <ul class="goods-container">
+            <li class="goods" th:each="product,i: ${products}" th:if="${i.count <9}">
                <a href="#">
-                   <img src="/resources/images/md1.png" alt="" >
+<!--                   <img th:each="image : ${product.getImageIndexes()}">-->
+                   <img th:src="@{/admin/productImage (index=${product.getImageIndexes()}) }" alt="이미지" title="이미지">
                </a>
 
                 <div class="goods-info">
-                    <a href="#">BBQ닭가슴살 골라담기(신제품)</a>
+                    <a href="#" th:text="${product.getProductName()}">BBQ닭가슴살 골라담기(신제품)</a>
                     <span class="price">
-                        <span> 12</span><span class="small-text">%</span>
+                        <span class="sale-text" th:text="${product.getSaleQuantity()}"> 1277</span><span class="small-text">%</span>
 
-                          <span>6980</span><span class="small-text">원</span>
-                        <span class="small-text">7000</span>
+                          <span th:text="${product.getPrice() } - ${product.getPrice()*(product.getSaleQuantity()*0.01)}">6980</span><span class="small-text">원</span>
+                        <span class="small-text price-text" th:text="${product.getPrice()}">7000</span>
                     </span>
                 </div>
 
-            </div>
-
-            <div class="goods">
-                <a href="#"><img src="/resources/images/md2.png" alt=""></a>
-
-                <div class="goods-info">
-                    <a href="#">BBQ닭가슴살 골라담기(신제품)</a>
-                    <span class="price">
-                        <span> 12</span><span class="small-text">%</span>
-
-                          <span>6980</span><span class="small-text">원</span>
-                        <span class="small-text">7000</span>
-                    </span>
-                </div>
-
-            </div> <div class="goods">
-            <a href="#"><img src="/resources/images/md3.png" alt="" ></a>
-
-            <div class="goods-info">
-                <a href="#">BBQ닭가슴살 골라담기(신제품)</a>
-                <span class="price">
-                        <span> 12</span><span class="small-text">%</span>
-
-                          <span>6980</span><span class="small-text">원</span>
-                        <span class="small-text">7000</span>
-                    </span>
-            </div>
-
-        </div> <div class="goods">
-            <a href="#"><img src="/resources/images/md4.png" alt="" ></a>
-
-            <div class="goods-info">
-                <a href="#">BBQ닭가슴살 골라담기(신제품)</a>
-                <span class="price">
-                        <span> 12</span><span class="small-text">%</span>
-
-                          <span>6980</span><span class="small-text">원</span>
-                        <span class="small-text">7000</span>
-                    </span>
-            </div>
-
-        </div> <div class="goods">
-            <a href="#"><img src="/resources/images/md5.png" alt="" ></a>
-
-            <div class="goods-info">
-                <a href="#">BBQ닭가슴살 골라담기(신제품)</a>
-                <span class="price">
-                        <span> 12</span><span class="small-text">%</span>
-
-                          <span>6980</span><span class="small-text">원</span>
-                        <span class="small-text">7000</span>
-                    </span>
-            </div>
-
-        </div> <div class="goods">
-            <a href="#"><img src="/resources/images/md6.png" alt="" ></a>
-
-            <div class="goods-info">
-                <a href="#">BBQ닭가슴살 골라담기(신제품)</a>
-                <span class="price">
-                        <span> 12</span><span class="small-text">%</span>
-
-                          <span>6980</span><span class="small-text">원</span>
-                        <span class="small-text">7000</span>
-                    </span>
-            </div>
-
-        </div> <div class="goods">
-            <a href="#"><img src="/resources/images/md7.png" alt="" ></a>
-
-            <div class="goods-info">
-                <a href="#">BBQ닭가슴살 골라담기(신제품)</a>
-                <span class="price">
-                        <span> 12</span><span class="small-text">%</span>
-
-                          <span>6980</span><span class="small-text">원</span>
-                        <span class="small-text">7000</span>
-                    </span>
-            </div>
-
-        </div> <div class="goods">
-            <a href="#"><img src="/resources/images/md8.png" alt="" ></a>
-
-            <div class="goods-info">
-                <a href="#">BBQ닭가슴살 골라담기(신제품)</a>
-                <span class="price">
-                        <span> 12</span><span class="small-text">%</span>
-
-                          <span>6980</span><span class="small-text">원</span>
-                        <span class="small-text">7000</span>
-                    </span>
-            </div>
-
-        </div>
+            </li>
 
 
-        </div>
+        </ul>
 
 
     </section>
 
     <section class="goods-row goods-row2">
         <span class="title">BBQ몰 추천상품</span>
-        <div class="goods-container">
-            <div class="goods">
-                <a href="#"><img src="/resources/images/md1.png" alt="" ></a>
+        <ul class="goods-container">
+            <li class="goods" th:each="product,i: ${products}" th:if="${i.count >8 and i.count < 17}">
+                <a href="#"><img th:src="@{/admin/productImage (index=${product.getImageIndexes()}) }" alt="이미지" title="이미지"></a>
 
                 <div class="goods-info">
-                    <a href="#">BBQ닭가슴살 골라담기(신제품)</a>
+                    <a href="#" th:text="${product.getProductName()}">BBQ닭가슴살 골라담기(신제품)</a>
                     <span class="price">
-                        <span> 12</span><span class="small-text">%</span>
+                        <span class="sale-text" th:text="${product.getSaleQuantity()}"> 12</span><span class="small-text">%</span>
 
-                          <span>6980</span><span class="small-text">원</span>
-                        <span class="small-text">7000</span>
+                          <span th:text="${product.getPrice() } - ${product.getPrice()*(product.getSaleQuantity()*0.01)}">6980</span><span class="small-text">원</span>
+                        <span class="small-text price-text" th:text="${product.getPrice()}">7000</span>
                     </span>
                 </div>
 
-            </div>
-
-            <div class="goods">
-                <a href="#"><img src="/resources/images/md2.png" alt="" ></a>
-
-                <div class="goods-info">
-                    <a href="#">BBQ닭가슴살 골라담기(신제품)</a>
-                    <span class="price">
-                        <span> 12</span><span class="small-text">%</span>
-
-                          <span>6980</span><span class="small-text">원</span>
-                        <span class="small-text">7000</span>
-                    </span>
-                </div>
-
-            </div> <div class="goods">
-            <a href="#"><img src="/resources/images/md3.png" alt="" ></a>
-
-            <div class="goods-info">
-                <a href="#">BBQ닭가슴살 골라담기(신제품)</a>
-                <span class="price">
-                        <span> 12</span><span class="small-text">%</span>
-
-                          <span>6980</span><span class="small-text">원</span>
-                        <span class="small-text">7000</span>
-                    </span>
-            </div>
-
-        </div> <div class="goods">
-            <a href="#"><img src="/resources/images/md4.png" alt="" ></a>
-
-            <div class="goods-info">
-                <a href="#">BBQ닭가슴살 골라담기(신제품)</a>
-                <span class="price">
-                        <span> 12</span><span class="small-text">%</span>
-
-                          <span>6980</span><span class="small-text">원</span>
-                        <span class="small-text">7000</span>
-                    </span>
-            </div>
-
-        </div> <div class="goods">
-            <a href="#"><img src="/resources/images/md5.png" alt="" ></a>
-
-            <div class="goods-info">
-                <a href="#">BBQ닭가슴살 골라담기(신제품)</a>
-                <span class="price">
-                        <span> 12</span><span class="small-text">%</span>
-
-                          <span>6980</span><span class="small-text">원</span>
-                        <span class="small-text">7000</span>
-                    </span>
-            </div>
-
-        </div> <div class="goods">
-            <a href="#"><img src="/resources/images/md6.png" alt="" ></a>
-
-            <div class="goods-info">
-                <a href="#">BBQ닭가슴살 골라담기(신제품)</a>
-                <span class="price">
-                        <span> 12</span><span class="small-text">%</span>
-
-                          <span>6980</span><span class="small-text">원</span>
-                        <span class="small-text">7000</span>
-                    </span>
-            </div>
-
-        </div> <div class="goods">
-            <a href="#"><img src="/resources/images/md7.png" alt="" ></a>
-
-            <div class="goods-info">
-                <a href="#">BBQ닭가슴살 골라담기(신제품)</a>
-                <span class="price">
-                        <span> 12</span><span class="small-text">%</span>
-
-                          <span>6980</span><span class="small-text">원</span>
-                        <span class="small-text">7000</span>
-                    </span>
-            </div>
-
-        </div>
-            <div class="goods">
-            <a href="#"><img src="/resources/images/md8.png" alt="" ></a>
-
-            <div class="goods-info">
-                <a href="#">BBQ닭가슴살 골라담기(신제품)</a>
-                <span class="price">
-                        <span> 12</span><span class="small-text">%</span>
-
-                          <span>6980</span><span class="small-text">원</span>
-                        <span class="small-text">7000</span>
-                    </span>
-            </div>
-
-        </div>
+            </li>
 
 
-        </div>
+        </ul>
 
 
     </section>
@@ -312,172 +126,48 @@
 
     <section class="goods-row goods-row1">
         <span class="title">BBQ몰 추천상품</span>
-        <div class="goods-container">
-            <div class="goods">
-                <a href="#"><img src="/resources/images/md1.png" alt="" ></a>
+        <ul class="goods-container">
+            <li class="goods" th:each="product,i: ${products}" th:if="${i.count >16}">
+                <a href="#"><img th:src="@{/admin/productImage (index=${product.getImageIndexes()}) }" alt="이미지" title="이미지" ></a>
 
                 <div class="goods-info">
-                    <a href="#">BBQ닭가슴살 골라담기(신제품)</a>
+                    <a href="#" th:text="${product.getProductName()}">BBQ닭가슴살 골라담기(신제품)</a>
                     <span class="price">
-                        <span> 12</span><span class="small-text">%</span>
+                        <span class="sale-text" th:text="${product.getSaleQuantity()}"> 12</span><span class="small-text">%</span>
 
-                          <span>6980</span><span class="small-text">원</span>
-                        <span class="small-text">7000</span>
+                          <span th:text="${product.getPrice() } - ${product.getPrice()*(product.getSaleQuantity()*0.01)}">6980</span><span class="small-text">원</span>
+                        <span class="small-text price-text" th:text="${product.getPrice()}">7000</span>
                     </span>
                 </div>
 
-            </div>
-
-            <div class="goods">
-                <a href="#"><img src="/resources/images/md2.png" alt="" ></a>
-
-                <div class="goods-info">
-                    <a href="#">BBQ닭가슴살 골라담기(신제품)</a>
-                    <span class="price">
-                        <span> 12</span><span class="small-text">%</span>
-
-                          <span>6980</span><span class="small-text">원</span>
-                        <span class="small-text">7000</span>
-                    </span>
-                </div>
-
-            </div> <div class="goods">
-            <a href="#"><img src="/resources/images/md3.png" alt="" ></a>
-
-            <div class="goods-info">
-                <a href="#">BBQ닭가슴살 골라담기(신제품)</a>
-                <span class="price">
-                        <span> 12</span><span class="small-text">%</span>
-
-                          <span>6980</span><span class="small-text">원</span>
-                        <span class="small-text">7000</span>
-                    </span>
-            </div>
-
-        </div> <div class="goods">
-            <a href="#"><img src="/resources/images/md4.png" alt="" ></a>
-
-            <div class="goods-info">
-                <a href="#">BBQ닭가슴살 골라담기(신제품)</a>
-                <span class="price">
-                        <span> 12</span><span class="small-text">%</span>
-
-                          <span>6980</span><span class="small-text">원</span>
-                        <span class="small-text">7000</span>
-                    </span>
-            </div>
-
-        </div> <div class="goods">
-            <a href="#"><img src="/resources/images/md5.png" alt="" ></a>
-
-            <div class="goods-info">
-                <a href="#">BBQ닭가슴살 골라담기(신제품)</a>
-                <span class="price">
-                        <span> 12</span><span class="small-text">%</span>
-
-                          <span>6980</span><span class="small-text">원</span>
-                        <span class="small-text">7000</span>
-                    </span>
-            </div>
-
-        </div> <div class="goods">
-            <a href="#"><img src="/resources/images/md6.png" alt="" ></a>
-
-            <div class="goods-info">
-                <a href="#">BBQ닭가슴살 골라담기(신제품)</a>
-                <span class="price">
-                        <span> 12</span><span class="small-text">%</span>
-
-                          <span>6980</span><span class="small-text">원</span>
-                        <span class="small-text">7000</span>
-                    </span>
-            </div>
-
-        </div> <div class="goods">
-            <a href="#"><img src="/resources/images/md7.png" alt="" ></a>
-
-            <div class="goods-info">
-                <a href="#">BBQ닭가슴살 골라담기(신제품)</a>
-                <span class="price">
-                        <span> 12</span><span class="small-text">%</span>
-
-                          <span>6980</span><span class="small-text">원</span>
-                        <span class="small-text">7000</span>
-                    </span>
-            </div>
-
-        </div>
-
-            <div class="goods">
-            <a href="#"><img src="/resources/images/md8.png" alt="" ></a>
-
-            <div class="goods-info">
-                <a href="#">BBQ닭가슴살 골라담기(신제품)</a>
-                <span class="price">
-                        <span> 12</span><span class="small-text">%</span>
-
-                          <span>6980</span><span class="small-text">원</span>
-                        <span class="small-text">7000</span>
-                    </span>
-            </div>
-
-        </div>
+            </li>
 
 
-        </div>
+
+        </ul>
 
 
     </section>
 
 
 
-<!--    <div class="event-row-big">-->
-<!--        <img src="/resources/images/eventBig.png">-->
-<!--    </div>-->
+    <div class="event-row-big">
+        <img src="/resources/images/eventBig.png">
+    </div>
 
 <section class="review-row">
     <div ><img src="https://mall.bbq.co.kr/data/skin/responsive_ver1_default_gl/images/bbqnew2/pc/%EA%B3%A0%EA%B0%9D%ED%9B%84%EA%B8%B0.svg">
-        <a class="title">고객후기</a> <span class="spring"></span> <a class="more" href="#">더보기 ＞</a></div>
+        <a class="title">고객후기</a> <span class="spring"></span> <a class="more" th:href="@{/board/ (bid=pr)}">더보기 ＞</a></div>
 
     <ul class="review-container">
-        <li class="review">
-            <a href="#">
-            <img src="/resources/images/review1.png"  alt="reviewImage">
+        <li class="review" th:each="review, i: ${reviews}">
+            <span class="review-text" th:text="${review.getTitle()}"> </span>
+            <a th:href="@{/board/readNotice (bid='pr',nid=${review.getIndex()})}">
+
+                <img th:src="@{/resources/images/review} + ${i.count}+.png"  alt="reviewImage">
             </a>
         </li>
-        <li class="review">
-            <a href="#"><img src="/resources/images/review1.png"></a>
-        </li>
-        <li class="review">
-            <a href="#"><img src="/resources/images/review1.png" ></a>
-        </li>
-        <li class="review">
-            <a href="#"><img src="/resources/images/review1.png" ></a>
-        </li>
-        <li class="review">
-            <a href="#"><img src="/resources/images/review1.png" ></a>
-        </li>
-        <li class="review">
-            <a href="#"><img src="/resources/images/review1.png" ></a>
-        </li>
-        <li class="review">
-            <a href="#"><img src="/resources/images/review2.jpg" ></a>
-        </li>
-        <li class="review">
-            <a href="#"><img src="/resources/images/review2.jpg" ></a>
-        </li>
-        <li class="review">
-            <a href="#"><img src="/resources/images/review2.jpg" ></a>
-        </li>
-        <li class="review">
-            <a href="#"><img src="/resources/images/review2.jpg" ></a>
-        </li>
-        <li class="review">
-            <a href="#"><img src="/resources/images/review2.jpg" ></a>
-        </li>
-        <li class="review">
-            <a href="#"><img src="/resources/images/review2.jpg" ></a>
-        </li>
+
     </ul>
 
 </section>

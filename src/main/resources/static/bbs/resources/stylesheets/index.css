@@ -91,6 +91,8 @@ body>main>.goods-row>.goods-container>.goods>a{
 
 body>main>.goods-row>.goods-container>.goods>a>img{
     width: 100%;
+    min-height: 18.25rem;
+
     /*display: inline-block;*/
 }
 
@@ -110,6 +112,7 @@ body > main > .goods-row >.goods-container>.goods>.goods-info >a{
     font-size: 1.3125rem;
     margin-bottom: 1rem;
     color: black;
+    min-height: 2.625rem;
 }
 body > main > .goods-row >.goods-container>.goods>.goods-info >.price{
     font-size: 1.5rem;
@@ -119,6 +122,15 @@ body > main > .goods-row >.goods-container>.goods>.goods-info >.price{
 body > main > .goods-row >.goods-container>.goods>.goods-info >span> .small-text {
         font-size:1rem;
 }
+body > main > .goods-row >.goods-container>.goods>.goods-info >span> .sale-text {
+    color: #CF152D;
+}
+
+body > main > .goods-row >.goods-container>.goods>.goods-info >span> .price-text {
+    text-decoration: line-through;
+    color: rgba(0,0,0,0.5);
+}
+
 
 body>main>.event-row{
     /*max-height: 45.25rem;*/
@@ -238,7 +250,21 @@ body>main> .review-row> .review-container{
 }
 body>main> .review-row> .review-container>.review{
     height: 13.125rem;
+    position: relative;
 }
+body>main> .review-row> .review-container>.review>.review-text{
+    position: absolute;
+    color: white;
+    font-size: 1.5rem;
+    overflow-x: hidden;
+    /*text-shadow: -1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black;*/
+    background-color: rgba(0,0,0,0.5);
+
+    font-family: inherit;
+
+}
+
+
 body>main> .review-row> .review-container>.review>a>img{
     max-width: 13.125rem;
     /*max-width: 10.125rem;*/

@@ -1,5 +1,8 @@
 package com.hiponya.bbqmall.controllers;
 
+import com.hiponya.bbqmall.services.BbsService;
+import com.hiponya.bbqmall.services.HomeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.http.MediaType;
@@ -14,9 +17,22 @@ import javax.servlet.http.HttpSession;
 @RequestMapping(value = "/")
 public class HomeController {
 
+    private final HomeService homeService;
+
+
+    @Autowired
+    public HomeController(HomeService homeService) {
+        this.homeService = homeService;
+    }
+
+
     @GetMapping(value = "/" ,produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getHome(){
         ModelAndView modelAndView = new ModelAndView("home/index");
+
+        modelAndView.addObject("reviews", this.homeService.getProductReviews());
+        modelAndView.addObject("products", this.homeService.getRecommendedProducts());
+
 
         return modelAndView;
     }
