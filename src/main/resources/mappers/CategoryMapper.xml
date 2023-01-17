@@ -47,7 +47,9 @@
                `on_sale` as `onSale`,
                `sale_quantity` as `saleQuantity`
         from bbqmall.products
-        <if test="cid != 0">where `detail_index` = #{cid}</if>
+            left join `bbqmall`.`detail_menu` as detailMenu on products.detail_index = `detailMenu`.`index`
+        left join bbqmall.menus as menu on detailMenu.menu_index = menu.`index`
+        <if test="'cid != 0">where menu.`index` = #{cid}</if>
     </select>
 
     <select id="selectEightProducts" resultType="com.hiponya.bbqmall.entities.product.ProductEntity">
@@ -159,6 +161,7 @@
                `on_sale` as `onSale`,
                `sale_quantity` as `saleQuantity`
         from bbqmall.products
+
         where binary product_index = #{pid}
     </select>
 
@@ -193,7 +196,6 @@
     </select>
 
     <select id="selectProductsByDetailIndex" resultType="com.hiponya.bbqmall.vos.product.ProductReadVo">
-
         SELECT `product_index` AS `productIndex`,
         `detail_index` AS `detailIndex`,
         `menu`.`index`AS `menuIndex`,
@@ -206,25 +208,20 @@
         `amount` AS `amount`,
         `on_sale` AS onSale,
         `sale_quantity` AS `saleQuantity`
-
         FROM `bbqmall`.`products`
         LEFT JOIN `bbqmall`.`detail_menu` on `products`.`detail_index` = `detail_menu`.`index`
         LEFT JOIN `bbqmall`.`menus` AS `menu` on `detail_menu`.`menu_index` = `menu`.`index`
         <if test='detailIndex!=0 and detailIndex!=101 and detailIndex!=102 and detailIndex!=103 and detailIndex!=null' >
             WHERE `detail_index` = #{detailIndex}
         </if>
-
         <if test='detailIndex!=null and detailIndex==101 '>
             WHERE `menu`.`index` = 1
-
         </if>
         <if test='detailIndex!=null and detailIndex==102 '>
             WHERE `menu`.`index` = 2
-
         </if>
         <if test='detailIndex!=null and detailIndex==103 '>
             WHERE `menu`.`index` = 3
-
         </if>
 
 
