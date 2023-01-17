@@ -141,3 +141,34 @@ main > .swiper > div > .catalog-page > .goods-search-form > .paging-navigation >
 main > .swiper > div > .catalog-page > .goods-search-form > .paging-navigation > .page:last-of-type {
     border-right : 0.0125rem solid rgb(213, 216, 220);
 }
+
+
+@media screen and (max-width: 100rem) { /* 최대크기가 100rem 이하가 될때 적용될 것들을 적어넣으면 됨 */
+    .product-container {
+        max-width : 70rem;
+    }
+}
+
+@media screen and (max-width : 80rem) {
+    .product-container {
+        max-width : 50rem;
+    }
+
+    .product-container > .products {
+        gap : 1rem 1.25rem;
+    }
+
+    .product-container > .products + .products {
+        gap : 1.25rem 4.25rem;
+    }
+}
+
+@media screen and (max-width : 60rem) {
+    .product-container {
+        max-width : clac(100vw - 4rem);
+    }
+
+    .product-container > .products {
+        grid-template-columns : repeat(2, 1fr);
+    }
+}

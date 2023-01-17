@@ -261,6 +261,15 @@ main > #cartForm > .order-layout > .cartPage-container > .cart-content > .cart-l
     display : flex;
 }
 
+.sale-container2 > .sale-area > .list1 > .save-money > .use-money-btn,
+.sale-container2 > .sale-area > .list1 > .save-money > .use-all-money-btn {
+    background-color : rgb(255, 255, 255);
+    border : 0.0125rem solid gray;
+    padding: 0.15rem 0.3rem;
+    font-size : 0.8rem;
+    color : gray;
+}
+
 .sale-container2 > .sale-area > .list1 > .save-money > .reset-btn {
     display : none;
 
@@ -285,6 +294,14 @@ main > #cartForm > .order-layout > .cartPage-container > .cart-content > .cart-l
 
 .user-info-container > .order-info-input.visible {
     display : flex;
+}
+
+.user-info-container > .title3 > .modify-button {
+    background-color : rgb(255, 255, 255);
+    border : 0.0125rem solid gray;
+    padding: 0.15rem 0.3rem;
+    font-size : 0.8rem;
+    color : gray;
 }
 
 .order-info {
@@ -316,6 +333,15 @@ main > #cartForm > .order-layout > .cartPage-container > .cart-content > .cart-l
 
     border-bottom : 0.0125rem solid rgb(128, 140, 152);
     padding-bottom : 0.8rem;
+}
+
+.shipping-container > .title > .shipping-button > .change-address-btn,
+.shipping-container > .title > .shipping-button > .modify-btn {
+    background-color : rgb(255, 255, 255);
+    border : 0.0125rem solid gray;
+    padding: 0.15rem 0.3rem;
+    font-size : 0.8rem;
+    color : gray;
 }
 
 .cart-goods > .shipping-container > .delivery-info-container {

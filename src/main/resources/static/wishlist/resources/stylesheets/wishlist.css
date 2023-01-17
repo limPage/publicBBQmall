@@ -107,6 +107,10 @@ body > header {
     color : gray;
 }
 
+.cart-products:last-of-type {
+    border : none;
+}
+
 .block3 > .option-modify-btn-container > .option-modify-btn,
 .block3 > .direct-buy-btn-container > .direct-buy-btn {
     background-color : rgb(255, 255, 255);
@@ -178,7 +182,6 @@ body > header {
     flex-direction : column;
     justify-content : flex-start;
 
-    margin-top : 3rem;
 }
 
 .user-info-container > .title3 > .modify-button {
