@@ -6,8 +6,10 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>BBQ몰 -마이페이지</title>
+
     <th:block th:replace="~{fragments/head :: common}"></th:block>
     <link rel="stylesheet" th:href="@{/myPage/resources/stylesheets/myShopping.css}">
+
     <script defer th:src="@{/myPage/resources/scripts/myShopping.js}"></script>
 
     <script th:if="${session.user==null}">
@@ -26,7 +28,7 @@
 <th:block th:replace="~{fragments/body :: floatingBanner}"></th:block>
 
 
-<main >
+<main class="c" >
     <th:block th:replace="~{fragments/body ::myPageSideBar}"></th:block>
         <input hidden id="bid" th:value="${bid}">
 

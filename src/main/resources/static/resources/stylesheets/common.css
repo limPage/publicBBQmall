@@ -738,7 +738,7 @@ body > footer > .foot-row > .last > p:last-of-type {
 
 body>main{
     /*width: 100%;*/
-    /*max-width: 77.5rem;*/
+    /*width: 80rem;*/
     padding: 0 2.5rem;
 
     align-items: center;
@@ -1045,6 +1045,7 @@ body>main>.admin-side-bar{
     body>.floating-banner{
        display: none;
     }
+
 }
 @media screen and (max-width : 53.75rem) {
     html{

@@ -3,8 +3,9 @@ body>main{
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-
     font-family: inherit;
+
+    width:80rem;
 }
 
 body>main>.content{
@@ -259,4 +260,57 @@ body > main > .content > form> table > tbody>tr>td>.panel.address>.dialog{
 body #MSideBarM{
     color: rgba(0,0,0,0.9);
     font-weight: 700;
+}
+@media screen and (max-width : 87.5rem) {
+
+
+    body > main {
+
+        width: 100%;
+
+    }
+
+    body>main>article{
+        font-size: 1rem;
+        padding:0 1.625rem  0.5rem 0;
+    }
+
+
+    body > main > .content > form> table > tbody>tr>td>.panel.address>.dialog{
+        top: 0;
+        left: 0;
+
+        transform: translate(40% ,50%);
+    }
+
+    body> main> .content>form > table>tbody>.modify-row.address-row>td{
+
+        width: 70%;
+
+    }
+
+    body> main> .content>form > table>tbody>.modify-row>th{
+        padding: 0 ;
+
+
+
+
+    }
+
+
+}
+@media screen and (max-width : 53.75rem) {
+
+
+    body > main > article {
+        padding: 0 1rem 0.5rem 0;
+    }
+
+    body > main > article > ul > li > a {
+        padding: 0.375rem 0 0.4375rem 0;
+        width: 6.75rem;
+        /*padding-bottom: 1px;*/
+    }
+
+
 }
