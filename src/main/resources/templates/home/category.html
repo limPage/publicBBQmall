@@ -24,42 +24,13 @@
                     <div class="search-filter-wrap">
                         <div class="search-filter">
                             <ul class="search-list" rel="searchList">
-                                <li class = "li">
+                                <li class = "li" th:each="sort : ${sorts}">
                                     <label class="active">
-                                        <input type="button" name="ranking" value="랭킹순" class = "button" rel="sorting" id="ranking">&nbsp
-                                        <input type="hidden" name = "rankingSid" th:value="${sort.getIndex()}" rel="sid" id="rankingSid">
+                                        <input type="button" name="ranking" th:value="${sort.getSort()}" class = "button" rel="sorting" id="ranking">&nbsp
+                                        <input type="hidden" name = "rankingSid" th:value="${sort.getIndex()}" rel="sid" id="rankingSid" class="sort-index">
                                     </label>
                                 </li>
-                                <li class = "li">
-                                    <label class="active">
-                                        <input type="button" name="regist" value="신규등록순" class = "button" rel="sorting">&nbsp
-                                        <input type="hidden" name = "registSid" th:value="${sort.getIndex()}" rel="sid">
-                                    </label>
-                                </li>
-                                <li class = "li">
-                                    <label class="active">
-                                        <input type="button" name="low-price" value="낮은가격순" class = "button" rel="sorting">&nbsp
-                                        <input type="hidden" name = "lowPriceSid" th:value="${sort.getIndex()}" rel="sid">
-                                    </label>
-                                </li>
-                                <li class = "li">
-                                    <label class="active">
-                                        <input type="button" name="high-price" value="높은가격순" class = "button" rel="sorting">&nbsp
-                                        <input type="hidden" name = "highPriceSid" th:value="${sort.getIndex()}" rel="sid">
-                                    </label>
-                                </li>
-                                <li class = "li">
-                                    <label class="active">
-                                        <input type="button" name="review" value="상품평많은순" class = "button" rel="sorting">&nbsp
-                                        <input type="hidden" name = "reviewSid" th:value="${sort.getIndex()}" rel="sid">
-                                    </label>
-                                </li>
-                                <li class = "li">
-                                    <label class="active">
-                                        <input type="button" name="view" value="조회순" class = "button" rel="sorting">
-                                        <input type="hidden" name = "viewSid" th:value="${sort.getIndex()}" rel="sid">
-                                    </label>
-                                </li>
+
                             </ul>
                         </div>
                     </div>

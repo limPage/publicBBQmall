@@ -1,36 +1,41 @@
 // form['back'].addEventListener('click', () => window.history.length < 2 ? window.close() : window.history.back());
-
-const ranking = window.document.getElementById('ranking');
+const form = window.document.getElementById('form');
+let button = window.document.querySelectorAll('.button');
+const sorting = form.querySelectorAll('[rel="sorting"]');
+let sid = window.document.querySelectorAll('.sort-index');
 const cid = window.document.getElementById('cid');
 const rankingSid=  window.document.getElementById('rankingSid');
-ranking.addEventListener('click', (e) => {
-    e.preventDefault();
-    alert('랭킹순');
-    const xhr = new XMLHttpRequest();
-    const formData = new FormData();
-    formData.append('cid', cid.value);
-    formData.append('sid', rankingSid.value);
-    xhr.open('GET', window.location.href);
-    xhr.onreadystatechange = () => {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status >= 200 && xhr.status < 300) {
-                // const responseObject = JSON.parse(xhr.responseText); // responseObject에 controller에서 받아온 값을 넣고
-                // switch (responseObject['result']) { // responseObject의 값을 switch할 때
-                //     case 'success':
-                //          const index = responseObject['index'];
-                //          window.location.href = `category?cid=${index}`;
-                //         break;
-                //         default:
-                //             break;
-                //              alert('알 수 없는 이유로 게시글을 작성하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
-                // }
-            } else {
 
+for (let i = 0; i < sorting.length; i++) {
+    sorting.item(i).addEventListener('click', (e) => {
+        e.preventDefault();
+        alert(sid.item(i).value);
+        const xhr = new XMLHttpRequest();
+        const formData = new FormData();
+        formData.append('sid', sid.item(i).value);
+        xhr.open('PATCH', './category');
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    const responseObject = JSON.parse(xhr.responseText)
+                    switch (responseObject['result']) {
+                        case 'success':
+                            alert('정렬 선택');
+                            location.reload()
+                            break;
+                        default:
+                            alert("알 수 없는 이유로 상품을 정렬하지 못하였습니다.\n잠시 후 다시 시도해 주세요.");
+                            break;
+
+                    }
+                } else {
+
+                }
             }
-        }
-    };
-    xhr.send(formData);
-});
+        };
+        xhr.send(formData);
+    });
+}
 
 
 

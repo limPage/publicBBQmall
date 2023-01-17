@@ -123,6 +123,16 @@ public class CategoryController {
         return responseObject.toString();
     }
 
+    @RequestMapping(value="category", method=RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String patchCategory(@RequestParam(value="sid") int sid) {
+        JSONObject responseObject = new JSONObject();
+        ProductEntity product = this.categoryService.getSortingBySortIndex(sid);
+        responseObject.put("product", product);
+
+        return responseObject.toString();
+    }
+
     @RequestMapping(value="order", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String postOrder(@SessionAttribute(value = "user",required = false) UserEntity user,

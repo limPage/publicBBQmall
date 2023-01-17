@@ -20,6 +20,10 @@ public interface ICategoryMapper {
 
     CategoryEntity selectCategories2(@Param(value = "index") int index);
 
+    SortEntity selectSort(@Param(value = "sid") int sid);
+
+    ProductEntity selectProductSortingByRanking(@Param(value = "sid") int sid);
+
     ProductReadVo[] selectProducts(@Param(value = "cid") int cid);
 
 

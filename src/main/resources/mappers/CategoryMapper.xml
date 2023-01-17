@@ -100,9 +100,33 @@
                  limit 16, 8;
     </select>
 
+    <select id="selectSort" resultType="com.hiponya.bbqmall.entities.product.SortEntity">
+        select `index` as `index`,
+               `sort` as `sort`
+        from bbqmall.sort
+        where `index` = #{sid}
+    </select>
+
     <select id="selectSorts" resultType="com.hiponya.bbqmall.entities.product.SortEntity">
         select `index` as `index`, `sort` as `sort`
         from bbqmall.sort
+    </select>
+
+    <select id="selectProductSortingByRanking" resultType="com.hiponya.bbqmall.entities.product.ProductEntity">
+        select `product_index` as `productIndex`,
+               `detail_index` as `detailIndex`,
+               `product_name` as `productName`,
+               `price` as `price`,
+               `content` as `content`,
+               `view` as `view`,
+               `created_on` as `createdOn`,
+               `modified_on` as `modifiedOn`,
+               `amount` as `amount`,
+               `on_sale` as `onSale`,
+               `sale_quantity` as `saleQuantity`
+        from bbqmall.products
+        order by view desc;
+
     </select>
 
     <select id="selectWishlist" resultType = "com.hiponya.bbqmall.entities.product.WishlistEntity">

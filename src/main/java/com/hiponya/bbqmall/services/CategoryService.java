@@ -111,6 +111,15 @@ public class CategoryService {
         return this.categoryMapper.deleteWishlistByIndex(wishlist.getIndex()) > 0 ? CommonResult.SUCCESS : CommonResult.FAILURE;
     }
 
+    public ProductEntity getSortingBySortIndex(int sid) {
+        SortEntity existingSort = this.categoryMapper.selectSort(sid);
+        ProductEntity product = new ProductEntity();
+        if(existingSort.getIndex() == 1) {
+            product = this.categoryMapper.selectProductSortingByRanking(existingSort.getIndex());
+        }
+        return product;
+    }
+
     public CartEntity getCartByIndex(int cid) {
         return this.categoryMapper.selectCartByIndex(cid);
     }
@@ -169,6 +178,7 @@ public class CategoryService {
 
         return this.categoryMapper.selectDetailImageByIndex(index);
     }
+
 
 
 }
