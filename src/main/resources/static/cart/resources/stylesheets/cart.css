@@ -360,8 +360,8 @@ main > #cartForm > .order-layout > .cartPage-container > .cart-content > .cart-l
 .order-button-container > .button-container > .buy-button-container > .buy-button {
     background-color: #E31134;
     border : none;
-    height : 46px;
-    font-size : 16px;
+    height : 2.875rem;
+    font-size : 1rem;
     line-height : 1.5rem;
     color : #FFFFFF;
     width : 100%;

@@ -169,8 +169,8 @@ body > header {
 .cart-order-btn-area > .button-container > .all-order-btn {
     background-color: #E31134;
     border : none;
-    height : 46px;
-    font-size : 16px;
+    height : 2.875rem;
+    font-size : 1rem;
     line-height : 1.5rem;
     color : #FFFFFF;
 

@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>BBQ몰</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
 
     <link rel="stylesheet" th:href="@{/bbs/resources/stylesheets/index.css}">
@@ -23,13 +26,15 @@
 
 
     <section class="goods-row goods-row1">
-        <span class="title">BBQ몰 추천상품</span>
+        <i class="fa-regular fa-badge-percent"></i><span class="title">BBQ몰 추천상품</span>
         <div class="goods-container">
             <div class="goods" th:each="eightProduct : ${eightProducts}">
-                <a href="#"><img src="/resources/images/md1.png" alt="" width="308px"></a>
+                <a th:href="@{view (pid=${eightProduct.getProductIndex()})}">
+                    <img src="/resources/images/md1.png" alt="" width="308px">
+                </a>
 
                 <div class="goods-info">
-                    <a href="#" th:text="${eightProduct.getProductName()}">BBQ닭가슴살 골라담기(신제품)</a>
+                    <a th:href="@{view (pid=${eightProduct.getProductIndex()})}" th:text="${eightProduct.getProductName()}">BBQ닭가슴살 골라담기(신제품)</a>
                     <span class="price">
                         <span th:text="${eightProduct.getSaleQuantity()}"> 12</span><span class="small-text">%</span>
 
@@ -51,10 +56,10 @@
         <span class="title">BBQ몰 추천상품</span>
         <div class="goods-container">
             <div class="goods" th:each="secondEightProduct : ${secondEightProducts}">
-                <a href="#"><img src="/resources/images/md1.png" alt="" width="308px"></a>
+                <a th:href="@{view (pid=${secondEightProduct.getProductIndex()})}"><img src="/resources/images/md1.png" alt="" width="308px"></a>
 
                 <div class="goods-info">
-                    <a href="#" th:text="${secondEightProduct.getProductName()}">BBQ닭가슴살 골라담기(신제품)</a>
+                    <a th:href="@{view (pid=${secondEightProduct.getProductIndex()})}" th:text="${secondEightProduct.getProductName()}">BBQ닭가슴살 골라담기(신제품)</a>
                     <span class="price">
                         <span th:text="${secondEightProduct.getSaleQuantity()}"> 12</span><span class="small-text">%</span>
 
@@ -125,10 +130,10 @@
         <span class="title">BBQ몰 추천상품</span>
         <div class="goods-container">
             <div class="goods" th:each="thirdEightProduct : ${thirdEightProducts}">
-                <a href="#"><img src="/resources/images/md1.png" alt="" width="308px"></a>
+                <a th:href="@{view (pid=${thirdEightProduct.getProductIndex()})}"><img src="/resources/images/md1.png" alt="" width="308px"></a>
 
                 <div class="goods-info">
-                    <a href="#" th:text="${thirdEightProduct.getProductName()}">BBQ닭가슴살 골라담기(신제품)</a>
+                    <a th:href="@{view (pid=${thirdEightProduct.getProductIndex()})}" th:text="${thirdEightProduct.getProductName()}">BBQ닭가슴살 골라담기(신제품)</a>
                     <span class="price">
                         <span th:text="${thirdEightProduct.getSaleQuantity()}"> 12</span><span class="small-text">%</span>
 

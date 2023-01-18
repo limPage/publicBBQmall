@@ -43,12 +43,12 @@
                             <span class="review-count">(0)</span>
                         </div>
                         <div class="price-container">
-                            <span class="sale" th:text="${product.getSaleQuantity()}"></span>
+                            <span class="sale" th:text="${product.getSaleQuantity()}" th:value="${product.getSaleQuantity()}"></span>
                             <span class="percent">%</span>
-                            <input type="hidden" th:text="${product.getPrice()}" th:value="${product.getPrice()}" id="price">
+                            <input type="hidden" th:text="${product.getPrice() - (product.getPrice() / (product.getSaleQuantity()==0?1:product.getSaleQuantity()))}" th:value="${product.getPrice() - (product.getPrice() / (product.getSaleQuantity()==0?1:product.getSaleQuantity()))}" id="price">
 
                             <span class="won">원</span>
-                            <span class="basic-price" th:text="${(product.getPrice() / (product.getSaleQuantity()==0?1:product.getSaleQuantity())) + product.getPrice()}">20,000원</span>
+                            <span class="basic-price" th:text="${product.getPrice()}">20,000원</span>
                         </div>
                     </div>
 

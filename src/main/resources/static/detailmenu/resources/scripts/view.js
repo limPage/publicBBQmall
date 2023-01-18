@@ -47,6 +47,7 @@ cartButton.addEventListener('click', ()=> {
 addButton.addEventListener('click', () => {
     productForm['quantityNumber'].value =  ++num;
     totalPrice.innerText = price.value * productForm['quantityNumber'].value;
+    //th:text="${product.getPrice() - (product.getPrice() / (product.getSaleQuantity()==0?1:product.getSaleQuantity()))}"
     return false;
 });
 

@@ -33,7 +33,11 @@ body {
     justify-content : flex-end;
 }
 
-
+.search-list > .li {
+    margin-top : 0.5rem;
+    margin-bottom : 0.5rem;
+    font : 15px "Pretendard Variable";
+}
 
 main > .swiper > div > .catalog-page > .goods-search-form > .search-filter-wrap > .search-filter > .search-list {
     align-items : stretch;
@@ -82,8 +86,8 @@ main > .swiper > div > .catalog-page > .goods-search-form > .border-line {
 }
 
 .product-container > .products > .product-image {
-    max-width : 300px;
-    min-width : 300px;
+    max-width : 18.75rem;
+    min-width : 18.75rem;
 }
 
 .product-container > .products > .product-box > .title > .comment {

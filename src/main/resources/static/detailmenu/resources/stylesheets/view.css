@@ -35,13 +35,14 @@ body > header {
     box-shadow: 0 0 0.3rem rgba(0, 0, 0, 15%);
 }
 
+
 main > .products-view > .products > .image-container {
     margin-right: 1.5rem;
     padding : 3rem;
 }
 main > .products-view > .products {
     display : grid;
-    grid-template-rows : 63px 1fr;
+    grid-template-rows : 3.9375rem 1fr;
     grid-template-columns :  1fr;
     padding-top : 1rem;
 
@@ -129,7 +130,7 @@ main > .products-view > .products > .products-container > .products-form > .quan
     border-left : none;
     border-right : none;
     text-align: center;
-    max-width: 50px;
+    max-width: 3.125rem;
 }
 
 main > .products-view > .products > .products-container > .products-form > .quantity-container > .add,
@@ -203,5 +204,3 @@ main > .products-view > .products > .products-container > .products-form > .prod
     font-size : 1.2rem;
     font-style : initial;
 }
-
-
