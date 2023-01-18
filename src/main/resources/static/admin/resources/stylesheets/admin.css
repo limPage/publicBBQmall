@@ -121,13 +121,6 @@ body>main>.content>.lookup>.status-ul>li>div{
 }
 
 
-/*body>main>.content>.lookup>.status-ul>li>div>.button{*/
-/*    cursor: pointer;*/
-/*    padding: 25px 9px 28px 13px;*/
-/*    font-size: 14px;*/
-
-/*}*/
-
 
 body>main>.content>.lookup>.status-ul>li>div>span{
     font-size: 1.8rem;
@@ -162,14 +155,27 @@ body>main>.content>.lookup>.status-ul>li>div>.small-text{
     }
 
     body>main>article{
+        font-size: 1.2rem;
         padding:0 1.625rem  0.5rem 0;
+    }
+
+    body>main>.content>ul>li>a>i{
+
+        padding: 0;
+    }
+
+    body>main>.content>.lookup>.status-ul>li>div>.small-text{
+        padding:0;
+
+    }
+
+    body>main>.content>ul>li>a {
+        height: unset;
     }
 
 }
 @media screen and (max-width : 53.75rem) {
-    * {
-        font-size: 0.5rem;
-    }
+
 
     body > main > article {
         padding: 0 1rem 0.5rem 0;

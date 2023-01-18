@@ -22,7 +22,7 @@ body> main> .content>.title-container{
     font-size: 2rem;
     font-weight: 700;
     text-align: center;
-    letter-spacing: -2px;
+    letter-spacing: -0.125rem;
     border-bottom: 0.0625rem solid rgba(0,0,0,0.6);
     padding-bottom: 2rem;
 
@@ -108,11 +108,11 @@ body> main> .my-page-content>form>.last-check{
 
 }
 body> main> .my-page-content>form>.last-check>input[type="checkbox"]{
-    width: 20px;
-    height: 20px;
-    margin-right: 5px;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-right: 0.3125rem;
     appearance: none;
-    box-shadow: 0 0  0 1px  rgba(0,0,0,0.2);
+    box-shadow: 0 0  0 0.0625rem  rgba(0,0,0,0.2);
     border: solid rgba(0,0,0,0.4) 0.0625rem;
 }
 body> main> .my-page-content>form>.last-check>input[type="checkbox"]:checked{
@@ -120,8 +120,8 @@ body> main> .my-page-content>form>.last-check>input[type="checkbox"]:checked{
 
     background-image: url("/resources/images/checkbox.jpg");
     background-size: 100%;
-    box-shadow: 0 0  0 2px  #0ea31a;
-    border-radius: 5px;
+    box-shadow: 0 0  0 0.125rem  #0ea31a;
+    border-radius: 0.3125rem;
 
 
 }
@@ -156,13 +156,13 @@ body #MSideBarW{
     }
 
     body>main>article{
+        font-size: 1.5rem;
         padding:0 1.625rem  0.5rem 0;
     }
 
 }
 @media screen and (max-width : 53.75rem) {
-    *{font-size: 0.5rem;
-    }
+
     body>main>article{
         padding:0 1rem  0.5rem 0;
     }
@@ -173,6 +173,5 @@ body #MSideBarW{
         font-weight: 350;
         color: rgba(0, 0, 0, 0.7);
         letter-spacing: -0.05rem;
-        /*padding-bottom: 1px;*/
     }
 }

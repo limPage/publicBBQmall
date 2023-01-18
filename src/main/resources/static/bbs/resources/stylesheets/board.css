@@ -335,22 +335,50 @@ body>main>.bp>form>input[type="button"]:hover{
     }
 
     body>main>article.side-bar{
-        font-size: 2rem;
+
 
         padding:0 1.625rem  0.5rem 0;
     }
     body>main>.content>table{
         font-size: 0.5rem;
     }
+    body>main>.content>table>* +*{
+        font-size: 0.5rem;
+        width: unset;
+    }
+    body>main>.content>.content-table>thead,
+    body>main>.content>.content-table>tbody,
+    body>main>.content.bp>.content-table tr>td>h3,
+    body>main>.content.pi>.content-table tr>td>h3
+
+    {
+        width: unset;
+        font-size: 0.275rem;
+
+
+    }
+
 
     body>main>.content>table>tbody>tr>td>a>h3{
-        font-size: 2rem;
+        font-size: 1.5rem;
 
     }
 
     html>main.cs-center{
         padding: 0;
     }
+
+    body>main>.content.notice>table.content-table tr>td>h3,
+    body>main>.content.notice>table.content-table tr.article>td>h3
+    {
+        width:unset;
+
+
+    }
+
+
+
+
 }
 @media screen and (max-width : 53.75rem) {
 

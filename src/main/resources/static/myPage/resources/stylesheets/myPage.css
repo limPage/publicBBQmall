@@ -191,15 +191,22 @@ body>main>.my-page-content>table>tbody>.service-row>.service>span{
 
 @media screen and (max-width : 87.5rem) {
 
-*{font-size: 0.5rem}
+*{
+
+}
     body > main {
 
         width: 100%;
 
     }
+    body>main>.content.my-page-content>table>tbody>tr>td,
+    body>main>.content.my-page-content>table>tbody>.user-order-tr>.user-order
+    {
+        padding: 0;
+    }
 
     body>main>article{
-        font-size: 2rem;
+        font-size: 1.5rem;
         padding:0 1.625rem  0.5rem 0;
     }
     body>main>.my-page-content>table>tbody>.user-order-tr>.user-order>img{
@@ -219,7 +226,6 @@ body>main>.my-page-content>table>tbody>.service-row>.service>span{
         font-weight: 350;
         color: rgba(0,0,0,0.7);
         letter-spacing: -0.05rem;
-        /*padding-bottom: 1px;*/
     }
 
 }

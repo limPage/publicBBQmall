@@ -1,7 +1,9 @@
 package com.hiponya.bbqmall.services;
 
+import com.hiponya.bbqmall.entities.bbs.ImageEntity;
 import com.hiponya.bbqmall.entities.member.EmailAuthEntity;
 import com.hiponya.bbqmall.entities.member.WithdrawalEntity;
+import com.hiponya.bbqmall.entities.product.OrderEntity;
 import com.hiponya.bbqmall.enums.bbs.DeleteResult;
 import com.hiponya.bbqmall.enums.bbs.ModifyResult;
 import com.hiponya.bbqmall.enums.member.DeleteUserResult;
@@ -362,6 +364,13 @@ public class MemberService {
         return this.memberMapper.updateUser(existingUser)>0?CommonResult.SUCCESS:CommonResult.FAILURE;
     }
 
+    public OrderEntity[] getOrder(UserEntity user) {
+
+        return this.memberMapper.selectOrderById(user.getId());
+
+
+
+    }
 
 
     }

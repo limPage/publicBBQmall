@@ -106,6 +106,11 @@ display: flex;
 
     /*padding: 1.75rem 0;*/
 }
+body > header > .logo-row > .logo-container > a >img{
+
+    max-width: 7.375rem;
+}
+
 
 body > header > .logo-row > .logo-container > .user-menu {
     /*height: 100%;*/
@@ -1094,6 +1099,9 @@ body>main>.admin-side-bar{
         flex-direction: column;
         /*justify-content: space-between;*/
         /*justify-content: flex-start;*/
+    }
+    body > footer > .foot-row > .foot-container > .question-row >a> img{
+        width: 13rem;
     }
 
 

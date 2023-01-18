@@ -8,16 +8,15 @@
     <div class="logo-row">
         <div class="logo-container">
             <a th:href="@{/}">
-            <img alt="" src="/resources/images/bbq_logo.png"
-                 width="118px"></a>
+            <img alt="로고" src="/resources/images/bbq_logo.png"
+                ></a>
             <div class="search">
                 <form>
                     <label>
-                        <input type="text" maxlength="20" placeholder="BBQ mall 오픈! 신규가입하고 적립금3,000원 받자!">
+                        <input type="text" maxlength="20" placeholder="BBQ mall 오픈! 신규가입하고 적립금3,000원 받자!" id="searchText">
                     </label>
-                    <div class="button">
+                    <div class="button" id="searchButton">
                         <i class="fa-solid fa-magnifying-glass"></i>
-                        <!--                    제출 버튼을 숨기고 아이콘을 클릭시 제출이벤트를 만듬-->
                         <input type="submit" hidden>
 
                     </div>
@@ -39,8 +38,8 @@
 
                     </li>
 
-                    <li class="--item" th:if="${session.user != null}">
-                        <a class="--link" th:href="@{/member/logout}">로그아웃</a>
+                    <li  th:if="${session.user != null}">
+                        <a  th:href="@{/member/logout}">로그아웃</a>
                         <span class="bar"></span>
                     </li>
 
@@ -56,14 +55,7 @@
 
                     </li>
                 </ul>
-                <!--                <div class="tab">-->
-                <!--                    <ul>-->
-                <!--                        <li><a>공지사항</a></li>-->
-                <!--                        <li><a>자주 뭍는질문</a></li>-->
-                <!--                        <li><a>1:1 문의</a></li>-->
 
-                <!--                    </ul>-->
-                <!--                </div>-->
             </div>
         </div>
     </div>
@@ -120,7 +112,7 @@
     <img alt="" class="--icon2" th:src="@{/resources/images/l2.png}">
     <img alt="" class="--icon3" th:src="@{/resources/images/l2.png}">
     <sapn class="--text" rel="text">무언가를 불러오고 있습니다. 잠시만 기다려 주세요.</sapn>
-<!--    /resources/images/images/review1.png-->
+
 </div>
 
 <article class="side-bar" th:fragment="sideBar">
@@ -178,8 +170,7 @@
     <ul>
         <li><a th:href="@{/admin/create}" id="sideBarC">상품등록</a></li>
         <li><a th:href="@{/admin/read}" id="sideBarRUD">상품조회/수정/삭제</a></li>
-<!--        <li><a th:href="@{/admin/read}" id="sideBarU">상품수정</a></li>-->
-<!--        <li><a th:href="@{/admin/read}" id="sideBarD">상품삭제</a></li>-->
+
 
 
     </ul>
@@ -219,7 +210,7 @@
         <div class="foot-container">
             <div class="question-row">
                 <a href="#">
-                <img alt="" src="https://mall.bbq.co.kr/data/skin/responsive_ver1_default_gl/images/bbq/bbq_logo.svg"
+                <img alt="로고" src="/resources/images/bbq_logo.png"
                      width="208"></a>
                 <div class="question-button">
                     <a href="#">1:1 문의하기

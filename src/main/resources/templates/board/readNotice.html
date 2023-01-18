@@ -205,7 +205,7 @@
                         삭제</a>
 
 
-                    <input th:if="${session.user!=null && session.user.isAdmin()}" type="button" id="piCommentButton"
+                    <input th:if="${session.user!=null && session.user.isAdmin() && !bid.equals('notice') && !bid.equals('pr')}" type="button" id="piCommentButton"
                            value="답변남기기">
 
                     <input hidden id="isMine" th:value="${session.user!=null && (session.user.isAdmin() || notice.getId().equals(session.user.getId())) ? 1:0

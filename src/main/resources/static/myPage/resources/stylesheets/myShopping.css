@@ -19,21 +19,15 @@ body>main>.content{
 }
 
 body> main> .content>.title-container{
-    /*width: 100%;*/
 
     padding-top: 0;
     padding-bottom: 2rem;
     font-size: 2rem;
     text-align: center;
-    letter-spacing: -2px;
+    letter-spacing: -0.125rem;
     font-weight: 700;
-    /*border-bottom: rgba(0,0,0,0.4) solid 0.0625rem;*/
 }
 
-
-body> main> .content>.title-container>h1{
-    /*width: 100%;*/
-}
 
 
 
@@ -42,6 +36,10 @@ body> main> .content>.text{
     justify-content: center;
     padding: 17rem 0;
     font-size: 0.9rem;
+}
+
+body>main> .content>.order>li{
+    border-bottom: black solid 0.0625rem;
 }
 
 
@@ -71,6 +69,5 @@ body> main> .content>.text{
         font-weight: 350;
         color: rgba(0,0,0,0.7);
         letter-spacing: -0.05rem;
-        /*padding-bottom: 1px;*/
     }
 }

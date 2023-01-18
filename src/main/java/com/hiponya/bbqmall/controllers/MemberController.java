@@ -360,13 +360,18 @@ public class MemberController {
 
 
     @GetMapping(value = "myShopping", produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getMyShopping(@RequestParam (value = "bid" , required = false) Integer bid){
+    public ModelAndView getMyShopping(@SessionAttribute(value = "user", required = false) UserEntity user,
+            @RequestParam (value = "bid" , required = false) Integer bid){
         ModelAndView modelAndView = new ModelAndView("myPage/myShopping");
         String board;
         if (bid !=null) {
             switch (bid) {
                 case (1):
                     board = "주문/배송 내역";
+                    if(user!=null) {
+
+                        modelAndView.addObject("orders", this.memberService.getOrder(user));
+                    }
                     break;
                 case (2):
                     board = "반품/교환 내역";

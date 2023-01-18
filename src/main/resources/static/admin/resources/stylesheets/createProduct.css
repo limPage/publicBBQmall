@@ -25,7 +25,7 @@ body> main> .content>.title-container{
     padding-bottom: 2rem;
     font-size: 2rem;
     text-align: center;
-    letter-spacing: -2px;
+    letter-spacing: -0.125rem;
     font-weight: 700;
     border-bottom: rgba(0,0,0,0.4) solid 0.0625rem;
 }
@@ -286,14 +286,13 @@ body> main> .content > form >.button-row>label> .submit:hover{
     }
 
     body>main>article{
+        font-size: 1.2rem;
         padding:0 1.625rem  0.5rem 0;
     }
 
 }
 @media screen and (max-width : 53.75rem) {
-    * {
-        font-size: 0.5rem;
-    }
+
 
     body > main > article {
         padding: 0 1rem 0.5rem 0;

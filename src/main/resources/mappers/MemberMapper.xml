@@ -179,6 +179,27 @@
 
     </select>
 
+    <select id="selectOrderById" resultType="com.hiponya.bbqmall.entities.product.OrderEntity">
+     SELECT `index` AS `index`,
+            `id` AS `id`,
+            `name` AS `name`,
+            `contact` AS `contact`,
+            `address_postal` AS `addressPostal`,
+            `address_primary` AS addressPrimary,
+            `address_secondary` AS `addressSecondary`,
+            `order_time` AS `orderTime`,
+            `product_index` AS `produtIndex`,
+            `product_name` AS `productName`,
+            `price` AS `price`,
+            `order_amount` AS `orderAmount`
+
+    FROM `bbqmall`.`order`
+    WHERE id =#{id}
+
+
+    </select>
+
+
     <update id="updateRecoverPasswordAuth">
 
         UPDATE `bbqmall`.`email_auths`
@@ -237,6 +258,7 @@
 
 
     </delete>
+
 
 
 

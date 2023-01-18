@@ -25,7 +25,7 @@ body> main> .content>.title-container{
     padding-bottom: 2rem;
     font-size: 2rem;
     text-align: center;
-    letter-spacing: -2px;
+    letter-spacing: -0.125rem;
     font-weight: 700;
     border-bottom: rgba(0,0,0,0.4) solid 0.0625rem;
 }
@@ -227,26 +227,35 @@ body> main> .content > form>table> tbody> .data-row>td>ul>li>.number-column{
 
 
 @media screen and (max-width : 87.5rem) {
-    * {
-    }
 
     body > main {
-
         width: 100%;
-
+        padding: 0;
     }
 
     body>main>article{
         padding:0 1.625rem  0.5rem 0;
     }
 
-}
-@media screen and (max-width : 53.75rem) {
-    * {
-        font-size: 0.5rem;
+
+
+    body>main>.content>form>table .number-column,
+    body>main>.content>form>table .image-column,
+    body>main>.content>form>table .name-column,
+    body>main>.content>form>table .price-column,
+    body>main>.content>form>table .date-column
+    {
+        width: unset;
+    }
+    body>main.cs-center>.content>form>table>thead>tr.name-row>th.image-column{
+        display: none;
+    }
+    body>main>.content>form>table>tbody>tr>td>ul>li>span>img{
+        display: none;
     }
 
     body > main > article {
+        font-size: 1.2rem;
         padding: 0 1rem 0.5rem 0;
     }
 
@@ -262,6 +271,10 @@ body> main> .content > form>table> tbody> .data-row>td>ul>li>.number-column{
         padding: 1rem;
         min-width: 2rem;
     }
+
+}
+@media screen and (max-width : 53.75rem) {
+
 }
 
 

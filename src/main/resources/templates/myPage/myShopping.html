@@ -28,7 +28,7 @@
 <th:block th:replace="~{fragments/body :: floatingBanner}"></th:block>
 
 
-<main class="c" >
+<main th:if="${session.user!=null}" >
     <th:block th:replace="~{fragments/body ::myPageSideBar}"></th:block>
         <input hidden id="bid" th:value="${bid}">
 
@@ -37,15 +37,24 @@
             <h1 th:text="${board}">주문/배송 내역</h1>
         </div>
 
-        <div class="text">
+        <div class="text" th:if="${orders==null}">
 
 
             내역이 없습니다.
 
 
         </div>
-
-
+        <ul class="order">
+            <li th:each=" order: ${orders}">
+                <p th:text="'주문번호 : '+ ${order.getIndex()}"></p>
+                <p th:text="'주문자 : '+${order.getName()}"> </p>
+                <p th:text="'연락처 : '+${order.getContact()}"> </p>
+                <p th:text="'주소 : '+${order.getAddressPostal()}+' '+${order.getAddressPrimary()}+ ' '+ ${order.getAddressSecondary()}"> </p>
+                <p th:text="'주문일자 : '+${#dates.format(order.getOrderTime(),'yyyy-MM-dd HH:mm') }"> </p>
+                <p th:text="'상품명 : '+${order.getProductName()} +' '+ ${order.getOrderAmount()}+'개' "> </p>
+                <p th:text="'결제금액 : '+${order.getPrice()}+'원'"> </p>
+            </li>
+        </ul>
 </div>
 
 
