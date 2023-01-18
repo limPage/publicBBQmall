@@ -101,7 +101,7 @@ const content = window.document.getElementById('content');
 
 
 
-                         window.location.href='http://localhost:8080/';
+                         window.history.back();
 
                          break;
 

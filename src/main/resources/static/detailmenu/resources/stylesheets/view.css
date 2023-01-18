@@ -99,7 +99,7 @@ main > .products-view > .products > .products-container > .products-form > .butt
     flex-direction : row;
     justify-content : flex-end;
 
-    padding : 4rem 0 0 0;
+    padding : 0 0 0 0;
 }
 
 main > .products-view > .products > .products-container > .products-form > .button-container > .cart,
@@ -193,6 +193,15 @@ main > .products-view > .products > .products-container > .products-form > .prod
 }
 
 .button-container {
-    padding-bottom : 2rem;
+    padding-bottom : 0.75rem;
+    margin-bottom : 1rem;
 }
+
+.button-container > .cart,
+.button-container > .buy,
+.button-container > .jjim {
+    font-size : 1.2rem;
+    font-style : initial;
+}
+
 

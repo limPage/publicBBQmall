@@ -37,7 +37,7 @@ buyButton.addEventListener('click', () => {
                         window.location.href='./';
                         break;
                     default:
-                        alert("알 수 없는 이유로 상품을 삭제하지 못하였습니다\n\n잠시 후 다시 시도해 주세요.");
+                        alert("알 수 없는 이유로 상품을 주문하지 못하였습니다\n\n잠시 후 다시 시도해 주세요.");
                         break;
 
                 }

@@ -30,9 +30,10 @@ cartButton.addEventListener('click', ()=> {
                         break;
                     case 'no_user':
                         alert('로그인이 되어있지 않습니다.\n로그인후 다시 시도해 주세요');
+                        window.location.href;
                         break;
                     default:
-
+                        break;
                 }
             } else {
 
@@ -40,7 +41,7 @@ cartButton.addEventListener('click', ()=> {
         }
     };
     xhr.send(formData);
-    window.location.href='./wishlist?pid='+pid.value+'&quantity='+quantityNumber.value;
+    //window.location.href='./wishlist?pid='+pid.value+'&quantity='+quantityNumber.value;
 });
 
 addButton.addEventListener('click', () => {

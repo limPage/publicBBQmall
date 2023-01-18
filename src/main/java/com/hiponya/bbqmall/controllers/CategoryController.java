@@ -104,7 +104,7 @@ public class CategoryController {
                                WishlistEntity wishlist) {
         JSONObject responseObject = new JSONObject();
         if (user == null) {
-            responseObject.put("result", CommonResult.FAILURE.name().toLowerCase());
+            responseObject.put("result", UserResult.NO_USER.name().toLowerCase());
         } else {
             wishlist.setId(user.getId());
             Enum<?> result = this.categoryService.insertWishlist(wishlist);
@@ -203,7 +203,8 @@ public class CategoryController {
     }
 
     @RequestMapping(value = "view", method=RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getView(@RequestParam(value = "pid", required = false) int pid,
+    public ModelAndView getView(@SessionAttribute(value="user", required = false)UserEntity user,
+                                @RequestParam(value = "pid", required = false) int pid,
                                 @RequestParam(value = "cid", required = false) Integer cid,
                                 CategoryEntity category,
                                 CartEntity cart) {
@@ -222,6 +223,9 @@ public class CategoryController {
 
         ProductEntity product = this.categoryService.getProductByIndex(pid);
         modelAndView.addObject("product", product);
+        if(user==null) {
+
+        }
 
 
 //        JSONObject commentObject = new JSONObject();
@@ -312,6 +316,7 @@ public class CategoryController {
     }
 
     @PostMapping(value="category", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
     public String postCategory(@RequestParam(value = "cid") int cid,
                                @SessionAttribute(value = "user", required = false) UserEntity user,
                                CategoryEntity category,
@@ -348,6 +353,12 @@ public class CategoryController {
 
         return responseObject.toString();
     }
+
+//    @RequestMapping(value="view", method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+//    @ResponseBody
+//    public String postView() {
+//        return null;
+//    }
 
 
 }
