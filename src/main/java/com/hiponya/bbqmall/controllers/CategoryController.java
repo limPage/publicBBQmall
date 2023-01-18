@@ -154,6 +154,7 @@ public class CategoryController {
     }
 
     @RequestMapping(value = "wishlist", method= RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
     public String deleteWishlist(@SessionAttribute(value = "user", required = false) UserEntity user,
                                  @RequestParam(value = "wishlistIndex") int wishlistIndex) {
         // CommentEntity를 받아오는 이유 : formData.append('index', commentObject['index']); <- 에 index를 전달하기 위해
@@ -229,25 +230,26 @@ public class CategoryController {
         return modelAndView;
     }
 
-    @GetMapping(value = "list", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ModelAndView getList(@RequestParam(value = "cid") int cid,
-                                @RequestParam(value = "sid", required = false) int sid,
-                                CategoryEntity category,ProductEntity product) {
-        ModelAndView modelAndView = new ModelAndView("home/list");
-
-        this.categoryService.getCategoryIndex(cid);
-        modelAndView.addObject("category", category);
-        modelAndView.addObject("product", product);
-
-        ProductReadVo[] products = this.categoryService.getProducts(cid, sid);
-        modelAndView.addObject("products", products);
-
-        JSONObject commentObject = new JSONObject();
-        commentObject.put("productName", product.getProductName());
-        commentObject.put("price", product.getPrice());
-
-        return modelAndView;
-    }
+//    @GetMapping(value = "list", produces = MediaType.APPLICATION_JSON_VALUE)
+//    public ModelAndView getList(@RequestParam(value = "cid") int cid,
+//                                @RequestParam(value = "sid", required = false) int sid,
+//                                CategoryEntity category,
+//                                ProductEntity product) {
+//        ModelAndView modelAndView = new ModelAndView("home/list");
+//
+//        this.categoryService.getCategoryIndex(cid);
+//        modelAndView.addObject("category", category);
+//        modelAndView.addObject("product", product);
+//
+//        ProductReadVo[] products = this.categoryService.getProducts(cid, sid);
+//        modelAndView.addObject("products", products);
+//
+//        JSONObject commentObject = new JSONObject();
+//        commentObject.put("productName", product.getProductName());
+//        commentObject.put("price", product.getPrice());
+//
+//        return modelAndView;
+//    }
 
 
     @GetMapping(value = "productImage")

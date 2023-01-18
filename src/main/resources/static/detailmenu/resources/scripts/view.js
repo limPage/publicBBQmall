@@ -15,7 +15,6 @@ let buyButton = window.document.getElementById('buy');
 let num = parseInt(productForm.querySelector('.quantity-number').value);
 
 cartButton.addEventListener('click', ()=> {
-    alert('장바구니');
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
     formData.append('productIndex', pid.value);

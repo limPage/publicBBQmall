@@ -29,8 +29,7 @@ for (let i = 0; i < button.length; i++) {
                     const responseObject = JSON.parse(xhr.responseText)
                     switch (responseObject['result']) {
                         case 'success':
-                            alert('삭제 성공');
-                            location.reload()
+                            location.reload();
                             break;
                             default:
                                 alert("알 수 없는 이유로 상품을 삭제하지 못하였습니다\n\n잠시 후 다시 시도해 주세요.");
