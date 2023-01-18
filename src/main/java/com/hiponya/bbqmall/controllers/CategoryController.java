@@ -3,6 +3,7 @@ package com.hiponya.bbqmall.controllers;
 import com.hiponya.bbqmall.entities.member.UserEntity;
 import com.hiponya.bbqmall.entities.product.*;
 import com.hiponya.bbqmall.enums.CommonResult;
+import com.hiponya.bbqmall.enums.category.UserResult;
 import com.hiponya.bbqmall.enums.member.CategoryResult;
 import com.hiponya.bbqmall.interfaces.IResult;
 import com.hiponya.bbqmall.services.CategoryService;
@@ -230,26 +231,26 @@ public class CategoryController {
         return modelAndView;
     }
 
-//    @GetMapping(value = "list", produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ModelAndView getList(@RequestParam(value = "cid") int cid,
-//                                @RequestParam(value = "sid", required = false) int sid,
-//                                CategoryEntity category,
-//                                ProductEntity product) {
-//        ModelAndView modelAndView = new ModelAndView("home/list");
-//
-//        this.categoryService.getCategoryIndex(cid);
-//        modelAndView.addObject("category", category);
-//        modelAndView.addObject("product", product);
-//
-//        ProductReadVo[] products = this.categoryService.getProducts(cid, sid);
-//        modelAndView.addObject("products", products);
-//
-//        JSONObject commentObject = new JSONObject();
-//        commentObject.put("productName", product.getProductName());
-//        commentObject.put("price", product.getPrice());
-//
-//        return modelAndView;
-//    }
+    @RequestMapping(value = "list", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ModelAndView getList(@RequestParam(value = "cid") int cid,
+                                @RequestParam(value = "sid", required = false) int sid,
+                                CategoryEntity category,
+                                ProductEntity product) {
+        ModelAndView modelAndView = new ModelAndView("home/list");
+
+        this.categoryService.getCategoryIndex(cid);
+        modelAndView.addObject("category", category);
+        modelAndView.addObject("product", product);
+
+        ProductReadVo[] products = this.categoryService.getProducts(cid, sid);
+        modelAndView.addObject("products", products);
+
+        JSONObject commentObject = new JSONObject();
+        commentObject.put("productName", product.getProductName());
+        commentObject.put("price", product.getPrice());
+
+        return modelAndView;
+    }
 
 
     @GetMapping(value = "productImage")
@@ -291,7 +292,10 @@ public class CategoryController {
     }
 
     @RequestMapping(value = "view", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public String postCategoryQuantity(@RequestParam(value = "cid") int cid, @RequestParam(value = "sid") int sid, CategoryEntity category, SortEntity sort) {
+    public String postCategoryQuantity(@RequestParam(value = "cid") int cid,
+                                       @RequestParam(value = "sid") int sid,
+                                       CategoryEntity category,
+                                       SortEntity sort) {
         JSONObject responseObject = new JSONObject();
         Enum<?> result =this.categoryService.getProductQuantity(cid);
         responseObject.put("result", result.name().toLowerCase());
@@ -308,19 +312,25 @@ public class CategoryController {
     }
 
     @PostMapping(value="category", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String postCategory(@RequestParam(value = "cid") int cid, @RequestParam(value = "sid") int sid, CategoryEntity category, ProductEntity product, SortEntity sort) {
+    public String postCategory(@RequestParam(value = "cid") int cid,
+                               @SessionAttribute(value = "user", required = false) UserEntity user,
+                               CategoryEntity category,
+                               ProductEntity product,
+                               SortEntity sort) {
         JSONObject responseObject = new JSONObject();
 
         Enum<? extends IResult> result =this.categoryService.sendCategoryIndex(category, product);
 
         if (category == null) {
             result = CategoryResult.NO_CATEGORY;
+        } else if(user == null) {
+            result = UserResult.NO_USER;
         } else {
             category.setIndex(cid);
             category.setTitle(category.getTitle());
             product.setPrice(product.getPrice());
             product.setDetailIndex(category.getIndex());
-            sort.setIndex(sid);
+            sort.setIndex(sort.getIndex());
 
             result = this.categoryService.getProductQuantity(category.getIndex());
             if (result == CommonResult.SUCCESS) {
@@ -328,6 +338,7 @@ public class CategoryController {
                 responseObject.put("sid", sort.getIndex());
             }
         }
+
 
         responseObject.put("result", result.name().toLowerCase());
         responseObject.put("category", category);

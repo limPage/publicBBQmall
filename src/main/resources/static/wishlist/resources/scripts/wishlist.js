@@ -46,7 +46,6 @@ for (let i = 0; i < button.length; i++) {
 }
 
 buyButton.addEventListener('click', () => {
-    alert('전체주문버튼 클릭');
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
     formData.append('id', id.value);

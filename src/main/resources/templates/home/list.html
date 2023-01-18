@@ -43,35 +43,35 @@
 
             </tbody>
         <tfoot>
-<!--        <tr>-->
-<!--            <td colspan = "5">-->
-<!--                <div class="page-container" th:with="urlBuilder = ${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder).fromCurrentRequest()}">-->
-<!--                    &lt;!&ndash;/*@thymesVar id="paging" type="com.khj.studymemberbbs.models.PagingModel"*/&ndash;&gt;-->
-<!--                    <a class = "page" th:href="@{${urlBuilder.replaceQueryParam('page', paging.minPage).build().toUriString()}}" th:if="${paging.requestPage > 1}">-->
-<!--                        <i class = "fa-solid- fa-angles-left"></i>-->
-<!--                    </a>-->
-<!--                    <a class = "page" th:href="@{${urlBuilder.replaceQueryParam('page', paging.requestPage - 1).build().toUriString()}}" th:if="${paging.requestPage > 1}">-->
-<!--                        <i class = "fa-solid- fa-angle-left"></i>-->
-<!--                    </a>-->
-<!--                    <a th:class="${'page ' + (page == paging.requestPage ? 'selected' : '')}"-->
-<!--                       th:each="page : ${#numbers.sequence(paging.startPage, paging.endPage)}"-->
-<!--                       th:text="${page}"-->
-<!--                       th:href="@{${urlBuilder.replaceQueryParam('page', page).build().toUriString()}}">-->
-<!--                    </a>-->
-<!--                    <a class = "page" th:href="@{${urlBuilder.replaceQueryParam('page', paging.requestPage + 1).build().toUriString()}}" th:if="${paging.requestPage < paging.maxPage}">-->
-<!--                        <i class = "fa-solid- fa-angle-right"></i>-->
-<!--                    </a>-->
-<!--                    <a class = "page" th:href="@{${urlBuilder.replaceQueryParam('page', paging.maxPage).build().toUriString()}}" th:if="${paging.requestPage < paging.maxPage}">-->
-<!--                        <i class = "fa-solid- fa-angles-right"></i>-->
-<!--                    </a>-->
-<!--                </div>-->
-<!--            </td>-->
-<!--        </tr>-->
+        <tr>
+            <td colspan = "5">
+                <div class="page-container" th:with="urlBuilder = ${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder).fromCurrentRequest()}">
+                    <!--/*@thymesVar id="paging" type="com.khj.studymemberbbs.models.PagingModel"*/-->
+                    <a class = "page" th:href="@{${urlBuilder.replaceQueryParam('page', paging.minPage).build().toUriString()}}" th:if="${paging.requestPage > 1}">
+                        <i class = "fa-solid- fa-angles-left"></i>
+                    </a>
+                    <a class = "page" th:href="@{${urlBuilder.replaceQueryParam('page', paging.requestPage - 1).build().toUriString()}}" th:if="${paging.requestPage > 1}">
+                        <i class = "fa-solid- fa-angle-left"></i>
+                    </a>
+                    <a th:class="${'page ' + (page == paging.requestPage ? 'selected' : '')}"
+                       th:each="page : ${#numbers.sequence(paging.startPage, paging.endPage)}"
+                       th:text="${page}"
+                       th:href="@{${urlBuilder.replaceQueryParam('page', page).build().toUriString()}}">
+                    </a>
+                    <a class = "page" th:href="@{${urlBuilder.replaceQueryParam('page', paging.requestPage + 1).build().toUriString()}}" th:if="${paging.requestPage < paging.maxPage}">
+                        <i class = "fa-solid- fa-angle-right"></i>
+                    </a>
+                    <a class = "page" th:href="@{${urlBuilder.replaceQueryParam('page', paging.maxPage).build().toUriString()}}" th:if="${paging.requestPage < paging.maxPage}">
+                        <i class = "fa-solid- fa-angles-right"></i>
+                    </a>
+                </div>
+            </td>
+        </tr>
             </tfoot>
         </table>
-        <div class="button-container" id = "buttonContainer">
-            <a class="--object-button" th:href = "@{/bbs/write (bid=${board.getId()})}">글 쓰기</a>
-        </div>
+<!--        <div class="button-container" id = "buttonContainer">-->
+<!--            <a class="&#45;&#45;object-button" th:href = "@{/bbs/write (bid=${board.getId()})}">글 쓰기</a>-->
+<!--        </div>-->
         <form class="search-form" id="searchForm" method="get">
             <label class="label">
                 <span hidden>검색 기준</span>
@@ -86,7 +86,7 @@
                 <input type="text" class="--object-input" maxlength="50" name = "keyword" placeholder = "검색어를 입력해 주세요." th:value="${#request.getParameter('keyword')}">
                 <!-- th:value="${#request.getParameter('keyword')} : 키워드값을 가져와서 value로 넣는다 -->
             </label>
-            <input name = "bid" type = "hidden" th:value = "${board.getId()}">
+            <input name = "cid" type = "hidden" th:value = "${category.getIndex()}">
             <input type="submit" class="--object-button" value = "검색">
         </form>
     </div>

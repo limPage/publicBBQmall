@@ -50,6 +50,12 @@
             left join `bbqmall`.`detail_menu` as detailMenu on products.detail_index = `detailMenu`.`index`
         left join bbqmall.menus as menu on detailMenu.menu_index = menu.`index`
         <if test="cid != 0">where menu.`index` = #{cid}</if>
+        <if test="sid == 1">order by `view` desc</if>
+        <if test="sid == 2">order by `createdOn` desc</if>
+        <if test="sid == 3">order by `price` desc</if>
+        <if test="sid == 4">order by `price` asc</if>
+        <if test="sid == 5">order by `view` desc</if>
+        <if test="sid == 6">order by `view` asc</if>
     </select>
 
     <select id="selectEightProducts" resultType="com.hiponya.bbqmall.entities.product.ProductEntity">
@@ -125,12 +131,12 @@
                `on_sale` as `onSale`,
                `sale_quantity` as `saleQuantity`
         from bbqmall.products
-        <if test="sid == 1">order by view desc</if>
-        <if test="sid == 2">order by createdOn desc</if>
-        <if test="sid == 3">order by price asc</if>
-        <if test="sid == 4">order by price desc</if>
-        <if test="sid == 5">order by view desc</if>
-        <if test="sid == 6">order by view asc</if>
+        <if test="sid == 1">order by `view` desc</if>
+        <if test="sid == 2">order by `createdOn` desc</if>
+        <if test="sid == 3">order by `price` asc</if>
+        <if test="sid == 4">order by `price` desc</if>
+        <if test="sid == 5">order by `view` desc</if>
+        <if test="sid == 6">order by `view` asc</if>
     </select>
 
     <select id="selectWishlist" resultType = "com.hiponya.bbqmall.entities.product.WishlistEntity">

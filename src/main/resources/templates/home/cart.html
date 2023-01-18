@@ -39,7 +39,7 @@
                             <span>택배</span>
                             <span class="ship-pay">(선불)</span>
                             <span class="ship-price">무료</span>
-                            <input type="button" class="shipping-modify" value="배송 변경"><!--배송 변경-->
+                            <input type="button" class="shipping-modify" value="배송 변경" hidden><!--배송 변경-->
                         </li>
                         <!--                        <li class="shipping">-->
                         <!--                            <span>택배</span>-->
@@ -87,7 +87,7 @@
                                                 <span class="sale-title">할인금액</span>
                                                 <span class="total-sale" th:text="${(product.getPrice() / product.getSaleQuantity()) * quantity}">-</span>
                                                 <span class="sale-option">
-                                                    <input type="button" class="layout" value="내역"></input>
+                                                    <input type="button" class="layout" value="내역" hidden></input>
                                                     <!-- 할인내역 css로 내역버튼누를시 나오게할것 -->
                                                     <div class="detail-sale" hidden>
                                                         <h1>할인내역</h1>
@@ -197,7 +197,7 @@
                             <div class="user-info-container">
                                 <h3 class="title3">
                                     <span>주문자 정보</span>
-                                    <button type="button" id="orderModify" class="modify-button">수정</button>
+                                    <button type="button" id="orderModify" class="modify-button" hidden>수정</button>
                                 </h3>
 
                                 <ul class="list1" id="orderInfo" hidden>
@@ -269,8 +269,8 @@
                                     <span class="shipping-area">배송지</span>
                                     <div class="shipping-button">
                                         &nbsp
-                                        <button type="button" class="change-address-btn">다른배송지 선택</button>
-                                        <button type="button" class="modify-btn">수정</button>
+                                        <button type="button" class="change-address-btn" hidden>다른배송지 선택</button>
+                                        <button type="button" class="modify-btn" hidden>수정</button>
                                     </div>
                                 </h3>
 

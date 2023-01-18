@@ -39,6 +39,7 @@ const rankingSid=  window.document.getElementById('rankingSid');
 
 
 
+
 // form['ranking'].addEventListener = () => {
 //     Warning.hide();
 //
