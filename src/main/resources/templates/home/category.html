@@ -17,6 +17,7 @@
 <th:block th:replace="~{fragments/body :: floatingBanner}"></th:block>
 
 <main>
+    <input type="hidden" name = "cid" id="cid" th:value="${category.getIndex()}">
     <div class="swiper">
         <div>
             <div class="catalog-page">
@@ -26,8 +27,10 @@
                             <ul class="search-list" rel="searchList">
                                 <li class = "li" th:each="sort : ${sorts}">
                                     <label class="active">
-                                        <input type="button" name="ranking" th:value="${sort.getSort()}" class = "button" rel="sorting" id="ranking">&nbsp
-                                        <input type="hidden" name = "rankingSid" th:value="${sort.getIndex()}" rel="sid" id="rankingSid" class="sort-index">
+                                        <a th:href = "@{/category (cid=${cid},sid=${sort.getIndex()})}" class="btn-container">
+                                            <input type="button" name="ranking" th:value="${sort.getSort()}" class = "button" rel="sorting" id="ranking">&nbsp
+                                        </a>
+                                        <input type="hidden" name = "rankingSid" th:value="${sort.getIndex()}" rel="sid" id="sid" class="sort-index">
                                     </label>
                                 </li>
 

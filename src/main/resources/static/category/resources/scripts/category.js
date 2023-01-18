@@ -6,36 +6,36 @@ let sid = window.document.querySelectorAll('.sort-index');
 const cid = window.document.getElementById('cid');
 const rankingSid=  window.document.getElementById('rankingSid');
 
-for (let i = 0; i < sorting.length; i++) {
-    sorting.item(i).addEventListener('click', (e) => {
-        e.preventDefault();
-        alert(sid.item(i).value);
-        const xhr = new XMLHttpRequest();
-        const formData = new FormData();
-        formData.append('sid', sid.item(i).value);
-        xhr.open('PATCH', './category');
-        xhr.onreadystatechange = () => {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status >= 200 && xhr.status < 300) {
-                    const responseObject = JSON.parse(xhr.responseText)
-                    switch (responseObject['result']) {
-                        case 'success':
-                            alert('정렬 선택');
-                            location.reload()
-                            break;
-                        default:
-                            alert("알 수 없는 이유로 상품을 정렬하지 못하였습니다.\n잠시 후 다시 시도해 주세요.");
-                            break;
-
-                    }
-                } else {
-
-                }
-            }
-        };
-        xhr.send(formData);
-    });
-}
+// for (let i = 0; i < sorting.length; i++) {
+//     sorting.item(i).addEventListener('click', (e) => {
+//         e.preventDefault();
+//         alert(sid.item(i).value);
+//         const xhr = new XMLHttpRequest();
+//         const formData = new FormData();
+//         formData.append('sid', sid.item(i).value);
+//         xhr.open('PATCH', './category');
+//         xhr.onreadystatechange = () => {
+//             if (xhr.readyState === XMLHttpRequest.DONE) {
+//                 if (xhr.status >= 200 && xhr.status < 300) {
+//                     const responseObject = JSON.parse(xhr.responseText)
+//                     switch (responseObject['result']) {
+//                         case 'success':
+//                             alert(sid.item(i).value + '정렬 선택');
+//                             location.reload();
+//                             break;
+//                         default:
+//                             alert("알 수 없는 이유로 상품을 정렬하지 못하였습니다.\n잠시 후 다시 시도해 주세요.");
+//                             break;
+//
+//                     }
+//                 } else {
+//
+//                 }
+//             }
+//         };
+//         xhr.send(formData);
+//     });
+// }
 
 
 

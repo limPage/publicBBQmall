@@ -32,12 +32,16 @@ public class CategoryController {
 
     @RequestMapping(value = "category", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getCategory(@RequestParam(value = "cid") Integer cid,
+                                    @RequestParam(value = "sid", required = false) Integer sid,
                                     CategoryEntity category,
                                     ProductEntity product,
                                     SortEntity sort) {
         ModelAndView modelAndView = new ModelAndView("home/category");
         CategoryEntity[] categories = this.categoryService.getCategories();
-        ProductReadVo[] products = this.categoryService.getProducts(cid);
+        if(sid == null) {
+            sid = 1;
+        }
+        ProductReadVo[] products = this.categoryService.getProducts(cid, sid);
         CategoryEntity categories2;
         SortEntity[] sorts = this.categoryService.getSorts();
 
@@ -49,6 +53,7 @@ public class CategoryController {
         if(cid == 0 && product != null) {
             modelAndView.addObject("title", "전체상품");
         }
+
 
         category.setIndex(category.getIndex());
 
@@ -127,8 +132,8 @@ public class CategoryController {
     @ResponseBody
     public String patchCategory(@RequestParam(value="sid") int sid) {
         JSONObject responseObject = new JSONObject();
-        ProductEntity product = this.categoryService.getSortingBySortIndex(sid);
-        responseObject.put("product", product);
+        ProductEntity[] products = this.categoryService.getProductSortByIndex(sid);
+        responseObject.put("products", products);
 
         return responseObject.toString();
     }
@@ -225,14 +230,16 @@ public class CategoryController {
     }
 
     @GetMapping(value = "list", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ModelAndView getList(@RequestParam(value = "cid") int cid, CategoryEntity category,ProductEntity product) {
+    public ModelAndView getList(@RequestParam(value = "cid") int cid,
+                                @RequestParam(value = "sid", required = false) int sid,
+                                CategoryEntity category,ProductEntity product) {
         ModelAndView modelAndView = new ModelAndView("home/list");
 
         this.categoryService.getCategoryIndex(cid);
         modelAndView.addObject("category", category);
         modelAndView.addObject("product", product);
 
-        ProductReadVo[] products = this.categoryService.getProducts(cid);
+        ProductReadVo[] products = this.categoryService.getProducts(cid, sid);
         modelAndView.addObject("products", products);
 
         JSONObject commentObject = new JSONObject();

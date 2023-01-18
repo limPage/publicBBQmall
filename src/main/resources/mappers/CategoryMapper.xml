@@ -49,7 +49,7 @@
         from bbqmall.products
             left join `bbqmall`.`detail_menu` as detailMenu on products.detail_index = `detailMenu`.`index`
         left join bbqmall.menus as menu on detailMenu.menu_index = menu.`index`
-        <if test="'cid != 0">where menu.`index` = #{cid}</if>
+        <if test="cid != 0">where menu.`index` = #{cid}</if>
     </select>
 
     <select id="selectEightProducts" resultType="com.hiponya.bbqmall.entities.product.ProductEntity">
@@ -112,7 +112,7 @@
         from bbqmall.sort
     </select>
 
-    <select id="selectProductSortingByRanking" resultType="com.hiponya.bbqmall.entities.product.ProductEntity">
+    <select id="selectProductsSortBySortIndex" resultType="com.hiponya.bbqmall.entities.product.ProductEntity">
         select `product_index` as `productIndex`,
                `detail_index` as `detailIndex`,
                `product_name` as `productName`,
@@ -125,8 +125,12 @@
                `on_sale` as `onSale`,
                `sale_quantity` as `saleQuantity`
         from bbqmall.products
-        order by view desc;
-
+        <if test="sid == 1">order by view desc</if>
+        <if test="sid == 2">order by createdOn desc</if>
+        <if test="sid == 3">order by price asc</if>
+        <if test="sid == 4">order by price desc</if>
+        <if test="sid == 5">order by view desc</if>
+        <if test="sid == 6">order by view asc</if>
     </select>
 
     <select id="selectWishlist" resultType = "com.hiponya.bbqmall.entities.product.WishlistEntity">
@@ -235,9 +239,16 @@
         FROM `bbqmall`.`products`
         LEFT JOIN `bbqmall`.`detail_menu` on `products`.`detail_index` = `detail_menu`.`index`
         LEFT JOIN `bbqmall`.`menus` AS `menu` on `products`.`detail_index` = `menu`.`index`
+
         <if test='cid!=0' >
             WHERE `menu`.`index` = #{cid}
         </if>
+        <if test="sid == 1 and sid == null">order by view desc</if>
+        <if test="sid == 2 and sid != null">order by createdOn desc</if>
+        <if test="sid == 3 and sid != null">order by price desc</if>
+        <if test="sid == 4 and sid != null">order by price asc</if>
+        <if test="sid == 5 and sid != null">order by view desc</if>
+        <if test="sid == 6 and sid != null">order by view asc</if>
 
 
     </select>

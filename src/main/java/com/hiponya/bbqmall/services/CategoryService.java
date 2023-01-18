@@ -111,13 +111,13 @@ public class CategoryService {
         return this.categoryMapper.deleteWishlistByIndex(wishlist.getIndex()) > 0 ? CommonResult.SUCCESS : CommonResult.FAILURE;
     }
 
-    public ProductEntity getSortingBySortIndex(int sid) {
+    public ProductEntity[] getProductSortByIndex(int sid) {
         SortEntity existingSort = this.categoryMapper.selectSort(sid);
-        ProductEntity product = new ProductEntity();
-        if(existingSort.getIndex() == 1) {
-            product = this.categoryMapper.selectProductSortingByRanking(existingSort.getIndex());
-        }
-        return product;
+        existingSort.setIndex(sid);
+        ProductEntity[] products = this.categoryMapper.selectProductsSortBySortIndex(existingSort.getIndex());
+
+
+        return products;
     }
 
     public CartEntity getCartByIndex(int cid) {
@@ -154,9 +154,9 @@ public class CategoryService {
         return this.categoryMapper.selectThirdEightProducts();
     }
 
-    public ProductReadVo[] getProducts(int cid){
+    public ProductReadVo[] getProducts(int cid, int sid){
 
-        ProductReadVo[] products =this.categoryMapper.selectProductsByDetailIndex(cid);
+        ProductReadVo[] products =this.categoryMapper.selectProductsByDetailIndex(cid, sid);
         for (ProductReadVo product :products){
             ProductImageEntity[] productImages = this.categoryMapper.selectProductImagesByProductIndexExceptData(product.getProductIndex());
             int[] productImageIndexes = stream(productImages).mapToInt(ProductImageEntity::getIndex).toArray();
@@ -165,6 +165,7 @@ public class CategoryService {
             DetailImageEntity[] detailImages = this.categoryMapper.selectDetailImagesByProductIndexExceptData(product.getProductIndex());
             int[] detailImageIndexes = stream(detailImages).mapToInt(DetailImageEntity::getIndex).toArray();
             product.setDetailImageIndexes(detailImageIndexes);
+
 
         }
         return products;

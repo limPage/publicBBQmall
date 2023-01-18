@@ -49,7 +49,7 @@ main > .swiper > div > .catalog-page > .goods-search-form > .search-filter-wrap 
     border-left : 0.125rem solid rgb(213, 216, 220);
 }
 
-main > .swiper > div > .catalog-page > .goods-search-form > .search-filter-wrap > .search-filter > .search-list > .li > .active > .button {
+main > .swiper > div > .catalog-page > .goods-search-form > .search-filter-wrap > .search-filter > .search-list > .li > .active >.btn-container > .button {
     background-color: rgb(255, 255, 255);
     border : none;
     font-weight : 100;

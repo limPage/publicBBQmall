@@ -22,7 +22,7 @@ public interface ICategoryMapper {
 
     SortEntity selectSort(@Param(value = "sid") int sid);
 
-    ProductEntity selectProductSortingByRanking(@Param(value = "sid") int sid);
+    ProductEntity[] selectProductsSortBySortIndex(@Param(value = "sid") int sid);
 
     ProductReadVo[] selectProducts(@Param(value = "cid") int cid);
 
@@ -59,7 +59,8 @@ public interface ICategoryMapper {
 
     int deleteWishlistByIndex(@Param(value = "index") int index);
 
-    ProductReadVo[] selectProductsByDetailIndex(@RequestParam(value = "detailIndex") int detailIndex);
+    ProductReadVo[] selectProductsByDetailIndex(@RequestParam(value = "cid") int cid,
+                                                @RequestParam(value="sid") int sid);
 
     ProductImageEntity[] selectProductImagesByProductIndexExceptData(@Param(value = "productIndex") int productIndex);
 
