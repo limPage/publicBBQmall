@@ -67,6 +67,11 @@ main > .swiper > div > .catalog-page > .goods-search-form > .border-line {
     margin: unset;
     margin-top: 3rem;
     padding: unset;
+
+}
+
+.product-container > .products:hover {
+    font-weight:500;
 }
 
 .product-container > .products {

@@ -473,7 +473,9 @@ body > header > .menu-row > .menu-container > ul > li >a:hover>.new{
     letter-spacing: -2px;
 }
 
-
+body > header > .menu-row > .menu-container > ul > .menu:hover {
+    font-weight:700;
+}
 
 
 body > header > .menu-row > .menu-container > ul > .spring{

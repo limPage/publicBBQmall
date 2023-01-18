@@ -45,9 +45,9 @@
                         <!--/*@thymesVar id="products" type="com.hiponya.bbqmall.vos.product.ProductReadVo"*/-->
                         <li th:each = "product : ${products}" class="products">
                             <div th:text = "${product.getProductIndex()}" hidden>3</div>
-                            <img src="/resources/images/new1.png" width="300px" alt>
                             <div class="product-box">
                                 <a class = "title" th:href = "@{/view (pid = ${product.getProductIndex()})}"> <!-- 클릭시 이동할 view 주소 -->
+                                    <img src="/resources/images/new1.png" width="300px" alt>
                                     <div class = "comment" th:text = "${'[' + product.getProductName() + ']'}">내용</div>
                                     <span class="sale" th:text="${product.getSaleQuantity()}">13%</span>
                                     <span class="percent">%</span>
