@@ -15,16 +15,6 @@ justify-content: stretch;
 
 body> .swiper-row>.swiper{
     width: 100%;
-    /*height: 545px;*/
-    /*!*background-color: #CF152D;*!*/
-
-
-    /*background-size: 100%;*/
-    /*background-repeat: no-repeat;*/
-
-    /*box-sizing:border-box;*/
-    /*margin: unset;*/
-    /*padding: unset;*/
 
 }
 
@@ -240,7 +230,6 @@ body> main> .review-row>div>.more{
 body>main> .review-row> .review-container{
     display: grid;
     grid-template-columns: repeat(6,1fr);
-    /*gap: 8px;*/
     max-width: 80rem;
     padding: unset;
 
@@ -257,7 +246,6 @@ body>main> .review-row> .review-container>.review>.review-text{
     color: white;
     font-size: 1.5rem;
     overflow-x: hidden;
-    /*text-shadow: -1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black;*/
     background-color: rgba(0,0,0,0.5);
 
     font-family: inherit;
