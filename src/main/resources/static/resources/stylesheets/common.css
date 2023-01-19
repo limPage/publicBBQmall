@@ -193,6 +193,11 @@ body > header > .logo-row > .logo-container > .user-menu > ul > li > a {
     letter-spacing: -0.0625rem;
 
 }
+body > header > .logo-row > .logo-container > .user-menu > ul > li:hover>a{
+
+    font-weight: 700;
+}
+
 
 body > header > .logo-row > .logo-container > .user-menu > ul > .cs > a {
 
@@ -263,10 +268,7 @@ body > header > .logo-row > .logo-container > .user-menu > div > ul > li > a {
 }
 
 
-body > header > .logo-row > .logo-container > .tab:hover {
 
-    background-color: grey;
-}
 
 
 body > header > .logo-row > .logo-container > .search {
@@ -510,8 +512,12 @@ body > header > .menu-row > .menu-container > ul > .my-menu{
     width: 3rem;
 
 }
-body > header > .menu-row > .menu-container > ul > .my-menu>a>img{
 
+
+
+
+body > header > .menu-row > .menu-container > ul > .my-menu>a>img:hover{
+   filter: opacity(50%);
 }
 
 
@@ -1005,6 +1011,11 @@ body>main>.admin-side-bar{
 
 
 @media screen and (max-width : 87.5rem) {
+    body>header>.menu-row>.menu-container>ul>.menu>a{
+        padding: 0.5rem;
+    }
+
+
     body > main > .goods-row > .goods-container {
 
 
