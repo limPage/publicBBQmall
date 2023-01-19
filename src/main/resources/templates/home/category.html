@@ -49,7 +49,7 @@
                         <!--/*@thymesVar id="products" type="com.hiponya.bbqmall.vos.product.ProductReadVo"*/-->
                         <li th:each = "product : ${products}" class="products">
                             <div th:text = "${product.getProductIndex()}" hidden>3</div>
-                            <a class="image" href="#">
+                            <a class="image" th:href="@{view (pid=${product.getProductIndex()})}">
                                 <!--                   <img th:each="image : ${product.getImageIndexes()}">-->
                                 <img th:src="@{/admin/productImage (index=${product.getImageIndexes()}) }" alt="이미지" title="이미지">
                             </a>

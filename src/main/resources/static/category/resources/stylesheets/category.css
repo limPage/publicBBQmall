@@ -26,6 +26,8 @@ body>main{
     font : 0.9375rem "Pretendard Variable";
 }
 
+
+
 main > .swiper > div > .catalog-page > .goods-search-form > .search-filter-wrap > .search-filter > .search-list {
     align-items : stretch;
     display : flex;
@@ -44,6 +46,7 @@ main > .swiper > div > .catalog-page > .goods-search-form > .search-filter-wrap 
     background-color: rgb(255, 255, 255);
     border : none;
     font-weight : 100;
+    cursor: pointer;
 }
 
 main > .swiper > div > .catalog-page > .goods-search-form > .border-line {
@@ -173,6 +176,24 @@ main > .swiper > div > .catalog-page > .goods-search-form > .border-line {
         max-width : 70rem;
     }
 }
+@media screen and (max-width : 87.5rem) {
+    .product-container {
+        max-width : 50rem;
+
+
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+        /*min-height: 20rem;*/
+        /*max-height: 20rem;*/
+
+        /*width: 100%;*/
+    }
+
+
+
+
+}
 
 @media screen and (max-width : 80rem) {
     .product-container {
@@ -190,33 +211,17 @@ main > .swiper > div > .catalog-page > .goods-search-form > .border-line {
 
 @media screen and (max-width : 60rem) {
     .product-container {
-        max-width : calc(100vw - 4rem);
     }
 
 
 }
 
 
-@media screen and (max-width : 87.5rem) {
-    .product-container {
 
-
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 0.5rem;
-        /*min-height: 20rem;*/
-        /*max-height: 20rem;*/
-
-        width: 100%;
-    }
-
-
-
-
-}
 @media screen and (max-width : 53.75rem) {
 
     .product-container {
+        max-width : calc(97vw );
 
 
         display: grid;
@@ -225,7 +230,6 @@ main > .swiper > div > .catalog-page > .goods-search-form > .border-line {
         /*min-height: 20rem;*/
         /*max-height: 20rem;*/
 
-        width: 100%;
     }
 
 

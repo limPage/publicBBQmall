@@ -221,7 +221,7 @@ public class CategoryController {
 //            modelAndView.addObject("products", products);
 //        }
 
-        ProductEntity product = this.categoryService.getProductByIndex(pid);
+        ProductReadVo product = this.categoryService.getProductByIndex(pid);
         modelAndView.addObject("product", product);
         if(user==null) {
 

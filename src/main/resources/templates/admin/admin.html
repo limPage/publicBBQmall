@@ -88,7 +88,7 @@
 
                         <i class="small-text" th:text="${status.getStatusText()}">상태</i>
                         <span class="small-text" th:text="${status.getProductIndex()}">-</span>
-                        <span class="small-text" th:text="${status.getText()}">234</span>
+                        <a th:href="@{/view (pid=${status.getProductIndex()})}"  th:text="${status.getText()}">234</a>
 
                         <span class="spring"></span>
 

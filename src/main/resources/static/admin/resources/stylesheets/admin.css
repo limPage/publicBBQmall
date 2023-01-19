@@ -124,7 +124,10 @@ body>main>.content>.lookup>.status-ul>li>div{
 
 
 
-body>main>.content>.lookup>.status-ul>li>div>span{
+body>main>.content>.lookup>.status-ul>li>div>span,
+body>main>.content>.lookup>.status-ul>li>div>a
+
+{
     font-size: 1.8rem;
     font-weight: 700;
     display: inline-block;
@@ -136,7 +139,8 @@ body>main>.content>.lookup>.status-ul>li>div>span{
 
 }
 
-body>main>.content>.lookup>.status-ul>li>div>.small-text{
+body>main>.content>.lookup>.status-ul>li>div>.small-text,
+body>main>.content>.lookup>.status-ul>li>div>a{
         cursor: pointer;
         padding: 1.5625rem 2rem 1.75rem 1rem;
         font-size: 0.875rem;
@@ -164,9 +168,14 @@ body>main>.content>.lookup>.status-ul>li>div>.small-text{
     }
 
     body>main>.content>.lookup>.status-ul>li>div>.small-text{
-        padding:0;
-
+        /*padding:0 0 0 0.5rem;*/
+        font-size: 0.5rem;
+        padding: 0;
     }
+    body>main>.content>.lookup>.status-ul>li>div>a{
+        padding: 0.5rem;
+    }
+
 
     body>main>.content>ul>li>a {
         height: unset;

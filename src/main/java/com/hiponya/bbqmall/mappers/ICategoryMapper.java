@@ -16,7 +16,7 @@ public interface ICategoryMapper {
 
     CategoryEntity[] selectCategories();
 
-    ProductEntity selectProductByIndex(@Param(value = "pid") int pid);
+    ProductReadVo selectProductByIndex(@Param(value = "pid") int pid);
 
     CategoryEntity selectCategories2(@Param(value = "index") int index);
 

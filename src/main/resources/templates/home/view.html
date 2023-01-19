@@ -21,7 +21,8 @@
         <div class="products">
 
             <div class="image-container">
-                <img src="/resources/images/kimbob-title.png" class="image" alt>
+                <img th:src="@{/admin/productImage (index=${product.getImageIndexes()}) }" alt="이미지"
+                     title="이미지" class="image" width="300">
 <!--                <div class="pagination">-->
 <!--                    <span class="count">-->
 <!--                        <input type="button" class="left" id="left" name="left" value="<">-->

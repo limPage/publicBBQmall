@@ -1,5 +1,6 @@
 package com.hiponya.bbqmall.services;
 
+import com.hiponya.bbqmall.controllers.HomeController;
 import com.hiponya.bbqmall.entities.member.EmailAuthEntity;
 import com.hiponya.bbqmall.entities.member.UserEntity;
 import com.hiponya.bbqmall.entities.product.*;
@@ -9,6 +10,7 @@ import com.hiponya.bbqmall.enums.member.CategoryResult;
 import com.hiponya.bbqmall.enums.member.VerifyEmailAuthResult;
 import com.hiponya.bbqmall.interfaces.IResult;
 import com.hiponya.bbqmall.mappers.ICategoryMapper;
+import com.hiponya.bbqmall.mappers.IHomeMapper;
 import com.hiponya.bbqmall.vos.product.ProductReadVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,10 +25,11 @@ import static java.util.Arrays.stream;
 public class CategoryService {
 
     private final ICategoryMapper categoryMapper;
-
+    private final IHomeMapper iHomeMapper ;
     @Autowired
-    public CategoryService(ICategoryMapper categoryMapper) {
+    public CategoryService(ICategoryMapper categoryMapper, IHomeMapper iHomeMapper) {
         this.categoryMapper = categoryMapper;
+        this.iHomeMapper = iHomeMapper;
     }
 
     public CategoryEntity getCategoryIndex(int index) {
@@ -96,9 +99,18 @@ public class CategoryService {
         return this.categoryMapper.selectWishlistSumQuantityByUserId(id);
     }
 
-    public ProductEntity getProductByIndex(int pid) {
+    public ProductReadVo getProductByIndex(int pid) {
 
-        return this.categoryMapper.selectProductByIndex(pid);
+
+
+
+        ProductReadVo product =this.categoryMapper.selectProductByIndex(pid);
+
+        ProductImageEntity[] productImages = this.iHomeMapper.selectProductImagesByProductIndexExceptData(product.getProductIndex());
+            int[] productImageIndexes = stream(productImages).mapToInt(ProductImageEntity::getIndex).toArray();
+            product.setImageIndexes(productImageIndexes);
+
+        return product;
     }
 
     public Enum<? extends IResult> deleteWishlist(WishlistEntity wishlist, UserEntity user) {
