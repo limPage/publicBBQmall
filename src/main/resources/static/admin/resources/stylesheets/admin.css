@@ -1,4 +1,6 @@
-
+body>main{
+    width: 80rem;
+}
 
 body>main>.content {
     width: 100%;
