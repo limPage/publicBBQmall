@@ -100,11 +100,10 @@ form.addEventListener("keydown",e =>{
 })
 
 
-form.onsubmit=(e)=>{
-    e.preventDefault()
-    // if (!confirm("정보를 수정하시겠습니까?")){
-    //     return;
-    // }
+form['submit'].addEventListener("click", ()=>{
+    if (!confirm("정보를 수정하시겠습니까?")){
+        return;
+    }
     let regPassword = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,16}$/;
     let regContact = /^\d{2,3}\d{3,4}\d{4}$/;
 
@@ -213,4 +212,4 @@ form.onsubmit=(e)=>{
     }
     xhr.send(formData);
 
-}
+})

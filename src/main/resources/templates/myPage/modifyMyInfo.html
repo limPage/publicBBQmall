@@ -14,8 +14,8 @@
 
     <script th:if="${session.user==null}">
 
-        alert("로그인 해주세요.");
-        window.location.href='../member/login';
+       alert("로그인 해주세요.");
+       window.location.href='../member/login';
 
     </script>
 
@@ -37,11 +37,11 @@
         <form id="form">
             <table>
                 <thead class="password-check-row">
-                <tr>
-                    <th>
-                        <h1>본인 확인을 위해서 비밀번호를 입력해주세요.</h1>
-                    </th>
-                </tr>
+                        <tr>
+                            <th>
+                                <h1>본인 확인을 위해서 비밀번호를 입력해주세요.</h1>
+                            </th>
+                        </tr>
                 </thead>
                 <tbody>
                 <tr class="password-check-row">
@@ -118,13 +118,13 @@
                     </th>
                     <td>
                         <label>
-                            <input type="text" name="contact" maxlength="16" placeholder="' - ' 없이 입력해주세요." th:value="${session.user.getContact()}" >
-                        </label>
+                           <input type="text" name="contact" maxlength="16" placeholder="' - ' 없이 입력해주세요." th:value="${session.user.getContact()}" >
+                       </label>
                     </td>
                 </tr>
                 <tr class="modify-row">
                     <th>
-                        생일
+                     생일
                     </th>
                     <td>
                         <label>
@@ -159,7 +159,7 @@
                             <span hidden>상세주소</span>
                             <input autofocus  maxlength="100" name="addressSecondary"
                                    placeholder="상세주소를 입력해주세요." disabled type="text"
-                                   th:value="${session.user.getAddressSecondary()}">
+                            th:value="${session.user.getAddressSecondary()}">
 
                         </label>
                         <div class="panel address" rel="addressFindPanel">
@@ -175,7 +175,7 @@
                 </tbody>
             </table>
 
-            <input type="submit" name="submit" value="정보수정">
+                    <input type="button" name="submit" value="정보수정">
         </form>
 
 
@@ -186,4 +186,5 @@
 <th:block th:replace="~{fragments/body :: footer}"></th:block>
 </body>
 </html>
+
 

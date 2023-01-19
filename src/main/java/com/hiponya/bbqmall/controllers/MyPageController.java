@@ -28,33 +28,6 @@ public class MyPageController {
 
 
 
-//    @GetMapping(value = "/" , produces = MediaType.TEXT_HTML_VALUE)
-//    public ModelAndView getMyPage(){
-//
-//        return new ModelAndView("myPage/myPage");
-//
-//    }
-//
-//
-//    @GetMapping(value = "/withdrawal" , produces = MediaType.TEXT_HTML_VALUE)
-//    public ModelAndView getMyPageWithdrawal(){
-//
-//        return new ModelAndView("myPage/myPageWithdrawal");
-//
-//    }
-//
-//    @ResponseBody
-//    @RequestMapping(value = "/withdrawal", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
-//    public String  deleteUser(@SessionAttribute (value = "user" ,required = false)UserEntity user, WithdrawalEntity withdrawal, HttpSession session){
-////        System.out.println("id="+user.getId());
-//
-//        JSONObject responseObject = new JSONObject();
-//        Enum<? extends IResult> result = this.memberService.deleteUser(user, withdrawal,session);
-//
-//        responseObject.put("result", result.name().toLowerCase());
-//
-//        return responseObject.toString();
-//    }
 
 
 }

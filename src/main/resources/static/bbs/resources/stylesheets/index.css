@@ -81,7 +81,7 @@ body>main>.goods-row>.goods-container>.goods>a{
 
 body>main>.goods-row>.goods-container>.goods>a>img{
     width: 100%;
-    min-height: 18.25rem;
+    height: 18.25rem;
 
     /*display: inline-block;*/
 }
