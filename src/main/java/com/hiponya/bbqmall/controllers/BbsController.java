@@ -37,18 +37,19 @@ public class BbsController {
     }
 
 
-    @RequestMapping(value = "/", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getBoard(@SessionAttribute(value = "user", required = false) UserEntity user,
-                                @RequestParam(value = "bid", required = false) String bid,
-                                @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
-                                @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword,
-                                 @RequestParam(value = "qid" ,required = false) String qid,
-                                 @RequestParam(value = "bbid" ,required = false) String bbid) {
-        //페이지 안보내줫을때는 펄즈, 펄즈도 인식하게 인티저, 펄즈일시 디폴트 1
-        page=Math.max(1,page);
+
+        @RequestMapping(value = "/", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+        public ModelAndView getBoard(@SessionAttribute(value = "user", required = false) UserEntity user,
+                                     @RequestParam(value = "bid", required = false) String bid,
+                                     @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+                                     @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword,
+                                     @RequestParam(value = "qid" ,required = false) String qid,
+                                     @RequestParam(value = "bbid" ,required = false) String bbid) {
+            //페이지 안보내줫을때는 펄즈, 펄즈도 인식하게 인티저, 펄즈일시 디폴트 1
+            page=Math.max(1,page);
 
 
-        ModelAndView modelAndView = new ModelAndView("board/board");
+            ModelAndView modelAndView = new ModelAndView("board/board");
 
 
 //        if(bid==null|| bid.equals("all")) {
@@ -61,62 +62,62 @@ public class BbsController {
 //            modelAndView.addObject("notice", notice);
 //            modelAndView.addObject("user", user);
 //        }
-        NoticeBoardEntity noticeBoard = new NoticeBoardEntity(); //게시판 선택안하거나 전채선택일경우 빈껍데기
+            NoticeBoardEntity noticeBoard = new NoticeBoardEntity(); //게시판 선택안하거나 전채선택일경우 빈껍데기
 
 
 
-                     if (bid!=null && !bid.equals("all") ) {
+            if (bid!=null && !bid.equals("all") ) {
 
 
-                  noticeBoard = this.bbsService.getNoticeBoard(bid);
-             }
+                noticeBoard = this.bbsService.getNoticeBoard(bid);
+            }
 
-                if (bid!=null &&bid.equals("bp") ){
-                    System.out.println("bbid는"+bbid);
+            if (bid!=null &&bid.equals("bp") ){
+                System.out.println("bbid는"+bbid);
 //                    int totalCount = this.bbsService.getBpArticleCount(bbid, keyword);
-                    int totalCount = this.bbsService.getBpArticleCount(bbid, keyword);
-                    PagingModel paging = new PagingModel(totalCount, page);
+                int totalCount = this.bbsService.getBpArticleCount(bbid, keyword);
+                PagingModel paging = new PagingModel(totalCount, page);
 //
-                    BpReadVo[] bpArticles = this.bbsService.getBpArticles( paging, keyword, bbid);
-                    BpReadVo bpReadVo = new BpReadVo();
+                BpReadVo[] bpArticles = this.bbsService.getBpArticles( paging, keyword, bbid);
+                BpReadVo bpReadVo = new BpReadVo();
 
-                    modelAndView.addObject("bid",bid);
-                    modelAndView.addObject("bpArticles",bpArticles);
+                modelAndView.addObject("bid",bid);
+                modelAndView.addObject("bpArticles",bpArticles);
 
-                    modelAndView.addObject("paging", paging); //게시글개수
-
-
-
-                }else {
+                modelAndView.addObject("paging", paging); //게시글개수
 
 
-                    int totalCount = this.bbsService.getNoticeCount(noticeBoard, keyword, qid);
-                    PagingModel paging = new PagingModel(totalCount, page);
+
+            }else {
 
 
-                    if (bid != null && bid.equals("qna")) {
-                        QnaAnswerEntity[] answer = this.bbsService.getAnswer();
-                        modelAndView.addObject("answer", answer); //게시글개수
-
-                        paging = new PagingModel(20, totalCount, page);
-                        System.out.println("qid는" + qid);
-                        System.out.println("qid 키워드는=" + keyword);
-                        modelAndView.addObject("qid", qid);
-
-                    }
+                int totalCount = this.bbsService.getNoticeCount(noticeBoard, keyword, qid);
+                PagingModel paging = new PagingModel(totalCount, page);
 
 
-                    modelAndView.addObject("paging", paging); //게시글개수
+                if (bid != null && bid.equals("qna")) {
+                    QnaAnswerEntity[] answer = this.bbsService.getAnswer();
+                    modelAndView.addObject("answer", answer); //게시글개수
 
-                    NoticeReadVo[] notice = this.bbsService.getNotice(noticeBoard, paging, keyword, qid);
-                    NoticeReadVo[] announceNotice = this.bbsService.getAnnounceNotice();
+                    paging = new PagingModel(20, totalCount, page);
+                    System.out.println("qid는" + qid);
+                    System.out.println("qid 키워드는=" + keyword);
+                    modelAndView.addObject("qid", qid);
 
-                    modelAndView.addObject("announceNotice", announceNotice);
-                    modelAndView.addObject("notice", notice);
-                    modelAndView.addObject("bid", bid);
+                }
 
 
-                    modelAndView.addObject("user", user);
+                modelAndView.addObject("paging", paging); //게시글개수
+
+                NoticeReadVo[] notice = this.bbsService.getNotice(noticeBoard, paging, keyword, qid);
+                NoticeReadVo[] announceNotice = this.bbsService.getAnnounceNotice();
+
+                modelAndView.addObject("announceNotice", announceNotice);
+                modelAndView.addObject("notice", notice);
+                modelAndView.addObject("bid", bid);
+
+
+                modelAndView.addObject("user", user);
 
 
 //        else{
@@ -137,9 +138,9 @@ public class BbsController {
 //
 //            }
 //        }
-                }
-        return modelAndView;
-    }
+            }
+            return modelAndView;
+        }
 
 
 
@@ -148,7 +149,7 @@ public class BbsController {
 
 
 
-    @GetMapping(value = "/readNotice" ,produces = MediaType.TEXT_HTML_VALUE)
+        @GetMapping(value = "/readNotice" ,produces = MediaType.TEXT_HTML_VALUE)
     public  ModelAndView getNotice( @RequestParam(value = "bid", required = false) String bid,
                                      @RequestParam(value = "nid", required = false) Integer nid,
                                    @RequestParam(value = "bbid", required = false) Integer bbid){

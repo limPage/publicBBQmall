@@ -29,7 +29,7 @@ body {
 .search-list > .li {
     margin-top : 0.5rem;
     margin-bottom : 0.5rem;
-    font : 15px "Pretendard Variable";
+    font : 0.9375rem "Pretendard Variable";
 }
 
 main > .swiper > div > .catalog-page > .goods-search-form > .search-filter-wrap > .search-filter > .search-list {
