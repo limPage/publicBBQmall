@@ -27,7 +27,7 @@ body>main>.qna>.qna-button-container>li>a{
 body>main>.qna>form{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+justify-content: center;
     margin-bottom: 1.25rem;
     padding-bottom: 0.3125rem;
 }
@@ -125,7 +125,7 @@ body>main>.qna>.qna-container>li>.answer>h1 {
 body>main>.qna>.qna-container>li>.answer>p{
     margin: unset;
     padding: 0.875rem 0.625rem 0.625rem 0.625rem;
-    width: 100%;
+ width: 100%;
     background-color: rgba(0, 0, 0, 0.03);
 
 
