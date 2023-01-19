@@ -2,302 +2,77 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>BBQ몰</title>
-    <link rel="stylesheet" th:href="@{/bbs/resources/stylesheets/index.css}">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title th:text = "${'BBQ몰 - ' + (title)}"></title>
+    <link rel="stylesheet" th:href="@{/bbq/resources/stylesheets/index.css}">
     <link rel="stylesheet" th:href="@{/category/resources/stylesheets/category.css}">
     <th:block th:replace="~{fragments/head :: common}"></th:block>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script defer th:src="@{/category/resources/scripts/category.js}"></script>
 </head>
 <body>
 <th:block th:replace="~{fragments/body :: header}"></th:block>
 <th:block th:replace="~{fragments/body :: floatingBanner}"></th:block>
 
 <main>
+    <input type="hidden" name = "cid" id="cid" th:value="${category.getIndex()}">
     <div class="swiper">
         <div>
             <div class="catalog-page">
-                <form name = "goods-search-form" id="goodsSearchForm" class = "goods-search-form" method="get">
-                    <div class="search-filter">
-                        <ul class="search-list">
-                            <li>
-                                <label class="active">
-                                    <input type="radio" name ="sorting" value="ranking" checked>랭킹순
-                                </label>
-                            </li>
-                            <li>
-                                <label class="active">
-                                    <input type="radio" name ="sorting" value="register" checked>신규등록순
-                                </label>
-                            </li>
-                            <li>
-                                <label class="active">
-                                    <input type="radio" name ="sorting" value="low-price" checked>낮은가격순
-                                </label>
-                            </li>
-                            <li>
-                                <label class="active">
-                                    <input type="radio" name ="sorting" value="high-price" checked>높은가격순
-                                </label>
-                            </li>
-                            <li>
-                                <label class="active">
-                                    <input type="radio" name ="sorting" value="review" checked>상품평많은순
-                                </label>
-                            </li>
-                            <li>
-                                <label class="active">
-                                    <input type="radio" name ="sorting" value="sale" checked>판매량순
-                                </label>
-                            </li>
-                        </ul>
+                <form id="form" name="goods-search-form" class="goods-search-form" method="get">
+                    <div class="search-filter-wrap">
+                        <div class="search-filter">
+                            <ul class="search-list" rel="searchList">
+                                <li class = "li" th:each="sort : ${sorts}">
+                                    <label class="active">
+                                        <a th:href = "@{/category (cid=${cid},sid=${sort.getIndex()})}" class="btn-container">
+                                            <input type="button" name="ranking" th:value="${sort.getSort()}" class = "button" rel="sorting" id="ranking">&nbsp
+                                        </a>
+                                        <input type="hidden" name = "rankingSid" th:value="${sort.getIndex()}" rel="sid" id="sid" class="sort-index">
+                                    </label>
+                                </li>
+
+                            </ul>
+                        </div>
                     </div>
 
-                    <div class="search-item-display" id="searchItemDisplay">
-                        <ul class = "ul">
-                            <li class = "goods-list">
-                                <div class="item-area">
-                                    <a href = "https://www.mall.bbq.co.kr/goods/view?no=582" class="goods">
-                                        <img src = "/resources/images/new1.png" width = "300px" alt>
-                                        <div class = "goods-content">
-                                            BBQ닭가슴살 맛보기세트 12종 2팩씩 (신제품)
-                                        </div>
-                                        <div class = "goods-price">
-                                            41% 44,900원
-                                        </div>
-                                    </a>
-                                    <div class="zzim">
-                                        <i class="fa-light fa-cart-shopping-fast"></i>
-                                    </div>
+                    <div class = "border-line">
 
-                                </div>
-                                <div class="item-area">
-                                    <a href = "https://www.mall.bbq.co.kr/goods/view?no=582">
-                                        <img src = "/resources/images/new1.png" width = "300px" alt>
-                                        <div class = "goods-content">
-                                            BBQ간편식 골라담기 (신제품)
-                                        </div>
-                                        <div class = "goods-price">
-                                            41% 44,900원
-                                        </div>
-                                    </a>
-                                    <div class="zzim">
-                                        <i class="fa-light fa-cart-shopping-fast"></i>
-                                    </div>
-                                </div>
-                                <div class="item-area">
-                                    <a href = "https://www.mall.bbq.co.kr/goods/view?no=582">
-                                        <img src = "/resources/images/new1.png" width = "300px" alt>
-                                        <div class = "goods-content">
-                                            BBQ간편식 맛보기세트 15종 (신제품)
-                                        </div>
-                                        <div class = "goods-price">
-                                            27% 44,900원
-                                        </div>
-                                    </a>
-                                    <div class="zzim">
-                                        <i class="fa-light fa-cart-shopping-fast"></i>
-                                    </div>
-                                </div>
-                                <div class="item-area">
-                                    <a href = "https://www.mall.bbq.co.kr/goods/view?no=582">
-                                        <img src = "/resources/images/new1.png" width = "300px" alt>
-                                        <div class = "goods-content">
-                                            [냉동] BBQ 구운 왕갈비맛 삼각밥 100g 10팩
-                                        </div>
-                                        <div class = "goods-price">
-                                            13% 17,300원
-                                        </div>
-                                    </a>
-                                    <div class="zzim">
-                                        <i class="fa-light fa-cart-shopping-fast"></i>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li class = "goods-list">
-                                <div class="item-area">
-                                    <a href = "https://www.mall.bbq.co.kr/goods/view?no=582" class="goods">
-                                        <img src = "/resources/images/new1.png" width = "300px" alt>
-                                        <div class = "goods-content">
-                                            BBQ닭가슴살 맛보기세트 12종 2팩씩 (신제품)
-                                        </div>
-                                        <div class = "goods-price">
-                                            41% 44,900원
-                                        </div>
-                                    </a>
-                                    <div class="zzim">
-                                        <i class="fa-light fa-cart-shopping-fast"></i>
-                                    </div>
-
-                                </div>
-                                <div class="item-area">
-                                    <a href = "https://www.mall.bbq.co.kr/goods/view?no=582">
-                                        <img src = "/resources/images/new1.png" width = "300px" alt>
-                                        <div class = "goods-content">
-                                            BBQ간편식 골라담기 (신제품)
-                                        </div>
-                                        <div class = "goods-price">
-                                            41% 44,900원
-                                        </div>
-                                    </a>
-                                    <div class="zzim">
-                                        <i class="fa-light fa-cart-shopping-fast"></i>
-                                    </div>
-                                </div>
-                                <div class="item-area">
-                                    <a href = "https://www.mall.bbq.co.kr/goods/view?no=582">
-                                        <img src = "/resources/images/new1.png" width = "300px" alt>
-                                        <div class = "goods-content">
-                                            BBQ간편식 맛보기세트 15종 (신제품)
-                                        </div>
-                                        <div class = "goods-price">
-                                            27% 44,900원
-                                        </div>
-                                    </a>
-                                    <div class="zzim">
-                                        <i class="fa-light fa-cart-shopping-fast"></i>
-                                    </div>
-                                </div>
-                                <div class="item-area">
-                                    <a href = "https://www.mall.bbq.co.kr/goods/view?no=582">
-                                        <img src = "/resources/images/new1.png" width = "300px" alt>
-                                        <div class = "goods-content">
-                                            [냉동] BBQ 구운 왕갈비맛 삼각밥 100g 10팩
-                                        </div>
-                                        <div class = "goods-price">
-                                            13% 17,300원
-                                        </div>
-                                    </a>
-                                    <div class="zzim">
-                                        <i class="fa-light fa-cart-shopping-fast"></i>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li class = "goods-list">
-                                <div class="item-area">
-                                    <a href = "https://www.mall.bbq.co.kr/goods/view?no=582" class="goods">
-                                        <img src = "/resources/images/new1.png" width = "300px" alt>
-                                        <div class = "goods-content">
-                                            BBQ닭가슴살 맛보기세트 12종 2팩씩 (신제품)
-                                        </div>
-                                        <div class = "goods-price">
-                                            41% 44,900원
-                                        </div>
-                                    </a>
-                                    <div class="zzim">
-                                        <i class="fa-light fa-cart-shopping-fast"></i>
-                                    </div>
-
-                                </div>
-                                <div class="item-area">
-                                    <a href = "https://www.mall.bbq.co.kr/goods/view?no=582">
-                                        <img src = "/resources/images/new1.png" width = "300px" alt>
-                                        <div class = "goods-content">
-                                            BBQ간편식 골라담기 (신제품)
-                                        </div>
-                                        <div class = "goods-price">
-                                            41% 44,900원
-                                        </div>
-                                    </a>
-                                    <div class="zzim">
-                                        <i class="fa-light fa-cart-shopping-fast"></i>
-                                    </div>
-                                </div>
-                                <div class="item-area">
-                                    <a href = "https://www.mall.bbq.co.kr/goods/view?no=582">
-                                        <img src = "/resources/images/new1.png" width = "300px" alt>
-                                        <div class = "goods-content">
-                                            BBQ간편식 맛보기세트 15종 (신제품)
-                                        </div>
-                                        <div class = "goods-price">
-                                            27% 44,900원
-                                        </div>
-                                    </a>
-                                    <div class="zzim">
-                                        <i class="fa-light fa-cart-shopping-fast"></i>
-                                    </div>
-                                </div>
-                                <div class="item-area">
-                                    <a href = "https://www.mall.bbq.co.kr/goods/view?no=582">
-                                        <img src = "/resources/images/new1.png" width = "300px" alt>
-                                        <div class = "goods-content">
-                                            [냉동] BBQ 구운 왕갈비맛 삼각밥 100g 10팩
-                                        </div>
-                                        <div class = "goods-price">
-                                            13% 17,300원
-                                        </div>
-                                    </a>
-                                    <div class="zzim">
-                                        <i class="fa-light fa-cart-shopping-fast"></i>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li class = "goods-list">
-                                <div class="item-area">
-                                    <a href = "https://www.mall.bbq.co.kr/goods/view?no=582" class="goods">
-                                        <img src = "/resources/images/new1.png" width = "300px" alt>
-                                        <div class = "goods-content">
-                                            BBQ닭가슴살 맛보기세트 12종 2팩씩 (신제품)
-                                        </div>
-                                        <div class = "goods-price">
-                                            41% 44,900원
-                                        </div>
-                                    </a>
-                                    <div class="zzim">
-                                        <i class="fa-light fa-cart-shopping-fast"></i>
-                                    </div>
-
-                                </div>
-                                <div class="item-area">
-                                    <a href = "https://www.mall.bbq.co.kr/goods/view?no=582">
-                                        <img src = "/resources/images/new1.png" width = "300px" alt>
-                                        <div class = "goods-content">
-                                            BBQ간편식 골라담기 (신제품)
-                                        </div>
-                                        <div class = "goods-price">
-                                            41% 44,900원
-                                        </div>
-                                    </a>
-                                    <div class="zzim">
-                                        <i class="fa-light fa-cart-shopping-fast"></i>
-                                    </div>
-                                </div>
-                                <div class="item-area">
-                                    <a href = "https://www.mall.bbq.co.kr/goods/view?no=582">
-                                        <img src = "/resources/images/new1.png" width = "300px" alt>
-                                        <div class = "goods-content">
-                                            BBQ간편식 맛보기세트 15종 (신제품)
-                                        </div>
-                                        <div class = "goods-price">
-                                            27% 44,900원
-                                        </div>
-                                    </a>
-                                    <div class="zzim">
-                                        <i class="fa-light fa-cart-shopping-fast"></i>
-                                    </div>
-                                </div>
-                                <div class="item-area">
-                                    <a href = "https://www.mall.bbq.co.kr/goods/view?no=582">
-                                        <img src = "/resources/images/new1.png" width = "300px" alt>
-                                        <div class = "goods-content">
-                                            [냉동] BBQ 구운 왕갈비맛 삼각밥 100g 10팩
-                                        </div>
-                                        <div class = "goods-price">
-                                            13% 17,300원
-                                        </div>
-                                    </a>
-                                    <div class="zzim">
-                                        <i class="fa-light fa-cart-shopping-fast"></i>
-                                    </div>
-                                </div>
-                            </li>
-
-                        </ul>
                     </div>
+                    <ul class="product-container">
+                        <!--/*@thymesVar id="products" type="com.hiponya.bbqmall.vos.product.ProductReadVo"*/-->
+                        <li th:each = "product : ${products}" class="products">
+                            <div th:text = "${product.getProductIndex()}" hidden>3</div>
+                            <div class="product-box">
+                                <a class = "title" th:href = "@{/view (pid = ${product.getProductIndex()})}"> <!-- 클릭시 이동할 view 주소 -->
+                                    <img src="/resources/images/new1.png" width="300px" alt>
+                                    <div class = "comment" th:text = "${'[' + product.getProductName() + ']'}">내용</div>
+                                    <span class="sale" th:text="${product.getSaleQuantity()}">13%</span>
+                                    <span class="percent">%</span>
+                                    <span class = "price" th:text = "${product.getPrice - (product.getPrice() * product.getSaleQuantity() / 100)}">가격</span>
+                                    <span class="won">원</span>
+                                    <span class="base-price" th:text="${product.getPrice()}  + '원'">상품기본가격</span>
+                                </a>
+                            </div>
+<!--                            <div th:text = "${product.getProductName()}">레너드</div>-->
+<!--                            <div th:text = "${product.getAmount()}">17</div>-->
+<!--                            <div th:text = "${#dates.format(product.getModifiedOn(), 'yyyy-MM-dd HH:mm:ss')}">2022-01-03 00:00:00</div>-->
+                        </li>
 
+                    </ul>
 
                 </form>
+<!--                <div class="paging-navigation">-->
+<!--                    <a href = "#" class = "page">1</a>-->
+<!--                    <a href = "#" class = "page">2</a>-->
+<!--                    <a href = "#" class = "page">3</a>-->
+<!--                    <a href = "#" class = "page">4</a>-->
+<!--                    <a href = "#" class = "page">5</a>-->
+<!--                    <a href = "#" class = "page"><i class="fa-solid fa-angle-right"></i></a>-->
+<!--                    <a href = "#" class = "page"><i class="fa-solid fa-angles-right"></i></a>-->
+<!--                </div>-->
             </div>
         </div>
     </div>

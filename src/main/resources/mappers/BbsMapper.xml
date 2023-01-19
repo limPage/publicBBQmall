@@ -307,7 +307,6 @@
                `notice`.`id` AS `id`,
                `notice`.`board_id`    AS `boardId`,
                `notice`.`title`       AS `title`,
-               `notice`.`important_flag` AS `isImportant`,
                `notice`.`content`     AS `content`,
                `notice`.`view`        AS `view`,
                `notice`.`written_on`  AS `writtenOn`,
@@ -390,21 +389,6 @@
 
 
     </insert>
-    <insert id="insertBpArticle"
-            useGeneratedKeys="true" keyProperty="index"
-            keyColumn="index"
-            parameterType="com.hiponya.bbqmall.entities.bbs.BpArticleEntity">
-        INSERT INTO `bbq_bbs`.`bp_articles` ( `id`, `bp_board_id`, `name`, `email`, `contact`, `company`, `request_date`,`product_info`,
-                                             `request_price`, `pay`, `request_evidence`, `reply_sms`, `reply_email`, `title`,
-                                             `content`, `written_on`, `modified_on`)
-        VALUES (#{id}, #{bpBoardId},#{name},#{email},#{contact},#{company},#{requestDate},#{productInfo}, #{requestPrice},#{pay},  #{requestEvidence}, #{replySms}, #{replyEmail},
-                #{title},#{content}, IFNULL(#{writtenOn}, DEFAULT(`written_on`)), IFNULL(NOW(), DEFAULT(`modified_on`)))
-
-
-    </insert>
-
-
-
 
     <insert id="insertImage" keyColumn="index" useGeneratedKeys="true" keyProperty="index"
             parameterType="com.hiponya.bbqmall.entities.bbs.ImageEntity">
@@ -429,8 +413,8 @@ VALUES (#{articleIndex}, #{content},IFNULL(#{writtenOn}, DEFAULT(`written_on`)),
         VALUES (#{articleIndex}, #{content},IFNULL(#{writtenOn}, DEFAULT(`written_on`)), IFNULL(NOW(), DEFAULT(`modified_on`)))
 
     </insert>
-    
-    
+
+
     <select id="selectImageByIndex" resultType="com.hiponya.bbqmall.entities.bbs.ImageEntity">
 
         SELECT `index`     AS `index`,

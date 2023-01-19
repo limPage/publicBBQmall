@@ -7,6 +7,8 @@ import com.hiponya.bbqmall.entities.product.OrderEntity;
 import com.hiponya.bbqmall.enums.bbs.DeleteResult;
 import com.hiponya.bbqmall.enums.bbs.ModifyResult;
 import com.hiponya.bbqmall.enums.member.DeleteUserResult;
+import com.hiponya.bbqmall.enums.bbs.DeleteResult;
+import com.hiponya.bbqmall.enums.member.DeleteUserResult;
 import com.hiponya.bbqmall.enums.member.RegisterResult;
 import com.hiponya.bbqmall.entities.member.UserEntity;
 import com.hiponya.bbqmall.enums.CommonResult;

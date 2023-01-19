@@ -63,8 +63,7 @@
         <div class="menu-container">
             <ul>
                 <li class="menu-button">
-
-                    <a href="#">
+                    <a th:href = "@{/category (cid=0)}">
                         <div class="menu-trigger">
                             <span ></span>
                             <span class="hover-trigger"></span>
@@ -73,15 +72,11 @@
                         </div>
                         <strong>전체상품</strong></a>
                 </li>
-                <li class="menu">
-                    <a href="#"><strong class="new">NEW</strong></a>
+                <!--/*@thymesVar id="categories" type="com.hiponya.bbqmall.entities.product.CategoryEntity"*/-->
+                <li class="menu" th:each="category : ${categories}">
+                    <!--<a href="/category"><strong class="new"></strong></a>-->
+                    <a th:text="${category.getTitle()}" th:href = "@{/category (cid=${category.getIndex()})}" rel="categoryTitle"></a>
                 </li>
-                <li class="menu">
-                    <a href="#"><strong class="en">669 세트</strong></a>
-                </li>
-
-
-
                 <span class="spring"></span>
                 <li class="my-menu">
                     <a th:href="@{/member/myPage/}">

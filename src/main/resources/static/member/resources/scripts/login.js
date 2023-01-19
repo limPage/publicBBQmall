@@ -86,7 +86,7 @@ const content = window.document.getElementById('content');
                  switch (responseObject['result']) {
                      case 'success':
 
-                         alert('로그인 성공');
+
 
 
                              if(form['checkbox'].checked) {
@@ -101,7 +101,7 @@ const content = window.document.getElementById('content');
 
 
 
-                         window.location.href='http://localhost:8080/';
+                         window.history.back();
 
                          break;
 
