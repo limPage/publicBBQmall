@@ -131,10 +131,10 @@ body> main> .content >.content-table> tbody>.content-row *{
 
 
 body> main> .content >.content-table> tfoot > .sns-share-row>td{
-align-items: flex-start;
-display: flex;
-flex-direction: row ;
-justify-content: flex-start;
+    align-items: flex-start;
+    display: flex;
+    flex-direction: row ;
+    justify-content: flex-start;
 
 }
 
@@ -152,10 +152,10 @@ body> main> .content >.content-table> tfoot>.management-row {
     margin-top: 0.9rem;
 }
 body> main> .content >.content-table> tfoot>.management-row>td {
-align-items: center;
-display: flex;
-flex-direction: row ;
-justify-content: flex-start;
+    align-items: center;
+    display: flex;
+    flex-direction: row ;
+    justify-content: flex-start;
     width: 100%;
 
 }
@@ -191,4 +191,3 @@ body> main> .content >.content-table> tfoot > .management-row>td>.spring{
 body> main> .content >.content-table> tfoot > .management-row>td>a:not(:last-of-type){
     margin-right: 0.5rem;
 }
-

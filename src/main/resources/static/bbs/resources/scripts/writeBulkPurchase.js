@@ -74,9 +74,9 @@ form.onsubmit = e =>{
         form['requestDate'].focus();
         return false;
     }if(form['productInfo'].value===''){
-            alert('문의 상품을 기술해주세요.');
-            form['productInfo'].focus();
-            return false;
+        alert('문의 상품을 기술해주세요.');
+        form['productInfo'].focus();
+        return false;
 
     }if(form['requestPrice'].value===''){
         alert('요청가격을 입력해 주세요.');
@@ -100,10 +100,10 @@ form.onsubmit = e =>{
         return false;
     }
 
-   //  let replySms;
-   //  let replyEmail;
-   // if (form['replySms'].checked){replySms=true;}
-   // if (form['replyEmail'].checked){replyEmail=true;}
+    //  let replySms;
+    //  let replyEmail;
+    // if (form['replySms'].checked){replySms=true;}
+    // if (form['replyEmail'].checked){replyEmail=true;}
 
 
 
@@ -173,4 +173,3 @@ form.onsubmit = e =>{
 
 
 };
-

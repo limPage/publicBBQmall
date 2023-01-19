@@ -7,16 +7,16 @@
     <insert id="insertProduct" parameterType="com.hiponya.bbqmall.entities.product.ProductEntity" keyProperty="productIndex"
             useGeneratedKeys="true" keyColumn="product_index">
         INSERT INTO `bbqmall`.`products` ( `detail_index`,
-                                          `product_name`,
-                                          `price`,
-                                          `content`,
-                                          `view`,
-                                          `created_on`,
-                                          `modified_on`,
-                                          `amount`,
-                                          `on_sale`,
-                                          `sale_quantity`
-                                            )
+                                           `product_name`,
+                                           `price`,
+                                           `content`,
+                                           `view`,
+                                           `created_on`,
+                                           `modified_on`,
+                                           `amount`,
+                                           `on_sale`,
+                                           `sale_quantity`
+        )
         VALUES (#{detailIndex}, #{productName}, #{price} , #{content},#{view},IFNULL(#{createdOn}, default(`created_on`)),IFNULL(#{modifiedOn}, default(`modified_on`)), #{amount},#{onSale},#{saleQuantity} )
 
     </insert>
@@ -41,15 +41,15 @@
     <update id="updateProduct" parameterType="com.hiponya.bbqmall.entities.product.ProductEntity">
 
         UPDATE `bbqmall`.`products` SET   `detail_index` = #{detailIndex},
-                                           `product_name`= #{productName},
-                                           `price` = #{price} ,
-                                           `content` = #{content},
-                                           `view` =  #{view},
-                                           `created_on` = #{createdOn},
-                                           `modified_on` =#{modifiedOn},
-                                           `amount` = #{amount},
-                                           `on_sale` =#{onSale},
-                                           `sale_quantity` = #{saleQuantity}
+                                          `product_name`= #{productName},
+                                          `price` = #{price} ,
+                                          `content` = #{content},
+                                          `view` =  #{view},
+                                          `created_on` = #{createdOn},
+                                          `modified_on` =#{modifiedOn},
+                                          `amount` = #{amount},
+                                          `on_sale` =#{onSale},
+                                          `sale_quantity` = #{saleQuantity}
         WHERE product_index = #{productIndex}
         LIMIT 1;
 
@@ -62,17 +62,17 @@
     <select id="selectProductsByDetailIndex" resultType="com.hiponya.bbqmall.vos.product.ProductReadVo">
 
         SELECT `product_index` AS `productIndex`,
-               `detail_index` AS `detailIndex`,
-                `menu`.`index`AS `menuIndex`,
-               `product_name` AS `productName`,
-               `price` AS `price`,
-               `content` AS `content`,
-               `view` AS `view`,
-               `created_on` AS `createdOn`,
-               `modified_on` AS `modifiedOn`,
-               `amount` AS `amount`,
-               `on_sale` AS onSale,
-               `sale_quantity` AS `saleQuantity`
+        `detail_index` AS `detailIndex`,
+        `menu`.`index`AS `menuIndex`,
+        `product_name` AS `productName`,
+        `price` AS `price`,
+        `content` AS `content`,
+        `view` AS `view`,
+        `created_on` AS `createdOn`,
+        `modified_on` AS `modifiedOn`,
+        `amount` AS `amount`,
+        `on_sale` AS onSale,
+        `sale_quantity` AS `saleQuantity`
 
         FROM `bbqmall`.`products`
         LEFT JOIN `bbqmall`.`detail_menu` on `products`.`detail_index` = `detail_menu`.`index`
@@ -143,16 +143,16 @@
     <select id="selectProductByProductIndex" resultType="com.hiponya.bbqmall.vos.product.ProductReadVo">
 
         SELECT `product_index` AS `productIndex`,
-        `detail_index` AS `detailIndex`,
-        `product_name` AS `productName`,
-        `price` AS `price`,
-        `content` AS `content`,
-        `view` AS `view`,
-        `created_on` AS `createdOn`,
-        `modified_on` AS `modifiedOn`,
-        `amount` AS `amount`,
-        `on_sale` AS onSale,
-        `sale_quantity` AS `saleQuantity`
+               `detail_index` AS `detailIndex`,
+               `product_name` AS `productName`,
+               `price` AS `price`,
+               `content` AS `content`,
+               `view` AS `view`,
+               `created_on` AS `createdOn`,
+               `modified_on` AS `modifiedOn`,
+               `amount` AS `amount`,
+               `on_sale` AS onSale,
+               `sale_quantity` AS `saleQuantity`
 
         FROM `bbqmall`.`products`
 
@@ -164,11 +164,11 @@
     <select id="selectStatusLookupByStatus" resultType="com.hiponya.bbqmall.entities.product.StatusLookupEntity">
 
         SELECT `index` AS  `index`,
-               `product_index` AS `productIndex`,
-               `status` AS `status`,
-               `status_text` AS `statusText`,
-               `text` AS `text`,
-               `occurred_time` AS `occurredTime`
+        `product_index` AS `productIndex`,
+        `status` AS `status`,
+        `status_text` AS `statusText`,
+        `text` AS `text`,
+        `occurred_time` AS `occurredTime`
 
         FROM `bbqmall`.`status_lookup`
         WHERE `occurred_time` > DATE_ADD(NOW(), INTERVAL -3 DAY )

@@ -6,6 +6,7 @@ import com.hiponya.bbqmall.entities.bbs.NoticeEntity;
 import com.hiponya.bbqmall.entities.member.EmailAuthEntity;
 import com.hiponya.bbqmall.entities.member.UserEntity;
 import com.hiponya.bbqmall.entities.member.WithdrawalEntity;
+import com.hiponya.bbqmall.entities.product.WishlistEntity;
 import com.hiponya.bbqmall.enums.CommonResult;
 import com.hiponya.bbqmall.enums.bbs.ModifyResult;
 import com.hiponya.bbqmall.interfaces.IResult;
@@ -361,7 +362,7 @@ public class MemberController {
 
     @GetMapping(value = "myShopping", produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getMyShopping(@SessionAttribute(value = "user", required = false) UserEntity user,
-            @RequestParam (value = "bid" , required = false) Integer bid){
+                                      @RequestParam (value = "bid" , required = false) Integer bid){
         ModelAndView modelAndView = new ModelAndView("myPage/myShopping");
         String board;
         if (bid !=null) {
@@ -400,13 +401,12 @@ public class MemberController {
         }else {
             board = "주문/배송 내역";
         }
-            modelAndView.addObject("bid", bid);
-            modelAndView.addObject("board", board);
+        modelAndView.addObject("bid", bid);
+        modelAndView.addObject("board", board);
         return modelAndView;
     }
 
 }
-
 
 
 

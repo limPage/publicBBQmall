@@ -106,7 +106,7 @@
                `address_primary`   AS `addressPrimary`,
                `address_secondary` AS `addressSecondary`,
                `registered_on`     AS `registeredOn`,
-                `admin` AS `isAdmin`
+               `admin` AS `isAdmin`
         FROM `bbqmall`.`users`
         WHERE BINARY `id` = #{id}
           AND BINARY `password` = #{password}
@@ -180,21 +180,21 @@
     </select>
 
     <select id="selectOrderById" resultType="com.hiponya.bbqmall.entities.product.OrderEntity">
-     SELECT `index` AS `index`,
-            `id` AS `id`,
-            `name` AS `name`,
-            `contact` AS `contact`,
-            `address_postal` AS `addressPostal`,
-            `address_primary` AS addressPrimary,
-            `address_secondary` AS `addressSecondary`,
-            `order_time` AS `orderTime`,
-            `product_index` AS `produtIndex`,
-            `product_name` AS `productName`,
-            `price` AS `price`,
-            `order_amount` AS `orderAmount`
+        SELECT `index` AS `index`,
+               `id` AS `id`,
+               `name` AS `name`,
+               `contact` AS `contact`,
+               `address_postal` AS `addressPostal`,
+               `address_primary` AS addressPrimary,
+               `address_secondary` AS `addressSecondary`,
+               `order_time` AS `orderTime`,
+               `product_index` AS `produtIndex`,
+               `product_name` AS `productName`,
+               `price` AS `price`,
+               `order_amount` AS `orderAmount`
 
-    FROM `bbqmall`.`order`
-    WHERE id =#{id}
+        FROM `bbqmall`.`order`
+        WHERE id =#{id}
 
 
     </select>

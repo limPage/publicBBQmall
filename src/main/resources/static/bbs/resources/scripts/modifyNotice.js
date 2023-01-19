@@ -73,12 +73,12 @@ if(form['bidValue'].value==="notice") {
                         case 'success':
 
                             alert('작성 성공');
-                             if (bidValue.value==='pi'|| bidValue.value==='pr'){
+                            if (bidValue.value==='pi'|| bidValue.value==='pr'){
 
-                                 window.location.href = `http://localhost:8080/board/?bid=`+bidValue.value;
-                             }else {
-                                 window.location.href = `http://localhost:8080/board/`;//자바스크립트문법
-                             }
+                                window.location.href = `http://localhost:8080/board/?bid=`+bidValue.value;
+                            }else {
+                                window.location.href = `http://localhost:8080/board/`;//자바스크립트문법
+                            }
 
                             break;
 
@@ -266,5 +266,4 @@ if(window.document.getElementById('bidValue').value==="pr"){
     window.document.getElementById('sideBarPR').style.cssText = `  color: rgba(0,0,0,0.9);
     font-weight: 700;`;
 }
-
 

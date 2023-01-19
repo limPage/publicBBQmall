@@ -18,16 +18,16 @@
     <select id="selectRecommendedProduct" resultType="com.hiponya.bbqmall.vos.product.ProductReadVo">
 
         SELECT `product_index` AS `productIndex`,
-        `detail_index` AS `detailIndex`,
-        `product_name` AS `productName`,
-        `price` AS `price`,
-        `content` AS `content`,
-        `view` AS `view`,
-        `created_on` AS `createdOn`,
-        `modified_on` AS `modifiedOn`,
-        `amount` AS `amount`,
-        `on_sale` AS onSale,
-        `sale_quantity` AS `saleQuantity`
+               `detail_index` AS `detailIndex`,
+               `product_name` AS `productName`,
+               `price` AS `price`,
+               `content` AS `content`,
+               `view` AS `view`,
+               `created_on` AS `createdOn`,
+               `modified_on` AS `modifiedOn`,
+               `amount` AS `amount`,
+               `on_sale` AS onSale,
+               `sale_quantity` AS `saleQuantity`
 
         FROM `bbqmall`.`products`
         WHERE `on_sale`=1

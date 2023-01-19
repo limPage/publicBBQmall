@@ -47,7 +47,7 @@ public class BbsService {
             return WriteResult.NO_SUCH_BOARD;
         }
 
-            //글쓸때 글의 새 개시물 알림뜰 기간을 내일까지로 정한다.
+        //글쓸때 글의 새 개시물 알림뜰 기간을 내일까지로 정한다.
         notice.setExpirationDate(DateUtils.addDays(new Date(), 1));
 //        if(this.bbsMapper.insertArticle(article)==0){
 //            return CommonResult.FAILURE;
@@ -96,11 +96,11 @@ public class BbsService {
 
     }
 
-public NoticeReadVo[] getAnnounceNotice(){
+    public NoticeReadVo[] getAnnounceNotice(){
         return this.bbsMapper.selectAnnounceNotice();
-}
+    }
 
-            //공지게시판을 불러온다
+    //공지게시판을 불러온다
     public NoticeReadVo[] getNotice(NoticeBoardEntity board, PagingModel paging,  String keyword, String qid) {
 
         //만들어진지 1일이 지난 게시물의 새게시물 여부를 새로고침 한다.
@@ -164,7 +164,7 @@ public NoticeReadVo[] getAnnounceNotice(){
         if (user == null) {
             return ModifyResult.NOT_SIGNED;
         }
-    //    공지로 등록하려고 왔을 경우
+        //    공지로 등록하려고 왔을 경우
         if(notice.isImportant()!=null){
             //관리지가 아니면 권한이 없음을 알린다.
             existingArticle.setImportant(notice.isImportant());
@@ -181,7 +181,7 @@ public NoticeReadVo[] getAnnounceNotice(){
 
             return ModifyResult.NO_SUCH_ARTICLE;
 
-                //수정 시작
+            //수정 시작
         } else {
             //게시물 수정인경우->(단순 공지 등록이아님) 타이틀과 컨텐츠가 있음
             if(notice.getTitle()!=null){
@@ -364,7 +364,7 @@ public NoticeReadVo[] getAnnounceNotice(){
 
     public QnaAnswerEntity[] getAnswer(){
 
-       return this.bbsMapper.selectAnswers();
+        return this.bbsMapper.selectAnswers();
     }
 
 
@@ -389,8 +389,8 @@ public NoticeReadVo[] getAnnounceNotice(){
     public Enum<? extends IResult> writeAdminComment(UserEntity user, int bbid, int nid,  String content ) {
 //        article.setWrittenOn(new Date());
 //        article.setModifiedOn(new Date());
-            //유저가 null
-                //어드민이 아닐경우
+        //유저가 null
+        //어드민이 아닐경우
         //게시물이 없을경우
 
         if (user==null){
@@ -449,7 +449,7 @@ public NoticeReadVo[] getAnnounceNotice(){
 
 
 
-            return  CommonResult.FAILURE;
+        return  CommonResult.FAILURE;
     }
 
     public AdminCommentEntity[] getAdminComments(BpReadVo article){
@@ -490,8 +490,8 @@ public NoticeReadVo[] getAnnounceNotice(){
 
                 //수정 시작
             }
-                existingAdminComment.setModifiedOn(new Date());
-                existingAdminComment.setContent(content);
+            existingAdminComment.setModifiedOn(new Date());
+            existingAdminComment.setContent(content);
             if(this.bbsMapper.updateAdminComment(existingAdminComment) > 0){
                 return CommonResult.SUCCESS;
             }
@@ -512,8 +512,7 @@ public NoticeReadVo[] getAnnounceNotice(){
 
         }
 
-       return CommonResult.FAILURE;
+        return CommonResult.FAILURE;
     }
 
 }
-

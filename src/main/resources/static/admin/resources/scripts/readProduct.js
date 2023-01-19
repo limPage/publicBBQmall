@@ -26,7 +26,7 @@ form['menuIndex'].addEventListener('change', ()=>{
         form['detailIndex3'].style.display="none"
         form['detailIndex3'].value=0;
 
-}else if(form['menuIndex'].value==='2') {
+    }else if(form['menuIndex'].value==='2') {
         form['detailIndex2'].style.display="inline-block"
         form['detailIndex1'].style.display="none"
         form['detailIndex1'].value=0;
@@ -123,7 +123,7 @@ form['detailIndex3'].addEventListener('change', ()=>{
 for (let i =0; i<deleteButton.length; i++){
 
     deleteButton.item(i).addEventListener("click",(e)=>{
-       e.preventDefault();
+        e.preventDefault();
 
         if (!confirm('상품을 삭제합니다.\n상품 데이터는 복구할 수 없습니다.\n진행하시겠습니까?')) {
 
@@ -181,4 +181,3 @@ for (let i =0; i<deleteButton.length; i++){
     })
 
 }
-

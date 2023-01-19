@@ -8,7 +8,7 @@
     <div class="logo-row">
         <div class="logo-container">
             <a th:href="@{/}">
-            <img alt="로고" src="/resources/images/bbq_logo.png"
+                <img alt="로고" src="/resources/images/bbq_logo.png"
                 ></a>
             <div class="search">
                 <form>
@@ -77,23 +77,26 @@
                     <!--<a href="/category"><strong class="new"></strong></a>-->
                     <a th:text="${category.getTitle()}" th:href = "@{/category (cid=${category.getIndex()})}" rel="categoryTitle"></a>
                 </li>
+
+
+
                 <span class="spring"></span>
                 <li class="my-menu">
                     <a th:href="@{/member/myPage/}">
-                    <img alt="마이페이지"
-        src="/resources/images/myPage.png">
+                        <img alt="마이페이지"
+                             src="/resources/images/myPage.png">
                     </a>
                 </li>
                 <li class="my-menu">
                     <a th:href="@{/member/myShopping?bid=4}">
-                    <img alt="찜목록"
-                                     src="/resources/images/wishList.png">
+                        <img alt="찜목록"
+                             src="/resources/images/wishList.png">
                     </a>
                 </li>
                 <li class="my-menu">
                     <a th:href="@{/member/myShopping?bid=5}">
                         <img alt="장바구니"
-                                     src="/resources/images/cart.png"></a>
+                             src="/resources/images/cart.png"></a>
                 </li>
 
 
@@ -205,8 +208,8 @@
         <div class="foot-container">
             <div class="question-row">
                 <a href="#">
-                <img alt="로고" src="/resources/images/bbq_logo.png"
-                     width="208"></a>
+                    <img alt="로고" src="/resources/images/bbq_logo.png"
+                         width="208"></a>
                 <div class="question-button">
                     <a href="#">1:1 문의하기
 

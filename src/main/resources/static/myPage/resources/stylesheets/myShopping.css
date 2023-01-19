@@ -51,10 +51,10 @@ body>main> .content>.order>li{
 
     }
 
-        body>main>article{
-            font-size: 1.5rem;
-            padding:0 1.625rem  0.5rem 0;
-        }
+    body>main>article{
+        font-size: 1.5rem;
+        padding:0 1.625rem  0.5rem 0;
+    }
 
 }
 @media screen and (max-width : 53.75rem) {

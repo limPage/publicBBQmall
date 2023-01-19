@@ -32,6 +32,11 @@ body {
     font : 15px "Pretendard Variable";
 }
 
+main {
+    margin-left : 17.5rem;
+    margin-right : 17.5rem;
+}
+
 main > .swiper > div > .catalog-page > .goods-search-form > .search-filter-wrap > .search-filter > .search-list {
     align-items : stretch;
     display : flex;
@@ -83,6 +88,10 @@ main > .swiper > div > .catalog-page > .goods-search-form > .border-line {
     min-width : 18.75rem;
 }
 
+.product-container > .products > .product-box > .title {
+    color : black;
+}
+
 .product-container > .products > .product-box > .title > .comment {
     font-size : 1.25rem;
 }
@@ -102,7 +111,7 @@ main > .swiper > div > .catalog-page > .goods-search-form > .border-line {
     text-decoration : line-through;
 }
 
-    .goods-search-form > .search-item-display > .ul > .goods-list {
+.goods-search-form > .search-item-display > .ul > .goods-list {
     align-items : stretch;
     display : flex;
     flex-direction : row;
@@ -120,7 +129,7 @@ main > .swiper > div > .catalog-page > .goods-search-form > .border-line {
     flex-wrap: wrap;
 }
 
- .paging-navigation {
+.paging-navigation {
     align-items : stretch;
     display : flex;
     flex-direction : row;
@@ -170,7 +179,7 @@ main > .swiper > div > .catalog-page > .goods-search-form > .border-line {
 
 @media screen and (max-width : 60rem) {
     .product-container {
-        max-width : calc(100vw - 4rem);
+        /*max-width : calc(100vw - 4rem);*/
     }
 
     .product-container > .products {

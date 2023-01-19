@@ -40,4 +40,3 @@ switch (bid.value){
         break;
 
 }
-

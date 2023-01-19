@@ -264,16 +264,16 @@
                         <span th:text="${article.getTitle()}">2</span> <span
                             th:text="${article.getContent()}"> 1 </span></p></div>
 
-                    <div class="answer" th:each="isAnswer:${answer}" th:if="${isAnswer.getQuestionIndex()==article.getIndex()}">
-                        <h1>A</h1>
-                        <p>
+                <div class="answer" th:each="isAnswer:${answer}" th:if="${isAnswer.getQuestionIndex()==article.getIndex()}">
+                    <h1>A</h1>
+                    <p>
                                              <span th:utext="${isAnswer.getContent()}"
                                              >BBQ 배송과 각 브랜드 개별 배송비는 별도로 부과됩니다.
                                                  <br>브랜드 개별 배송: 브랜드 정책에 따라 무료배송 혹은 배송비 부과 (3,000원)
                                              </span>
 
-                        </p>
-                    </div>
+                    </p>
+                </div>
 
             </li>
 
@@ -732,9 +732,9 @@
                 <td class="content-title">
                     <a th:href="@{/board/readNotice (bid=bpArticle,bbid=${bpArticle.getIndex()})}">
                         <h3
-                        th:text="${bpArticle.getTitle()}">-</h3>
+                                th:text="${bpArticle.getTitle()}">-</h3>
 
-                </a></td>
+                    </a></td>
 
                 <td>
                     <h3 class="id"  th:text="${bpArticle.getId()}" >성함</h3>

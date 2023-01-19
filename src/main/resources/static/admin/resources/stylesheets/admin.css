@@ -50,8 +50,8 @@ body>main>.content>ul>li>a>i{
 
 
 body>main>.content>ul>li>a{
-width: 100%;
-height: 10rem;
+    width: 100%;
+    height: 10rem;
 
 
     align-items: center;
@@ -138,9 +138,9 @@ body>main>.content>.lookup>.status-ul>li>div>span{
 }
 
 body>main>.content>.lookup>.status-ul>li>div>.small-text{
-        cursor: pointer;
-        padding: 25px 2rem 28px 1rem;
-        font-size: 14px;
+    cursor: pointer;
+    padding: 25px 2rem 28px 1rem;
+    font-size: 14px;
 
 }
 
@@ -187,7 +187,6 @@ body>main>.content>.lookup>.status-ul>li>div>.small-text{
     }
 
 }
-
 
 
 

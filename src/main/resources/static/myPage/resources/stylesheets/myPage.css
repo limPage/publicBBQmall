@@ -65,7 +65,7 @@ body>main>.my-page-content>table>tbody>.user-order-tr
 }
 
 body>main>.my-page-content>table>tbody>.user-order-tr{
-   padding-top: 4.7rem;
+    padding-top: 4.7rem;
     padding-bottom: 5rem;
     letter-spacing: -0.1rem;
     display: flex;
@@ -116,7 +116,7 @@ body>main>.my-page-content>table>tbody>tr>.user-menu>p>span:first-of-type{
 }
 body>main>.my-page-content>table>tbody>.user-order-tr{
     color: rgba(0,0,0,0.6);
-    
+
 }
 body>main>.my-page-content>table>tbody>.user-order-tr>td>h1{
     font-size: 1.75rem;
@@ -191,9 +191,9 @@ body>main>.my-page-content>table>tbody>.service-row>.service>span{
 
 @media screen and (max-width : 87.5rem) {
 
-*{
+    *{
 
-}
+    }
     body > main {
 
         width: 100%;

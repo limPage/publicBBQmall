@@ -41,8 +41,8 @@ body>main>.content>ul>li:last-of-type{
 
 
 body>main>.content>ul>li>a{
-width: 100%;
-height: calc(10rem - 0.125rem);
+    width: 100%;
+    height: calc(10rem - 0.125rem);
 
 
     align-items: center;
@@ -159,7 +159,7 @@ body>main>.content>.question>.question-ul>li.answer>div>span{
 }
 
 body>main>.content>.question>.question-ul>.answer{
-   background-color: rgba(0,0,0,0.03);
+    background-color: rgba(0,0,0,0.03);
     color: rgba(0,0,0,0.5);
 
 

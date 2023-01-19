@@ -30,7 +30,7 @@
 
 <main th:if="${session.user!=null}" >
     <th:block th:replace="~{fragments/body ::myPageSideBar}"></th:block>
-        <input hidden id="bid" th:value="${bid}">
+    <input hidden id="bid" th:value="${bid}">
 
     <div class="content" >
         <div class="title-container">
@@ -55,7 +55,7 @@
                 <p th:text="'결제금액 : '+${order.getPrice()}+'원'"> </p>
             </li>
         </ul>
-</div>
+    </div>
 
 
 
@@ -64,5 +64,4 @@
 <th:block th:replace="~{fragments/body :: footer}"></th:block>
 </body>
 </html>
-
 

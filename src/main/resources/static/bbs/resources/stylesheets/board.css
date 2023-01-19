@@ -96,13 +96,13 @@ body> main> .content>.form>label>input[type='text']{
 
 body>main>.content>.content-table{
     border-top: 0.0625rem black solid;
-border-bottom:  0.0625rem rgba(0,0,0,0.3) solid;
+    border-bottom:  0.0625rem rgba(0,0,0,0.3) solid;
 
     align-items: stretch;
     display: flex;
     flex-direction: column ;
     justify-content: flex-start;
-color: rgba(0,0,0,0.5);
+    color: rgba(0,0,0,0.5);
     font-weight: 500;
 
 }
@@ -197,7 +197,7 @@ body>main>.content>.content-table>tbody .content-title>a>img {
 
 
 body>main>.content>.content-table tr>td>.written-on{
-  text-align: center;
+    text-align: center;
     width: 5.625rem;
 }
 body>main>.content>.content-table tr>td>.view-count{
@@ -287,7 +287,7 @@ body>main>.content>.content-table>tfoot>tr>td>.page-container>.page:hover{
 
 body>main>.content>.write-notice-button{
     display: flex;
-justify-content: flex-end;
+    justify-content: flex-end;
 
 }
 body>main>.content>.write-notice-button>a{

@@ -24,19 +24,19 @@ public class HomeService {
     }
 
     public NoticeEntity[] getProductReviews() {
-        
+
         return this.iHomeMapper.selectProductReview();
     }
     public ProductReadVo[] getRecommendedProducts() {
 
-            ProductReadVo[] products =this.iHomeMapper.selectRecommendedProduct();
-            for (ProductReadVo product :products){
-                ProductImageEntity[] productImages = this.iHomeMapper.selectProductImagesByProductIndexExceptData(product.getProductIndex());
-                int[] productImageIndexes = stream(productImages).mapToInt(ProductImageEntity::getIndex).toArray();
-                product.setImageIndexes(productImageIndexes);
+        ProductReadVo[] products =this.iHomeMapper.selectRecommendedProduct();
+        for (ProductReadVo product :products){
+            ProductImageEntity[] productImages = this.iHomeMapper.selectProductImagesByProductIndexExceptData(product.getProductIndex());
+            int[] productImageIndexes = stream(productImages).mapToInt(ProductImageEntity::getIndex).toArray();
+            product.setImageIndexes(productImageIndexes);
 
-            }
-            return products;
         }
+        return products;
+    }
 
 }

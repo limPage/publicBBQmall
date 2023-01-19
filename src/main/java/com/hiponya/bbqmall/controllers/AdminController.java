@@ -61,7 +61,7 @@ public class AdminController {
                                        @RequestParam(value = "menuIndex" , required = false)Integer menuIndex,
                                        @RequestParam (value = "detailIndex" ,required = false) Integer detailIndex){
         ModelAndView modelAndView = new ModelAndView("admin/readProduct");
-       ProductEntity product = new ProductEntity();
+        ProductEntity product = new ProductEntity();
 
         if(menuIndex!=null && menuIndex==99){
 
@@ -82,8 +82,8 @@ public class AdminController {
 
         if (menuIndex!=null && menuIndex!=99&& detailIndex!=99 ){
             ProductReadVo[] products= this.adminService.getProducts(detailIndex.toString());
-         modelAndView.addObject("products", products);
-         modelAndView.addObject("detailIndex",detailIndex);
+            modelAndView.addObject("products", products);
+            modelAndView.addObject("detailIndex",detailIndex);
         }
 
         modelAndView.addObject("menuIndex",menuIndex);
@@ -130,11 +130,11 @@ public class AdminController {
     @ResponseBody
     @RequestMapping(value = "/delete" ,method =RequestMethod.DELETE, produces = MediaType.TEXT_HTML_VALUE)
     public String deleteProduct(@SessionAttribute (value = "user",required = false) UserEntity user,
-                                         @RequestParam (value = "pid") int pid ) throws RollbackException {
+                                @RequestParam (value = "pid") int pid ) throws RollbackException {
 
         JSONObject responseObject = new JSONObject();
-            Enum<?> result = this.adminService.deleteProduct(user, pid);
-            responseObject.put("result", result.name().toLowerCase());
+        Enum<?> result = this.adminService.deleteProduct(user, pid);
+        responseObject.put("result", result.name().toLowerCase());
         return responseObject.toString();
 
     }
@@ -145,9 +145,9 @@ public class AdminController {
     @PostMapping(value = "create")
     @ResponseBody
     public String postProduct(@SessionAttribute(value = "user" ,required = false) UserEntity user,
-                             @RequestParam(value = "images", required = false) MultipartFile[] images,
-                             @RequestParam(value = "detailImages", required = false) MultipartFile[] detailImages,
-                             ProductEntity product )throws IOException {
+                              @RequestParam(value = "images", required = false) MultipartFile[] images,
+                              @RequestParam(value = "detailImages", required = false) MultipartFile[] detailImages,
+                              ProductEntity product )throws IOException {
         JSONObject responseObject = new JSONObject();
         Enum<?> result;
 

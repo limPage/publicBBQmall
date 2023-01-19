@@ -19,7 +19,7 @@ form['menuIndex'].addEventListener('change', ()=>{
         form['detailIndex3'].style.display="none"
         form['detailIndex3'].value=0;
 
-}else if(form['menuIndex'].value==='2') {
+    }else if(form['menuIndex'].value==='2') {
         form['detailIndex2'].style.display="inline-block"
         form['detailIndex1'].style.display="none"
         form['detailIndex1'].value=0;
@@ -46,33 +46,33 @@ form['menuIndex'].addEventListener('change', ()=>{
 //상세 메뉴를 골랐을때
 
 
-    for (let i=0; i< imageButton.length; i++){
-        imageButton.item(i).addEventListener("click",(e)=>{
+for (let i=0; i< imageButton.length; i++){
+    imageButton.item(i).addEventListener("click",(e)=>{
 
-            e.preventDefault();
-            images.item(i).click();
-        })
+        e.preventDefault();
+        images.item(i).click();
+    })
 
 
 
-        images.item(i).addEventListener('input', () => {
-            const imageContainerElement = imageContainer.item(i);
-            imageContainerElement.querySelectorAll('img.image').forEach(x => x.remove());
-            if (images.item(i).files.length > 0) {
-                noImage.item(i).setAttribute("hidden",1);
-            } else {
-                noImage.item(i).removeAttribute('hidden');
-            }
+    images.item(i).addEventListener('input', () => {
+        const imageContainerElement = imageContainer.item(i);
+        imageContainerElement.querySelectorAll('img.image').forEach(x => x.remove());
+        if (images.item(i).files.length > 0) {
+            noImage.item(i).setAttribute("hidden",1);
+        } else {
+            noImage.item(i).removeAttribute('hidden');
+        }
 
-            for (let file of images.item(i).files) {
-                const imageSrc = URL.createObjectURL(file);
-                const imgElement = document.createElement('img');
-                imgElement.classList.add('image');
-                imgElement.setAttribute('src', imageSrc);
-                imageContainerElement.append(imgElement);
-            }
+        for (let file of images.item(i).files) {
+            const imageSrc = URL.createObjectURL(file);
+            const imgElement = document.createElement('img');
+            imgElement.classList.add('image');
+            imgElement.setAttribute('src', imageSrc);
+            imageContainerElement.append(imgElement);
+        }
 
-        });
+    });
 
 }
 //사진첨부를 눌렀을때
@@ -178,6 +178,5 @@ form['submit'].addEventListener("click",()=>{
 
 
 })
-
 
 

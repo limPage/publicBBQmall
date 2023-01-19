@@ -310,7 +310,7 @@ if(window.document.getElementById('bid').value===("notice")) {
             xhr.send(formData);//데이터가 없음
         })}
 
-        }else if(window.document.getElementById('bid').value===("pr")) {
+}else if(window.document.getElementById('bid').value===("pr")) {
     window.document.getElementById('sideBarPR').style.cssText=  `  color: rgba(0,0,0,0.9);
     font-weight: 700;`;
 
@@ -546,12 +546,12 @@ else {
 
 
             })
-            })
-        }
+        })
+    }
 
 
 
-   let deleteAdminComments= window.document.querySelectorAll('.deleteAdminComment');
+    let deleteAdminComments= window.document.querySelectorAll('.deleteAdminComment');
 
 
     for (let i=0 ; i< deleteAdminComments.length; i++){

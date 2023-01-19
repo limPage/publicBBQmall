@@ -32,7 +32,7 @@ else if (nowDetailIndex>5 && nowDetailIndex<12){
     detailIndex=nowDetailIndex;
 
 }
- else {
+else {
     form['menuIndex'].value=3;
     form['detailIndex3'].style.display="inline-block"
     form['detailIndex2'].style.display="none"
@@ -56,7 +56,7 @@ form['menuIndex'].addEventListener('change', ()=>{
         form['detailIndex3'].value=0;
 
 
-}else if(form['menuIndex'].value==='2') {
+    }else if(form['menuIndex'].value==='2') {
         form['detailIndex2'].style.display="inline-block"
         form['detailIndex1'].style.display="none"
         form['detailIndex1'].value=0;
@@ -83,43 +83,43 @@ form['menuIndex'].addEventListener('change', ()=>{
 //상세 메뉴를 골랐을때
 
 
-    for (let i=0; i< imageButton.length; i++){
-        imageButton.item(i).addEventListener("click",(e)=>{
-            if(!confirm("기존 상품 이미지가 있다면 모두 삭제됩니다.\n이후 되돌리고 싶다면 새로고침 후 진행해야 합니다.\n진행 하시겠습니까?")){
-                return ;
-            }
-            e.preventDefault();
-            if (i===0){imageChange=1;}
-            if (i===1){detailImageChange=1;}
-            const imageContainerElement = imageContainer.item(i);
-            imageContainerElement.querySelectorAll('img.image').forEach(x => x.remove());
-            images.item(i).click();
-        })
+for (let i=0; i< imageButton.length; i++){
+    imageButton.item(i).addEventListener("click",(e)=>{
+        if(!confirm("기존 상품 이미지가 있다면 모두 삭제됩니다.\n이후 되돌리고 싶다면 새로고침 후 진행해야 합니다.\n진행 하시겠습니까?")){
+            return ;
+        }
+        e.preventDefault();
+        if (i===0){imageChange=1;}
+        if (i===1){detailImageChange=1;}
+        const imageContainerElement = imageContainer.item(i);
+        imageContainerElement.querySelectorAll('img.image').forEach(x => x.remove());
+        images.item(i).click();
+    })
 
 
 
-        images.item(i).addEventListener('input', () => {
-            const imageContainerElement = imageContainer.item(i);
+    images.item(i).addEventListener('input', () => {
+        const imageContainerElement = imageContainer.item(i);
 
-            if (images.item(i).files.length > 0) {
-                nowNoImage.item(i).setAttribute("hidden",1);
-                noImage.item(i).setAttribute("hidden",1);
+        if (images.item(i).files.length > 0) {
+            nowNoImage.item(i).setAttribute("hidden",1);
+            noImage.item(i).setAttribute("hidden",1);
 
-            } else {
-                noImage.item(i).removeAttribute('hidden');
+        } else {
+            noImage.item(i).removeAttribute('hidden');
 
 
-            }
+        }
 
-            for (let file of images.item(i).files) {
-                const imageSrc = URL.createObjectURL(file);
-                const imgElement = document.createElement('img');
-                imgElement.classList.add('image');
-                imgElement.setAttribute('src', imageSrc);
-                imageContainerElement.append(imgElement);
-            }
+        for (let file of images.item(i).files) {
+            const imageSrc = URL.createObjectURL(file);
+            const imgElement = document.createElement('img');
+            imgElement.classList.add('image');
+            imgElement.setAttribute('src', imageSrc);
+            imageContainerElement.append(imgElement);
+        }
 
-        });
+    });
 
 }
 //사진첨부를 눌렀을때
@@ -229,6 +229,5 @@ form['submit'].addEventListener("click",()=>{
 
 
 })
-
 
 

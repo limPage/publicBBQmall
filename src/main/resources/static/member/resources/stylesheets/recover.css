@@ -46,7 +46,7 @@ body > main > .content> .form >.title{
     letter-spacing: -0.0625rem;
 }
 body > main > .content> .form > .title2{
- font-size: 1rem;
+    font-size: 1rem;
     text-align: center;
     margin-bottom: 1.25rem;
 
@@ -139,10 +139,10 @@ main> .content >.form>table>tbody>.icon-row>td{
 main> .content >.form>table>tbody>.icon-row>td>.bar-container{
 
 
-   align-items: center;
-   display: flex;
-   flex-direction: row ;
-   justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: row ;
+    justify-content: center;
 
 
 }
@@ -180,7 +180,7 @@ main> .content >.form>table>tbody>.icon-row>td>.bar-container>.bar-icon>span{
     }
     to{
 
-       translate:  0.4375rem 0;
+        translate:  0.4375rem 0;
 
     }
 

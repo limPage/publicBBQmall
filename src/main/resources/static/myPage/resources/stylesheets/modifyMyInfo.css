@@ -35,7 +35,7 @@ body> main> .content>form > table{
 }
 body> main> .content>form > table>thead{
     padding-top: 10rem;
-   /*display: none;*/
+    /*display: none;*/
 }
 body> main> .content > form > table>thead>tr>th>h1{
     text-shadow: 0 0  0.5rem #767676 ;
@@ -198,7 +198,7 @@ body> main> .content>form > table>tbody>.password-row.visible>td>label>#password
 
 
 body> main> .content>form > table>tbody>.modify-row>td>label>.password-button{
-margin-left: 0.25rem;
+    margin-left: 0.25rem;
 }
 
 

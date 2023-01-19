@@ -56,8 +56,8 @@ if (form['isNoticeBoard'].value==="notice"){
 else if (form['isNoticeBoard'].value === "qna"){
 
 
-   const questionOpen= window.document.querySelectorAll('.questionOpen');
-   const antherLi=  window.document.querySelectorAll('.answer');
+    const questionOpen= window.document.querySelectorAll('.questionOpen');
+    const antherLi=  window.document.querySelectorAll('.answer');
 
     for(let i=0 ;i< questionOpen.length; i++){
 
@@ -66,15 +66,15 @@ else if (form['isNoticeBoard'].value === "qna"){
 
         questionText.addEventListener('click', () => {
 
-             if  (antherText.classList.contains('visible')){
-                antherText.classList.remove('visible');
-            }else {
-                antherText.classList.add('visible');
-                 }
+                if  (antherText.classList.contains('visible')){
+                    antherText.classList.remove('visible');
+                }else {
+                    antherText.classList.add('visible');
+                }
             }
-    )}
+        )}
 
-   const qid= form['qid'].value;
+    const qid= form['qid'].value;
     if (qid===''){
         window.document.getElementById('all').style.cssText= `background-color: black;
         color:white; `;
@@ -174,10 +174,10 @@ else if (form['isNoticeBoard'].value==="bp"){
         loadBbid();
         delete window.localStorage.savedBpBoardId;
     })
-        window.addEventListener('load', function () {
+    window.addEventListener('load', function () {
 
-       delete window.localStorage.savedBpBoardId;
-            // form['bbid'].value='0'
+        delete window.localStorage.savedBpBoardId;
+        // form['bbid'].value='0'
     })
 
 

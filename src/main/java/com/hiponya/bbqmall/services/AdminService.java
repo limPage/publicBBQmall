@@ -133,9 +133,9 @@ public class AdminService {
 
 
 
-            ProductImageEntity[] productImages = this.adminMapper.selectProductImagesByProductIndexExceptData(product.getProductIndex());
-            int[] productImageIndexes = stream(productImages).mapToInt(ProductImageEntity::getIndex).toArray();
-            product.setImageIndexes(productImageIndexes);
+        ProductImageEntity[] productImages = this.adminMapper.selectProductImagesByProductIndexExceptData(product.getProductIndex());
+        int[] productImageIndexes = stream(productImages).mapToInt(ProductImageEntity::getIndex).toArray();
+        product.setImageIndexes(productImageIndexes);
 
         DetailImageEntity[] detailImages = this.adminMapper.selectDetailImagesByProductIndexExceptData(product.getProductIndex());
         int[] detailImageIndexes = stream(detailImages).mapToInt(DetailImageEntity::getIndex).toArray();

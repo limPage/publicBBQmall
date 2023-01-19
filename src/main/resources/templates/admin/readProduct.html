@@ -182,7 +182,7 @@
                         <ul>
                             <li th:each="product :${products}">
                                 <span class="number-column" th:text="${product.getProductIndex()}">00</span>
-                            <span class="image-container image-column">
+                                <span class="image-container image-column">
 
                                 <img th:each="image : ${product.getImageIndexes()}"
                                      th:src="@{/admin/productImage (index=${image}) }" alt="이미지" title="이미지">
@@ -193,12 +193,12 @@
                                 <a href="#">
 
                                     <span class="name-column"
-                                                   th:text="${product.getProductName()}">비비큐</span>
+                                          th:text="${product.getProductName()}">비비큐</span>
 
                                     <span class="price-column" th:text="${product.getPrice()}+' 원'">5000원</span> </a>
-                                    <span class="date-column"
-                                        th:text="${#dates.format(product.getCreatedOn(),'yyyy.MM.dd hh:mm')}">2022-22-28-10:20:20</span>
-                                    <span class="spring"></span>
+                                <span class="date-column"
+                                      th:text="${#dates.format(product.getCreatedOn(),'yyyy.MM.dd hh:mm')}">2022-22-28-10:20:20</span>
+                                <span class="spring"></span>
                                 <a class="button" th:href="@{/admin/update (pid= ${product.getProductIndex()})}">수 정</a><a class="button delete" href="#">삭 제</a>
                                 <input hidden class="pid" th:value="${product.getProductIndex()}">
                             </li>

@@ -6,9 +6,9 @@ public class NoticeEntity {
 
 
 
-  private int  index;
+    private int  index;
 
-  private String id;
+    private String id;
     private String boardId;
     private String title;
     private Date writtenOn;

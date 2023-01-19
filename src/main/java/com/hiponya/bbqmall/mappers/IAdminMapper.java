@@ -15,27 +15,27 @@ public interface IAdminMapper {
 
 
 
-   int insertProduct(ProductEntity product);
+    int insertProduct(ProductEntity product);
 
-   int insertProductImage(ProductImageEntity productImage);
-   int insertDetailImage(DetailImageEntity detailImage);
-   int insertStatusLookup(StatusLookupEntity statusLookup);
-   int updateProduct(ProductEntity product);
+    int insertProductImage(ProductImageEntity productImage);
+    int insertDetailImage(DetailImageEntity detailImage);
+    int insertStatusLookup(StatusLookupEntity statusLookup);
+    int updateProduct(ProductEntity product);
 
 
-   int deleteProductByProductIndex(@RequestParam (value = "productIndex") int productIndex);
-   int deleteProductImageByProductIndex(@RequestParam (value = "productIndex") int productIndex);
-   int deleteDetailImageByProductIndex(@RequestParam (value = "productIndex") int productIndex);
-   ProductReadVo[] selectProductsByDetailIndex(@RequestParam (value = "detailIndex") String detailIndex);
-   ProductReadVo selectProductByProductIndex(@RequestParam (value = "productIndex") int pid);
+    int deleteProductByProductIndex(@RequestParam (value = "productIndex") int productIndex);
+    int deleteProductImageByProductIndex(@RequestParam (value = "productIndex") int productIndex);
+    int deleteDetailImageByProductIndex(@RequestParam (value = "productIndex") int productIndex);
+    ProductReadVo[] selectProductsByDetailIndex(@RequestParam (value = "detailIndex") String detailIndex);
+    ProductReadVo selectProductByProductIndex(@RequestParam (value = "productIndex") int pid);
 
-   ProductImageEntity[] selectProductImagesByProductIndexExceptData(@Param(value = "productIndex") int productIndex);
-   DetailImageEntity[] selectDetailImagesByProductIndexExceptData(@Param(value = "productIndex") int productIndex);
+    ProductImageEntity[] selectProductImagesByProductIndexExceptData(@Param(value = "productIndex") int productIndex);
+    DetailImageEntity[] selectDetailImagesByProductIndexExceptData(@Param(value = "productIndex") int productIndex);
 
-   StatusLookupEntity[] selectStatusLookupByStatus(String status);
+    StatusLookupEntity[] selectStatusLookupByStatus(String status);
 
-   ProductImageEntity selectProductImageByIndex(@Param(value = "index") int index);
-   DetailImageEntity selectDetailImageByIndex(@Param(value = "index") int index);
+    ProductImageEntity selectProductImageByIndex(@Param(value = "index") int index);
+    DetailImageEntity selectDetailImageByIndex(@Param(value = "index") int index);
 
 
 

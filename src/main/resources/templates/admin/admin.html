@@ -8,7 +8,7 @@
     <th:block th:replace="~{fragments/head :: common}"></th:block>
 
     <link rel="stylesheet" th:href="@{/admin/resources/stylesheets/admin.css}">
-<!--    <script defer th:src="@{/member/resources/scripts/csCenter.js}"></script>-->
+    <!--    <script defer th:src="@{/member/resources/scripts/csCenter.js}"></script>-->
 
     <script th:if="${session.user==null || !session.user.isAdmin()}">
         alert("없는 페이지입니다.");//일반인에게 어드민 페이지를 숨긴다.
@@ -86,13 +86,13 @@
                         <span th:text="${status.getStatus().charAt(0)}">C</span>
 
 
-                           <i class="small-text" th:text="${status.getStatusText()}">상태</i>
-                            <span class="small-text" th:text="${status.getProductIndex()}">-</span>
-                            <span class="small-text" th:text="${status.getText()}">234</span>
+                        <i class="small-text" th:text="${status.getStatusText()}">상태</i>
+                        <span class="small-text" th:text="${status.getProductIndex()}">-</span>
+                        <span class="small-text" th:text="${status.getText()}">234</span>
 
                         <span class="spring"></span>
 
-                            <span class="small-text" th:text="${#dates.format(status.getOccurredTime(),'yyyy.MM.dd hh:mm')}">2022-22-28-10:20:20</span>
+                        <span class="small-text" th:text="${#dates.format(status.getOccurredTime(),'yyyy.MM.dd hh:mm')}">2022-22-28-10:20:20</span>
 
 
 
