@@ -1,69 +1,180 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>BBQ몰</title>
 
-    <link rel="stylesheet" th:href="@{/resources/stylesheets/common.css}">
+
+    <link rel="stylesheet" th:href="@{/bbs/resources/stylesheets/index.css}">
+    <th:block th:replace="~{fragments/head :: common}"></th:block>
+
 
 </head>
 <body>
-<header>
-    <div class="logo-row">
-        <div class="logo-container">
-             <img  alt="" src="https://mall.bbq.co.kr/data/skin/responsive_ver1_default_gl/images/bbq/bbq_logo.svg">
-            <div class="search">검색</div>
-            <span class="spring"></span>
+<th:block th:replace="~{fragments/body :: header}"></th:block>
+<div class="swiper-row">
+    <img class="swiper" src="https://mall.bbq.co.kr/data/skin/responsive_ver1_default_gl/images/banner/10/images_1.png?ver=3000">
 
-            <a>회원가입</a>
 
-            <a>로그인</a>
-            <a>고객센터</a>
+
+</div>
+
+<main>
+
+
+    <section class="goods-row goods-row1">
+        <span class="title">BBQ몰 추천상품</span>
+        <ul class="goods-container">
+            <li class="goods" th:each="product,i: ${products}" th:if="${i.count <9}">
+               <a href="#">
+<!--                   <img th:each="image : ${product.getImageIndexes()}">-->
+                   <img th:src="@{/admin/productImage (index=${product.getImageIndexes()}) }" alt="이미지" title="이미지">
+               </a>
+
+                <div class="goods-info">
+                    <a href="#" th:text="${product.getProductName()}">BBQ닭가슴살 골라담기(신제품)</a>
+                    <span class="price">
+                        <span class="sale-text" th:text="${product.getSaleQuantity()}"> 1277</span><span class="small-text">%</span>
+
+                          <span th:text="${product.getPrice() } - ${product.getPrice()*(product.getSaleQuantity()*0.01)}">6980</span><span class="small-text">원</span>
+                        <span class="small-text price-text" th:text="${product.getPrice()}">7000</span>
+                    </span>
+                </div>
+
+            </li>
+
+
+        </ul>
+
+
+    </section>
+
+    <section class="goods-row goods-row2">
+        <span class="title">BBQ몰 추천상품</span>
+        <ul class="goods-container">
+            <li class="goods" th:each="product,i: ${products}" th:if="${i.count >8 and i.count < 17}">
+                <a href="#"><img th:src="@{/admin/productImage (index=${product.getImageIndexes()}) }" alt="이미지" title="이미지"></a>
+
+                <div class="goods-info">
+                    <a href="#" th:text="${product.getProductName()}">BBQ닭가슴살 골라담기(신제품)</a>
+                    <span class="price">
+                        <span class="sale-text" th:text="${product.getSaleQuantity()}"> 12</span><span class="small-text">%</span>
+
+                          <span th:text="${product.getPrice() } - ${product.getPrice()*(product.getSaleQuantity()*0.01)}">6980</span><span class="small-text">원</span>
+                        <span class="small-text price-text" th:text="${product.getPrice()}">7000</span>
+                    </span>
+                </div>
+
+            </li>
+
+
+        </ul>
+
+
+    </section>
+
+
+
+    <div class="event-row">
+
+        <a class="title">특가/이벤트</a>
+
+        <ul>
+            <li>
+                <a>
+                    <img src="/resources/images/event1.jpg" >
+
+                    <span class="event-title">금액대별 육포 증정이벤트</span>
+                    <span>육포도 같이가욥!</span>
+
+                </a>
+            </li>
+            <li>
+                <a>
+                    <img src="/resources/images/event2.png" >
+
+                    <span class="event-title">금액대별 육포 증정이벤트</span>
+                    <span>육포도 같이가욥!</span>
+
+                </a>
+            </li><li>
+            <a>
+                <img src="/resources/images/event3.png" >
+
+                <span class="event-title">금액대별 육포 증정이벤트</span>
+                <span>육포도 같이가욥!</span>
+
+            </a>
+        </li><li>
+            <a>
+                <img src="/resources/images/event4.png" >
+
+                <span class="event-title">금액대별 육포 증정이벤트</span>
+                <span>육포도 같이가욥!</span>
+
+            </a>
+        </li>
+
+        </ul>
+
+        <div class="page-container">
+            <a></a>
+
         </div>
     </div>
-    <div class="menu-row">
-        <div class="menu-container">
-                <ul>
-                    <li class="menu-button">
-                        <span>X</span>
-                        <a href="#">전체상품</a>
-                    </li>
-                    <li class="menu">
-                        <a href="#">NEW</a>
-                    </li>
-                    <li class="menu">
-                        <a href="#">BBQ베스트</a>
-                    </li>
-                    <li class="menu">
-                        <a href="#">현명한특가</a>
-                    </li>
-                    <li class="menu">
-                        <a href="#">브랜드관</a>
-                    </li>
-                    <li class="menu">
-                        <a href="#">이벤트/혜택</a>
-                    </li>
-                    <span class="spring"></span>
-                    <li class="my-menu">
-                        <a href="#"><img alt="" src="https://mall.bbq.co.kr/data/images/bbqnew/pc/%EB%A7%88%EC%9D%B4%ED%8E%98%EC%9D%B4%EC%A7%80.svg"> </a>
-                    </li>
-                    <li class="my-menu">
-                        <a href="#"><img alt="" src="https://mall.bbq.co.kr/data/images/bbqnew/pc/%EC%B0%9C%ED%95%9C%EB%AA%A9%EB%A1%9D.svg"> </a>
-                    </li>
-                    <li class="my-menu">
-                        <a href="#"><img alt="" src="https://mall.bbq.co.kr/data/images/bbqnew/pc/%EC%9E%A5%EB%B0%94%EA%B5%AC%EB%8B%88.svg"></img></a>
-                    </li>
 
 
-                </ul>
-        </div>
+    <section class="goods-row goods-row1">
+        <span class="title">BBQ몰 추천상품</span>
+        <ul class="goods-container">
+            <li class="goods" th:each="product,i: ${products}" th:if="${i.count >16}">
+                <a href="#"><img th:src="@{/admin/productImage (index=${product.getImageIndexes()}) }" alt="이미지" title="이미지" ></a>
+
+                <div class="goods-info">
+                    <a href="#" th:text="${product.getProductName()}">BBQ닭가슴살 골라담기(신제품)</a>
+                    <span class="price">
+                        <span class="sale-text" th:text="${product.getSaleQuantity()}"> 12</span><span class="small-text">%</span>
+
+                          <span th:text="${product.getPrice() } - ${product.getPrice()*(product.getSaleQuantity()*0.01)}">6980</span><span class="small-text">원</span>
+                        <span class="small-text price-text" th:text="${product.getPrice()}">7000</span>
+                    </span>
+                </div>
+
+            </li>
+
+
+
+        </ul>
+
+
+    </section>
+
+
+
+    <div class="event-row-big">
+        <img src="/resources/images/eventBig.png">
     </div>
-</header>
-<main>몸</main>
 
-<footer>
-    발
-</footer>
+<section class="review-row">
+    <div ><img src="https://mall.bbq.co.kr/data/skin/responsive_ver1_default_gl/images/bbqnew2/pc/%EA%B3%A0%EA%B0%9D%ED%9B%84%EA%B8%B0.svg">
+        <a class="title">고객후기</a> <span class="spring"></span> <a class="more" th:href="@{/board/ (bid=pr)}">더보기 ＞</a></div>
+
+    <ul class="review-container">
+        <li class="review" th:each="review, i: ${reviews}">
+            <span class="review-text" th:text="${review.getTitle()}"> </span>
+            <a th:href="@{/board/readNotice (bid='pr',nid=${review.getIndex()})}">
+
+                <img th:src="@{/resources/images/review} + ${i.count}+.png"  alt="reviewImage">
+            </a>
+        </li>
+
+    </ul>
+
+</section>
+</main>
+
+<th:block th:replace="~{fragments/body :: footer}"></th:block>
+
 
 </body>
 </html>
