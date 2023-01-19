@@ -170,7 +170,9 @@
         `notice`.`written_on` AS `writtenOn`,
         `notice`.`modified_on` AS `modifiedOn`,
         `notice`.`new_flag` AS `isNew`,
-        `notice`.`qna_board_id` AS `qnaBoardId`
+        `notice`.`qna_board_id` AS `qnaBoardId`,
+        `notice`.`comment_count` AS `commentCount`
+
         FROM `bbq_bbs`.`notice` AS `notice`
         LEFT JOIN `bbq_bbs`.`notice_boards` AS `notice_board` on  `notice_board`.`id` = `notice`.`board_id`
         WHERE  `board_id` = #{boardId} AND `notice`.`id` = #{id}

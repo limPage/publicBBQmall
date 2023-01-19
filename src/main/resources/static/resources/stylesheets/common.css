@@ -5,14 +5,8 @@ html {
     font-weight: 400;
 
     height: 100%;
-    /*width: 118.9375rem;*/
-    /*width: 1903px;*/
-
-    /*min-width: 56.25rem;*/
     margin: unset;
     padding: unset;
-    /*display: flex;*/
-    /*justify-content: center;*/
     display: block;
 
 }
@@ -1083,7 +1077,6 @@ body>main>.admin-side-bar{
     body>main> .review-row> .review-container{
         display: grid;
         grid-template-columns: repeat(2,1fr);
-        /*gap: 8px;*/
         max-width: 80rem;
         padding: unset;
 

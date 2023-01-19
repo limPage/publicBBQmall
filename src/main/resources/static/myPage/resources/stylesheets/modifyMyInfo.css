@@ -211,7 +211,7 @@ body> main> .content>form > table>tbody>.modify-row.address-row>td>label:nth-of-
     margin-bottom: 0.25rem;
 }
 
-body> main> .content>form >input[type="submit"]{
+body> main> .content>form >input[name="submit"]{
     padding: 0.5rem 2rem;
     border-radius: 0.2rem;
     border: none;

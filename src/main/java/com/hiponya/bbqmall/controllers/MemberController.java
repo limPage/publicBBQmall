@@ -321,7 +321,6 @@ public class MemberController {
         page=Math.max(1,page);
         String bbid=null;
         String qid = null;
-        String board =null;
 
         if (user!=null && bid!=null && !bid.equals("bp") ) {
             NoticeBoardEntity notice = new NoticeBoardEntity();
