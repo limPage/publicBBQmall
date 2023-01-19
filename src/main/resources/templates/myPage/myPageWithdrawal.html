@@ -5,10 +5,20 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>BBQ몰 - 로그인</title>
+    <title>BBQ몰 -마이페이지</title>
     <th:block th:replace="~{fragments/head :: common}"></th:block>
     <link rel="stylesheet" th:href="@{/myPage/resources/stylesheets/myPageWithdrawal.css}">
-        <script defer th:src="@{/myPage/resources/scripts/myPageWithdrawal.js}"></script>
+    <script defer th:src="@{/myPage/resources/scripts/myPageWithdrawal.js}"></script>
+
+    <script th:if="${session.user==null}">
+
+        alert("로그인 해주세요.");
+        window.location.href='/member/login';
+
+    </script>
+
+
+
 
 </head>
 <body>
@@ -44,7 +54,7 @@
                     <th>내용</th>
                     <td>
                         <label>
-                        <textarea placeholder="삭제 사유를 입력해주세요." name="reasonText"></textarea>
+                            <textarea placeholder="삭제 사유를 입력해주세요." name="reasonText"></textarea>
                         </label>
                     </td>
 
@@ -64,6 +74,8 @@
             <input type="submit" value="탈퇴하기">
         </form>
 
+
+
     </div>
 
 
@@ -71,5 +83,4 @@
 <th:block th:replace="~{fragments/body :: footer}"></th:block>
 </body>
 </html>
-
 

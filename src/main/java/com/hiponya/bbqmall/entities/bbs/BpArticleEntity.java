@@ -6,7 +6,7 @@ public class BpArticleEntity {
 
 
 
-  private int  index;
+    private int  index;
     private String Id;
 
     private int bpBoardId;

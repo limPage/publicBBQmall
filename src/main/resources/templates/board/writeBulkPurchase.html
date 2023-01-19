@@ -20,7 +20,7 @@
 
 <main class="cs-center">
 
-<th:block th:replace="~{fragments/body ::sideBar}"></th:block>
+    <th:block th:replace="~{fragments/body ::sideBar}"></th:block>
     <div class="content">
 
         <div class="title-container">
@@ -37,10 +37,10 @@
 
 
                         <label class="label">
-<!--                            <input type="text" placeholder="제목, 내용" th:value="${#request.getParameter('keyword')}" name="keyword">-->
+                            <!--                            <input type="text" placeholder="제목, 내용" th:value="${#request.getParameter('keyword')}" name="keyword">-->
                             <span hidden>문의등록자</span>
-                            <input class="--object-input input" maxlength="100" name="id" readonly
-                                   type="text" th:value="${session.user.getId()}">
+                            <input  maxlength="20" name="id" readonly
+                                    type="text" th:value="${session.user.getId()}">
 
                         </label>
                     </td>
@@ -81,8 +81,8 @@
                         <label class="label">
 
                             <span hidden>제목</span>
-                            <input class="--object-input input" maxlength="100" name="name"
-                                   type="text">
+                            <input  maxlength="100" name="name"
+                                    type="text">
 
                         </label>
                     </td>
@@ -95,8 +95,8 @@
                         <label class="label">
 
                             <span hidden>이메일</span>
-                            <input class="--object-input input" maxlength="30" name="email"
-                                   type="email">
+                            <input  maxlength="30" name="email"
+                                    type="email">
 
                         </label>
                     </td>
@@ -109,8 +109,8 @@
                         <label class="label">
 
                             <span hidden>담당자연락처</span>
-                            <input class="--object-input input" maxlength="20" name="contact" placeholder="' - ' 없이 입력해주세요"
-                                   type="text">
+                            <input  maxlength="20" name="contact" placeholder="' - ' 없이 입력해주세요"
+                                    type="text">
 
                         </label>
                     </td>
@@ -123,8 +123,8 @@
                         <label class="label">
 
                             <span hidden>회사명</span>
-                            <input class="--object-input input" maxlength="20" name="company"
-                                   type="text">
+                            <input  maxlength="20" name="company"
+                                    type="text">
 
                         </label>
                     </td>
@@ -137,8 +137,8 @@
                         <label class="label">
 
                             <span hidden>배송요청일</span>
-                            <input class="--object-input input" name="requestDate"
-                                   type="date">
+                            <input  name="requestDate"
+                                    type="date">
 
                         </label>
                     </td>
@@ -151,7 +151,7 @@
                         <label class="label">
 
                             <span hidden>상품정보</span>
-                            <input maxlength="100" name="productInfo"
+                            <input maxlength="500" name="productInfo"
                                    type="text" placeholder="문의하시는 상품을 기술해주세요.">
 
                         </label>
@@ -166,8 +166,8 @@
                         <label class="label">
 
                             <span hidden>요청금액</span>
-                            <input class="--object-input input" maxlength="30" name="requestPrice"
-                                   type="number">
+                            <input  maxlength="30" name="requestPrice"
+                                    type="number">
                             <span>원</span>
                         </label>
 
@@ -181,8 +181,8 @@
                         <label class="label">
 
                             <span hidden>제목</span>
-                            <input class="--object-input input" maxlength="100" name="pay" placeholder="결제수단을 입력해주세요."
-                                   type="text">
+                            <input  maxlength="100" name="pay" placeholder="결제수단을 입력해주세요."
+                                    type="text">
 
                         </label>
                     </td>
@@ -195,8 +195,8 @@
                         <label class="label">
 
                             <span hidden>제목</span>
-                            <input class="--object-input input" maxlength="20" name="requestEvidence" placeholder="ex:현금영수증, 세금계산서 필요합니다"
-                                   type="text">
+                            <input  maxlength="20" name="requestEvidence" placeholder="ex:현금영수증, 세금계산서 필요합니다"
+                                    type="text">
 
                         </label>
                     </td>
@@ -209,13 +209,13 @@
                         <label class="label">
 
                             <span> SMS</span>
-                            <input class="--object-input input"  name="replySms" id="replySms" type="checkbox">
+                            <input   name="replySms" id="replySms" type="checkbox">
                         </label>
                         <label class="label">
 
                             <span> email</span>
 
-                            <input class="--object-input input"  name="replyEmail" id="replyEmail" type="checkbox">
+                            <input  name="replyEmail" id="replyEmail" type="checkbox">
 
                         </label>
                     </td>
@@ -230,8 +230,8 @@
                         <label class="label">
 
                             <span hidden>제목</span>
-                            <input class="--object-input input" maxlength="100" name="title"
-                                   type="text">
+                            <input  maxlength="100" name="title"
+                                    type="text">
 
                         </label>
                     </td>
@@ -244,8 +244,8 @@
                     <td>
                         <label class="label">
                             <span hidden>내용</span>
-                            <textarea class="--object-input input" maxlength="10000" name="content"
-                                      placeholder="내용을 입력해주세요"></textarea>
+                            <textarea  maxlength="10000" name="content"
+                                       placeholder="내용을 입력해주세요"></textarea>
 
                         </label>
                     </td>
@@ -257,7 +257,7 @@
                         <label>
                             <input class="before" name="back" value="돌아가기" type="button">
                         </label>
-                            <span class="spring"></span>
+                        <span class="spring"></span>
                         <label>
                             <input class="submit" name="submit" value="작성하기" type="submit">
 

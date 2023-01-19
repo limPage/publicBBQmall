@@ -109,7 +109,7 @@ main > .swiper > div > .catalog-page > .goods-search-form > .border-line {
     text-decoration : line-through;
 }
 
-    .goods-search-form > .search-item-display > .ul > .goods-list {
+.goods-search-form > .search-item-display > .ul > .goods-list {
     align-items : stretch;
     display : flex;
     flex-direction : row;
@@ -127,7 +127,7 @@ main > .swiper > div > .catalog-page > .goods-search-form > .border-line {
     flex-wrap: wrap;
 }
 
- .paging-navigation {
+.paging-navigation {
     align-items : stretch;
     display : flex;
     flex-direction : row;

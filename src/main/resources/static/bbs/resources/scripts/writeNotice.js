@@ -1,4 +1,4 @@
-
+let bidValue=form['bid'].value;
 // const form = window.document.getElementById('form');
 
 // ClassicEditor.create(form['content']);
@@ -25,7 +25,27 @@ window.addEventListener('load', () =>{
 
 })
 
+if(window.document.getElementById('bid').value===''){
+    window.document.getElementById('sideBarN').style.cssText=  `  color: rgba(0,0,0,0.9);
+    font-weight: 700;`;
+}
 
+if(window.document.getElementById('bid').value==='pi'){
+    window.document.getElementById('sideBarPI').style.cssText=  `  color: rgba(0,0,0,0.9);
+    font-weight: 700;`;
+}
+if(window.document.getElementById('bid').value==='pr'){
+    window.document.getElementById('sideBarPR').style.cssText=  `  color: rgba(0,0,0,0.9);
+    font-weight: 700;`;
+}
+
+if(window.document.getElementById('bid').value==='pr'|| window.document.getElementById('bid').value==='pi'){
+
+    form['bid'].setAttribute('disabled', true);
+    form['bid'].style.display="none";
+
+    bidValue=window.document.getElementById('bid').value;
+}
 
 
 let editor;
@@ -36,6 +56,9 @@ ClassicEditor
         }
     })
     .then( e => editor =e); // e가 e2 > editor > form content .focus;
+
+
+
 
 form['back'].addEventListener('click' , () => window.history.length <2 ? window.close() : window.history.back());
 
@@ -64,7 +87,7 @@ form.onsubmit = e =>{
     // formData.append('content', form['content'].value);
     formData.append('content', editor.getData());
 
-    formData.append('bid', form['bid'].value);
+    formData.append('bid',bidValue );
 
 
     // bid= "${bid}";
@@ -81,15 +104,12 @@ form.onsubmit = e =>{
 
 
                         alert('작성 성공');
-                        // const index = responseObject['index'];
-                        // window.location.href=`read?aid=${index}`;//자바스크립트문법
-                        window.location.href=`http://localhost:8080/board/`;//자바스크립트문법
+                        if (bidValue==='pi'|| bidValue==='pr'){
 
-
-                        // window.location.href='http://localhost:8080/bbs/write?bid='+form['bid'].value;
-
-                        // window.location.href='http://localhost:8080/bbs/read?aid='+responseObject['index'];
-
+                            window.location.href = `http://localhost:8080/board/?bid=`+bidValue;
+                        }else {
+                            window.location.href = `http://localhost:8080/board/`;//자바스크립트문법
+                        }
 
                         break;
 
@@ -110,4 +130,3 @@ form.onsubmit = e =>{
 
 
 };
-

@@ -26,6 +26,12 @@ if(form['bidValue'].value==="notice") {
     // form['back'].addEventListener('click', () => window.history.length < 2 ? window.close() : window.history.back());
 
     form['bid'].value=form['bidLoad'].value;
+    if(bidValue.value==='pi'|| bidValue.value==='pr'){
+        form['bid'].setAttribute('disabled',true);
+        form['bid'].style.display="none";
+
+
+    }
     form.onsubmit = e => {
 
 
@@ -42,12 +48,16 @@ if(form['bidValue'].value==="notice") {
             return false;
         }
 
-        Cover.show('게시글 수정을 처리중 입니다.')
+        Cover.show('게시글 수정을 처리중 입니다.');
         const xhr = new XMLHttpRequest();
         const formData = new FormData();
         const index = window.document.getElementById('index').value;
 
+        // let bidValue = window.document.getElementById('bidValue').value;
+
         formData.append('title', form['title'].value);
+        formData.append('BoardId',(bidValue.value==='pi'|| bidValue.value==='pr')?null:  form['bid'].value);
+
         // formData.append('content', form['content'].value);
         formData.append('content', editor.getData());
         formData.append('index', index)
@@ -63,9 +73,12 @@ if(form['bidValue'].value==="notice") {
                         case 'success':
 
                             alert('작성 성공');
+                            if (bidValue.value==='pi'|| bidValue.value==='pr'){
 
-                            window.location.href = `http://localhost:8080/board/`;//자바스크립트문법
-
+                                window.location.href = `http://localhost:8080/board/?bid=`+bidValue.value;
+                            }else {
+                                window.location.href = `http://localhost:8080/board/`;//자바스크립트문법
+                            }
 
                             break;
 
@@ -253,5 +266,4 @@ if(window.document.getElementById('bidValue').value==="pr"){
     window.document.getElementById('sideBarPR').style.cssText = `  color: rgba(0,0,0,0.9);
     font-weight: 700;`;
 }
-
 

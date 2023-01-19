@@ -4,7 +4,7 @@ import com.hiponya.bbqmall.entities.bbs.*;
 import com.hiponya.bbqmall.entities.member.UserEntity;
 import com.hiponya.bbqmall.enums.CommonResult;
 import com.hiponya.bbqmall.enums.bbs.DeleteResult;
-import com.hiponya.bbqmall.enums.bbs.ModifyArticleResult;
+import com.hiponya.bbqmall.enums.bbs.ModifyResult;
 import com.hiponya.bbqmall.enums.bbs.WriteCommentResult;
 import com.hiponya.bbqmall.enums.bbs.WriteResult;
 import com.hiponya.bbqmall.interfaces.IResult;
@@ -47,7 +47,7 @@ public class BbsService {
             return WriteResult.NO_SUCH_BOARD;
         }
 
-            //글쓸때 글의 새 개시물 알림뜰 기간을 내일까지로 정한다.
+        //글쓸때 글의 새 개시물 알림뜰 기간을 내일까지로 정한다.
         notice.setExpirationDate(DateUtils.addDays(new Date(), 1));
 //        if(this.bbsMapper.insertArticle(article)==0){
 //            return CommonResult.FAILURE;
@@ -96,11 +96,11 @@ public class BbsService {
 
     }
 
-public NoticeReadVo[] getAnnounceNotice(){
+    public NoticeReadVo[] getAnnounceNotice(){
         return this.bbsMapper.selectAnnounceNotice();
-}
+    }
 
-            //공지게시판을 불러온다
+    //공지게시판을 불러온다
     public NoticeReadVo[] getNotice(NoticeBoardEntity board, PagingModel paging,  String keyword, String qid) {
 
         //만들어진지 1일이 지난 게시물의 새게시물 여부를 새로고침 한다.
@@ -113,13 +113,14 @@ public NoticeReadVo[] getAnnounceNotice(){
                 qid);
 
     }
-    //공지게시판을 불러온다 항목을 선택하지 않았을때 전체
+    public NoticeReadVo[] getMyNotice(String id, String bid,  PagingModel paging) {
+        System.out.println("id:"+id);
+        System.out.println("bid:"+bid);
 
-//    public NoticeReadVo[] getNoticeAll(PagingModel paging,  String keyword) {
-//
-//        return this.bbsMapper.selectNoticeAll( keyword, paging.countPerPage,(paging.requestPage - 1) * (paging.countPerPage) );
-//
-//    }
+
+        return this.bbsMapper.selectMyNoticeById(id,bid, paging.countPerPage, (paging.requestPage - 1) * (paging.countPerPage));
+
+    }
 
 
     public BpReadVo[] getBpArticles(PagingModel paging, String keyword, String bbid) {
@@ -127,6 +128,13 @@ public NoticeReadVo[] getAnnounceNotice(){
         //만들어진지 1일이 지난 게시물의 새게시물 여부를 새로고침 한다.
 
         return this.bbsMapper.selectBpArticleByBoardId(bbid, keyword, paging.countPerPage, (paging.requestPage - 1) * (paging.countPerPage));
+
+    }
+
+    public BpReadVo[] getMyBpArticles(String id, PagingModel paging) {
+
+
+        return this.bbsMapper.selectBpArticleById(id,  paging.countPerPage, (paging.requestPage - 1) * (paging.countPerPage));
 
     }
 
@@ -154,16 +162,16 @@ public NoticeReadVo[] getAnnounceNotice(){
 
         //로그인 안했다면 실패
         if (user == null) {
-            return ModifyArticleResult.NOT_SIGNED;
+            return ModifyResult.NOT_SIGNED;
         }
-    //    공지로 등록하려고 왔을 경우
+        //    공지로 등록하려고 왔을 경우
         if(notice.isImportant()!=null){
             //관리지가 아니면 권한이 없음을 알린다.
             existingArticle.setImportant(notice.isImportant());
 
 
             if( !user.isAdmin()) {
-                return  ModifyArticleResult.NOT_ALLOWED;
+                return  ModifyResult.NOT_ALLOWED;
             }
 
         }
@@ -171,15 +179,19 @@ public NoticeReadVo[] getAnnounceNotice(){
 
         if (existingArticle == null) { //게시글이 없으면 실패
 
-            return ModifyArticleResult.NO_SUCH_ARTICLE;
+            return ModifyResult.NO_SUCH_ARTICLE;
 
-                //수정 시작
+            //수정 시작
         } else {
             //게시물 수정인경우->(단순 공지 등록이아님) 타이틀과 컨텐츠가 있음
             if(notice.getTitle()!=null){
 
                 existingArticle.setContent(notice.getContent());
                 existingArticle.setTitle(notice.getTitle());
+//                System.out.println("@@@@@@@@@@@@"+notice.getBoardId());
+                if(!notice.getBoardId().equals("null")) {
+                    existingArticle.setBoardId(notice.getBoardId());
+                }
 
 
             }
@@ -199,23 +211,23 @@ public NoticeReadVo[] getAnnounceNotice(){
 
         //로그인 안했다면 실패
         if (user == null) {
-            return ModifyArticleResult.NOT_SIGNED;
+            return ModifyResult.NOT_SIGNED;
         }
 
         if (existingBpArticle == null) { //게시글이 없으면 실패
 
-            return ModifyArticleResult.NO_SUCH_ARTICLE;
+            return ModifyResult.NO_SUCH_ARTICLE;
 
             //수정 시작
         }   if( !user.getId().equals(existingBpArticle.getId())) {
-            return  ModifyArticleResult.NOT_ALLOWED;
+            return  ModifyResult.NOT_ALLOWED;
         }
 
         else {
             //게시물 수정인경우->(단순 공지 등록이아님) 타이틀과 컨텐츠가 있음
 
 
-
+            bpArticle.setCommentCount(existingBpArticle.getCommentCount());
             bpArticle.setModifiedOn(new Date());
 
 
@@ -229,16 +241,16 @@ public NoticeReadVo[] getAnnounceNotice(){
         NoticeReadVo existingNotice = this.bbsMapper.selectNoticeByIndex(nid);
 
         if (user == null) {
-            return ModifyArticleResult.NOT_SIGNED;  //로그인이 안되어있거나, 관리자가 아닐경우
+            return ModifyResult.NOT_SIGNED;  //로그인이 안되어있거나, 관리자가 아닐경우
         }
 
         if (existingNotice == null) { //게시글이 없으면
 
-            return ModifyArticleResult.NO_SUCH_ARTICLE;
+            return ModifyResult.NO_SUCH_ARTICLE;
         }
         if (!user.isAdmin()) {   //권한이 없으면
 
-            return ModifyArticleResult.NOT_ALLOWED;       //리턴 값을 줍니다
+            return ModifyResult.NOT_ALLOWED;       //리턴 값을 줍니다
         }
 
 
@@ -249,16 +261,16 @@ public NoticeReadVo[] getAnnounceNotice(){
         BpReadVo existingBpArticle = this.bbsMapper.selectBpArticleByBoardIdJustOne(bbid);
 
         if (user == null) {
-            return ModifyArticleResult.NOT_SIGNED;  //로그인이 안되어있거나, 관리자가 아닐경우
+            return ModifyResult.NOT_SIGNED;  //로그인이 안되어있거나, 관리자가 아닐경우
         }
 
         if (existingBpArticle == null) { //게시글이 없으면
 
-            return ModifyArticleResult.NO_SUCH_ARTICLE;
+            return ModifyResult.NO_SUCH_ARTICLE;
         }
         if (!user.getId().equals(existingBpArticle.getId())) {   //권한이 없으면
 
-            return ModifyArticleResult.NOT_ALLOWED;       //리턴 값을 줍니다
+            return ModifyResult.NOT_ALLOWED;       //리턴 값을 줍니다
         }
 
 
@@ -289,32 +301,59 @@ public NoticeReadVo[] getAnnounceNotice(){
         if (bpArticle == null) {
             return DeleteResult.NO_SUCH_ARTICLE; //게시물이 없다
         }
-        if (user == null || !user.getId().equals(bpArticle.getId())) {
+        if (user == null || !user.isAdmin() && !user.getId().equals(bpArticle.getId())) {
             return DeleteResult.NOT_ALLOWED; //권한이 없다
         }
         return this.bbsMapper.deleteBpArticleByIndex(bpArticle.getIndex()) > 0 ? CommonResult.SUCCESS : CommonResult.FAILURE;
     }
 
-    public Enum<? extends IResult> deleteAdminComment(UserEntity user,int bbid, int acIndex ) {
-        BpArticleEntity existingBpArticle = this.bbsMapper.selectBpArticleByBoardIdJustOne(bbid);//글이 없다
-
-        AdminCommentEntity adminComment = this.bbsMapper.selectAdminCommentByIndexJustOne(acIndex);//수정할 댓글이 없다
-
-        if (adminComment == null || existingBpArticle==null) {
-            return DeleteResult.NO_SUCH_ARTICLE; //게시물이 없다
-        }
-
+    public Enum<? extends IResult> deleteAdminComment(UserEntity user,String bid, int index, int articleIndex ) {
         if (user == null || !user.isAdmin()) {
             return DeleteResult.NOT_ALLOWED; //권한이 없다
         }
-        if( this.bbsMapper.deleteAdminCommentByIndex(acIndex) > 0 ){
+        if (bid.equals("bpArticle")){
 
+            BpArticleEntity existingBpArticle = this.bbsMapper.selectBpArticleByBoardIdJustOne(articleIndex);//글이 없다
 
-            existingBpArticle.setCommentCount(existingBpArticle.getCommentCount()-1);
-            if(this.bbsMapper.updateBpArticle(existingBpArticle)>0){
-                return  CommonResult.SUCCESS;
+            AdminCommentEntity existingAdminComment = this.bbsMapper.selectAdminCommentByIndexJustOne(index);//수정할 댓글이 없다
+
+            if (existingAdminComment == null || existingBpArticle==null) {
+                return DeleteResult.NO_SUCH_ARTICLE; //게시물이 없다
             }
+
+
+            if( this.bbsMapper.deleteAdminCommentByIndex(index) > 0 ){
+
+
+                existingBpArticle.setCommentCount(existingBpArticle.getCommentCount()-1);
+                if(this.bbsMapper.updateBpArticle(existingBpArticle)>0){
+                    return  CommonResult.SUCCESS;
+                }
+            }
+
+
         }
+        if(bid.equals("pi")){
+            NoticeEntity existingNotice = this.bbsMapper.selectNoticeByIndex(articleIndex);
+            PiCommentEntity existingPiComment = this.bbsMapper.selectPiCommentByIndexJustOne(index);
+
+            if (existingNotice == null || existingPiComment==null) {
+                return DeleteResult.NO_SUCH_ARTICLE; //게시물이 없다
+            }
+
+            if( this.bbsMapper.deletePiCommentByIndex(index) > 0 ){
+
+
+                existingNotice.setCommentCount(existingNotice.getCommentCount()-1);
+                if(this.bbsMapper.updateNotice(existingNotice)>0){
+                    return  CommonResult.SUCCESS;
+                }
+            }
+
+
+        }
+
+
         return CommonResult.FAILURE;
 
     }
@@ -325,7 +364,7 @@ public NoticeReadVo[] getAnnounceNotice(){
 
     public QnaAnswerEntity[] getAnswer(){
 
-       return this.bbsMapper.selectAnswers();
+        return this.bbsMapper.selectAnswers();
     }
 
 
@@ -347,11 +386,11 @@ public NoticeReadVo[] getAnnounceNotice(){
         return this.bbsMapper.insertBpArticle(bpArticle) > 0 ? CommonResult.SUCCESS : CommonResult.FAILURE;
     }
 
-    public Enum<? extends IResult> writeAdminComment(UserEntity user, int bbid, AdminCommentEntity adminComment ) {
+    public Enum<? extends IResult> writeAdminComment(UserEntity user, int bbid, int nid,  String content ) {
 //        article.setWrittenOn(new Date());
 //        article.setModifiedOn(new Date());
-            //유저가 null
-                //어드민이 아닐경우
+        //유저가 null
+        //어드민이 아닐경우
         //게시물이 없을경우
 
         if (user==null){
@@ -360,21 +399,55 @@ public NoticeReadVo[] getAnnounceNotice(){
         if(!user.isAdmin()){
             return WriteCommentResult.NOT_ALLOWED;
         }
-        BpArticleEntity existingBpArticle= this.bbsMapper.selectBpArticleByBoardIdJustOne(bbid);
-        if(existingBpArticle==null){
-            return WriteCommentResult.NO_SUCH_ARTICLE;
+
+        System.out.println("bbid는"+bbid);
+        System.out.println("nid는"+nid);
+
+        if (bbid!=0){
+
+            BpArticleEntity existingBpArticle= this.bbsMapper.selectBpArticleByBoardIdJustOne(bbid);
+            if(existingBpArticle==null){
+                return WriteCommentResult.NO_SUCH_ARTICLE;
+            }
+
+            AdminCommentEntity adminComment = new AdminCommentEntity();
+            adminComment.setArticleIndex(bbid);
+            adminComment.setContent(content);
+            if(this.bbsMapper.insertAdminComment(adminComment)>0){
+                existingBpArticle.setCommentCount(existingBpArticle.getCommentCount()+1);
+
+                if(this.bbsMapper.updateBpArticle(existingBpArticle)>0){
+                    return  CommonResult.SUCCESS;
+                }
+            }
+
+        }
+
+        if (nid!=0){
+            NoticeEntity existingNotice= this.bbsMapper.selectNoticeByIndex(nid);
+            if(existingNotice==null){
+                return WriteCommentResult.NO_SUCH_ARTICLE;
+            }
+
+            PiCommentEntity piComment = new PiCommentEntity();
+            piComment.setArticleIndex(nid);
+            piComment.setContent(content);
+            if(this.bbsMapper.insertPiComment(piComment)>0){
+                existingNotice.setCommentCount(existingNotice.getCommentCount()+1);
+
+                if(this.bbsMapper.updateNotice(existingNotice)>0){
+                    System.out.println("성공");
+                    return  CommonResult.SUCCESS;
+                }
+            }
+
+
         }
 
 
 
-        adminComment.setArticleIndex(bbid);
-        if(this.bbsMapper.insertAdminComment(adminComment)>0){
-            existingBpArticle.setCommentCount(existingBpArticle.getCommentCount()+1);
 
-           if(this.bbsMapper.updateBpArticle(existingBpArticle)>0){
-               return  CommonResult.SUCCESS;
-           }
-        }
+
 
         return  CommonResult.FAILURE;
     }
@@ -384,33 +457,62 @@ public NoticeReadVo[] getAnnounceNotice(){
         return this.bbsMapper.selectAdminCommentByIndex(article.getIndex());
 
     }
+    public PiCommentEntity[] getPiComments(int articleIndex){
+
+        return this.bbsMapper.selectPiCommentByIndex(articleIndex);
+
+    }
 
 
-    public Enum<? extends IResult> modifyAdminComment(UserEntity user, AdminCommentEntity adminComment) {
+    public Enum<? extends IResult> modifyAdminComment(UserEntity user, String bid, int index, int articleIndex, String content ) {
 
-        BpArticleEntity existingBpArticle = this.bbsMapper.selectBpArticleByBoardIdJustOne(adminComment.getArticleIndex());
-        AdminCommentEntity existingAdminComment = this.bbsMapper.selectAdminCommentByIndexJustOne(adminComment.getIndex());
+
+
+//        BpArticleEntity existingBpArticle = this.bbsMapper.selectBpArticleByBoardIdJustOne(adminComment.getArticleIndex());
+//        AdminCommentEntity existingAdminComment = this.bbsMapper.selectAdminCommentByIndexJustOne(adminComment.getIndex());
 
         //로그인 안했다면 실패
         if (user == null && !user.isAdmin()) {
-            return ModifyArticleResult.NOT_SIGNED;
+
+            return ModifyResult.NOT_SIGNED;
+        }
+        if (!user.isAdmin()) {
+            return ModifyResult.NOT_ALLOWED;
         }
 
-        if (existingBpArticle == null || existingAdminComment==null) { //게시글이 없으면 실패
+        if(bid.equals("bpArticle")){
+            BpArticleEntity existingBpArticle = this.bbsMapper.selectBpArticleByBoardIdJustOne(articleIndex);
+            AdminCommentEntity existingAdminComment = this.bbsMapper.selectAdminCommentByIndexJustOne(index);
 
-            return ModifyArticleResult.NO_SUCH_ARTICLE;
+            if (existingBpArticle == null || existingAdminComment==null) { //게시글이 없으면 실패
 
-            //수정 시작
-        }
+                return ModifyResult.NO_SUCH_ARTICLE;
 
-        else {
+                //수정 시작
+            }
             existingAdminComment.setModifiedOn(new Date());
-            existingAdminComment.setContent(adminComment.getContent());
-
-
-            return this.bbsMapper.updateAdminComment(existingAdminComment) > 0 ? CommonResult.SUCCESS : CommonResult.FAILURE;
+            existingAdminComment.setContent(content);
+            if(this.bbsMapper.updateAdminComment(existingAdminComment) > 0){
+                return CommonResult.SUCCESS;
+            }
         }
+        if(bid.equals("pi")) {
+            NoticeEntity existingNotice = this.bbsMapper.selectNoticeByIndex(articleIndex);
+            PiCommentEntity existingPiComment = this.bbsMapper.selectPiCommentByIndexJustOne(index);
+
+            if (existingNotice == null || existingPiComment == null) { //게시글이 없으면 실패
+                return ModifyResult.NO_SUCH_ARTICLE;
+
+            }
+            existingPiComment.setModifiedOn(new Date());
+            existingPiComment.setContent(content);
+            if(this.bbsMapper.updatePiComment(existingPiComment) > 0){
+                return CommonResult.SUCCESS;
+            }
+
+        }
+
+        return CommonResult.FAILURE;
     }
 
 }
-

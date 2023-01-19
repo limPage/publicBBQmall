@@ -1,7 +1,11 @@
 package com.hiponya.bbqmall.services;
 
+import com.hiponya.bbqmall.entities.bbs.ImageEntity;
 import com.hiponya.bbqmall.entities.member.EmailAuthEntity;
+import com.hiponya.bbqmall.entities.member.WithdrawalEntity;
+import com.hiponya.bbqmall.entities.product.OrderEntity;
 import com.hiponya.bbqmall.enums.bbs.DeleteResult;
+import com.hiponya.bbqmall.enums.bbs.ModifyResult;
 import com.hiponya.bbqmall.enums.member.DeleteUserResult;
 import com.hiponya.bbqmall.enums.member.RegisterResult;
 import com.hiponya.bbqmall.entities.member.UserEntity;
@@ -25,6 +29,7 @@ import org.thymeleaf.context.Context;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpSession;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 
@@ -274,7 +279,7 @@ public class MemberService {
 
 
     @Transactional
-    public Enum<? extends IResult> deleteUser(UserEntity user) {
+    public Enum<? extends IResult> deleteUser(UserEntity user, WithdrawalEntity withdrawal ) {
 
         if (user == null) {
             return DeleteUserResult.NOT_SIGNED;
@@ -286,9 +291,86 @@ public class MemberService {
             return DeleteUserResult.NO_SUCH_USER;
         }
 
+        //삭제가 된다면
+        if(this.memberMapper.deleteUserById(existingUser.getId()) > 0){
+            //탈퇴 사유를 저장한다.
+            withdrawal.setId(user.getId());
 
-        return this.memberMapper.deleteUserById(existingUser.getId()) > 0 ? CommonResult.SUCCESS : CommonResult.FAILURE;
+            switch (withdrawal.getReasonValue()){
+                case 1:
+                    withdrawal.setReasonCategory("배송 주문 불만");
+                    break;
+                case 2:
+                    withdrawal.setReasonCategory("사이트 이용 불편");
+                    break;
+                case 3:
+                    withdrawal.setReasonCategory("상품품질 불만족");
+                    break;
+                case 4:
+                    withdrawal.setReasonCategory("서비스 불만족");
+                    break;
+                case 5:
+                    withdrawal.setReasonCategory("기타");
+                    break;
+
+                default: break;
+            }
+
+            if(this.memberMapper.insertReason(withdrawal)>0){
+
+                return CommonResult.SUCCESS;}
+        }
+
+
+        return CommonResult.FAILURE;
 
 
     }
+
+    @Transactional
+    public Enum<? extends IResult> updateUserInfo(UserEntity user, UserEntity userInfo) {
+
+        if(user==null){
+            return ModifyResult.NOT_SIGNED;
+        }
+        if(!user.getId().equals(userInfo.getId())){
+            return ModifyResult.NOT_ALLOWED;
+        }
+
+        UserEntity existingUser = this.memberMapper.selectUserByEmail(userInfo.getEmail());
+        if(existingUser==null){
+            return DeleteResult.NO_SUCH_ARTICLE;
+        }
+
+        if(!userInfo.getPassword().equals("")){
+            existingUser.setPassword(CryptoUtils.hashSha512(userInfo.getPassword()));
+        }
+        UserEntity existingContact = this.memberMapper.selectUserByContact(userInfo.getContact());
+
+        System.out.println(existingContact+"번호");
+        if(existingContact!=null){
+            if(!existingContact.getId().equals(userInfo.getId())){
+                return ModifyResult.CONTACT_DUPLICATED;
+            }
+        }
+        existingUser.setName(userInfo.getName());
+        existingUser.setContact(userInfo.getContact());
+        existingUser.setBirth(userInfo.getBirth());
+        existingUser.setAddressPostal(userInfo.getAddressPostal());
+        existingUser.setAddressPrimary(userInfo.getAddressPrimary());
+        existingUser.setAddressSecondary(userInfo.getAddressSecondary());
+
+
+        return this.memberMapper.updateUser(existingUser)>0?CommonResult.SUCCESS:CommonResult.FAILURE;
+    }
+
+    public OrderEntity[] getOrder(UserEntity user) {
+
+        return this.memberMapper.selectOrderById(user.getId());
+
+
+
+    }
+
+
 }

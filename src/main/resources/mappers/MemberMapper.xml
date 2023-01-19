@@ -33,6 +33,15 @@
 
     </insert>
 
+    <insert id="insertReason" useGeneratedKeys="true" keyProperty="index"
+            keyColumn="index" parameterType="com.hiponya.bbqmall.entities.member.WithdrawalEntity">
+
+        INSERT INTO `bbqmall`.`withdrawal` (`index`, `id`,`reason_value`, `reason_category`, `reason_text`, `deleted_on`)
+        VALUES (#{index}, #{id},#{reasonValue},  #{reasonCategory}, #{reasonText}, IFNULL(#{deletedOn}, DEFAULT(`deleted_on`)))
+
+
+    </insert>
+
     <select id="selectEmailAuthByEmailCodeSalt" resultType="com.hiponya.bbqmall.entities.member.EmailAuthEntity">
 
         SELECT `index`        AS `index`,
@@ -97,7 +106,7 @@
                `address_primary`   AS `addressPrimary`,
                `address_secondary` AS `addressSecondary`,
                `registered_on`     AS `registeredOn`,
-                `admin` AS `isAdmin`
+               `admin` AS `isAdmin`
         FROM `bbqmall`.`users`
         WHERE BINARY `id` = #{id}
           AND BINARY `password` = #{password}
@@ -127,6 +136,28 @@
 
     </select>
 
+
+
+    <select id="selectUserByContact" resultType="com.hiponya.bbqmall.entities.member.UserEntity">
+        SELECT `email`             AS `email`,
+               `id`                AS `id`,
+               `password`          AS `password`,
+               `name`              AS `name`,
+               `contact`           AS `contact`,
+               `birth`             AS `birth`,
+               `address_postal`    AS `addressPostal`,
+               `address_primary`   AS `addressPrimary`,
+               `address_primary`   AS `addressPrimary`,
+               `address_secondary` AS `addressSecondary`,
+               `registered_on`     AS `registeredOn`
+        FROM `bbqmall`.`users`
+        WHERE `contact` = #{contact}
+        LIMIT 1;
+
+    </select>
+
+
+
     <select id="selectUserByNameIdEmail" resultType="com.hiponya.bbqmall.entities.member.UserEntity">
         SELECT `email`             AS `email`,
                `id`                AS `id`,
@@ -147,6 +178,27 @@
         LIMIT 1;
 
     </select>
+
+    <select id="selectOrderById" resultType="com.hiponya.bbqmall.entities.product.OrderEntity">
+        SELECT `index` AS `index`,
+               `id` AS `id`,
+               `name` AS `name`,
+               `contact` AS `contact`,
+               `address_postal` AS `addressPostal`,
+               `address_primary` AS addressPrimary,
+               `address_secondary` AS `addressSecondary`,
+               `order_time` AS `orderTime`,
+               `product_index` AS `produtIndex`,
+               `product_name` AS `productName`,
+               `price` AS `price`,
+               `order_amount` AS `orderAmount`
+
+        FROM `bbqmall`.`order`
+        WHERE id =#{id}
+
+
+    </select>
+
 
     <update id="updateRecoverPasswordAuth">
 
@@ -189,7 +241,7 @@
             `address_postal`  = #{addressPostal},
             `address_primary` = #{addressPrimary},
             address_secondary = #{addressSecondary},
-            `registered_on`   = #{ registeredOn}
+            `registered_on`   = #{registeredOn}
         WHERE BINARY `email` = #{email}
         LIMIT 1
 #프라이머리키를 제외하고 업데이트
@@ -206,5 +258,9 @@
 
 
     </delete>
+
+
+
+
 
 </mapper>

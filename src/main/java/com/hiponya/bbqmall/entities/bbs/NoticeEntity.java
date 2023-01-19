@@ -6,7 +6,9 @@ public class NoticeEntity {
 
 
 
-  private int  index;
+    private int  index;
+
+    private String id;
     private String boardId;
     private String title;
     private Date writtenOn;
@@ -22,6 +24,7 @@ public class NoticeEntity {
 
     private String qnaBoardId;
 
+    private int commentCount;
     public String getQnaBoardId() {
         return qnaBoardId;
     }
@@ -37,6 +40,14 @@ public class NoticeEntity {
     public NoticeEntity setNew(Boolean isNew) {
         this.isNew = isNew;
         return this;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public Date getExpirationDate() {
@@ -119,6 +130,14 @@ public class NoticeEntity {
     public NoticeEntity setModifiedOn(Date modifiedOn) {
         this.modifiedOn = modifiedOn;
         return this;
+    }
+
+    public int getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(int commentCount) {
+        this.commentCount = commentCount;
     }
 
     @Override

@@ -19,12 +19,13 @@
 <th:block th:replace="~{fragments/body :: cover}"></th:block>
 
 <main class="cs-center">
+    <input hidden id="bid" th:value="${bid}">
 
-<th:block th:replace="~{fragments/body ::sideBar}"></th:block>
+    <th:block th:replace="~{fragments/body ::sideBar}"></th:block>
     <div class="content">
 
         <div class="title-container">
-            <h1>공지사항 글쓰기</h1>
+            <h1 th:text="${bid==null?'공지사항 글쓰기':'상품 글쓰기'}">공지사항 글쓰기</h1>
         </div>
 
         <form class="write-form" id="form">
@@ -37,7 +38,7 @@
 
 
                         <label class="label">
-
+                            <span th:if="${bid!=null && !bid.equals('notice')}">상품</span>
                             <span hidden>보드아이디</span>
                             <select name="bid">
                                 <option selected value="notice">
@@ -87,7 +88,7 @@
                         <label>
                             <input class="before" name="back" value="돌아가기" type="button">
                         </label>
-                            <span class="spring"></span>
+                        <span class="spring"></span>
                         <label>
                             <input class="submit" name="submit" value="작성하기" type="submit">
 

@@ -3,6 +3,7 @@ package com.hiponya.bbqmall.controllers;
 import com.hiponya.bbqmall.entities.product.ProductEntity;
 import com.hiponya.bbqmall.entities.product.ProductImageEntity;
 import com.hiponya.bbqmall.services.CategoryService;
+import com.hiponya.bbqmall.services.HomeService;
 import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 
@@ -19,9 +20,11 @@ import org.springframework.web.servlet.ModelAndView;
 public class HomeController {
 
     private final CategoryService categoryService;
+    private final HomeService homeService;
 
-    public HomeController(CategoryService categoryService) {
+    public HomeController(CategoryService categoryService, HomeService homeService) {
         this.categoryService = categoryService;
+        this.homeService = homeService;
     }
 
     @GetMapping(value = "/" ,produces = MediaType.TEXT_HTML_VALUE)
@@ -31,10 +34,12 @@ public class HomeController {
         ProductEntity[] secondEightProducts = this.categoryService.getSecondEightProducts();
         ProductEntity[] thirdEightProducts = this.categoryService.getThirdEightProducts();
 
-
         modelAndView.addObject("eightProducts", eightProducts);
         modelAndView.addObject("secondEightProducts", secondEightProducts);
         modelAndView.addObject("thirdEightProducts", thirdEightProducts);
+
+        modelAndView.addObject("reviews", this.homeService.getProductReviews());
+        modelAndView.addObject("products", this.homeService.getRecommendedProducts());
 
         return modelAndView;
     }

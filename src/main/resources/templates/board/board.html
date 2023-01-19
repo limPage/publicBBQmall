@@ -201,7 +201,7 @@
         </table>
 
 
-        <div class="write-notice-button">
+        <div class="write-notice-button" th:if="${session.user!=null && session.user.isAdmin()}">
             <a th:href="@{/board/writeNotice}">공지작성</a>
         </div>
     </div>
@@ -266,16 +266,16 @@
                         <span th:text="${article.getTitle()}">2</span> <span
                             th:text="${article.getContent()}"> 1 </span></p></div>
 
-                    <div class="answer" th:each="isAnswer:${answer}" th:if="${isAnswer.getQuestionIndex()==article.getIndex()}">
-                        <h1>A</h1>
-                        <p>
+                <div class="answer" th:each="isAnswer:${answer}" th:if="${isAnswer.getQuestionIndex()==article.getIndex()}">
+                    <h1>A</h1>
+                    <p>
                                              <span th:utext="${isAnswer.getContent()}"
                                              >BBQ 배송과 각 브랜드 개별 배송비는 별도로 부과됩니다.
                                                  <br>브랜드 개별 배송: 브랜드 정책에 따라 무료배송 혹은 배송비 부과 (3,000원)
                                              </span>
 
-                        </p>
-                    </div>
+                    </p>
+                </div>
 
             </li>
 
@@ -350,12 +350,12 @@
         </div>
     </div>
 
-    <div class="content notice" th:if="${bid!=null &&  bid.equals('pi')}">
+    <div class="content pi" th:if="${bid!=null &&  bid.equals('pi')}">
         <div class="title-container">
             <h1>상품문의</h1>
         </div>
 
-        <form class="form" name="form">
+        <form class="form " name="form">
             <!--            <div class="search-row">-->
             <label>
                 <!--                    <select name="criterion" th:with="criterion = ${#request.getParameter('criterion')}">-->
@@ -365,7 +365,7 @@
                 <!--                        <option th:selected="${criterion != null && criterion.equals('urgent')}" value="urgent">긴급공지</option>-->
                 <!--                    </select>-->
                 <input hidden name="isNoticeBoard" value="pi">
-                <select name="bid" class="bid" rel="bid" disabled>
+                <select name="bid" class="bid" rel="bid" disabled hidden>
                     <option value="all">- 전체 -</option>
                     <option value="notice">공지</option>
                     <option value="event">이벤트</option>
@@ -377,10 +377,10 @@
             <span class="spring"></span>
 
             <label>
-                <input type="text" placeholder="제목, 내용, 상품평, 상품설명, 작성자" th:value="${#request.getParameter('keyword')}" name="keyword" disabled>
+                <input type="text" placeholder="제목, 내용, 상품평, 상품설명, 작성자" th:value="${#request.getParameter('keyword')}" name="keyword" >
             </label>
 
-            <input type="submit" value="검색" disabled>
+            <input type="submit" value="검색" >
             <!--            </div>-->
         </form>
 
@@ -388,8 +388,10 @@
             <thead>
             <tr>
                 <td><h3 class="number">번호</h3></td>
+                <td><h3 class="state">상태</h3></td>
                 <td><h3 class="board-id">분류</h3></td>
                 <td class="content-title"><h3>제목</h3></td>
+                <td><h3 class="id">문의자</h3></td>
                 <td><h3 class="written-on">등록일</h3></td>
                 <td><h3 class="view-count">조회</h3></td>
             </tr>
@@ -400,6 +402,9 @@
                 <!--공지의 특성상 10개가 넘어가지 않으므로 실사이트에선 게시물 번호가 아닌 10 내림차순으로 보여주는 듯 합니다.                    -->
                 <td>
                     <h3 class="number" th:text="${i.size - i.index}">-</h3>
+                </td>
+                <td>
+                    <h3 th:text="${article.getCommentCount()<=0? '답변대기':'답변완료'}">답변전</h3>
                 </td>
 
                 <td>
@@ -424,6 +429,9 @@
 
                 </a></td>
 
+                <td>
+                    <h3 class="id"  th:text="${article.getId()}" >성함</h3>
+                </td>
 
                 <td>
                     <h3 class="written-on" th:text="${#dates.format(article.getWrittenOn(),'yyyy.MM.dd')}">
@@ -498,7 +506,7 @@
 
 
         <div class="write-notice-button">
-            <a th:href="@{/board/writeNotice}">공지작성</a>
+            <a th:href="@{/board/writeNotice (bid= ${bid})}">문의작성</a>
         </div>
     </div>
 
@@ -517,7 +525,7 @@
                 <!--                        <option th:selected="${criterion != null && criterion.equals('urgent')}" value="urgent">긴급공지</option>-->
                 <!--                    </select>-->
                 <input hidden name="isNoticeBoard" value="pr">
-                <select name="bid" class="bid" rel="bid" disabled>
+                <select name="bid" class="bid" rel="bid" disabled hidden>
                     <option value="all">- 전체 -</option>
                     <option value="notice">공지</option>
                     <option value="event">이벤트</option>
@@ -529,10 +537,10 @@
             <span class="spring"></span>
 
             <label>
-                <input type="text" placeholder="제목, 내용, 상품평, 상품설명, 작성자" th:value="${#request.getParameter('keyword')}" name="keyword" disabled>
+                <input type="text" placeholder="제목, 내용, 상품평, 상품설명, 작성자" th:value="${#request.getParameter('keyword')}" name="keyword" >
             </label>
 
-            <input type="submit" value="검색" disabled>
+            <input type="submit" value="검색" >
             <!--            </div>-->
         </form>
 
@@ -542,6 +550,8 @@
                 <td><h3 class="number">번호</h3></td>
                 <td><h3 class="board-id">분류</h3></td>
                 <td class="content-title"><h3>제목</h3></td>
+                <td><h3 class="id">문의자</h3></td>
+
                 <td><h3 class="written-on">등록일</h3></td>
                 <td><h3 class="view-count">조회</h3></td>
             </tr>
@@ -576,6 +586,9 @@
 
                 </a></td>
 
+                <td>
+                    <h3 class="id"  th:text="${article.getId()}" >성함</h3>
+                </td>
 
                 <td>
                     <h3 class="written-on" th:text="${#dates.format(article.getWrittenOn(),'yyyy.MM.dd')}">
@@ -650,7 +663,7 @@
 
 
         <div class="write-notice-button">
-            <a th:href="@{/board/writeNotice}">공지작성</a>
+            <a th:href="@{/board/writeNotice (bid= ${bid})}">후기작성</a>
         </div>
     </div>
 
@@ -721,9 +734,9 @@
                 <td class="content-title">
                     <a th:href="@{/board/readNotice (bid=bpArticle,bbid=${bpArticle.getIndex()})}">
                         <h3
-                        th:text="${bpArticle.getTitle()}">-</h3>
+                                th:text="${bpArticle.getTitle()}">-</h3>
 
-                </a></td>
+                    </a></td>
 
                 <td>
                     <h3 class="id"  th:text="${bpArticle.getId()}" >성함</h3>
