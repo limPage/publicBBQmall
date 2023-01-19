@@ -95,6 +95,10 @@ main > .swiper > div > .catalog-page > .goods-search-form > .border-line {
     min-width : 18.75rem;
 }
 
+.product-container > .products > .product-box > .title {
+    color : black;
+}
+
 .product-container > .products > .product-box > .title > .comment {
     font-size : 1.25rem;
 }
