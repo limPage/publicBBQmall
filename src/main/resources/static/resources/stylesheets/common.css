@@ -1065,13 +1065,14 @@ body>footer>nav>a>img{
         display: none;
     }
 
-    body > footer > .foot-row > .last {
-    margin-bottom: 3.25rem;
-    }
+
 
 }
 
 @media screen and (max-width : 60rem) {
+    body > footer > .foot-row > .last {
+        margin-bottom: 3.25rem;
+    }
 
 body>footer>nav{
     display: flex;
