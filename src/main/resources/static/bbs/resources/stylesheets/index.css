@@ -81,7 +81,7 @@ body>main>.goods-row>.goods-container>.goods>a{
 
 body>main>.goods-row>.goods-container>.goods>a>img{
     width: 100%;
-    min-height: 18.25rem;
+    height: 18.25rem;
 
     /*display: inline-block;*/
 }
@@ -200,7 +200,7 @@ body>main>.event-row-big{
     width: 100%;
     margin: 0;
     padding: 0;
-    height: 18.9375rem;
+    max-height: 18.9375rem;
 }
 body>main>.event-row-big>img{
     width: 100%;

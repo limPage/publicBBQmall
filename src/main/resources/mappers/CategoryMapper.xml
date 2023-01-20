@@ -182,7 +182,7 @@
         order by saleQuantity desc;
     </select>
 
-    <select id="selectProductByIndex" resultType="com.hiponya.bbqmall.entities.product.ProductEntity">
+    <select id="selectProductByIndex" resultType="com.hiponya.bbqmall.vos.product.ProductReadVo">
         select `product_index` as `productIndex`,
                `detail_index` as `detailIndex`,
                `product_name` as `productName`,

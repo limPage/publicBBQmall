@@ -31,7 +31,7 @@
 <main >
     <th:block th:replace="~{fragments/body ::myPageSideBar}"></th:block>
     <input hidden id="bid" th:value="${bid}">
-    <div class="content notice" th:if="${session.user!=null && bid!='bp'}">
+    <div class="content notice pi" th:if="${session.user!=null && bid!='bp'}">
         <div class="title-container">
             <h1 th:text="${bid=='pi'? '상품문의':'상품후기' }">상품문의</h1>
         </div>
@@ -40,6 +40,8 @@
             <thead>
             <tr>
                 <td><h3 class="number">번호</h3></td>
+                <td th:if="${bid=='pi'}"><h3 class="state">상태</h3></td>
+
                 <td><h3 class="board-id">분류</h3></td>
                 <td class="content-title"><h3>제목</h3></td>
                 <td><h3 class="written-on">등록일</h3></td>
@@ -52,6 +54,10 @@
                 <td>
                     <h3 class="number" th:text="${i.size - i.index}">-</h3>
                 </td>
+                <td th:if="${bid=='pi'}">
+                    <h3 th:text="${article.getCommentCount()<=0? '답변대기':'답변완료'}">답변전</h3>
+                </td>
+
 
                 <td>
                     <h3 class="board-id" th:text="${article.getText()}">-</h3>

@@ -1,7 +1,6 @@
 
 body>main{
     width: 80rem;
-
     display: flex;
     flex-direction: row;
     /*justify-content: flex-start;*/
@@ -277,6 +276,7 @@ body> main> .content > form>table> tbody> .data-row>td>ul>li>.number-column{
 @media screen and (max-width : 53.75rem) {
 
 }
+
 
 
 

@@ -75,7 +75,9 @@
                 <!--/*@thymesVar id="categories" type="com.hiponya.bbqmall.entities.product.CategoryEntity"*/-->
                 <li class="menu" th:each="category : ${categories}">
                     <!--<a href="/category"><strong class="new"></strong></a>-->
-                    <a th:text="${category.getTitle()}" th:href = "@{/category (cid=${category.getIndex()})}" rel="categoryTitle"></a>
+                    <a   th:href = "@{/category (cid=${category.getIndex()})}" rel="categoryTitle">
+                        <strong th:text="${category.getTitle()}">치킨</strong>
+                    </a>
                 </li>
 
 

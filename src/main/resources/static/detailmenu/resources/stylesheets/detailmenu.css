@@ -41,7 +41,7 @@ main > .products-view > .products > .image-container {
 }
 main > .products-view > .products {
     display : grid;
-    grid-template-rows : 63px 1fr;
+    grid-template-rows : 3.9375rem 1fr;
     grid-template-columns :  1fr;
     padding-top : 1rem;
 

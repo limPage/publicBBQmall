@@ -5,14 +5,8 @@ html {
     font-weight: 400;
 
     height: 100%;
-    /*width: 118.9375rem;*/
-    /*width: 1903px;*/
-
-    /*min-width: 56.25rem;*/
     margin: unset;
     padding: unset;
-    /*display: flex;*/
-    /*justify-content: center;*/
     display: block;
 
 }
@@ -123,38 +117,23 @@ body > header > .logo-row > .logo-container > .user-menu {
 
 
 body > header > .logo-row > .logo-container > .user-menu > ul {
-    /*height: 100%;*/
     display: flex;
     align-items: flex-start;
     justify-content: center;
     flex-direction: row;
-    /*top: 10px;*/
-    /*position: relative;*/
+
 
     margin: unset;
-    /*height: 41px;*/
     padding: unset;
-    /*margin-left: 1rem;*/
-    /*background-color: lightblue;*/
 
 }
 
-/*body > header > .logo-row > .logo-container > .user-menu> ul >span{*/
-/*    height: 1rem;*/
-/*    width: 1rem;*/
 
-/*    border-right: 0.05rem solid black ;*/
-
-/*}*/
 
 body > header > .logo-row > .logo-container > .user-menu > ul > li {
 
-    /*color: red;*/
-
-
     font-family: inherit;
     font-weight: 450;
-    /*border-right: 0.05rem solid black ;*/
 
 
     display: flex;
@@ -167,11 +146,7 @@ body > header > .logo-row > .logo-container > .user-menu > ul > li:first-of-type
 }
 
 
-body > header > .logo-row > .logo-container > .user-menu > ul > li:last-of-type {
-    /*padding-right: unset;*/
-    /*border-right: none;*/
 
-}
 
 body > header > .logo-row > .logo-container > .user-menu > ul > li > .bar {
     margin-top: 2.5rem;
@@ -188,6 +163,7 @@ body > header > .logo-row > .logo-container > .user-menu > ul > li > a {
     font-weight: 450;
     color: rgba(0, 0, 0, 0.8);
 
+    white-space: nowrap;
     height: 2.5625rem;
     margin-top: 2.4375rem;
 
@@ -199,6 +175,11 @@ body > header > .logo-row > .logo-container > .user-menu > ul > li > a {
     letter-spacing: -0.0625rem;
 
 }
+body > header > .logo-row > .logo-container > .user-menu > ul > li:hover>a{
+
+    font-weight: 700;
+}
+
 
 body > header > .logo-row > .logo-container > .user-menu > ul > .cs > a {
 
@@ -216,30 +197,11 @@ body > header > .logo-row > .logo-container > .user-menu > ul > .cs > a > .drop-
     height: 0.4375rem;
     position: relative;
     bottom: 0.2rem;
-    /*background-repeat: no-repeat;*/
-    /*width: 0.5rem;*/
-    /*height: 0.5rem;*/
-    /*color: red;*/
-    /*margin-left: 10px;*/
-
-    /*display: inline-block;*/
-
-    /*position: relative;*/
-    /*right: -4px;*/
-}
-
-
-/*      고객센터   - 탭     */
-body > header > .logo-row > .logo-container > .user-menu > div {
-
-    position: absolute;
-    right: -0.5rem;
-    top: 0.8rem;
-    margin: 0;
-    padding: 0;
-
 
 }
+
+
+
 
 body > header > .logo-row > .logo-container > .user-menu > div > ul {
     list-style-type: none;
@@ -269,10 +231,7 @@ body > header > .logo-row > .logo-container > .user-menu > div > ul > li > a {
 }
 
 
-body > header > .logo-row > .logo-container > .tab:hover {
 
-    background-color: grey;
-}
 
 
 body > header > .logo-row > .logo-container > .search {
@@ -516,8 +475,12 @@ body > header > .menu-row > .menu-container > ul > .my-menu{
     width: 3rem;
 
 }
-body > header > .menu-row > .menu-container > ul > .my-menu>a>img{
 
+
+
+
+body > header > .menu-row > .menu-container > ul > .my-menu>a>img:hover{
+   filter: opacity(50%);
 }
 
 
@@ -821,8 +784,28 @@ body>main>article>ul>li>a{
 }
 
 /*cs*/
+
+/*반응형 바로가기*/
+body>footer>nav{
+    display: none;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+
+    justify-content: space-around;
+}
+body>footer>nav>a>img{
+    width: 5rem;
+    height: 5rem;
+}
+/*반응형 바로가기*/
+
+
+
 /*플로팅배너*/
 body>.floating-banner{
+    z-index: 100;
     position: fixed;
     top: 20.3%;
     right: 9.45rem;
@@ -908,19 +891,6 @@ body>main>.admin-side-bar{
 
 /*어드민 사이드바*/
 
-body>footer>nav{
-    display: none;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: white;
-
-    justify-content: space-around;
-}
-body>footer>nav>a>img{
-    width: 5rem;
-    height: 5rem;
-}
 
 
 .--cover{
@@ -1022,9 +992,21 @@ body>footer>nav>a>img{
         transform: rotate(-360deg);
     }
 }
+@media screen and (max-width : 118rem ) {
+    body>.floating-banner{
+        display: none;
+    }
+}
+
 
 
 @media screen and (max-width : 87.5rem) {
+
+
+    body > main > .goods-row {
+        padding-top: 0.5rem;
+    }
+
     body > main > .goods-row > .goods-container {
 
 
@@ -1049,6 +1031,12 @@ body>footer>nav>a>img{
         margin-top: 2.875rem;
 
     }
+    body>main> .review-row{
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+    }
+
+
     body>main> .review-row> .review-container{
         display: grid;
         grid-template-columns: repeat(4,1fr);
@@ -1061,24 +1049,55 @@ body>footer>nav>a>img{
         /*background-color: red;*/
     }
 
-    body>.floating-banner{
-        display: none;
+
+
+
+}
+
+
+@media screen and (max-width : 65rem) {
+
+    body > header > .menu-row > .menu-container > ul > .menu>a {
+
+        font-size: 1.2rem;
+        padding: 0 0.5rem  ;
+        white-space: nowrap;
+
+    }
+
+    body > header > .logo-row > .logo-container > .search {
+        margin: unset;
     }
 
 
 
-}
-
-@media screen and (max-width : 60rem) {
-    body > footer > .foot-row > .last {
-        margin-bottom: 3.25rem;
+    body > header > div.logo-row > div.logo-container > div.user-menu > ul > li:first-of-type {
+        padding : 0;
     }
 
-body>footer>nav{
-    display: flex;
-}
+
+    body > header > div.logo-row > div.logo-container > div.user-menu > ul > li > a {
+        padding: 0 0.5rem ;
+        font-size: 1rem;
+    }
+    body > header > div.logo-row > div.logo-container > div.user-menu > ul > li > a:last-of-type {
+        padding: 0 0.5rem ;
+
+    }
+
+
+
+    body>footer>.foot-row>.last{
+        margin-bottom:3.25rem;
+    }
+
+    body>footer>nav{
+        display:flex;
+    }
 
 }
+
+
 
 
 @media screen and (max-width : 53.75rem) {
@@ -1112,7 +1131,6 @@ body>footer>nav{
     body>main> .review-row> .review-container{
         display: grid;
         grid-template-columns: repeat(2,1fr);
-        /*gap: 8px;*/
         max-width: 80rem;
         padding: unset;
 
@@ -1160,3 +1178,5 @@ body>footer>nav{
         padding: 0;
     }
 }
+
+

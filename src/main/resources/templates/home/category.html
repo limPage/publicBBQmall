@@ -5,10 +5,14 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title th:text = "${'BBQ몰 - ' + (title)}"></title>
-    <link rel="stylesheet" th:href="@{/bbq/resources/stylesheets/index.css}">
-    <link rel="stylesheet" th:href="@{/category/resources/stylesheets/category.css}">
+    <title th:text = "${'BBQ몰 - '+ title}"></title>
+
     <th:block th:replace="~{fragments/head :: common}"></th:block>
+
+
+<!--    <link rel="stylesheet" th:href="@{/bbq/resources/stylesheets/index.css}">-->
+    <link rel="stylesheet" th:href="@{/category/resources/stylesheets/category.css}">
+
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script defer th:src="@{/category/resources/scripts/category.js}"></script>
 </head>
@@ -45,9 +49,12 @@
                         <!--/*@thymesVar id="products" type="com.hiponya.bbqmall.vos.product.ProductReadVo"*/-->
                         <li th:each = "product : ${products}" class="products">
                             <div th:text = "${product.getProductIndex()}" hidden>3</div>
+                            <a class="image" th:href="@{view (pid=${product.getProductIndex()})}">
+                                <!--                   <img th:each="image : ${product.getImageIndexes()}">-->
+                                <img th:src="@{/admin/productImage (index=${product.getImageIndexes()}) }" alt="이미지" title="이미지">
+                            </a>
                             <div class="product-box">
                                 <a class = "title" th:href = "@{/view (pid = ${product.getProductIndex()})}"> <!-- 클릭시 이동할 view 주소 -->
-                                    <img src="/resources/images/new1.png" width="300px" alt>
                                     <div class = "comment" th:text = "${'[' + product.getProductName() + ']'}">내용</div>
                                     <span class="sale" th:text="${product.getSaleQuantity()}">13%</span>
                                     <span class="percent">%</span>
@@ -60,6 +67,7 @@
 <!--                            <div th:text = "${product.getAmount()}">17</div>-->
 <!--                            <div th:text = "${#dates.format(product.getModifiedOn(), 'yyyy-MM-dd HH:mm:ss')}">2022-01-03 00:00:00</div>-->
                         </li>
+
 
                     </ul>
 
