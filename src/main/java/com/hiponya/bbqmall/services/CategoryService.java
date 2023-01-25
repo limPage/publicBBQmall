@@ -111,6 +111,13 @@ public class CategoryService {
             int[] productImageIndexes = stream(productImages).mapToInt(ProductImageEntity::getIndex).toArray();
             product.setImageIndexes(productImageIndexes);
 
+        DetailImageEntity[] detailImages = this.iHomeMapper.selectDetailImagesByProductIndexExceptData(product.getProductIndex());
+        int[] detailImageIndexes = stream(detailImages).mapToInt(DetailImageEntity::getIndex).toArray();
+        product.setDetailImageIndexes(detailImageIndexes);
+
+
+
+
         return product;
     }
 

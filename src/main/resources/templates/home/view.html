@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title th:text = "${'BBQ몰 - ' + (product.getProductName())}"></title>
 
-    <link rel="stylesheet" th:href="@{/bbq/resources/stylesheets/index.css}">
+<!--    <link rel="stylesheet" th:href="@{/bbq/resources/stylesheets/index.css}">-->
     <link rel="stylesheet" th:href="@{/detailmenu/resources/stylesheets/view.css}">
     <th:block th:replace="~{fragments/head :: common}"></th:block>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -22,7 +22,7 @@
 
             <div class="image-container">
                 <img th:src="@{/admin/productImage (index=${product.getImageIndexes()}) }" alt="이미지"
-                     title="이미지" class="image" width="300">
+                     title="이미지" class="image" >
 <!--                <div class="pagination">-->
 <!--                    <span class="count">-->
 <!--                        <input type="button" class="left" id="left" name="left" value="<">-->
@@ -94,7 +94,48 @@
                     </div>
                 </form>
             </div>
+
+
         </div>
+
+        <div class="detail-image-container">
+            <h1>상품 상세</h1>
+            <span class="text" th:text="${product.getContent()}">상세 없음</span>
+
+            <div class="detail-image">
+
+                <img th:each="detailImage : ${product.getDetailImageIndexes()}"
+                     th:src="@{/admin/detailImage (index=${detailImage}) }" alt="이미지" title="이미지">
+            </div>
+
+            <ul class="info">
+                <li>
+                    <h3>가격</h3><span>1원</span>
+                </li>
+                <li>
+                    <h3>배송비</h3><span>3,000원(30,000원 이상 구매시 무료)</span>
+                </li>
+                <li>
+                    <h3>배송지역</h3><span>전국</span>
+                </li>
+                <li>
+                    <h3>반품교환</h3><span>반품관련 배송비 : 편도 3,000원 / 무료배송 : 6,000원<br>
+교환관련 배송비 : 6,000원<br>
+도서지역 배송비 추가 : 5,000원</span>
+                </li>
+
+
+
+            </ul>
+            <p>상품 필수정보 및 인증정보</p>
+            <p>배송/교환/환불/AS/유의사항</p>
+
+            <div class="pi-button">
+                <a th:href="@{/board/ (bid=pi)}">문의 작성하기</a>
+            </div>
+        </div>
+
+
     </div>
 </main>
 <th:block th:replace="~{fragments/body :: footer}"></th:block>

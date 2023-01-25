@@ -3,11 +3,11 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hiponya.bbqmall.mappers.ICategoryMapper">
-    <select id="selectCategoryIndexByDetailIndex" resultType="com.hiponya.bbqmall.entities.product.CategoryEntity">
-        select `index` as `index`, `title` as `title`
-        from bbqmall.category
-        <if test="cid != 0">where `detail_index` = #{cid}</if>
-    </select>
+<!--    <select id="selectCategoryIndexByDetailIndex" resultType="com.hiponya.bbqmall.entities.product.CategoryEntity">-->
+<!--        select `index` as `index`, `title` as `title`-->
+<!--        from bbqmall.category-->
+<!--        <if test="cid != 0">where `detail_index` = #{cid}</if>-->
+<!--    </select>-->
 
     <select id="selectUserById" resultType="com.hiponya.bbqmall.entities.member.UserEntity">
         select `email` as `email`,
@@ -207,7 +207,7 @@
                `amount` as `amount`,
                `created_on` as `createdOn`,
                `modified_on` as `modifiedOn`
-            from bbqmall.cart where index=#{cid}
+            from bbqmall.cart where `index`=#{cid}
     </select>
 
     <select id = "selectWishlistSumPriceByUserId" resultType="int">
