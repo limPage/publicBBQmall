@@ -259,6 +259,41 @@
 
     </select>
 
+    <select id="selectProductsByKeyword" resultType="com.hiponya.bbqmall.vos.product.ProductReadVo">
+        SELECT `product`.`product_index` AS `productIndex`,
+               `product`.`detail_index`  AS `detailIndex`,
+               `menu`.`index`            AS `menuIndex`,
+               `product`.`product_name`  AS `productName`,
+               `product`.`price`         AS `price`,
+               `product`.`content`       AS `content`,
+               `product`.`view`          AS `view`,
+               `product`.`created_on`    AS `createdOn`,
+               `product`.`modified_on`   AS `modifiedOn`,
+               `product`.`amount`        AS `amount`,
+               `product`.`on_sale`       AS onSale,
+               `product`.`sale_quantity` AS `saleQuantity`
+        FROM `bbqmall`.`products` AS product
+                 LEFT JOIN `bbqmall`.`detail_menu` on `product`.`detail_index` = `detail_menu`.`index`
+                 LEFT JOIN `bbqmall`.`menus` AS `menu` on `product`.`detail_index` = `menu`.`index`
+
+        WHERE (REPLACE(`product_name`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword}, ' ', ''), '%'))
+        ORDER BY `product`.`product_index` DESC
+        LIMIT #{limit} OFFSET #{offset}
+
+
+    </select>
+    <select id="selectSearchProductsCountByKeyword" resultType="int">
+
+        SELECT  COUNT(0)
+
+        FROM `bbqmall`.`products`
+        WHERE    (REPLACE(`product_name`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword},' ',''),'%'))
+
+
+
+    </select>
+
+
 
     <select id="selectProductImagesByProductIndexExceptData" resultType="com.hiponya.bbqmall.entities.product.ProductImageEntity">
         SELECT `index`      AS `index`,

@@ -1,3 +1,5 @@
+searchText = window.document.getElementById('searchText');
+
 const Cover = {
     show:(text) =>{
         const cover=window.document.getElementById('cover');
@@ -11,7 +13,10 @@ const Cover = {
 };
 window.document.getElementById('searchButton').addEventListener("click",()=>{
 
-    alert("저희 BBQ몰을 사랑해주셔서 감사합니다.\n항상 고객님을 생각하는 마음으로 서비스 하겠습니다.");
 
-    window.document.getElementById('searchText').value=null;
+    window.location.href=`/search?keyword=${searchText.value}`
 })
+
+window.onsubmit=e => {
+    e.preventDefault();
+}

@@ -59,8 +59,15 @@ public interface ICategoryMapper {
 
     int deleteWishlistByIndex(@Param(value = "index") int index);
 
+    int selectSearchProductsCountByKeyword(@Param(value = "keyword") String keyword);
+
     ProductReadVo[] selectProductsByDetailIndex(@RequestParam(value = "cid") int cid,
                                                 @RequestParam(value="sid") int sid);
+
+    ProductReadVo[] selectProductsByKeyword(@Param(value = "keyword") String keyword,
+                                            @Param(value = "limit") int limit,
+                                            @Param(value = "offset") int offset
+    );
 
     ProductImageEntity[] selectProductImagesByProductIndexExceptData(@Param(value = "productIndex") int productIndex);
 

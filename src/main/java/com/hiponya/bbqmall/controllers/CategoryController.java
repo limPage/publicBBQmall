@@ -6,7 +6,9 @@ import com.hiponya.bbqmall.enums.CommonResult;
 import com.hiponya.bbqmall.enums.category.UserResult;
 import com.hiponya.bbqmall.enums.member.CategoryResult;
 import com.hiponya.bbqmall.interfaces.IResult;
+import com.hiponya.bbqmall.models.PagingModel;
 import com.hiponya.bbqmall.services.CategoryService;
+import com.hiponya.bbqmall.vos.bbs.BpReadVo;
 import com.hiponya.bbqmall.vos.product.ProductReadVo;
 import jdk.jfr.Category;
 import org.json.JSONObject;
@@ -360,5 +362,34 @@ public class CategoryController {
 //        return null;
 //    }
 
+
+    @GetMapping(value = "search", produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getSearch(@RequestParam (value = "keyword", defaultValue = "") String keyword,
+                                  @RequestParam(value = "page", required = false, defaultValue = "1") Integer page
+                                  ){
+        //페이지 안보내줫을때는 펄즈, 펄즈도 인식하게 인티저, 펄즈일시 디폴트 1
+        page=Math.max(1,page);
+
+
+
+        int totalCount = this.categoryService.getSearchProductsCount(keyword);
+
+        PagingModel paging = new PagingModel(12,totalCount, page);
+        ProductReadVo[] products = this.categoryService.getSearchProducts(paging, keyword);
+
+
+
+        ModelAndView modelAndView = new ModelAndView("home/search");
+        modelAndView.addObject("keyword",keyword);
+
+        modelAndView.addObject("products",products);
+
+        modelAndView.addObject("paging", paging); //게시글개수
+
+
+
+
+        return modelAndView;
+    }
 
 }

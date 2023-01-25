@@ -97,11 +97,9 @@ const content = window.document.getElementById('content');
                                  save('',false);
                              }
 
+                         alert("환영합니다. 고객님")
+                         window.location.href=`/`
 
-
-
-
-                         window.history.back();
 
                          break;
 

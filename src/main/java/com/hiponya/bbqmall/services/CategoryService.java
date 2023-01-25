@@ -11,6 +11,7 @@ import com.hiponya.bbqmall.enums.member.VerifyEmailAuthResult;
 import com.hiponya.bbqmall.interfaces.IResult;
 import com.hiponya.bbqmall.mappers.ICategoryMapper;
 import com.hiponya.bbqmall.mappers.IHomeMapper;
+import com.hiponya.bbqmall.models.PagingModel;
 import com.hiponya.bbqmall.vos.product.ProductReadVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -192,6 +193,28 @@ public class CategoryService {
         return this.categoryMapper.selectDetailImageByIndex(index);
     }
 
+    public ProductReadVo[] getSearchProducts(PagingModel paging, String keyword){
+
+        ProductReadVo[] products =this.categoryMapper.selectProductsByKeyword(keyword, paging.countPerPage, (paging.requestPage - 1) * (paging.countPerPage));
+        for (ProductReadVo product :products){
+            ProductImageEntity[] productImages = this.categoryMapper.selectProductImagesByProductIndexExceptData(product.getProductIndex());
+            int[] productImageIndexes = stream(productImages).mapToInt(ProductImageEntity::getIndex).toArray();
+            product.setImageIndexes(productImageIndexes);
+
+            DetailImageEntity[] detailImages = this.categoryMapper.selectDetailImagesByProductIndexExceptData(product.getProductIndex());
+            int[] detailImageIndexes = stream(detailImages).mapToInt(DetailImageEntity::getIndex).toArray();
+            product.setDetailImageIndexes(detailImageIndexes);
 
 
+        }
+
+
+        return products;
+    }
+
+    public int getSearchProductsCount(String keyword) { //검색조건이 크리테리온 검색어가 키워드 보드가 어느 게시판
+//
+        return this.categoryMapper.selectSearchProductsCountByKeyword(keyword );
+
+    }
 }
