@@ -15,6 +15,8 @@
 </head>
 <body>
 <th:block th:replace="~{fragments/body :: header}"></th:block>
+<th:block th:replace="~{fragments/body :: floatingBanner}"></th:block>
+
 <main>
     <input type="hidden" name = "pid" id="pid" th:value="${product.getProductIndex()}">
     <div class="products-view">
@@ -110,7 +112,7 @@
 
             <ul class="info">
                 <li>
-                    <h3>가격</h3><span>1원</span>
+                    <h3>가격</h3><span th:text="${product.getPrice() - (product.getPrice() / (product.getSaleQuantity()==0?1:product.getSaleQuantity()))}+'원'">1원</span>
                 </li>
                 <li>
                     <h3>배송비</h3><span>3,000원(30,000원 이상 구매시 무료)</span>

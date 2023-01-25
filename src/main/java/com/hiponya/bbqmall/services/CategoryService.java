@@ -174,9 +174,9 @@ public class CategoryService {
         return this.categoryMapper.selectThirdEightProducts();
     }
 
-    public ProductReadVo[] getProducts(int cid, int sid){
+    public ProductReadVo[] getProducts(int cid, int sid, PagingModel paging){
 
-        ProductReadVo[] products =this.categoryMapper.selectProductsByDetailIndex(cid, sid);
+        ProductReadVo[] products =this.categoryMapper.selectProductsByDetailIndex(cid, sid, paging.countPerPage, (paging.requestPage - 1) * (paging.countPerPage));
         for (ProductReadVo product :products){
             ProductImageEntity[] productImages = this.categoryMapper.selectProductImagesByProductIndexExceptData(product.getProductIndex());
             int[] productImageIndexes = stream(productImages).mapToInt(ProductImageEntity::getIndex).toArray();
@@ -217,6 +217,10 @@ public class CategoryService {
 
 
         return products;
+    }
+
+    public int getCategoryProductsCount(int cid){
+        return this.categoryMapper.selectCategoryProductCountById(cid);
     }
 
     public int getSearchProductsCount(String keyword) { //검색조건이 크리테리온 검색어가 키워드 보드가 어느 게시판

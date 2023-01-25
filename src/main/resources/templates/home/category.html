@@ -63,24 +63,59 @@
                                     <span class="base-price" th:text="${product.getPrice()}  + '원'">상품기본가격</span>
                                 </a>
                             </div>
-<!--                            <div th:text = "${product.getProductName()}">레너드</div>-->
-<!--                            <div th:text = "${product.getAmount()}">17</div>-->
-<!--                            <div th:text = "${#dates.format(product.getModifiedOn(), 'yyyy-MM-dd HH:mm:ss')}">2022-01-03 00:00:00</div>-->
                         </li>
 
 
                     </ul>
 
                 </form>
-<!--                <div class="paging-navigation">-->
-<!--                    <a href = "#" class = "page">1</a>-->
-<!--                    <a href = "#" class = "page">2</a>-->
-<!--                    <a href = "#" class = "page">3</a>-->
-<!--                    <a href = "#" class = "page">4</a>-->
-<!--                    <a href = "#" class = "page">5</a>-->
-<!--                    <a href = "#" class = "page"><i class="fa-solid fa-angle-right"></i></a>-->
-<!--                    <a href = "#" class = "page"><i class="fa-solid fa-angles-right"></i></a>-->
-<!--                </div>-->
+                <div class="page-container"
+                     th:with="urlBulder = ${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder).fromCurrentRequest()}">
+
+                    <a class="page"
+                       th:if="${paging.requestPage >1}"
+                       th:href="@{${urlBulder.replaceQueryParam('page', paging.minPage).build().toUriString()}}">
+
+
+                        <i class="fa-solid fa-angles-left"></i>
+
+                    </a>
+
+                    <a class="page"
+                       th:if="${paging.requestPage >1}"
+                       th:href="@{${urlBulder.replaceQueryParam('page', paging.requestPage -1).build().toUriString()}}">
+
+                        <i class="fa-solid fa-angle-left"></i>
+                    </a>
+
+                    <!--                                시퀀스를하면 정수 시작부터 정수끝을 배열로 돌려준다.-->
+                    <a th:each="page: ${#numbers.sequence(paging.startPage, paging.endPage)}"
+                       th:class="${'page ' + (page==paging.requestPage? 'selected':'')}"
+
+
+                       th:href="@{${urlBulder.replaceQueryParam('page', page).build().toUriString()}}"
+
+                    >
+                        <span  th:text="${page}"> </span>
+                    </a>
+
+
+                    <a class="page"
+                       th:if="${paging.requestPage < paging.maxPage}"
+                       th:href="@{${urlBulder.replaceQueryParam('page', paging.requestPage +1).build().toUriString()}}">
+
+
+                        <i class="fa-solid fa-angle-right"></i>
+
+                    </a>
+
+                    <a class="page"
+                       th:if="${paging.requestPage < paging.maxPage}"
+                       th:href="@{${urlBulder.replaceQueryParam('page', paging.maxPage).build().toUriString()}}">
+                        <i class="fa-solid fa-angles-right"></i>
+                    </a>
+
+                </div>
             </div>
         </div>
     </div>

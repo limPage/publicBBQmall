@@ -61,6 +61,7 @@ body>main>.content>form>input[type="text"]:focus{
 body>main>.content>form>input[type="submit"]{
     border: none;
     background-color: unset;
+    cursor: pointer;
 
 }
 body>main>.content>.no-result{
@@ -148,13 +149,14 @@ body>main>.content>.page-container{
 }
 
 body>main>.content>.page-container>.page{
-    /*background-color: rebeccapurple;*/
     width: 2rem;
     height: 2rem;
     /*padding: 0.4rem 1rem 0.4rem 1rem;*/
     color: #333333;
     border: 0.0625rem solid rgba(0,0,0,0.15);
-    border-radius: 1rem;
+
+
+    border-radius: 0.1rem;
     font-size: 0.75rem;
     /*display: flex;*/
     /*align-items: center;*/

@@ -179,7 +179,7 @@
 </article>
 
 
-<ul class="floating-banner" th:fragment="floatingBanner">
+<ul class="floating-banner" th:fragment="floatingBanner" id="floatingBanner">
     <li class="banner-image">
         <img alt="추천인이벤트배너" src="/resources/images/banner.png" title="추천인이벤트배너">
         <span><b>추천인</b><br>
@@ -213,7 +213,7 @@
                     <img alt="로고" src="/resources/images/bbq_logo.png"
                          width="208"></a>
                 <div class="question-button">
-                    <a href="#">1:1 문의하기
+                    <a th:href="@{/board/ (bid=pi)}" >1:1 문의하기
 
                         <i class="fa-solid fa-chevron-right icon"></i>
 
@@ -277,6 +277,10 @@
         </a>
 
     </nav>
+
+    <div >
+        <span id="topButton">↑</span>
+    </div>
 </footer>
 
 

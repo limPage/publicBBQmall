@@ -13,8 +13,7 @@
     <!--    <link rel="stylesheet" th:href="@{/bbq/resources/stylesheets/index.css}">-->
     <link rel="stylesheet" th:href="@{/category/resources/stylesheets/search.css}">
 
-    <!--    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>-->
-    <!--    <script defer th:src="@{/category/resources/scripts/category.js}"></script>-->
+    <script defer th:src="@{/category/resources/scripts/search.js}"></script>
 </head>
 <body>
 <th:block th:replace="~{fragments/body :: header}"></th:block>
@@ -26,9 +25,9 @@
         <div class="title-container">
             <h1 th:text="'‘'+ ${keyword} +'’ 검색 결과'">상품찾기 검색결과</h1>
         </div>
-        <form>
-            <input type="text" placeholder="검색할 상품명을 입력하세요" th:value="${#request.getParameter('keyword')}" name="keyword">
-            <input type="submit" value="검색">
+        <form id="mainForm">
+            <input type="text" placeholder="검색할 상품명을 입력하세요" id="keyword">
+            <input type="submit" name="searchButton" value="검색">
 
 
         </form>

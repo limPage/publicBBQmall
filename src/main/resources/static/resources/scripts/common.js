@@ -20,3 +20,11 @@ window.document.getElementById('searchButton').addEventListener("click",()=>{
 window.onsubmit=e => {
     e.preventDefault();
 }
+
+
+const topButton= window.document.getElementById('topButton');
+
+
+topButton.addEventListener("click",()=>{window.scroll({top:0, behavior: "smooth"});});
+
+window.addEventListener("scroll", () =>{ window.scrollY > 500 ? topButton.style.opacity = 1 : topButton.style.opacity = 0});

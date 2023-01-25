@@ -717,6 +717,21 @@ body>main{
 
 }
 
+body>footer>div>#topButton{
+    position: fixed;
+    right: 2rem;
+    bottom: 2rem;
+    opacity: 0;
+    /*transform:scale(1.8);*/
+    transition-duration: 0.5s;
+    cursor: pointer;
+    border: rgba(0,0,0,0.2) solid 0.0625rem;
+    padding: 0.6rem 1rem;
+    border-radius:  2rem;
+    font-size: 2rem;
+    background-color: white;
+}
+
 
 /* cs*/
 body>.cs-center{
@@ -1057,6 +1072,7 @@ body>main>.admin-side-bar{
 
 @media screen and (max-width : 65rem) {
 
+
     body > header > .menu-row > .menu-container > ul > .menu>a {
 
         font-size: 1.2rem;
@@ -1093,6 +1109,12 @@ body>main>.admin-side-bar{
 
     body>footer>nav{
         display:flex;
+    }
+
+    body>footer>div>#topButton{
+        right: 2rem;
+        bottom: 8rem;
+
     }
 
 }
