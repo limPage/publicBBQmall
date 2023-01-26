@@ -190,7 +190,7 @@
                             </span>
 
                                 <!--                            <img th:src="@{/admin/productImage?index= (${product.getProductIndex()})}">-->
-                                <a href="#">
+                                <a th:href="@{/view (pid= ${product.getProductIndex()})}">
 
                                     <span class="name-column"
                                           th:text="${product.getProductName()}">비비큐</span>
