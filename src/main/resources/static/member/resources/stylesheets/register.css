@@ -297,7 +297,7 @@ body >main>.content>.form>.terms-page> table>tbody>tr>td>label>input:checked{
 
     background-color: rgba(0,0,0,0.2);
 
-    background-image: url("/resources/images/checkbox.jpg");
+    background-image: url("https://bbqmall.alllim.dev/resources/images/checkbox.jpg");
     background-size: 100%;
     box-shadow: 0 0  0  0.125rem  #0ea31a;
     border-radius: 0.3125rem;
