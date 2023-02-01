@@ -87,7 +87,7 @@ form.onsubmit = e =>{
     // formData.append('content', form['content'].value);
     formData.append('content', editor.getData());
 
-    formData.append('bid',bidValue );
+    formData.append('bid',  bidValue===('notice')?form['bid'].value :bidValue  );
 
 
     // bid= "${bid}";

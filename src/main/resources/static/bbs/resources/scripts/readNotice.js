@@ -315,17 +315,6 @@ if(window.document.getElementById('bid').value===("notice")) {
     font-weight: 700;`;
 
 }
-else if(window.document.getElementById('bid').value===("pi")){
-
-    window.document.getElementById('sideBarPI').style.cssText=  `  color: rgba(0,0,0,0.9);
-    font-weight: 700;`;
-
-}else if(window.document.getElementById('bid').value===("pr")){
-
-    window.document.getElementById('sideBarPR').style.cssText=  `  color: rgba(0,0,0,0.9);
-    font-weight: 700;`;
-
-}
 
 
 else {
@@ -626,7 +615,8 @@ else {
 
 }
 
-if (window.document.getElementById('isMine').value==='1') {
+if (window.document.getElementById('bid').value!==("bpArticle") &&
+    window.document.getElementById('isMine').value==='1') {
     window.document.getElementById('deleteButton').addEventListener('click', e => {
         e.preventDefault();
 
@@ -641,6 +631,7 @@ if (window.document.getElementById('isMine').value==='1') {
         // const formData = new FormData();
         // formData.append('index', index);
         //주소로 보내게 되면 폼데이터가 필요없다.
+        const index = window.document.getElementById('index').value;
         xhr.open('DELETE', "/board/deleteNotice?bid=notice&nid=" + index);//  window.location.href 를쓰면 boardid bid를 안보내도댐
         xhr.onreadystatechange = () => {
             if (xhr.readyState === XMLHttpRequest.DONE) {//4 성공인게 아니고 작업의끝
