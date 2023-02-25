@@ -27,9 +27,6 @@ if (form['isNoticeBoard'].value==="notice"){
     // })
 
 
-
-
-
     form['bid'].oninput=()=>{
         save ();
 
@@ -39,6 +36,8 @@ if (form['isNoticeBoard'].value==="notice"){
 
 
         save ();
+
+        document.form.submit();
     }
     let page= window.document.querySelectorAll('.page')
     for( let i = 0; i < page.length; i++ ) {
